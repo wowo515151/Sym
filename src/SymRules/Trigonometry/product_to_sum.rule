@@ -1,0 +1,4 @@
+SinACosB: sin(a) * cos(b) -> 0.5 * (sin(a + b) + sin(a - b))
+CosASinB: cos(a) * sin(b) -> 0.5 * (sin(a + b) - sin(a - b))
+CosACosB: cos(a) * cos(b) -> 0.5 * (cos(a + b) + cos(a - b))
+SinASinB: sin(a) * sin(b) -> 0.5 * (cos(a - b) - cos(a + b))

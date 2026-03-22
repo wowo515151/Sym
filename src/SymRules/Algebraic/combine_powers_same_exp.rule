@@ -1,0 +1,6 @@
+CombinePowersSameExp: Pow(a, n) * Pow(b, n) -> Pow(a * b, n)
+CombinePowersSameExp3: Pow(a, n) * Pow(b, n) * Pow(c, n) -> Pow(a * b * c, n)
+CombinePowersSameExpCoeff: k * Pow(a, n) * Pow(b, n) -> k * Pow(a * b, n)
+CombinePowersPlus1: Pow(a, n) * Pow(b, n + 1) -> b * Pow(a * b, n)
+CombinePowersPlus2: Pow(a, n) * Pow(b, n + 2) -> Pow(b, 2) * Pow(a * b, n)
+CombinePowersMinus1: Pow(a, n) * Pow(b, n - 1) -> Pow(b, -1) * Pow(a * b, n)

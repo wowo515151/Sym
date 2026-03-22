@@ -1,0 +1,4 @@
+CosCosMinusSinSin: cos(a) * cos(b) - sin(a) * sin(b) -> cos(a + b)
+CosCosPlusSinSin: cos(a) * cos(b) + sin(a) * sin(b) -> cos(a - b)
+SinCosPlusCosSin: sin(a) * cos(b) + cos(a) * sin(b) -> sin(a + b)
+SinCosMinusCosSin: sin(a) * cos(b) - cos(a) * sin(b) -> sin(a - b)

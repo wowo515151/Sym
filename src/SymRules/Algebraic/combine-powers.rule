@@ -1,0 +1,6 @@
+a^m * a^n => a^(m + n)
+SplitPowerPlus1: Pow(a, n + 1) -> a * Pow(a, n)
+SplitPowerPlus2: Pow(a, n + 2) -> Pow(a, 2) * Pow(a, n)
+CombineSameExp: Pow(a, n) * Pow(b, n) -> Pow(a * b, n)
+CombineSameExpCoeff: k * Pow(a, n) * Pow(b, n) -> k * Pow(a * b, n)
+CombineSameExpCoeff2: k * Pow(a, n) * m * Pow(b, n) -> (k * m) * Pow(a * b, n)

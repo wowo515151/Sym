@@ -1,0 +1,6 @@
+{
+  "name": "LimitStrategy",
+  "description": "Rules for evaluating limits.",
+  "enabledByDefault": true,
+  "priority": 10
+}

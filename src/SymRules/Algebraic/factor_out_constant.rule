@@ -1,0 +1,2 @@
+# Factor out simple numeric constants (example rule; real implementation should be conservative)
+2 * a + 3 * a -> (2 + 3) * a

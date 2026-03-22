@@ -1,0 +1,7 @@
+# Piecewise evaluation rules
+PiecewiseEvalTrue: Piecewise(a, true, b) -> a
+PiecewiseEvalFalse: Piecewise(a, false, b) -> b
+
+# Multi-argument Piecewise (heuristic for common forms)
+PiecewiseEvalTrue3: Piecewise(a, true, c1, b, c2, c) -> a
+PiecewiseEvalFalse3: Piecewise(a, false, c1, b, c2, c) -> Piecewise(c1, b, c2, c)

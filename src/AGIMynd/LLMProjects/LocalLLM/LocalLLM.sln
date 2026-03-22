@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11312.151 d18.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalLLM", "LocalLLM.csproj", "{393819B1-1794-4001-8B8A-D201BE125648}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{393819B1-1794-4001-8B8A-D201BE125648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{393819B1-1794-4001-8B8A-D201BE125648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{393819B1-1794-4001-8B8A-D201BE125648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{393819B1-1794-4001-8B8A-D201BE125648}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4646C7FE-DCE4-4E84-B0B2-A8FDEB8F8ED3}
+	EndGlobalSection
+EndGlobal

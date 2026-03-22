@@ -1,0 +1,2 @@
+# Symbolic factorial recurrence.
+FactorialShift: factorial(n + 1) -> (n + 1) * factorial(n)

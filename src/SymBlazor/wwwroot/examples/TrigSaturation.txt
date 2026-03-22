@@ -1,0 +1,8 @@
+<Options>
+  RulePacks: Trigonometry, AlgebraicStrategy
+  MaxIterations: 50
+</Options>
+
+/* Trigonometric identity simplification */
+
+sin(x)^2 + cos(x)^2

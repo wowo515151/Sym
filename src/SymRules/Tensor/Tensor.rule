@@ -1,0 +1,180 @@
+# Tensor Rules
+# NOTE: While several rules in this file use deep learning terminology (like Relu, Conv2D, MoE) 
+# as examples or specialized shortcuts, the majority of the rules are general-purpose 
+# tensor/matrix algebra identities applicable to many fields (e.g., physics, finance, graphics).
+# LLMs should consider these rules as a broad toolkit for tensor manipulation, not 
+# exclusively for transformer architectures.
+
+# 1. Algebraic Rules
+
+# Transpose(Transpose(A)) -> A
+TransposeDouble: Transpose(Transpose(?a)) -> ?a
+
+# Distributive Property: MatMul(A, B + C) -> A*B + A*C
+# Useful for expanding to find fusion opportunities or factoring to reduce ops.
+# We might need both directions or control them via strategies. 
+# For now, let's allow expansion to explore.
+DistributeMatMulLeft: MatMul(?a, TensorAdd(?b, ?c)) -> TensorAdd(MatMul(?a, ?b), MatMul(?a, ?c))
+DistributeMatMulRight: MatMul(TensorAdd(?a, ?b), ?c) -> TensorAdd(MatMul(?a, ?c), MatMul(?b, ?c))
+
+# Factoring Rule: A*B + A*C -> A*(B + C)
+# Reduces FLOPs by sharing the multiplication.
+FactorMatMulLeft: TensorAdd(MatMul(?a, ?b), MatMul(?a, ?c)) -> MatMul(?a, TensorAdd(?b, ?c))
+FactorMatMulRight: TensorAdd(MatMul(?a, ?c), MatMul(?b, ?c)) -> MatMul(TensorAdd(?a, ?b), ?c)
+
+# Transpose of Product: (AB)^T -> B^T A^T
+TransposeProduct: Transpose(MatMul(?a, ?b)) -> MatMul(Transpose(?b), Transpose(?a))
+
+# Transpose of Sum: (A + B)^T -> A^T + B^T
+TransposeSum: Transpose(TensorAdd(?a, ?b)) -> TensorAdd(Transpose(?a), Transpose(?b))
+
+# Transpose of Elementwise Product: (A * B)^T -> A^T * B^T
+TransposeElemMul: Transpose(TensorMul(?a, ?b)) -> TensorMul(Transpose(?a), Transpose(?b))
+
+# Associativity of MatMul
+# Allows the solver to reorder multiplications to minimize FLOPs/Memory.
+AssocMatMul1: MatMul(MatMul(?a, ?b), ?c) -> MatMul(?a, MatMul(?b, ?c))
+AssocMatMul2: MatMul(?a, MatMul(?b, ?c)) -> MatMul(MatMul(?a, ?b), ?c)
+
+# Zero Rules
+# Simplify tensor expressions interacting with scalar zero.
+TensorAddZeroRight: TensorAdd(?a, 0) -> ?a
+TensorAddZeroLeft: TensorAdd(0, ?a) -> ?a
+TensorMulZeroRight: TensorMul(?a, 0) -> 0
+TensorMulZeroLeft: TensorMul(0, ?a) -> 0
+
+# Identity Rules
+# Scalar 1 acts as identity for MatMul (via broadcasting/scalar mult).
+MatMulIdentityRight: MatMul(?a, 1) -> ?a
+MatMulIdentityLeft: MatMul(1, ?a) -> ?a
+TensorMulIdentityRight: TensorMul(?a, 1) -> ?a
+TensorMulIdentityLeft: TensorMul(1, ?a) -> ?a
+
+# TensorAdd Properties
+TensorAddComm: TensorAdd(?a, ?b) -> TensorAdd(?b, ?a)
+TensorMulComm: TensorMul(?a, ?b) -> TensorMul(?b, ?a)
+TensorAddAssoc1: TensorAdd(TensorAdd(?a, ?b), ?c) -> TensorAdd(?a, TensorAdd(?b, ?c))
+TensorAddAssoc2: TensorAdd(?a, TensorAdd(?b, ?c)) -> TensorAdd(TensorAdd(?a, ?b), ?c)
+TensorAddSelf: TensorAdd(?a, ?a) -> TensorMul(?a, 2)
+
+# 2. Fusion Rules (Optimization Targets)
+
+# Fused MatMul+Add
+# A * B + C -> FusedMatMulAdd(A, B, C)
+FuseMatMulAdd: TensorAdd(MatMul(?a, ?b), ?c) -> FusedMatMulAdd(?a, ?b, ?c)
+
+# Fused MatMul+Add+Relu
+# Relu(A * B + C) -> Relu(FusedMatMulAdd(A, B, C)) -> FusedMatMulAddRelu(A, B, C)
+FuseMatMulAddRelu1: Relu(FusedMatMulAdd(?a, ?b, ?c)) -> FusedMatMulAddRelu(?a, ?b, ?c)
+
+# Direct path if the intermediate fusion didn't happen yet (though EGraph should find it)
+FuseMatMulAddRelu2: Relu(TensorAdd(MatMul(?a, ?b), ?c)) -> FusedMatMulAddRelu(?a, ?b, ?c)
+
+# Conv2D Fusion
+# Relu(Conv2D(Input, Filter, Stride, Padding)) -> FusedConv2DRelu(...)
+Relu(Conv2D(?input, ?filter, ?stride, ?padding)) -> FusedConv2DRelu(?input, ?filter, ?stride, ?padding)
+
+# 3. Optimization Rules (Hoisting/Ordering)
+
+# Hoisting Transpose through MatMul if both args are transposed
+# A^T * B^T -> (B * A)^T
+MatMul(Transpose(?a), Transpose(?b)) -> Transpose(MatMul(?b, ?a))
+
+# Relu Commutation with Transpose
+# Allows Relu to move inside Transpose to enable fusion with generating ops (e.g. Conv2D, MatMul).
+Relu(Transpose(?a)) -> Transpose(Relu(?a))
+Transpose(Relu(?a)) -> Relu(Transpose(?a))
+
+# Relu Idempotence
+# Relu(Relu(x)) -> Relu(x)
+Relu(Relu(?a)) -> Relu(?a)
+
+# Relu Zero
+# Relu(0) -> 0
+Relu(0) -> 0
+
+# 4. Matrix Inverse Identities
+
+# Inverse of Inverse: (A^-1)^-1 -> A
+inverse(inverse(?a)) -> ?a
+
+# Inverse of Product: (AB)^-1 -> B^-1 A^-1
+inverse(MatMul(?a, ?b)) -> MatMul(inverse(?b), inverse(?a))
+
+# Inverse of Transpose: (A^T)^-1 -> (A^-1)^T
+inverse(Transpose(?a)) -> Transpose(inverse(?a))
+Transpose(inverse(?a)) -> inverse(Transpose(?a))
+
+# 5. Equation Isolation Rules
+# Allows solving for variables in tensor equations
+
+IsolateTranspose: Equality(Transpose(?a), ?b) -> Equality(?a, Transpose(?b))
+IsolateTensorAddLeft: Equality(TensorAdd(?a, ?b), ?c) -> Equality(?a, TensorAdd(?c, Multiply(-1, ?b)))
+IsolateTensorAddRight: Equality(TensorAdd(?a, ?b), ?c) -> Equality(?b, TensorAdd(?c, Multiply(-1, ?a)))
+
+# 6. Weight Sliding and Scalar Commutation
+# Allows scalar weights (g) to move inside/outside MatMul to enable factoring.
+# We prefer sliding to the left (towards activation) to avoid materializing large weighted weights.
+MatMulWeightSlideLeft: MatMul(TensorMul(?a, ?g), ?b) -> TensorMul(MatMul(?a, ?b), ?g)
+TensorMulMatMulSlideLeft: TensorMul(MatMul(?a, ?b), ?g) -> MatMul(TensorMul(?a, ?g), ?b)
+MatMulWeightSlideRight: MatMul(?a, TensorMul(?b, ?g)) -> TensorMul(MatMul(?a, ?b), ?g)
+TensorMulMatMulSlideRight: TensorMul(MatMul(?a, ?b), ?g) -> MatMul(?a, TensorMul(?b, ?g))
+
+# Slide both simultaneously
+MatMulWeightSlideBoth: MatMul(TensorMul(?a, ?g1), Transpose(TensorMul(?b, ?g2))) -> TensorMul(MatMul(?a, Transpose(?b)), TensorMul(?g1, Transpose(?g2)))
+
+# TensorMul Identities
+TensorMulAssoc: TensorMul(TensorMul(?a, ?b), ?c) -> TensorMul(?a, TensorMul(?b, ?c))
+TensorMulComm: TensorMul(?a, ?b) -> TensorMul(?b, ?a)
+
+# Multiply Compatibility Rules (for Scale Folding)
+MatMulWeightSlideLeft_Mul: MatMul(Multiply(?a, ?g), ?b) -> Multiply(MatMul(?a, ?b), ?g)
+MultiplyMatMulSlideLeft: Multiply(MatMul(?a, ?b), ?g) -> MatMul(Multiply(?a, ?g), ?b)
+MatMulWeightSlideRight_Mul: MatMul(?a, Multiply(?b, ?g)) -> Multiply(MatMul(?a, ?b), ?g)
+MultiplyMatMulSlideRight: Multiply(MatMul(?a, ?b), ?g) -> MatMul(?a, Multiply(?b, ?g))
+TransposeElemMul_Mul: Transpose(Multiply(?a, ?b)) -> Multiply(Transpose(?a), Transpose(?b))
+
+# Transpose Identities
+TransposeTranspose: Transpose(Transpose(?a)) -> ?a
+TransposeMatMul: Transpose(MatMul(?a, ?b)) -> MatMul(Transpose(?b), Transpose(?a))
+TransposeElemMul: Transpose(TensorMul(?a, ?b)) -> TensorMul(Transpose(?a), Transpose(?b))
+
+# 8. Advanced Factoring Identities
+# Direct shortcuts for dual-end factoring, bypassing local fusion minima.
+# Dual-end factoring: (A*W)*g1 + (B*W)*g2 -> (A*g1 + B*g2) * W
+FactorDualRight: TensorAdd(MatMul(?a, ?W), MatMul(?b, ?W)) -> MatMul(TensorAdd(?a, ?b), ?W)
+FactorDualLeft: TensorAdd(MatMul(?W, ?a), MatMul(?W, ?b)) -> MatMul(?W, TensorAdd(?a, ?b))
+FactorWeightedDualRight: TensorAdd(TensorMul(MatMul(?a, ?W), ?g1), TensorMul(MatMul(?b, ?W), ?g2)) -> MatMul(TensorAdd(TensorMul(?a, ?g1), TensorMul(?b, ?g2)), ?W)
+FactorWeightedDualLeft: TensorAdd(TensorMul(MatMul(?W, ?a), ?g1), TensorMul(MatMul(?W, ?b), ?g2)) -> MatMul(?W, TensorAdd(TensorMul(?a, ?g1), TensorMul(?b, ?g2)))
+
+# Mixed Weighted/Unweighted Factoring
+FactorWeightedMatMulRight: TensorAdd(MatMul(?a, ?c), TensorMul(MatMul(?b, ?c), ?g)) -> MatMul(TensorAdd(?a, TensorMul(?b, ?g)), ?c)
+FactorWeightedMatMulLeft: TensorAdd(MatMul(?c, ?a), TensorMul(MatMul(?c, ?b), ?g)) -> MatMul(?c, TensorAdd(?a, TensorMul(?b, ?g)))
+FactorWeightedMatMulRight2: TensorAdd(TensorMul(MatMul(?a, ?c), ?g), MatMul(?b, ?c)) -> MatMul(TensorAdd(TensorMul(?a, ?g), ?b), ?c)
+FactorWeightedMatMulLeft2: TensorAdd(TensorMul(MatMul(?c, ?a), ?g), MatMul(?c, ?b)) -> MatMul(?c, TensorAdd(TensorMul(?a, ?g), ?b))
+
+# Factoring across Fused operations
+FactorFusedRight: TensorAdd(FusedMatMulAdd(?a, ?c, ?d), FusedMatMulAdd(?b, ?c, ?e)) -> FusedMatMulAdd(TensorAdd(?a, ?b), ?c, TensorAdd(?d, ?e))
+FactorFusedLeft: TensorAdd(FusedMatMulAdd(?a, ?b, ?d), FusedMatMulAdd(?a, ?c, ?e)) -> FusedMatMulAdd(?a, TensorAdd(?b, ?c), TensorAdd(?d, ?e))
+
+# 9. Stacking and Concatenation
+# Transforms multiple weighted operations into a single stacked operation.
+# axis=0 for vertical stacking
+StackWeightedSum: TensorAdd(TensorMul(?r1, ?w1), TensorMul(?r2, ?w2)) -> MatMul(Stack(0, ?w1, ?w2), Stack(0, ?r1, ?r2))
+StackWeightedSum3: TensorAdd(TensorAdd(TensorMul(?r1, ?w1), TensorMul(?r2, ?w2)), TensorMul(?r3, ?w3)) -> MatMul(Stack(0, ?w1, ?w2, ?w3), Stack(0, ?r1, ?r2, ?r3))
+
+# Fusion rules
+FuseMatMulAdd: TensorAdd(MatMul(?a, ?b), ?c) -> FusedMatMulAdd(?a, ?b, ?c)
+FuseMatMulAddComm: TensorAdd(?c, MatMul(?a, ?b)) -> FusedMatMulAdd(?a, ?b, ?c)
+
+# 11. Summation and Reduction
+SumDistribute: Sum(TensorAdd(?a, ?b)) -> TensorAdd(Sum(?a), Sum(?b))
+SumFactor: Sum(TensorMul(?a, ?g)) -> TensorMul(Sum(?a), ?g)
+
+# Squared Difference Expansion (L2 Distance optimization)
+ExpandL2Distance: Sum(Pow(TensorAdd(?a, TensorMul(?b, -1)), 2)) -> TensorAdd(TensorAdd(Sum(Pow(?a, 2)), TensorMul(Sum(TensorMul(?a, ?b)), -2)), Sum(Pow(?b, 2)))
+ExpandSquaredDiff: Pow(TensorAdd(?a, TensorMul(?b, -1)), 2) -> TensorAdd(TensorAdd(Pow(?a, 2), TensorMul(TensorMul(?a, ?b), -2)), Pow(?b, 2))
+# Allows the EGraph to see through fused operations for global optimization.
+UnfuseMatMulAdd: FusedMatMulAdd(?a, ?b, ?c) -> TensorAdd(MatMul(?a, ?b), ?c)
+FactorFusedMatMulRight: FusedMatMulAdd(?a, ?b, MatMul(?c, ?b)) -> MatMul(TensorAdd(?a, ?c), ?b)
+FactorFusedWeightedMatMulRight: FusedMatMulAdd(?a, ?b, TensorMul(MatMul(?c, ?b), ?g)) -> MatMul(TensorAdd(?a, TensorMul(?c, ?g)), ?b)

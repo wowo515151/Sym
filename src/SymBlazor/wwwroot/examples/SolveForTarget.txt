@@ -1,0 +1,7 @@
+<Options>
+  RulePacks: EquationSolving, AlgebraicStrategy
+  Target: x
+  MaxIterations: 50
+</Options>
+
+x + 5 = 10

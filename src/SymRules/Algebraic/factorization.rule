@@ -1,0 +1,7 @@
+# Factorization Identities
+DiffSquares: ?a^2 - ?b^2 -> (?a - ?b) * (?a + ?b)
+SumSquares: ?a^2 + 2*?a*?b + ?b^2 -> (?a + ?b)^2
+SubSquares: ?a^2 - 2*?a*?b + ?b^2 -> (?a - ?b)^2
+
+# Constant cases for difference of squares
+DiffSquaresConst: ?x^2 - ?c:Constant -> (?x - sqrt(?c)) * (?x + sqrt(?c))

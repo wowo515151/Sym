@@ -1,0 +1,1 @@
+SolveEquation solves one equation for one target variable. It is strong on many common symbolic cases, including linear equations and a useful range of polynomial and inverse-function problems. It does not accept full ProblemScript and is not intended for full systems or every possible branch-heavy transcendental equation.

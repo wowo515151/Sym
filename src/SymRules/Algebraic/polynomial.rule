@@ -1,0 +1,7 @@
+# Polynomial Division Rules
+# Polynomial Remainder Theorem: P(x) % (x - a) = P(a)
+PolyRemainder: mod(?p, ?x - ?a:Constant) -> substitute(?p, ?x, ?a)
+PolyRemainderAdd: mod(?p, ?x + ?a:Constant) -> substitute(?p, ?x, -?a)
+
+# Triggers for synthetic division (handled by procedural code for now, but rules can identify forms)
+# Divide(P(x), x - a)

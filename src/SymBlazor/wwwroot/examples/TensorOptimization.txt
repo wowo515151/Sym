@@ -1,0 +1,9 @@
+<Options>
+  RulePacks: Tensor
+  CostModel: Tensor
+  MaxIterations: 100
+</Options>
+
+/* Simple tensor fusion example */
+
+Relu(TensorAdd(MatMul(A, B), C))

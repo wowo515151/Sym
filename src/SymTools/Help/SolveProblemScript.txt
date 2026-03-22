@@ -1,0 +1,37 @@
+Tool name: SolveProblemScript
+
+Purpose:
+Run Sym's full ProblemScript wrapper on an input script.
+
+What this tool does well:
+It is the most flexible wrapper in SymTools.
+It supports options, rule packs, target selection, inline rules, and the broader EGraph solving workflow.
+It is the best choice when a caller needs advanced Sym behavior rather than a narrow single-purpose tool.
+
+Expected input:
+One full ProblemScript string.
+This is the only SymTools wrapper that directly accepts full ProblemScript.
+
+Expected output:
+The wrapper result as text.
+
+Important limitations:
+This tool is more powerful but also more complex and less predictable than the narrower wrappers.
+Good results depend on writing valid ProblemScript and choosing appropriate options and rule packs.
+It is not the best default tool for simple calculator, simplify, or single-equation tasks.
+
+Immediate-use examples:
+<Options>
+	Target: x
+</Options>
+x + 5 = 10
+
+<Options>
+	RulePacks: Trigonometry, Algebraic
+	MaxIterations: 50
+</Options>
+cos(2*x) + 2*sin(x)^2
+
+Not a good fit for:
+Simple one-line numeric evaluation.
+Straightforward single-equation solving when no script features are needed.

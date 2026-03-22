@@ -1,0 +1,6 @@
+<Options>
+  RulePacks: AlgebraicStrategy
+</Options>
+
+/* Simple Algebraic Simplification */
+x - x

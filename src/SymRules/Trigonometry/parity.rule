@@ -1,0 +1,4 @@
+# Trigonometric parity identities
+SinOdd: sin(-a) -> -sin(a)
+CosEven: cos(-a) -> cos(a)
+TanOdd: tan(-a) -> -tan(a)

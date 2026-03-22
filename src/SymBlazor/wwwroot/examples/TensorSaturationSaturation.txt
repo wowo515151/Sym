@@ -1,0 +1,21 @@
+<Options>
+  RulePacks: Tensor, Algebraic
+  CostModel: Tensor
+</Options>
+
+/* 
+   Tensor Saturation Double Factoring
+   
+   This problem exercises:
+   1. Factoring by first argument: TensorAdd(MatMul(A, B), MatMul(A, C)) -> MatMul(A, TensorAdd(B, C))
+   2. Factoring by second argument: TensorAdd(MatMul(A, C), MatMul(B, C)) -> MatMul(TensorAdd(A, B), C)
+   
+   Input:
+   TensorAdd(MatMul(A, B), TensorAdd(MatMul(A, C), TensorAdd(MatMul(D, B), MatMul(D, C))))
+   
+   The E-Graph should explore all groupings and find the minimal representation.
+   Expected minimal form:
+   MatMul(TensorAdd(A, D), TensorAdd(B, C))
+*/
+
+TensorAdd(MatMul(A, B), TensorAdd(MatMul(A, C), TensorAdd(MatMul(D, B), MatMul(D, C))))

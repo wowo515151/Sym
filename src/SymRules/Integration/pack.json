@@ -1,0 +1,6 @@
+{
+  "name": "IntegrationStrategy",
+  "description": "Rules for evaluating integrals.",
+  "enabledByDefault": true,
+  "priority": 10
+}

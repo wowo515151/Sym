@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <IsPackable>false</IsPackable>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FlaUI.Core" Version="5.0.0" />
+    <PackageReference Include="FlaUI.UIA3" Version="5.0.0" />
+    <PackageReference Include="MSTest" Version="4.0.1" />
+    <PackageReference Include="coverlet.collector" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AGIMynd\AGIMynd.csproj" />
+    <ProjectReference Include="..\AGIHelmsman\AGIHelmsman.csproj" />
+    <ProjectReference Include="..\AGIMyndWPF\AGIMyndWPF.csproj" />
+    <ProjectReference Include="..\ConsoleHelmsman\ConsoleHelmsman.csproj" />
+  </ItemGroup>
+</Project>

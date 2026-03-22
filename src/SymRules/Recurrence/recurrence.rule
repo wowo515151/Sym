@@ -1,0 +1,6 @@
+# Linear Recurrence Rules
+# a(n) = c * a(n-1) -> a(n) = a(0) * c^n
+RecurrenceLinear1: Equality(Function(?a, ?n), ?c:Constant * Function(?a, ?n - 1)) -> Equality(Function(?a, ?n), Function(?a, 0) * ?c^?n)
+
+# a(n) = a(n-1) + d -> a(n) = a(0) + n * d
+RecurrenceArithmetic: Equality(Function(?a, ?n), Function(?a, ?n - 1) + ?d:Constant) -> Equality(Function(?a, ?n), Function(?a, 0) + ?n * ?d)

@@ -1,0 +1,34 @@
+<Options>
+  RulePacks: Tensor
+  CostModel: Tensor
+  MaxIterations: 200
+</Options>
+
+/* 
+   Complex Tensor Saturation & Optimization
+   
+   This problem contains multiple factoring opportunities, nested transposes, 
+   and potential for operation fusion.
+   
+   Original:
+   Relu(Transpose(Transpose(
+     TensorAdd(
+       MatMul(A, B), 
+       TensorAdd(
+         MatMul(A, C), 
+         TensorAdd(
+           MatMul(D, E), 
+           MatMul(D, G)
+         )
+       )
+     )
+   )))
+
+   Expected optimized form should involve:
+   1. Transpose(Transpose(X)) -> X
+   2. Factoring A: MatMul(A, B) + MatMul(A, C) -> MatMul(A, B + C)
+   3. Factoring D: MatMul(D, E) + MatMul(D, G) -> MatMul(D, E + G)
+   4. Fusion: Relu(MatMul(A, B+C) + MatMul(D, E+G)) -> FusedMatMulAddRelu(A, B+C, MatMul(D, E+G))
+*/
+
+Relu(Transpose(Transpose(TensorAdd(MatMul(A, B), TensorAdd(MatMul(A, C), TensorAdd(MatMul(D, E), MatMul(D, G)))))))

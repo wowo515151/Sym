@@ -1,0 +1,20 @@
+# Basic logic simplifications (binary forms)
+AndTrueLeft: and(true, a) -> a
+AndTrueRight: and(a, true) -> a
+AndFalseLeft: and(false, a) -> false
+AndFalseRight: and(a, false) -> false
+OrTrueLeft: or(true, a) -> true
+OrTrueRight: or(a, true) -> true
+OrFalseLeft: or(false, a) -> a
+OrFalseRight: or(a, false) -> a
+NotTrue: not(true) -> false
+NotFalse: not(false) -> true
+DoubleNeg: not(not(a)) -> a
+AndIdempotent: and(a, a) -> a
+OrIdempotent: or(a, a) -> a
+AndNotLeft: and(a, not(a)) -> false
+AndNotRight: and(not(a), a) -> false
+OrNotLeft: or(a, not(a)) -> true
+OrNotRight: or(not(a), a) -> true
+DeMorganAnd: not(and(a, b)) -> or(not(a), not(b))
+DeMorganOr: not(or(a, b)) -> and(not(a), not(b))

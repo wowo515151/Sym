@@ -1,0 +1,2 @@
+# Simple rule file for AddZero
+AddZero: a + 0 -> a

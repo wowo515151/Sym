@@ -1,0 +1,84 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableDefaultItems>false</EnableDefaultItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Calculus\DerivativeRule.cs" />
+    <Compile Include="EmbeddedRulePacks.cs" />
+    <Compile Include="Matrix\InverseRule.cs" />
+    <Compile Include="IdentityRuleLibrary.cs" />
+    <Compile Include="RulePackLibrary.cs" />
+    <Compile Include="StabilityRuleLibrary.cs" />
+    <Compile Include="Rule.cs" />
+    <Compile Include="RuleLoader.cs" />
+    <Compile Include="RuleTextParser.cs" />
+    <Compile Include="RuleConverter.cs" />
+    <Compile Include="RuleParser.cs" />
+    <Compile Include="GeneratedRuleStore.cs" />
+    <Compile Include="GeneratedRuleTuner.cs" />
+    <Compile Include="EmbeddedRulePacks.cs" />
+    <Compile Include="Inequality\InequalityRule.cs" />
+    <Compile Include="Graph\GraphRules.cs" />
+    <Compile Include="IRuleIndex.cs" />
+    <Compile Include="RuleIndexAdapter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sym\Sym.csproj" />
+    <ProjectReference Include="..\CSharpIO\CSharpIO.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Algebraic\add.rule" />
+    <None Include="Algebraic\add_zero.rule" />
+    <None Include="Algebraic\algebraic.rule" />
+    <None Include="Algebraic\cancel-factors.rule" />
+    <None Include="Algebraic\combine-powers.rule" />
+    <None Include="Algebraic\combine_like_terms.rule" />
+    <None Include="Algebraic\complete_square.rule" />
+    <None Include="Algebraic\commutative.rule" />
+    <None Include="Algebraic\distribute.rule" />
+    <None Include="Algebraic\distribute_mul_over_add.rule" />
+    <None Include="Algebraic\Distribution.rule" />
+    <None Include="Algebraic\distributive.rule" />
+    <None Include="Algebraic\factor_out_constant.rule" />
+    <None Include="Algebraic\move-negative-powers.rule" />
+    <None Include="Algebraic\multiplication.rule" />
+    <None Include="Algebraic\multiply.rule" />
+    <None Include="Algebraic\mul_one.rule" />
+    <None Include="Algebraic\PowerSample.rule" />
+    <None Include="Algebraic\PowerSample_2.rule" />
+    <None Include="Algebraic\PowerSample_3.rule" />
+    <None Include="Algebraic\sample.rule" />
+    <None Include="Algebraic\subtract_same.rule" />
+    <None Include="Algebraic\zero_mul.rule" />
+    <None Include="Bad\bad.rule" />
+    <None Include="Bad\malformed.rule" />
+    <None Include="Calculus\derivative.rule" />
+    <None Include="Calculus\diff.rule" />
+    <None Include="Calculus\power.rule" />
+    <None Include="EquationSolving\.keep" />
+    <None Include="EquationSolving\equation_solving.rule" />
+    <None Include="Matrix\identity.rule" />
+    <None Include="Rules\AddZero.rule" />
+    <None Include="Trigonometry\parity.rule" />
+    <None Include="Trigonometry\pythagorean.rule" />
+    <None Include="Trigonometry\sin.rule" />
+    <None Include="Trigonometry\cos.rule" />
+    <None Include="Vector\dot.rule" />
+    <None Include="Vector\dot_distribute.rule" />
+    <None Include="Vector\dot_symmetry.rule" />
+    <None Include="Vector\dot_bilinear.rule" />
+    <None Include="Inequality\inequality.rule" />
+    <None Include="Logic\logic.rule" />
+    <None Include="Logic\logic_simplify.rule" />
+    <None Include="SpecialFunctions\gamma.rule" />
+    <None Include="SpecialFunctions\factorial.rule" />
+    <None Include="Generating\**\*.rule" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Rules\**\*.rule" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Generating\**\*.rule" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

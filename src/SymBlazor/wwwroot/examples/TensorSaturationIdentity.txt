@@ -1,0 +1,34 @@
+<Options>
+  RulePacks: Tensor
+  CostModel: Tensor
+</Options>
+
+/* 
+   Tensor Saturation Identity Test
+   
+   This problem exercises:
+   1. Transpose of Sum: (A + B)^T -> A^T + B^T
+   2. Transpose of Product: (AB)^T -> B^T A^T
+   3. Factoring: AB + AC -> A(B + C)
+   4. Relu/Transpose commutation: Relu(X^T) <-> Relu(X)^T
+   
+   Original:
+   Relu(Transpose(TensorAdd(MatMul(A, B), MatMul(A, C))))
+   
+   Potential paths:
+   Path A:
+   Relu(Transpose(MatMul(A, TensorAdd(B, C))))
+   Relu(MatMul(Transpose(TensorAdd(B, C)), Transpose(A)))
+   Relu(MatMul(TensorAdd(Transpose(B), Transpose(C)), Transpose(A)))
+   
+   Path B:
+   Relu(TensorAdd(Transpose(MatMul(A, B)), Transpose(MatMul(A, C))))
+   Relu(TensorAdd(MatMul(Transpose(B), Transpose(A)), MatMul(Transpose(C), Transpose(A))))
+   Relu(MatMul(TensorAdd(Transpose(B), Transpose(C)), Transpose(A)))
+   
+   All paths should converge in the E-Graph.
+   The Tensor cost model should favor fusions if applicable, 
+   but here we are looking for the symbolic equivalent.
+*/
+
+Relu(Transpose(TensorAdd(MatMul(A, B), MatMul(A, C))))

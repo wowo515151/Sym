@@ -1,0 +1,10 @@
+<Options>
+  RulePacks: EquationSolving, AlgebraicStrategy
+  Target: y
+</Options>
+
+<Rules>
+  Rule(f(Wild("x")), Pow(Wild("x"), 2));
+</Rules>
+
+f(5) = y

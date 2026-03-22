@@ -1,0 +1,6 @@
+{
+  "name": "MatrixStrategy",
+  "description": "Rules for matrix operations, determinants, and inverses.",
+  "enabledByDefault": true,
+  "priority": 10
+}

@@ -1,0 +1,268 @@
+@page "/"
+@inject HttpClient Http
+@using WordsToSym
+@using System.Threading
+@using System.Net.Http.Json
+@using System.Text.RegularExpressions
+
+<div class="main-container">
+    <div class="toolbar">
+        <div class="toolbar-section">
+            <button class="btn btn-primary" @onclick="StartSolving" disabled="@_isSolving">Start</button>
+            <button class="btn btn-secondary" @onclick="StopSolving" disabled="@(!_isSolving)">Stop</button>
+        </div>
+        
+        <fieldset class="group-box examples-group">
+            <legend>Examples</legend>
+            <select @onchange="OnExampleSelected" class="form-select">
+                <option value="">-- Select an Example --</option>
+                @foreach (var example in _examples)
+                {
+                    <option value="@example">@example</option>
+                }
+            </select>
+        </fieldset>
+
+        <div class="toolbar-section">
+            <a class="btn btn-primary" href="/SymUIHelp.html" target="_blank" rel="noopener noreferrer">Help</a>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <fieldset class="group-box input-output-item">
+            <legend>Input</legend>
+            <textarea class="fill-area" @bind="_input" @bind:event="oninput" spellcheck="false"></textarea>
+        </fieldset>
+
+        <fieldset class="group-box input-output-item">
+            <legend>Output</legend>
+            <textarea class="fill-area" readonly @bind="_output" spellcheck="false"></textarea>
+        </fieldset>
+    </div>
+</div>
+
+@code {
+    private const string BlazorDefaultRulePacks = "AlgebraicStrategy, EquationSolving";
+    private static readonly Regex RulePacksOptionRegex = new(@"^\s*(?:@option\s+)?RulePacks\s*[:=]", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+    private static readonly Regex XmlOptionsBlockRegex = new(@"<Options>(.*?)</Options>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+    private string _input = "";
+    private string _output = "";
+    private bool _isSolving = false;
+    private List<string> _examples = new();
+    private CancellationTokenSource? _cts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try 
+        {
+            _examples = await Http.GetFromJsonAsync<List<string>>("examples/examples.json") ?? new();
+        }
+        catch (Exception ex)
+        {
+            _output = "Error loading initial data: " + ex.Message;
+        }
+    }
+
+    private async Task OnExampleSelected(ChangeEventArgs e)
+    {
+        var name = e.Value?.ToString();
+        if (string.IsNullOrEmpty(name)) return;
+
+        try 
+        {
+            _input = await Http.GetStringAsync($"examples/{name}");
+        }
+        catch (Exception ex)
+        {
+            _output = "Error loading example: " + ex.Message;
+        }
+    }
+
+    private async Task StartSolving()
+    {
+        if (_isSolving || string.IsNullOrWhiteSpace(_input)) return;
+        _isSolving = true;
+        _output = "Solving...";
+        _cts = new CancellationTokenSource();
+
+        try 
+        {
+            // Give the UI a chance to update
+            await Task.Yield();
+
+            var wrapper = new ProblemScriptEGraphWrapper();
+            var effectiveInput = ApplyBlazorDefaultRulePacks(_input);
+            
+            // Blazor WASM is single-threaded unless AOT/MT is used.
+            // We use Task.Run but it might still block if not using Workers.
+            // However, the wrapper and EGraph engine should check the token.
+            _output = await Task.Run(() => wrapper.SolveWithEGraph(effectiveInput, _cts.Token), _cts.Token);
+        }
+        catch (OperationCanceledException)
+        {
+            _output = "Solving stopped by user.";
+        }
+        catch (Exception ex)
+        {
+            _output = "Error: " + ex.Message;
+        }
+        finally
+        {
+            _isSolving = false;
+            _cts?.Dispose();
+            _cts = null;
+        }
+    }
+
+    private void StopSolving()
+    {
+        _cts?.Cancel();
+    }
+
+    private static string ApplyBlazorDefaultRulePacks(string script)
+    {
+        if (string.IsNullOrWhiteSpace(script) || RulePacksOptionRegex.IsMatch(script))
+        {
+            return script;
+        }
+
+        var lineEnding = script.Contains("\r\n", StringComparison.Ordinal) ? "\r\n" : "\n";
+        var xmlOptionsMatch = XmlOptionsBlockRegex.Match(script);
+        if (xmlOptionsMatch.Success)
+        {
+            var optionsContent = xmlOptionsMatch.Groups[1].Value;
+            var trimmedOptions = optionsContent.TrimEnd();
+            var updatedOptions = string.IsNullOrWhiteSpace(trimmedOptions)
+                ? $"{lineEnding}  RulePacks: {BlazorDefaultRulePacks}{lineEnding}"
+                : $"{lineEnding}{trimmedOptions}{lineEnding}  RulePacks: {BlazorDefaultRulePacks}{lineEnding}";
+
+            return script[..xmlOptionsMatch.Groups[1].Index] +
+                   updatedOptions +
+                   script[(xmlOptionsMatch.Groups[1].Index + xmlOptionsMatch.Groups[1].Length)..];
+        }
+
+        var trimmedScript = script.TrimStart();
+        return $"<Options>{lineEnding}  RulePacks: {BlazorDefaultRulePacks}{lineEnding}</Options>{lineEnding}{lineEnding}{trimmedScript}";
+    }
+}
+
+<style>
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 100vw;
+        padding: 10px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .toolbar {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch; /* make buttons fill toolbar height */
+        gap: 0.5rem;
+        height: 2.5rem;
+        min-height: 2.5rem;
+        padding: 0.25rem 0.5rem;
+        /* removed border-bottom separator to avoid stray line through toolbar */
+        margin-bottom: 1rem; /* ensure space between toolbar and content */
+        flex-wrap: wrap;
+        box-sizing: border-box;
+    }
+
+    /* If a group-box is placed inside the toolbar (examples selector), remove its fieldset border
+       and make it fit the toolbar height so it doesn't create a stray separator line. */
+    .toolbar .group-box, .toolbar fieldset {
+        border: none;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Make selects inside the toolbar match the toolbar height */
+    .toolbar .form-select {
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    .toolbar .btn {
+        height: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0.75rem;
+        border-radius: 6px;
+    }
+
+    .toolbar-section {
+        display: flex;
+        gap: 5px;
+    }
+
+    .content-container {
+        display: flex;
+        flex: 1;
+        gap: 10px;
+        overflow: hidden;
+        margin-top: 1rem; /* ensure toolbar doesn't overlap content */
+    }
+
+    /* Landscape (Default) */
+    @@media (min-aspect-ratio: 1/1) {
+        .content-container {
+            flex-direction: row;
+        }
+    }
+
+    /* Portrait */
+    @@media (max-aspect-ratio: 1/1) {
+        .content-container {
+            flex-direction: column;
+        }
+    }
+
+    .group-box {
+        border: 1px solid #888;
+        padding: 5px 10px 10px 10px;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        position: relative; /* ensure group boxes participate in stacking context above toolbar */
+        z-index: 0;
+    }
+
+    .group-box legend {
+        float: none;
+        width: auto;
+        padding: 0 5px;
+        margin-bottom: 0;
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    .examples-group {
+        padding: 0 10px 5px 10px;
+    }
+
+    .input-output-item {
+        flex: 1;
+        min-height: 0; /* Important for flex children to allow shrink */
+    }
+
+    .fill-area {
+        flex: 1;
+        width: 100%;
+        resize: none;
+        font-family: 'Cascadia Code', 'Courier New', Courier, monospace;
+        font-size: 0.9rem;
+        border: 1px solid #eee;
+        padding: 5px;
+        box-sizing: border-box; /* ensure padding doesn't change height */
+        height: 100%;
+        min-height: 0;
+    }
+
+</style>

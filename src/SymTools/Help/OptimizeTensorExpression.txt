@@ -1,0 +1,37 @@
+Tool name: OptimizeTensorExpression
+
+Purpose:
+Optimize a tensor or ML-style expression using Sym's tensor rules and tensor cost model.
+
+What this tool does well:
+It can rewrite certain tensor expressions into cheaper or fused forms.
+Examples include tensor factoring, transpose cleanup, and fused operator patterns such as fused matmul and relu combinations.
+This is one of Sym's most distinctive capabilities.
+
+Expected input:
+One tensor-oriented expression string.
+Optional shape information.
+
+Expected output:
+An optimized tensor expression as text.
+
+Important limitations:
+This tool is specialized.
+It is not a general simplifier for ordinary scalar algebra.
+It works best when the expression matches supported tensor patterns and when available tensor rules provide a better equivalent form.
+Requests outside tensor and graph optimization may produce no meaningful improvement.
+This tool does not accept full ProblemScript as input.
+It accepts a tensor expression and optional shapes, then builds the ProblemScript internally.
+
+Immediate-use examples:
+Expression: Relu(TensorAdd(MatMul(A, B), C))
+
+Expression: Relu(TensorAdd(MatMul(A, B), C))
+Shapes:
+A = [64,128]
+B = [128,64]
+C = [64,64]
+
+Not a good fit for:
+Ordinary symbolic equations.
+General calculus tasks.

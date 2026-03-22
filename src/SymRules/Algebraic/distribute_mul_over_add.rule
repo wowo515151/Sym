@@ -1,0 +1,4 @@
+# Guarded distribution rule; use only when distribution is desired
+# a * (b + c) -> a * b + a * c
+# Note: this rule can cause term explosion; solver should enforce limits.
+# a * (b + c) -> a * b + a * c

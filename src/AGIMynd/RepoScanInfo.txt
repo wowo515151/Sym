@@ -1,0 +1,18 @@
+# AGIMynd-specific security flow rules.
+# SymCLI auto-discovers this file when analyzing src/AGIMynd; use --repo-scan-info for other input roots.
+version|1
+model|append
+
+# LLM/AI sources
+source|AiSource|AGIMynd.IMyndLLM|QueryAsync|method
+source|AiSource|AGIMynd.SwitchLLMWrapper|QueryAsync|method
+source|AiSource|SwitchLLM.LLM|Query|method
+source|AiSource|SwitchLLM.LLM|SearchQuery|method
+source|AiSource|OpenAILLM.LLM|Query|method
+source|AiSource|OpenAILLM.LLM|SearchAsync|method
+source|AiSource|LocalLLM.LmStudioClient|QueryAsync|method
+source|AiSource|OpenRouter.LLM|Query|method
+
+# Command execution wrappers
+sink|CommandInjection|AGIMynd.IToolRunner|RunToolAsync|0,1|IToolRunner.RunToolAsync tool/args argument
+sink|CommandInjection|AGIMynd.CLI.DirectBridge|RunToolAsync|0,1|DirectBridge.RunToolAsync tool/args argument

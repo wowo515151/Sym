@@ -1,0 +1,6 @@
+{
+  "name": "Graph",
+  "description": "Rules for optimizing graph structures like Subscription Trees and Scoped DAGs.",
+  "enabledByDefault": true,
+  "priority": 20
+}

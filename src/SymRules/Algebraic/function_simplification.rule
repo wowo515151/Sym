@@ -1,0 +1,28 @@
+# Injective function equalities
+EqSqrt: Equality(sqrt(?a), sqrt(?b)) -> Equality(?a, ?b)
+EqExp: Equality(exp(?a), exp(?b)) -> Equality(?a, ?b)
+EqLog: Equality(log(?a), log(?b)) -> Equality(?a, ?b)
+EqLn: Equality(ln(?a), ln(?b)) -> Equality(?a, ?b)
+
+# Exponential / Log identities for solving
+ExpMulSolve: Equality(?a:Constant * exp(?b), exp(?c)) -> Equality(log(?a) + ?b, ?c)
+ExpMulSolve2: Equality(exp(?a) * exp(?b), exp(?c)) -> Equality(?a + ?b, ?c)
+
+# Factorial identities
+FactDiv: factorial(?n + 1) / factorial(?n) -> ?n + 1
+FactDivDown: factorial(?n) / factorial(?n + 1) -> 1 / (?n + 1)
+FactExpand: factorial(?n + 1) -> (?n + 1) * factorial(?n)
+FactContract: (?n + 1) * factorial(?n) -> factorial(?n + 1)
+
+# Piecewise evaluation (Basic)
+PiecewiseTrue: Piecewise(?a, true, ?b) -> ?a
+PiecewiseFalse: Piecewise(?a, false, ?b) -> ?b
+
+# Common function identities
+AbsConst: abs(?n:Constant) -> abs(?n)
+CeilConst: ceil(?n:Constant) -> ceil(?n)
+FloorConst: floor(?n:Constant) -> floor(?n)
+SignConst: sign(?n:Constant) -> sign(?n)
+GcdConst: gcd(?a:Constant, ?b:Constant) -> gcd(?a, ?b)
+LcmConst: lcm(?a:Constant, ?b:Constant) -> lcm(?a, ?b)
+ModConst: mod(?a:Constant, ?b:Constant) -> mod(?a, ?b)

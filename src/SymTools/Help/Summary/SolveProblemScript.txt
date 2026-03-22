@@ -1,0 +1,1 @@
+SolveProblemScript runs Sym's full ProblemScript wrapper, including options, rule packs, and EGraph-based solving. It is the only SymTools wrapper that directly accepts full ProblemScript. It is the most flexible tool in the set, but also the most advanced and least beginner-friendly.

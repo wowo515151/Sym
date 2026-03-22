@@ -1,0 +1,16 @@
+# Basic Integration Rules
+IntConst: Integral(?c:Constant, ?x) -> ?c * ?x
+IntVar: Integral(?x, ?x) -> ?x^2 / 2
+IntPow: Integral(?x^?n:Constant, ?x) -> ?x^(?n + 1) / (?n + 1)
+IntReciprocal: Integral(1/?x, ?x) -> log(?x)
+
+# Trig Integrals
+IntSin: Integral(sin(?x), ?x) -> -cos(?x)
+IntCos: Integral(cos(?x), ?x) -> sin(?x)
+
+# Exponential
+IntExp: Integral(exp(?x), ?x) -> exp(?x)
+
+# Linearity (Handled by engine mostly, but can be explicit)
+IntAdd: Integral(?f + ?g, ?x) -> Integral(?f, ?x) + Integral(?g, ?x)
+IntMulConst: Integral(?c:Constant * ?f, ?x) -> ?c * Integral(?f, ?x)

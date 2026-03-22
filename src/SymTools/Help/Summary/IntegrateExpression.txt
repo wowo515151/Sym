@@ -1,0 +1,1 @@
+IntegrateExpression computes antiderivatives for simpler and moderately structured symbolic expressions. It does not accept full ProblemScript and is not a full CAS-grade integration engine, so it will fail on harder integrals. This tool should be presented honestly as limited rather than universal.

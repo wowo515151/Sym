@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>AGIHelmsman</AssemblyName>
+    <ApplicationIcon>ChatGPT Image Jan 18, 2026, 03_46_16 PM.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AGIMyndWPF\AGIMyndWPF.csproj" />
+    <ProjectReference Include="..\ConsoleHelmsman\ConsoleHelmsman.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ChatGPT Image Jan 18, 2026, 03_46_16 PM.ico" />
+  </ItemGroup>
+
+</Project>

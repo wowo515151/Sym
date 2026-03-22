@@ -1,0 +1,5 @@
+<Options>
+  RulePacks: AlgebraicStrategy
+</Options>
+
+1 + 2 * 3

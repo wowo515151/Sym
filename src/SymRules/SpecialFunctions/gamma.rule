@@ -1,0 +1,2 @@
+# Gamma function recurrence anchored on shift form.
+GammaShift: gamma(x + 1) -> x * gamma(x)

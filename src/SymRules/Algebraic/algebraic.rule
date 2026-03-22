@@ -1,0 +1,18 @@
+# Combine powers with same exponent
+PowMatchExponent: Pow(a, k) * Pow(b, k) -> Pow(a * b, k)
+
+# Square root simplification (handled partially by Power.Canonicalize, but explicit rules help in complex forms)
+SqrtMul: Sqrt(a) * Sqrt(b) -> Sqrt(a * b)
+SqrtDiv: Sqrt(a) / Sqrt(b) -> Sqrt(a / b)
+
+# Valuation rules
+ValuationMul: valuation(p, a * b) -> valuation(p, a) + valuation(p, b)
+ValuationPow: valuation(p, Pow(a, k)) -> k * valuation(p, a)
+
+# Algebraic rule set (legacy aggregate file; kept for compatibility checks)
+# Format: OptionalName: left -> right
+# AddZero: a + 0 -> a
+# MulOne: a * 1 -> a
+# Distrib: a * (b + c) -> a*b + a*c
+# ZeroMul: 0 * a -> 0
+# SubSelf: a - a -> 0

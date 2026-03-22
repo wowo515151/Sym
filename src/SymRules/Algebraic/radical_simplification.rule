@@ -1,0 +1,1 @@
+SqrtMultiply: Pow(a, 0.5) * Pow(b, 0.5) -> Pow(a * b, 0.5)

@@ -1,0 +1,36 @@
+Tool name: SolveEquation
+
+Purpose:
+Solve one equation for one target variable.
+
+What this tool does well:
+It handles many common symbolic equation-solving tasks including linear equations, some polynomial equations, and a meaningful set of inverse-function cases.
+It is the right tool when the user gives a single equation and asks for one variable.
+
+Expected input:
+One equation string.
+One target variable name.
+
+Expected output:
+A solved equation or solution form as text.
+
+Important limitations:
+This tool expects a single equation, not a system.
+Coverage is good but not universal.
+Some equations with branch-heavy, highly transcendental, or unusual forms may fail or return incomplete results.
+Result shape can vary depending on the type of equation and how many solutions Sym can isolate.
+This tool does not accept full ProblemScript.
+
+Immediate-use examples:
+Equation: x + 5 = 10
+Target variable: x
+
+Equation: 2*x + 1 = 7
+Target variable: x
+
+Equation: x^2 - 5*x + 6 = 0
+Target variable: x
+
+Not a good fit for:
+Multiple simultaneous equations.
+General constraint sets written as ProblemScript.

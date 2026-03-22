@@ -1,0 +1,3 @@
+# Generation-only cleanup rules (deduplicate trivial expressions)
+AddZeroRight: a + 0 -> a
+AddZeroLeft: 0 + a -> a

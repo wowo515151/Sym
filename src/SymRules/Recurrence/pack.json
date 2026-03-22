@@ -1,0 +1,6 @@
+{
+  "name": "RecurrenceStrategy",
+  "description": "Rules for common recurrence relations.",
+  "enabledByDefault": true,
+  "priority": 10
+}

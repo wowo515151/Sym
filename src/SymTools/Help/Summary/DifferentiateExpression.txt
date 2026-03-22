@@ -1,0 +1,1 @@
+DifferentiateExpression computes symbolic derivatives with respect to one variable. It is solid for many standard calculus patterns and is one of the stronger specialized tools in SymTools. It does not accept full ProblemScript, and output may use Sym's canonical expression style rather than textbook notation.

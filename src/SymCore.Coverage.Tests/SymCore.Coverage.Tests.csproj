@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSTest" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SymCore\SymCore.csproj" />
+    <ProjectReference Include="..\Sym\Sym.csproj" />
+    <ProjectReference Include="..\SymRules\SymRules.csproj" />
+    <ProjectReference Include="..\SymSolvers\SymSolvers.csproj" />
+  </ItemGroup>
+
+</Project>

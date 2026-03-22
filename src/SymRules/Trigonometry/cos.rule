@@ -1,0 +1,3 @@
+# Cosine special values
+CosZero: cos(0) -> 1
+CosHalfPi: cos(pi/2) -> 0

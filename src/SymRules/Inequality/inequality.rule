@@ -1,0 +1,8 @@
+# Basic inequality normalizations that are always valid.
+# Format: name: pattern -> replacement
+ReflexiveFalse: x < x -> false
+ReflexiveFalseGt: x > x -> false
+ReflexiveTrueLe: x <= x -> true
+ReflexiveTrueGe: x >= x -> true
+AndConflict: and(lt(a, b), gt(a, b)) -> false
+NestedGuard: and(and(p, q), r) -> and(p, q, r)

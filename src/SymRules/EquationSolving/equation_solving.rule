@@ -1,0 +1,28 @@
+# Small, conservative rule set that enables combining like terms and basic distribution needed
+# by equation isolation.
+# Format: name: pattern -> replacement
+CombineLikeTerms: add(mul(n1, x), mul(n2, x)) -> mul(add(n1, n2), x)
+DistributeNegation: mul(-1, add(a, b)) -> add(mul(-1, a), mul(-1, b))
+
+# Addition Isolation
+IsolateAddLeft: Equality(a + b, c) -> Equality(a, c - b)
+IsolateAddRight: Equality(a + b, c) -> Equality(b, c - a)
+
+# Subtraction Isolation
+IsolateSubLeft: Equality(a - b, c) -> Equality(a, c + b)
+IsolateSubRight: Equality(a - b, c) -> Equality(b, a - c)
+
+# Multiplication Isolation
+IsolateMulLeft: Equality(a * b, c) -> Equality(a, c / b)
+IsolateMulRight: Equality(a * b, c) -> Equality(b, c / a)
+
+# Division Isolation
+IsolateDivLeft: Equality(a / b, c) -> Equality(a, c * b)
+IsolateDivRight: Equality(a / b, c) -> Equality(b, a / c)
+
+# Negation Isolation
+IsolateNeg: Equality(-a, b) -> Equality(a, -b)
+
+# Power Isolation (Square root)
+IsolateSquare: Equality(Pow(a, 2), b) -> Equality(a, Sqrt(b))
+IsolateSqrt: Equality(Sqrt(a), b) -> Equality(a, Pow(b, 2))

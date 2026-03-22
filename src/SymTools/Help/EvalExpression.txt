@@ -1,0 +1,34 @@
+Tool name: EvalExpression
+
+Purpose:
+Evaluate a single expression numerically.
+
+What this tool does well:
+It parses one Sym expression and attempts to compute a numeric result.
+It supports numeric operators, many built-in functions, and optional numeric substitutions for variables.
+It is a good fit for common calculator-style requests such as evaluating arithmetic, substituted formulas, and some piecewise expressions.
+
+Expected input:
+One expression string.
+Optional variable substitutions as decimal values.
+
+Expected output:
+A numeric result as text when evaluation succeeds.
+
+Important limitations:
+This is not a general-purpose arbitrary code evaluator.
+It only evaluates expressions that Sym can parse and that the numeric evaluator supports.
+Some symbolic expressions are intentionally not reduced if Sym cannot safely or meaningfully evaluate them numerically.
+Unsupported functions, missing substitutions, or domain errors can cause evaluation to fail.
+This tool does not accept full ProblemScript.
+
+Immediate-use examples:
+Expression: 1 + 2 * 3
+Expression: sin(pi / 2)
+Expression: x^2 + 1
+Substitutions: x = 3
+
+Not a good fit for:
+General symbolic solving.
+Large systems of equations.
+Arbitrary programming-language expressions.

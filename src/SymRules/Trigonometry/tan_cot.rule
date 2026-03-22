@@ -1,0 +1,11 @@
+# Tangent and Cotangent identities
+TanDef: tan(x) -> sin(x) / cos(x)
+CotDef: cot(x) -> cos(x) / sin(x)
+TanZero: tan(0) -> 0
+CotHalfPi: cot(pi/2) -> 0
+TanHalfPi: tan(pi/2) -> Infinity
+CotZero: cot(0) -> Infinity
+TanParity: tan(-x) -> -tan(x)
+CotParity: cot(-x) -> -cot(x)
+TanPeriodic: tan(x + pi) -> tan(x)
+CotPeriodic: cot(x + pi) -> cot(x)

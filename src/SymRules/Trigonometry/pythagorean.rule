@@ -1,0 +1,2 @@
+Pythagorean: Pow(sin(x),2) + Pow(cos(x),2) -> 1
+PythagoreanPlus: a + Pow(sin(x),2) + Pow(cos(x),2) -> a + 1

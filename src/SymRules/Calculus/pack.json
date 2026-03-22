@@ -1,0 +1,6 @@
+{
+  "name": "DifferentiationStrategy",
+  "description": "Rules for differentiation and ordinary differential equations.",
+  "enabledByDefault": true,
+  "priority": 10
+}

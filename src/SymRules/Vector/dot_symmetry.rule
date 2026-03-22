@@ -1,0 +1,3 @@
+# DotSymmetry causes non-terminating rewrite oscillation (a.b <-> b.a) under RewriteFully.
+# Keep disabled unless paired with a stable ordering/condition.
+# DotSymmetry: a . b -> b . a

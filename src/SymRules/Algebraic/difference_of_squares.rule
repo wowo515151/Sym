@@ -1,0 +1,2 @@
+DiffSquares: Pow(a,2) - Pow(b,2) -> (a - b)*(a + b)
+DiffSquaresAdd: Pow(a,2) + (-1*Pow(b,2)) -> (a - b)*(a + b)

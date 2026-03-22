@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="AGIMynd.Tests/AGIMynd.Tests.csproj" Id="661a9192-d1be-4b09-9d44-ee035a2a1640" />
+  <Project Path="AGIMynd/AGIMynd.csproj" />
+  <Project Path="AGIMynd.CLI/AGIMynd.CLI.csproj" />
+  <Project Path="LLMProjects/SwitchLLM/SwitchLLM.csproj" />
+  <Project Path="ConsoleHelmsman/ConsoleHelmsman.csproj" />
+  <Project Path="ConsoleHelmsman.Tests/ConsoleHelmsman.Tests.csproj" />
+  <Project Path="AGIMyndWPF/AGIMyndWPF.csproj" />
+  <Project Path="AGIHelmsman/AGIHelmsman.csproj" />
+</Solution>

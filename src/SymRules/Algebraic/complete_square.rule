@@ -1,0 +1,10 @@
+# Completion of square rules for single-variable quadratics.
+# These are heuristic rewrites and assume a non-zero quadratic coefficient.
+
+CompleteSquare: Pow(x, 2) + b * x -> Pow(x + (b / 2), 2) - (Pow(b, 2) / 4)
+CompleteSquareConst: c + Pow(x, 2) + b * x -> Pow(x + (b / 2), 2) + c - (Pow(b, 2) / 4)
+
+CompleteSquareCoeff: a * Pow(x, 2) + b * x -> a * Pow(x + (b / (2 * a)), 2) - (Pow(b, 2) / (4 * a))
+CompleteSquareCoeffLFirst: b * x + z * Pow(x, 2) -> z * Pow(x + (b / (2 * z)), 2) - (Pow(b, 2) / (4 * z))
+CompleteSquareCoeffConst: c + a * Pow(x, 2) + b * x -> a * Pow(x + (b / (2 * a)), 2) + c - (Pow(b, 2) / (4 * a))
+CompleteSquareCoeffConstLFirst: c + b * x + z * Pow(x, 2) -> z * Pow(x + (b / (2 * z)), 2) + c - (Pow(b, 2) / (4 * z))

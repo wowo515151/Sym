@@ -1,0 +1,2 @@
+DotProductZeroRight: DotProduct(a, 0) -> 0
+DotProductZeroLeft: DotProduct(0, a) -> 0

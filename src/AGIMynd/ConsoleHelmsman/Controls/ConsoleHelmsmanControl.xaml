@@ -1,0 +1,166 @@
+<UserControl x:Class="ConsoleHelmsman.Controls.ConsoleHelmsmanControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ConsoleHelmsman"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="1100">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Height" Value="24" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="2,2" />
+        </Style>
+        <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+            <Setter Property="Height" Value="24" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="2,2" />
+        </Style>
+    </UserControl.Resources>
+    <DockPanel>
+        <!-- Use WrapPanel to ensure controls wrap into new rows instead of hiding in overflow. -->
+        <WrapPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,0,0,4">
+            <Grid VerticalAlignment="Center" Margin="0,0,6,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Console:" Margin="8,0,6,0" VerticalAlignment="Center" />
+                <ComboBox Grid.Column="1" x:Name="ConsolesCombo"
+                          Height="24"
+                          Width="160"
+                          ItemsSource="{Binding AvailableConsoles}"
+                          SelectedItem="{Binding SelectedConsole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          VerticalAlignment="Center"
+                          VerticalContentAlignment="Center"
+                          Margin="0,0,6,0" />
+            </Grid>
+            <Grid VerticalAlignment="Center" Margin="0,0,6,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Mode:" Margin="8,0,6,0" VerticalAlignment="Center"
+                           Visibility="{Binding IsOneShotComboVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <ComboBox Grid.Column="1" x:Name="OneShotModeCombo"
+                          Height="24"
+                          Width="140"
+                          ItemsSource="{Binding OneShotModeItems}"
+                          SelectedItem="{Binding SelectedOneShotMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          Visibility="{Binding IsOneShotComboVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          VerticalAlignment="Center"
+                          VerticalContentAlignment="Center"
+                          Margin="0,0,6,0" />
+            </Grid>
+            <Button x:Name="SelectCLIsButton" Content="Select CLIs" Command="{Binding OpenSelectorCommand}" Margin="6,0,6,4" />
+            <Button x:Name="ConfigButton" Content="Config" Command="{Binding OpenConfigCommand}" Margin="6,0,6,4" />
+            <Button x:Name="ConsoleAppStart"
+                Content="ConsoleAppStart"
+                Command="{Binding StartCommand}"
+                Margin="6,0,6,4" />
+            <Button x:Name="ConsoleAppStop"
+                Content="ConsoleAppStop"
+                Command="{Binding StopCommand}"
+                Margin="6,0,6,4" />
+            <Separator Margin="0,0,0,4" />
+                <CheckBox x:Name="RepeatCheckBox"
+                          Content="Repeat"
+                          IsChecked="{Binding Repeat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          VerticalAlignment="Center"
+                          Margin="6,0,6,4" />
+            <Grid VerticalAlignment="Center" Margin="0,0,6,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="MaxEpochs:" Margin="8,0,4,0" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Width="60"
+                         Text="{Binding MaxEpochs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         VerticalAlignment="Center"
+                         Margin="0,0,6,0" />
+            </Grid>
+            <CheckBox x:Name="PlanBridgeToggle"
+                      Content="PlanBridge"
+                      IsChecked="{Binding IsPlanBridgeEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      VerticalAlignment="Center"
+                      Margin="6,0,6,4" />
+            <TextBlock Text="{Binding PlanBridgeStatusText}" Margin="8,0,8,4" VerticalAlignment="Center" />
+            <Separator Margin="0,0,0,4" />
+                <Button x:Name="ClearLogButton"
+                    Content="Clear Log"
+                    Command="{Binding ClearLogCommand}"
+                    Margin="6,0,6,4" />
+            <Separator Margin="0,0,0,4" />
+            <TextBlock Text="{Binding StatusText}" Margin="8,0,8,4" VerticalAlignment="Center" />
+            <Separator Margin="0,0,0,4" />
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0,0,6,4">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Current Dir:" Margin="8,0,6,0" VerticalAlignment="Center" />
+                    <TextBox x:Name="CurrentDirectoryTextBox"
+                             Height="24"
+                             Width="600"
+                             Text="{Binding CurrentDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             VerticalAlignment="Center"
+                             Margin="8,0,6,0"
+                             KeyDown="CurrentDirectoryTextBox_OnKeyDown" />
+                </StackPanel>
+                <!-- Validation message removed: validation now only affects Start button enablement. -->
+            </StackPanel>
+        </WrapPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Left: Console input -->
+            <GroupBox Header="Console Input" Grid.Column="0" Margin="6">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBox x:Name="ConsoleInputTextBox"
+                             Grid.Row="0"
+                             AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Auto"
+                             TextWrapping="Wrap"
+                             FontFamily="Consolas"
+                             KeyDown="ConsoleInputTextBox_OnKeyDown"
+                             Text="{Binding ConsoleInputText, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="6" />
+
+                    <Button x:Name="SendButton"
+                            Grid.Row="1"
+                            Content="Send"
+                            Command="{Binding SendCommand}"
+                            Height="40"
+                            Padding="12,6"
+                            Margin="6"
+                            HorizontalAlignment="Stretch" />
+                </Grid>
+            </GroupBox>
+
+            <!-- Right: Console display -->
+            <GroupBox Header="Console Display" Grid.Column="2" Margin="6">
+                <TextBox x:Name="ConsoleDisplayTextBox"
+                         Text="{Binding ConsoleDisplayText}"
+                         IsReadOnly="True"
+                         VerticalScrollBarVisibility="Auto"
+                         TextWrapping="Wrap"
+                         FontFamily="Consolas"
+                         Margin="6"
+                         Background="Black"
+                         Foreground="White"
+                         CaretBrush="White"
+                         TextChanged="ConsoleDisplayTextBox_OnTextChanged" />
+            </GroupBox>
+        </Grid>
+    </DockPanel>
+</UserControl>

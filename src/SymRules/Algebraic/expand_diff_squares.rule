@@ -1,0 +1,4 @@
+ExpandDiffSquares: (a + b)*(a + b) - (a - b)*(a - b) -> 4 * a * b
+ExpandDiffSquaresSym: (a + b)*(a + b) + -1*(a - b)*(a - b) -> 4 * a * b
+ExpandDiffSquaresProd: (a + b + (a - b)) * (a + b - (a - b)) -> 4 * a * b
+ExpandDiffSquaresMixed: ((a + b) - (a - b)) * ((a + b) + (a - b)) -> 4 * a * b

@@ -1,0 +1,5 @@
+# SinToCosDeg: sin(a) -> cos(90 - a)
+# CosToSinDeg: cos(a) -> sin(90 - a)
+TanToCotDeg: tan(a) -> cot(90 - a)
+Sin180Minus: sin(180 - a) -> sin(a)
+Cos180Minus: cos(180 - a) -> -cos(a)

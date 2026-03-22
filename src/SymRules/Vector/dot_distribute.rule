@@ -1,0 +1,2 @@
+DotDistribute: DotProduct(a + b, c) -> DotProduct(a, c) + DotProduct(b, c)
+DotDistributeRight: DotProduct(a, b + c) -> DotProduct(a, b) + DotProduct(a, c)

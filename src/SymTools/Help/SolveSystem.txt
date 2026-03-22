@@ -1,0 +1,37 @@
+Tool name: SolveSystem
+
+Purpose:
+Solve a small system of equations, optionally for a chosen target variable.
+
+What this tool does well:
+It can solve equation systems that benefit from propagation, substitution chains, and EGraph-based reasoning.
+It is useful when the user gives multiple equalities instead of a single equation.
+
+Expected input:
+A list of equation strings.
+Optional target variable name.
+
+Expected output:
+A solved expression or target assignment as text.
+
+Important limitations:
+This tool is not a fully general system solver for every symbolic system.
+It is strongest on smaller systems and cases where equalities propagate cleanly.
+Very large, heavily nonlinear, or underconstrained systems may fail or return only partial progress.
+This tool does not accept full ProblemScript.
+
+Immediate-use examples:
+Equations:
+a = b + 1
+b = c * 2
+c = 3
+Target variable: a
+
+Equations:
+x = y + 2
+y = 3
+Target variable: x
+
+Not a good fit for:
+Mixed equalities and inequalities with custom options.
+Complex workflows that need explicit rule packs or ProblemScript options.

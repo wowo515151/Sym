@@ -1,0 +1,1 @@
+EvalExpression numerically evaluates one Sym expression, with optional numeric substitutions for variables. It is good for calculator-style math and many supported built-in functions. It does not accept full ProblemScript and will fail on unsupported expressions, missing substitutions, or domain errors.

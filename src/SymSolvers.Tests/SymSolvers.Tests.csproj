@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsTestProject>true</IsTestProject>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SymSolvers\SymSolvers.csproj" />
+    <ProjectReference Include="..\SymCobra\SymCobra.csproj" />
+    <ProjectReference Include="..\SymRules\SymRules.csproj" />
+    <ProjectReference Include="..\Sym\Sym.csproj" />
+    <ProjectReference Include="..\SymCore\SymCore.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
+  </ItemGroup>
+</Project>

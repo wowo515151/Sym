@@ -1,0 +1,17 @@
+<Options>
+  RulePacks: Tensor, EquationSolving
+  CostModel: Tensor
+  Target: x
+</Options>
+
+/* 
+   Tensor System of Equations
+   A * x = B
+   C * x = D
+   
+   The solver will find multiple equivalent expressions for x.
+   The cost model will help it choose the "best" one.
+*/
+
+MatMul(A, x) = B;
+MatMul(C, x) = D;

@@ -1,0 +1,6 @@
+{
+  "name": "AlgebraicStrategy",
+  "description": "Standard algebraic simplifications and identities.",
+  "enabledByDefault": true,
+  "priority": 5
+}

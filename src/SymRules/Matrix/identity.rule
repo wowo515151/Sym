@@ -1,0 +1,5 @@
+# Matrix identity rules for left/right identity and vector products.
+IdentityLeft: MatrixMultiply(Identity, a) -> a
+IdentityRight: MatrixMultiply(a, Identity) -> a
+IdentityMul: Identity * a -> a
+IdentityVector: MatrixMultiply(Identity, v) -> v

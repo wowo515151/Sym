@@ -1,0 +1,29 @@
+# Isolation Rules for Equation Solving
+# Format: name: pattern -> replacement
+
+# Addition Isolation
+IsolateAddLeft: Equality(a + b, c) -> Equality(a, c - b)
+IsolateAddRight: Equality(a + b, c) -> Equality(b, c - a)
+
+# Subtraction Isolation
+IsolateSubLeft: Equality(a - b, c) -> Equality(a, c + b)
+IsolateSubRight: Equality(a - b, c) -> Equality(b, a - c)
+
+# Multiplication Isolation
+IsolateMulLeft: Equality(a * b, c) -> Equality(a, c / b)
+IsolateMulRight: Equality(a * b, c) -> Equality(b, c / a)
+
+# Division Isolation
+IsolateDivLeft: Equality(a / b, c) -> Equality(a, c * b)
+IsolateDivRight: Equality(a / b, c) -> Equality(b, a / c)
+
+# MatMul Isolation
+IsolateMatMulLeft: Equality(MatMul(?a, ?b), ?c) -> Equality(?b, MatMul(inverse(?a), ?c))
+IsolateMatMulRight: Equality(MatMul(?a, ?b), ?c) -> Equality(?a, MatMul(?c, inverse(?b)))
+
+# Negation Isolation
+IsolateNeg: Equality(-a, b) -> Equality(a, -b)
+
+# Power Isolation (Square root)
+IsolateSquare: Equality(Pow(a, 2), b) -> Equality(a, Sqrt(b))
+IsolateSqrt: Equality(Sqrt(a), b) -> Equality(a, Pow(b, 2))

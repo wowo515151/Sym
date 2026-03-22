@@ -1,0 +1,7 @@
+# Modular Arithmetic
+ModPow: mod(pow(?a:Constant, ?n:Constant), ?m:Constant) -> mod_pow(?a, ?n, ?m)
+ModInverse: mod_inverse(?a:Constant, ?m:Constant) -> modular_inverse(?a, ?m)
+
+# Congruence extraction
+# (already handled by C# for CRT, but basic ones can be rules)
+EqMod: Equality(mod(?x, ?m:Constant), ?r:Constant) -> Equality(mod(?x, ?m), ?r)

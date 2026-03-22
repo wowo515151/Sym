@@ -1,0 +1,4 @@
+# Double angle identities
+SinDouble: sin(2*x) -> 2*sin(x)*cos(x)
+CosDouble: cos(2*x) -> cos(x)^2 - sin(x)^2
+TanDouble: tan(2*x) -> 2*tan(x) / (1 - tan(x)^2)

@@ -1,0 +1,18 @@
+// Logarithmic identities
+// Convention: log(base, value) - this seems to be what the LLM produces despite instructions.
+// We override NumericEvaluator's (value, base) by providing a symbolic expansion rule.
+
+// LogExpand
+log(b, x) -> log(x) / log(b)
+// LogInverse
+1 / log(b, x) -> log(x, b)
+// LogPower
+log(b, Pow(x, k)) -> k * log(b, x)
+// LogProduct
+log(b, x * y) -> log(b, x) + log(b, y)
+// LogQuotient
+log(b, x / y) -> log(b, x) - log(b, y)
+// LogOfBase
+log(b, b) -> 1
+// LogOfOne
+log(b, 1) -> 0

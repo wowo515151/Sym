@@ -1,0 +1,2 @@
+SinZero: sin(0) -> 0
+SinHalfPi: sin(pi/2) -> 1

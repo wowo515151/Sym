@@ -1,0 +1,4 @@
+# Propositional logic expansions for core operators.
+# Format: name: pattern -> replacement
+Implies: implies(a, b) -> or(not(a), b)
+Iff: iff(a, b) -> and(implies(a, b), implies(b, a))

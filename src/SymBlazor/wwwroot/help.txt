@@ -1,0 +1,22 @@
+SymBlazor Help
+
+SymBlazor is a web interface for the E-Graph symbolic engine.
+
+Toolbar:
+- Start: Begins the solving process using the input script.
+- Stop: Interrupts the current solving operation.
+- Examples: Select a predefined ProblemScript to populate the input.
+- Help: Displays this information.
+
+Script Format:
+The engine accepts ProblemScripts which can contain:
+- <Options> blocks for engine configuration.
+- <Rules> blocks for custom rewrite rules.
+- Standard C# math expressions and equalities.
+
+Example Options:
+  RulePacks: Tensor, Algebraic
+  CostModel: Tensor
+  Target: x
+
+The engine will attempt to find the most efficient form of the provided expression or solve for the target variable based on the provided constraints.

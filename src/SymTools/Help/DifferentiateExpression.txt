@@ -1,0 +1,36 @@
+Tool name: DifferentiateExpression
+
+Purpose:
+Compute the symbolic derivative of an expression with respect to one variable.
+
+What this tool does well:
+It is a solid symbolic differentiation wrapper over Sym's derivative support.
+It handles many standard derivatives including sums, products, quotients, powers, and a useful set of elementary and inverse functions.
+It is a good fit for common calculus requests.
+
+Expected input:
+One expression string.
+One variable name.
+
+Expected output:
+A derivative expression as text.
+
+Important limitations:
+Coverage is good but not unlimited.
+Very exotic functions or unsupported symbolic forms may remain partially transformed or fail to simplify nicely.
+Output may be mathematically correct but formatted in Sym's canonical style rather than textbook notation.
+This tool does not accept full ProblemScript.
+
+Immediate-use examples:
+Expression: atan(x)
+Variable: x
+
+Expression: sin(x^2) / x
+Variable: x
+
+Expression: x^3
+Variable: x
+
+Not a good fit for:
+Numerical differentiation from sampled data.
+General integration or equation solving.

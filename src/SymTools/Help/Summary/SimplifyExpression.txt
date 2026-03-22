@@ -1,0 +1,1 @@
+SimplifyExpression rewrites one symbolic expression into a cleaner or more canonical form. It works well for common algebraic cleanup such as removing identities and combining some terms. It does not accept full ProblemScript and does not guarantee the globally best simplification for every expression.

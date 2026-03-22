@@ -1,0 +1,36 @@
+Tool name: IntegrateExpression
+
+Purpose:
+Compute an antiderivative for one expression with respect to one variable.
+
+What this tool does well:
+It can solve a useful set of standard symbolic integration problems.
+Current tested strengths include simple polynomials, some trigonometric and exponential forms, some inverse trigonometric and inverse hyperbolic patterns, and some common substitution-like cases.
+
+Expected input:
+One expression string.
+One variable name.
+
+Expected output:
+An antiderivative expression as text when Sym can find one.
+
+Important limitations:
+This is not a full general-purpose CAS-level integration engine.
+It is noticeably weaker than the equation and differentiation tools when the problem gets complex.
+It may fail on harder integrals, unusual transformations, or expressions that require advanced integration techniques outside the tested rule set.
+Callers should expect good performance on simpler and moderately structured problems, not broad universal coverage.
+This tool does not accept full ProblemScript.
+
+Immediate-use examples:
+Expression: x^3
+Variable: x
+
+Expression: sin(x)
+Variable: x
+
+Expression: exp(2*x + 1)
+Variable: x
+
+Not a good fit for:
+Very hard symbolic integrals.
+Broad claims of complete integration support.

@@ -1,0 +1,6 @@
+# Matrix Identities
+Det2x2: determinant(Matrix(Vector(?a, ?b), Vector(?c, ?d))) -> ?a * ?d - ?b * ?c
+Inv2x2: inverse(Matrix(Vector(?a, ?b), Vector(?c, ?d))) -> (1 / (?a * ?d - ?b * ?c)) * Matrix(Vector(?d, -?b), Vector(-?c, ?a))
+
+# Matrix Equality component-wise
+MatEq2x2: Equality(Matrix(Vector(?a, ?b), Vector(?c, ?d)), Matrix(Vector(?e, ?f), Vector(?g, ?h))) -> Vector(Equality(?a, ?e), Equality(?b, ?f), Equality(?c, ?g), Equality(?d, ?h))

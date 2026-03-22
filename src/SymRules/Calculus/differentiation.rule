@@ -1,0 +1,27 @@
+# Basic Operations
+AddRule: Derivative(?f + ?g, ?x) -> Derivative(?f, ?x) + Derivative(?g, ?x)
+SubRule: Derivative(?f - ?g, ?x) -> Derivative(?f, ?x) - Derivative(?g, ?x)
+MulRule: Derivative(?f * ?g, ?x) -> Derivative(?f, ?x) * ?g + ?f * Derivative(?g, ?x)
+DivRule: Derivative(?f / ?g, ?x) -> (Derivative(?f, ?x) * ?g - ?f * Derivative(?g, ?x)) / (?g^2)
+PowRule: Derivative(?f ^ ?g, ?x) -> (?f ^ ?g) * (Derivative(?g, ?x) * log(?f) + ?g * Derivative(?f, ?x) / ?f)
+
+# Constants and Variables
+DerivConst: Derivative(?c:Constant, ?x) -> 0
+DerivVar: Derivative(?x, ?x) -> 1
+
+# Trigonometric Functions
+SinRule: Derivative(sin(?u), ?x) -> cos(?u) * Derivative(?u, ?x)
+CosRule: Derivative(cos(?u), ?x) -> -1 * sin(?u) * Derivative(?u, ?x)
+TanRule: Derivative(tan(?u), ?x) -> Derivative(?u, ?x) / (cos(?u)^2)
+
+# Inverse Trig
+AsinRule: Derivative(asin(?u), ?x) -> Derivative(?u, ?x) / sqrt(1 - ?u^2)
+AcosRule: Derivative(acos(?u), ?x) -> -1 * Derivative(?u, ?x) / sqrt(1 - ?u^2)
+AtanRule: Derivative(atan(?u), ?x) -> Derivative(?u, ?x) / (1 + ?u^2)
+
+# Exponential and Log
+ExpRule: Derivative(exp(?u), ?x) -> exp(?u) * Derivative(?u, ?x)
+LogRule: Derivative(log(?u), ?x) -> Derivative(?u, ?x) / ?u
+
+# Power special cases (optimization)
+PowConstExp: Derivative(?x ^ ?n:Constant, ?x) -> ?n * ?x ^ (?n - 1)

@@ -1,0 +1,6 @@
+{
+  "name": "NumberTheoryStrategy",
+  "description": "Rules for modular arithmetic and number theory.",
+  "enabledByDefault": true,
+  "priority": 10
+}

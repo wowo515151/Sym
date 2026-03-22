@@ -1,0 +1,1 @@
+SolveSystem solves small equation systems, especially cases that work well with substitution and propagation. It is most reliable on smaller or cleaner symbolic systems. It does not accept full ProblemScript and is not a fully general solver for large, highly nonlinear, or heavily underconstrained systems.

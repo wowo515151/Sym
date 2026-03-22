@@ -1,0 +1,13 @@
+# Generic Structural Match Rules
+# These rules help match structures by stripping away common functions.
+
+EqSin: Equality(sin(?a), sin(?b)) -> Equality(?a, ?b)
+EqCos: Equality(cos(?a), cos(?b)) -> Equality(?a, ?b)
+EqTan: Equality(tan(?a), tan(?b)) -> Equality(?a, ?b)
+EqSqrt: Equality(sqrt(?a), sqrt(?b)) -> Equality(?a, ?b)
+EqExp: Equality(exp(?a), exp(?b)) -> Equality(?a, ?b)
+EqLog: Equality(log(?a), log(?b)) -> Equality(?a, ?b)
+
+# Simple addition/multiplication matching
+EqAdd: Equality(?a + ?b, ?c + ?d) -> Vector(Equality(?a, ?c), Equality(?b, ?d))
+EqMul: Equality(?a * ?b, ?c * ?d) -> Vector(Equality(?a, ?c), Equality(?b, ?d))

@@ -1,0 +1,2 @@
+# Matrix inverse rules for 2x2 matrices
+Inverse2x2: inverse(Matrix(Vector(a, b), Vector(c, d))) -> Matrix(Vector(d/(a*d - b*c), -b/(a*d - b*c)), Vector(-c/(a*d - b*c), a/(a*d - b*c)))

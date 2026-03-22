@@ -1,0 +1,2 @@
+# Sample algebraic rule (kept as documentation only; loader skips commented lines)
+# AddZero: a + 0 => a

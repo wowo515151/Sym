@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SymSolvers\SymSolvers.csproj" />
+    <ProjectReference Include="..\SymRules\SymRules.csproj" />
+    <ProjectReference Include="..\Sym\Sym.csproj" />
+    <ProjectReference Include="..\CSharpIO\CSharpIO.csproj" />
+  </ItemGroup>
+
+</Project>

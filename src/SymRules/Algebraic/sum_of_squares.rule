@@ -1,0 +1,1 @@
+SumSquares: Pow(a,2) + Pow(b,2) -> (Pow((a + b),2) - (2*a*b))

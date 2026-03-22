@@ -1,0 +1,2 @@
+CommutativeAdd: a + b -> b + a
+CommutativeMultiply: a * b -> b * a

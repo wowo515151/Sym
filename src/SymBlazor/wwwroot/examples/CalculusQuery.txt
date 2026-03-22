@@ -1,0 +1,5 @@
+<Options>
+  RulePacks: Calculus, AlgebraicStrategy
+</Options>
+
+Derivative(sin(x), x)

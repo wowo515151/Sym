@@ -1,0 +1,32 @@
+Tool name: SimplifyExpression
+
+Purpose:
+Simplify one symbolic expression.
+
+What this tool does well:
+It performs algebraic cleanup such as removing additive and multiplicative identities, combining some like terms, and canonicalizing expression structure.
+It is useful when an agent wants a cleaner or more standard form before further solving or evaluation.
+
+Expected input:
+One Sym expression string.
+Optional tracing and optional rule-pack selection.
+
+Expected output:
+A simplified expression as text.
+
+Important limitations:
+Simplify does not mean globally optimal in every case.
+Results depend on the available rules and solver context.
+It is strongest on standard algebraic cleanup and common rewrite patterns.
+It is weaker on very advanced transformations that require deeper search or domain-specific rule packs.
+This tool does not accept full ProblemScript.
+
+Immediate-use examples:
+Expression: x + 0
+Expression: 2*x + 3*x
+Expression: (x + 0) + (y * 1)
+
+Not a good fit for:
+Requests that clearly require solving for a variable.
+Tensor graph optimization.
+Highly specialized symbolic transformations without the needed rule support.

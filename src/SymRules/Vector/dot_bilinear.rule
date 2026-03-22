@@ -1,0 +1,4 @@
+# Bilinear expansion for dot products to enable distribution on both operands.
+DotBilinear: DotProduct(a + b, c + d) -> DotProduct(a, c) + DotProduct(a, d) + DotProduct(b, c) + DotProduct(b, d)
+DotNegateLeft: DotProduct(-a, b) -> -DotProduct(a, b)
+DotNegateRight: DotProduct(a, -b) -> -DotProduct(a, b)

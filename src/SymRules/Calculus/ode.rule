@@ -1,0 +1,9 @@
+# ODE Classification and Patterns
+# First-order linear: y' + P(x)y = Q(x)
+ODEFirstOrderLinear: Equality(Derivative(?y, ?x) + ?p * ?y, ?q) -> solve_linear_ode(?y, ?x, ?p, ?q)
+
+# First-order separable: y' = f(x)g(y)
+ODESeparable: Equality(Derivative(?y, ?x), ?fx * ?gy) -> solve_separable_ode(?y, ?x, ?fx, ?gy)
+
+# Second-order constant coefficients: ay'' + by' + cy = 0
+ODESecondOrderConst: Equality(?a:Constant * Derivative(Derivative(?y, ?x), ?x) + ?b:Constant * Derivative(?y, ?x) + ?c:Constant * ?y, 0) -> solve_second_order_const_ode(?y, ?x, ?a, ?b, ?c)

@@ -1,0 +1,15 @@
+# Basic Limit Rules
+LimitConst: Limit(?c:Constant, ?x, ?a) -> ?c
+LimitVar: Limit(?x, ?x, ?a) -> ?a
+
+# Common Limits
+SinOverX: Limit(sin(?x)/?x, ?x, 0) -> 1
+ExpMinusOneOverX: Limit((exp(?x) - 1)/?x, ?x, 0) -> 1
+
+# L'Hopital Rule (Heuristic - can be applied if direct eval fails)
+# Note: Rule engine usually doesn't know about 'direct eval fails' unless we use guards.
+# But we can define a rule that matches the indeterminate form 0/0.
+# However, evaluating ?f(?a) == 0 in a guard is better.
+
+# Polynomial Dominance (Infinity)
+LimitPolyRatioInf: Limit((?a:Constant * ?x^?n:Constant + ?r1) / (?b:Constant * ?x^?m:Constant + ?r2), ?x, infinity) -> (?a/?b) * Limit(?x^(?n-?m), ?x, infinity)

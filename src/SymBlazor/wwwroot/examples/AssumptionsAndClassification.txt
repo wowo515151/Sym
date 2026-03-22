@@ -1,0 +1,7 @@
+Options:
+AssumePositive: x
+AssumeReal: y
+RulePacks: Algebraic, Trigonometry
+
+Problem:
+sqrt(x^2) + sin(-y)
