@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

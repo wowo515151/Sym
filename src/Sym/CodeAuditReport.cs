@@ -1,4 +1,4 @@
-//Copyright Warren Harding 2025
+// Copyright Warren Harding 2026
 namespace Sym
 {
     // Minimal audit marker: used as a stable “proof-of-presence” API for audit-related work.

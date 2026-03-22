@@ -1,4 +1,4 @@
-//Copyright Warren Harding 2025.
+// Copyright Warren Harding 2026
 using System;
 using System.Collections.Immutable;
 using Sym.Core;

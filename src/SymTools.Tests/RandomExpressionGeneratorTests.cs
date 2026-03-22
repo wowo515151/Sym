@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 using System.Collections.Immutable;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.CSharp.Scripting;

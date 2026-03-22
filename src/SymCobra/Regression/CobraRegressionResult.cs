@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 using Sym.Core;
 
 namespace SymCobra.Regression;

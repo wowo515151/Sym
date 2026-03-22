@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 using System.Runtime.CompilerServices;
 using System;
 using System.IO;

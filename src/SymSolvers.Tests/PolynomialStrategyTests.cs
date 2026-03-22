@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sym.Atoms;

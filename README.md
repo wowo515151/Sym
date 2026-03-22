@@ -15,6 +15,10 @@ Sym has grown beyond the earlier Raven-only framing. The same core engine now po
 - Rule-pack driven algebraic, calculus, equation-solving, tensor, and graph optimization scenarios
 - Additional wrappers and companion apps in this repository
 
+## Status note
+
+The `SymCobra` and `SymCobra.CudaNative` projects are included as ongoing work toward COBRA GPU acceleration, but that GPU path is currently incomplete and not functional. The stable, supported path today is the CPU-based Sym engine and its existing wrappers.
+
 ![Sym image](RavenTextA.jpg)
 
 Copyright [TranscendAI.tech](https://transcendai.tech) 2026. Authored by Warren Harding. AI assisted.

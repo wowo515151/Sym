@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 using System.IO;
 using System.Linq;
 using SymRules;

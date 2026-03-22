@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WordsToSym;

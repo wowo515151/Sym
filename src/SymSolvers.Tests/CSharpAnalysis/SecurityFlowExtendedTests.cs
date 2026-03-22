@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 #nullable enable
 using System;
 using System.Linq;

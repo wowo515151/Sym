@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;

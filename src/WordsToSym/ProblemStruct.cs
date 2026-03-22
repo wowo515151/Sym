@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;

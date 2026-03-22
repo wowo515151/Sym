@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 // Minimal canonical rule index interface for Phase 3 M2
 using System.Collections.Immutable;
 using Sym.Core;

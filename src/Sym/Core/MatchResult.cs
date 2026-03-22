@@ -1,4 +1,4 @@
-//Copyright Warren Harding 2025.
+// Copyright Warren Harding 2026
 using System.Collections.Immutable;
 using Sym.Atoms; // Required for WildConstraint check
 using System.Linq; // For OrderBy in GetHashCode

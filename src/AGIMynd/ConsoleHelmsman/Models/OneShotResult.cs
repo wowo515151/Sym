@@ -1,4 +1,4 @@
-//Copyright Warren Harding 2025.
+// Copyright Warren Harding 2026
 namespace ConsoleHelmsman;
 
 public sealed class OneShotResult

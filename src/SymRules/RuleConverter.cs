@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 // Minimal converter to bridge SymRules.Rule and Sym.Core.Rule
 using System;
 using System.Collections.Generic;

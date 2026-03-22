@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 namespace Sym.Core;
 
 public static class SolverStrategyExtensions

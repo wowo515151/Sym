@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 // Base solver strategy providing a consistent "shape" for strategies.
 namespace Sym.Core;
 

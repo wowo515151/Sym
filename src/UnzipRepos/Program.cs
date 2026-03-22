@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 using System.IO.Compression;
 using System.Net;
 using System.Text.Json;

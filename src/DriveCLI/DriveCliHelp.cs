@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 namespace DriveCLI;
 
 public static class DriveCliHelp

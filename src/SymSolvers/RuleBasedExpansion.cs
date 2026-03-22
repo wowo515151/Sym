@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 using System;
 using Sym.Core;
 using Sym.Core.Rewriters;

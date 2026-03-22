@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;

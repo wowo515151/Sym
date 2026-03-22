@@ -1,3 +1,4 @@
+// Copyright Warren Harding 2026
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using SymBlazor;
