@@ -2,6 +2,22 @@
 
 The app is developed locally with a root base href in [src/SymBlazor/wwwroot/index.html](c:/Users/wowod/Desktop/Code2025/SymWork/src/SymBlazor/wwwroot/index.html).
 
+## Azure Static Web Apps
+
+For Azure hosting from GitHub, prefer Azure Static Web Apps over manual file upload.
+
+Recommended Azure Static Web Apps GitHub settings:
+- App location: `src/SymBlazor`
+- API location: leave blank
+- Output location: `wwwroot`
+- Branch: `main`
+
+Notes:
+- This repo now includes `src/SymBlazor/staticwebapp.config.json` so client-side Blazor routes fall back to `index.html`.
+- In Azure Static Web Apps, the Blazor app should normally be hosted at the site root `/` rather than under `/sym/`.
+- With root hosting, `SymHelp.txt`, `SymUIHelp.html`, `icon-192.png`, CSS, examples, and framework assets are all published directly from the Blazor app output.
+- The older `/sym/` publish profile remains useful for non-Azure folder-based deployments.
+
 For SymbolicComputation.com deployment, use the publish profile named `SymbolicComputationSym`.
 
 Publish target:
