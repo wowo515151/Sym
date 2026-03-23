@@ -5,7 +5,35 @@
       "rewrite": "/sym/index.html"
     },
     {
-      "route": "/sym/graph*",
+      "route": "/sym/graph",
+      "rewrite": "/sym/index.html"
+    },
+    {
+      "route": "/sym/graph/function-2d",
+      "rewrite": "/sym/index.html"
+    },
+    {
+      "route": "/sym/graph/parametric-2d",
+      "rewrite": "/sym/index.html"
+    },
+    {
+      "route": "/sym/graph/polar",
+      "rewrite": "/sym/index.html"
+    },
+    {
+      "route": "/sym/graph/surface-3d",
+      "rewrite": "/sym/index.html"
+    },
+    {
+      "route": "/sym/graph/parametric-3d",
+      "rewrite": "/sym/index.html"
+    },
+    {
+      "route": "/sym/graph/vector-field",
+      "rewrite": "/sym/index.html"
+    },
+    {
+      "route": "/sym/graph/expression-tree",
       "rewrite": "/sym/index.html"
     },
     {
