@@ -42,7 +42,7 @@
       Overwrite="true"
       Lines="$ErrorActionPreference = 'Stop'&#x0D;&#x0A;$path = '$(_PublishedIndexHtml)'&#x0D;&#x0A;if (-not (Test-Path -LiteralPath $path)) { exit 0 }&#x0D;&#x0A;if ([string]::IsNullOrWhiteSpace('$(PublishBaseHref)')) {&#x0D;&#x0A;  Remove-Item -Force -ErrorAction SilentlyContinue '$(_PublishedSiteDir)index.html.br', '$(_PublishedSiteDir)index.html.gz'&#x0D;&#x0A;  exit 0&#x0D;&#x0A;}&#x0D;&#x0A;$content = Get-Content -Raw -LiteralPath $path&#x0D;&#x0A;$targetBaseHref = '&lt;base href=&quot;$(PublishBaseHref)&quot; /&gt;'&#x0D;&#x0A;if (-not $content.Contains($targetBaseHref)) {&#x0D;&#x0A;  $updated = $content.Replace('&lt;base href=&quot;/&quot; /&gt;', $targetBaseHref)&#x0D;&#x0A;  if ($content -ceq $updated) { throw 'Expected base href marker was not found in published index.html.' }&#x0D;&#x0A;  Set-Content -LiteralPath $path -Value $updated -NoNewline&#x0D;&#x0A;}&#x0D;&#x0A;Remove-Item -Force -ErrorAction SilentlyContinue '$(_PublishedSiteDir)index.html.br', '$(_PublishedSiteDir)index.html.gz'" />
 
-    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(_RewriteScript)&quot;" />
+    <Exec Command="pwsh -NoProfile -ExecutionPolicy Bypass -File &quot;$(_RewriteScript)&quot;" />
     <Copy
       SourceFiles="@(_FrameworkFiles)"
       DestinationFiles="@(_FrameworkFiles->'$(_PublishedSymDir)_framework\%(RecursiveDir)%(Filename)%(Extension)')"
