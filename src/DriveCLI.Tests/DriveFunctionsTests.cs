@@ -26,7 +26,7 @@ public sealed class DriveFunctionsTests
     }
 
     [TestMethod]
-        [Timeout(10000)]
+    [Timeout(10000, CooperativeCancellation = true)]
     public async Task WriteReadAppend_10s()
     {
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
@@ -42,7 +42,7 @@ public sealed class DriveFunctionsTests
     }
 
     [TestMethod]
-        [Timeout(10000)]
+    [Timeout(10000, CooperativeCancellation = true)]
     public async Task Write_NoOverwrite_Throws_10s()
     {
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
@@ -61,7 +61,7 @@ public sealed class DriveFunctionsTests
     }
 
     [TestMethod]
-        [Timeout(10000)]
+    [Timeout(10000, CooperativeCancellation = true)]
     public void Exists_Delete_10s()
     {
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
@@ -78,7 +78,7 @@ public sealed class DriveFunctionsTests
     }
 
     [TestMethod]
-        [Timeout(10000)]
+    [Timeout(10000, CooperativeCancellation = true)]
     public void CreateDir_List_10s()
     {
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));

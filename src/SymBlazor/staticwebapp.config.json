@@ -5,6 +5,10 @@
       "rewrite": "/sym/index.html"
     },
     {
+      "route": "/sym/graph*",
+      "rewrite": "/sym/index.html"
+    },
+    {
       "route": "/sym/derivative-demo",
       "rewrite": "/sym/index.html"
     },

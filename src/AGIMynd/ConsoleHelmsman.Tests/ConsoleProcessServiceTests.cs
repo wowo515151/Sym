@@ -51,8 +51,19 @@ namespace ConsoleHelmsman.Tests
                 {
                     if (File.Exists(fromToolsFile))
                     {
-                        var text = File.ReadAllText(fromToolsFile, Encoding.UTF8);
-                        if (text.Contains("hello world")) { found = true; break; }
+                        try
+                        {
+                            var text = ReadAllTextShared(fromToolsFile, Encoding.UTF8);
+                            if (text.Contains("hello world"))
+                            {
+                                found = true;
+                                break;
+                            }
+                        }
+                        catch (IOException)
+                        {
+                            // The background writer may still hold the file briefly.
+                        }
                     }
                     await Task.Delay(100);
                 }
@@ -85,6 +96,13 @@ namespace ConsoleHelmsman.Tests
             }
 
             return null;
+        }
+
+        private static string ReadAllTextShared(string path, Encoding encoding)
+        {
+            using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
+            using var reader = new StreamReader(stream, encoding, detectEncodingFromByteOrderMarks: true);
+            return reader.ReadToEnd();
         }
     }
 }
