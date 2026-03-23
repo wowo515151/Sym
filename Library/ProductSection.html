@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ProductSection</title>
+    <link rel="stylesheet" href="./library.css" />
+</head>
+<body class="product-embed-body">
+    <section class="product-section product-section-standalone">
+        <span class="mini-label">Services</span>
+        <h2>Custom Mathematical Software</h2>
+        <p>
+            Warren Harding builds custom symbolic mathematics systems, agentic software, and technical tools where math,
+            AI, and software engineering meet.
+        </p>
+        <p class="muted-note">
+            Examples: <a href="https://github.com/Wowo51" target="_blank" rel="noopener noreferrer">GitHub</a>.
+        </p>
+        <div class="product-links">
+            <a class="button-link primary" href="../resume.html" target="_top">View Resume And Services</a>
+            <a class="button-link secondary" href="https://www.linkedin.com/in/warren-harding-29a0a673/" target="_blank" rel="noopener noreferrer">Contact On LinkedIn</a>
+        </div>
+    </section>
+    <script>
+        (function () {
+            function resizeFrame() {
+                if (!window.frameElement) {
+                    return;
+                }
+
+                const root = document.documentElement;
+                const body = document.body;
+                const height = Math.max(
+                    body ? body.scrollHeight : 0,
+                    body ? body.offsetHeight : 0,
+                    root ? root.scrollHeight : 0,
+                    root ? root.offsetHeight : 0
+                );
+
+                window.frameElement.style.height = (height + 4) + "px";
+            }
+
+            window.addEventListener("load", resizeFrame);
+            window.addEventListener("resize", resizeFrame);
+            setTimeout(resizeFrame, 0);
+        })();
+    </script>
+</body>
+</html>

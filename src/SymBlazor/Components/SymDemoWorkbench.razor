@@ -1,0 +1,245 @@
+@using System.Text.RegularExpressions
+@using WordsToSym
+
+<div class="demo-workbench">
+    <div class="demo-toolbar">
+        <div class="demo-toolbar-section">
+            <button class="btn btn-primary" @onclick="StartSolving" disabled="@_isSolving">Run Demo</button>
+            <button class="btn btn-secondary" @onclick="StopSolving" disabled="@(!_isSolving)">Stop</button>
+        </div>
+
+        @if (Examples.Count > 0)
+        {
+            <fieldset class="demo-group-box demo-examples-group">
+                <legend>Examples</legend>
+                <select @onchange="OnExampleSelected" class="form-select">
+                    <option value="">-- Select a Demo Example --</option>
+                    @foreach (var example in Examples)
+                    {
+                        <option value="@example.Name">@example.Name</option>
+                    }
+                </select>
+            </fieldset>
+        }
+
+        <div class="demo-toolbar-section">
+            <a class="btn btn-outline-light" href="/SymUIHelp.html" target="_blank" rel="noopener noreferrer">Sym Help</a>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(_selectedDescription))
+    {
+        <div class="demo-description">@_selectedDescription</div>
+    }
+
+    <div class="demo-content-container">
+        <fieldset class="demo-group-box demo-io-item">
+            <legend>Input</legend>
+            <textarea class="demo-fill-area" @bind="_input" @bind:event="oninput" spellcheck="false"></textarea>
+        </fieldset>
+
+        <fieldset class="demo-group-box demo-io-item">
+            <legend>Output</legend>
+            <textarea class="demo-fill-area" readonly @bind="_output" spellcheck="false"></textarea>
+        </fieldset>
+    </div>
+</div>
+
+@code {
+    [Parameter] public IReadOnlyList<DemoExample> Examples { get; set; } = Array.Empty<DemoExample>();
+    [Parameter] public string InitialInput { get; set; } = string.Empty;
+    [Parameter] public bool ApplyDefaultRulePacks { get; set; }
+
+    private const string BlazorDefaultRulePacks = "AlgebraicStrategy, EquationSolving";
+    private static readonly Regex RulePacksOptionRegex = new(@"^\s*(?:@option\s+)?RulePacks\s*[:=]", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+    private static readonly Regex XmlOptionsBlockRegex = new(@"<Options>(.*?)</Options>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+    private string _input = string.Empty;
+    private string _output = string.Empty;
+    private string? _selectedDescription;
+    private bool _initialized;
+    private bool _isSolving;
+    private CancellationTokenSource? _cts;
+
+    protected override void OnParametersSet()
+    {
+        if (_initialized)
+        {
+            return;
+        }
+
+        if (!string.IsNullOrWhiteSpace(InitialInput))
+        {
+            _input = InitialInput;
+        }
+        else if (Examples.Count > 0)
+        {
+            _input = Examples[0].Script;
+            _selectedDescription = Examples[0].Description;
+        }
+
+        _initialized = true;
+    }
+
+    private Task OnExampleSelected(ChangeEventArgs e)
+    {
+        var selected = Examples.FirstOrDefault(example => string.Equals(example.Name, e.Value?.ToString(), StringComparison.Ordinal));
+        if (selected is null)
+        {
+            return Task.CompletedTask;
+        }
+
+        _input = selected.Script;
+        _selectedDescription = selected.Description;
+        _output = string.Empty;
+        return Task.CompletedTask;
+    }
+
+    private async Task StartSolving()
+    {
+        if (_isSolving || string.IsNullOrWhiteSpace(_input))
+        {
+            return;
+        }
+
+        _isSolving = true;
+        _output = "Running demo...";
+        _cts = new CancellationTokenSource();
+
+        try
+        {
+            await Task.Yield();
+
+            var wrapper = new ProblemScriptEGraphWrapper();
+            var effectiveInput = ApplyDefaultRulePacks ? ApplyBlazorDefaultRulePacks(_input) : _input;
+            _output = await Task.Run(() => wrapper.SolveWithEGraph(effectiveInput, _cts.Token), _cts.Token);
+        }
+        catch (OperationCanceledException)
+        {
+            _output = "Demo run stopped.";
+        }
+        catch (Exception ex)
+        {
+            _output = "Error: " + ex.Message;
+        }
+        finally
+        {
+            _isSolving = false;
+            _cts?.Dispose();
+            _cts = null;
+        }
+    }
+
+    private void StopSolving()
+    {
+        _cts?.Cancel();
+    }
+
+    private static string ApplyBlazorDefaultRulePacks(string script)
+    {
+        if (string.IsNullOrWhiteSpace(script) || RulePacksOptionRegex.IsMatch(script))
+        {
+            return script;
+        }
+
+        var lineEnding = script.Contains("\r\n", StringComparison.Ordinal) ? "\r\n" : "\n";
+        var xmlOptionsMatch = XmlOptionsBlockRegex.Match(script);
+        if (xmlOptionsMatch.Success)
+        {
+            var optionsContent = xmlOptionsMatch.Groups[1].Value;
+            var trimmedOptions = optionsContent.TrimEnd();
+            var updatedOptions = string.IsNullOrWhiteSpace(trimmedOptions)
+                ? $"{lineEnding}  RulePacks: {BlazorDefaultRulePacks}{lineEnding}"
+                : $"{lineEnding}{trimmedOptions}{lineEnding}  RulePacks: {BlazorDefaultRulePacks}{lineEnding}";
+
+            return script[..xmlOptionsMatch.Groups[1].Index] +
+                   updatedOptions +
+                   script[(xmlOptionsMatch.Groups[1].Index + xmlOptionsMatch.Groups[1].Length)..];
+        }
+
+        var trimmedScript = script.TrimStart();
+        return $"<Options>{lineEnding}  RulePacks: {BlazorDefaultRulePacks}{lineEnding}</Options>{lineEnding}{lineEnding}{trimmedScript}";
+    }
+}
+
+<style>
+    .demo-workbench {
+        display: flex;
+        flex-direction: column;
+        min-height: 32rem;
+        gap: 1rem;
+    }
+
+    .demo-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .demo-toolbar-section {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .demo-group-box {
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        border-radius: 0.65rem;
+        padding: 0.5rem 0.75rem 0.75rem;
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    .demo-group-box legend {
+        float: none;
+        width: auto;
+        padding: 0 0.35rem;
+        margin-bottom: 0;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #b8d0f0;
+    }
+
+    .demo-examples-group {
+        min-width: 18rem;
+    }
+
+    .demo-description {
+        color: #c9d7e8;
+        font-size: 0.95rem;
+    }
+
+    .demo-content-container {
+        display: flex;
+        gap: 1rem;
+        min-height: 24rem;
+    }
+
+    .demo-io-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    .demo-fill-area {
+        flex: 1;
+        width: 100%;
+        min-height: 22rem;
+        resize: vertical;
+        background: #08111f;
+        color: #edf5ff;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 0.55rem;
+        padding: 0.75rem;
+        font-family: "Cascadia Code", Consolas, "Courier New", monospace;
+        font-size: 0.92rem;
+        box-sizing: border-box;
+    }
+
+    @@media (max-width: 900px) {
+        .demo-content-container {
+            flex-direction: column;
+        }
+    }
+</style>

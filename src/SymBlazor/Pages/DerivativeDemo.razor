@@ -1,0 +1,51 @@
+@page "/sym/derivative-demo"
+@page "/sym/derivative-demo/"
+
+<div class="demo-page">
+    <p class="demo-kicker">Sym Demo</p>
+    <h1>Derivative Demo</h1>
+    <p class="demo-summary">
+        This demo uses the Sym backend to differentiate symbolic expressions with calculus rule packs enabled.
+    </p>
+
+    <SymDemoWorkbench Examples="@Examples" InitialInput="@Examples[0].Script" />
+</div>
+
+@code {
+    private static readonly IReadOnlyList<DemoExample> Examples =
+    [
+        new(
+            "Derivative Of Sine",
+            """
+            <Options>
+              RulePacks: Calculus, AlgebraicStrategy
+            </Options>
+
+            Derivative(sin(x), x)
+            """,
+            "A direct calculus example showing a simple symbolic derivative."
+        ),
+        new(
+            "Product Rule",
+            """
+            <Options>
+              RulePacks: Calculus, AlgebraicStrategy
+            </Options>
+
+            Derivative(sin(x) * exp(x), x)
+            """,
+            "A slightly richer example that typically triggers product-rule style behavior."
+        ),
+        new(
+            "Polynomial Derivative",
+            """
+            <Options>
+              RulePacks: Calculus, AlgebraicStrategy
+            </Options>
+
+            Derivative(x^3 + 2*x^2 + x, x)
+            """,
+            "A symbolic polynomial derivative that should simplify cleanly."
+        )
+    ];
+}

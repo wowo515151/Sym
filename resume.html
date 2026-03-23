@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resume And Services | SymbolicComputation.com</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #071428;
+            --bg-alt: #0a1d37;
+            --panel: rgba(10, 25, 48, 0.92);
+            --line: rgba(122, 164, 224, 0.24);
+            --text: #edf5ff;
+            --muted: #a7b6ca;
+            --accent: #4a90e2;
+            --accent-strong: #1257a1;
+            --accent-deep: #0a3f7a;
+            --success: #89d1b6;
+            --max: 1040px;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top right, rgba(74, 144, 226, 0.16), transparent 28%),
+                linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+        }
+
+        a { color: var(--text); }
+
+        .page {
+            width: min(var(--max), calc(100% - 28px));
+            margin: 0 auto;
+            padding: 28px 0 48px;
+        }
+
+        .hero,
+        .panel {
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            background: var(--panel);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.34);
+        }
+
+        .hero { padding: 32px; }
+        .panel { padding: 24px; margin-top: 18px; }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            color: var(--success);
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        h1, h2 {
+            margin-top: 0;
+            font-family: "Palatino Linotype", Georgia, serif;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 4.2vw, 4.4rem);
+            line-height: 1;
+            margin-bottom: 14px;
+        }
+
+        p, li { color: var(--muted); }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .button-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 18px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid transparent;
+        }
+
+        .button-link.primary {
+            background: linear-gradient(180deg, var(--accent-strong), var(--accent-deep));
+            box-shadow: 0 10px 24px rgba(10,63,122,0.34);
+        }
+
+        .button-link.secondary {
+            background: rgba(255,255,255,0.02);
+            border-color: var(--line);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        ul { padding-left: 1.2rem; }
+
+        .site-footer {
+            margin-top: 24px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 860px) {
+            .grid { grid-template-columns: 1fr; }
+            .hero, .panel { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <section class="hero">
+            <p class="eyebrow">Resume And Services</p>
+            <h1>Custom Software For Math, AI, And Technical Systems</h1>
+            <p>
+                This page is intentionally written as a capabilities and services page rather than a standard employment resume.
+                The work behind SymbolicComputation.com includes symbolic mathematics, technical software engineering, agentic systems,
+                and practical tools built to solve nontrivial problems.
+            </p>
+            <div class="actions">
+                <a class="button-link primary" href="/library/">Open The Library</a>
+                <a class="button-link secondary" href="/sym">Open Sym Online</a>
+                <a class="button-link secondary" href="https://github.com/Wowo51" target="_blank" rel="noopener noreferrer">View GitHub</a>
+                <a class="button-link secondary" href="https://www.linkedin.com/in/warren-harding-29a0a673/" target="_blank" rel="noopener noreferrer">Contact On LinkedIn</a>
+            </div>
+        </section>
+
+        <div class="grid">
+            <section class="panel">
+                <h2>What I Offer</h2>
+                <ul>
+                    <li>Custom mathematical software development</li>
+                    <li>Symbolic computation systems and tooling</li>
+                    <li>Custom agentic development and AI workflow orchestration</li>
+                    <li>General custom software development for technically demanding projects</li>
+                </ul>
+                <p>
+                    This can include research-oriented prototypes, internal tools, domain-specific platforms, interpreters, automation,
+                    AI-assisted pipelines, or production-grade software shaped around a specialized problem.
+                </p>
+            </section>
+
+            <section class="panel">
+                <h2>Relevant Focus Areas</h2>
+                <ul>
+                    <li>Symbolic simplification and expression systems</li>
+                    <li>Math-oriented interfaces and educational software</li>
+                    <li>LLM tool use and agentic control loops</li>
+                    <li>Workflow automation with real domain logic</li>
+                    <li>Technical architecture for experimental products</li>
+                </ul>
+            </section>
+        </div>
+
+        <section class="panel">
+            <h2>Examples Of Public Work</h2>
+            <p>
+                Examples are available on <a href="https://github.com/Wowo51" target="_blank" rel="noopener noreferrer">github.com/Wowo51</a>,
+                including the code behind Sym and related projects in this repository. The goal of the public work is not only to show output,
+                but to demonstrate the ability to build substantial systems around math, AI, and technically complex problem spaces.
+            </p>
+        </section>
+
+        <section class="panel">
+            <h2>Contact</h2>
+            <p>
+                If you want to discuss custom mathematical software, custom agentic development, or other technically demanding software work,
+                the best public contact path is <a href="https://www.linkedin.com/in/warren-harding-29a0a673/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+            </p>
+        </section>
+
+        <footer class="site-footer">
+            Copyright SymbolicComputation.com 2026. AI assisted.
+        </footer>
+    </main>
+</body>
+</html>

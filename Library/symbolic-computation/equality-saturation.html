@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Equality Saturation Explained</title>
+    <meta name="description" content="An introduction to equality saturation and why it is useful for symbolic optimization." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Equality Saturation Explained</h1>
+            <p class="hero-copy">
+                Equality saturation is an optimization strategy that accumulates many equivalent expressions before
+                choosing a preferred result. It is one of the clearest examples of symbolic search becoming practical.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Basic Pattern</span>
+                <h2>Do Not Commit Too Early</h2>
+                <p>
+                    In ordinary rewriting, a system often chooses one valid rewrite and moves on. Equality saturation
+                    takes a different approach. It keeps adding equivalent forms into a shared structure, usually an
+                    e-graph, until enough of the search space has been exposed to make a better-informed decision.
+                </p>
+                <p>
+                    The goal is not to apply every rewrite forever. The goal is to avoid losing good alternatives simply
+                    because the system committed too early to one path.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Helps</span>
+                <h2>Search First, Extract Second</h2>
+                <p>
+                    Equality saturation separates two questions:
+                </p>
+                <ul class="lead-list">
+                    <li>Which expressions are equivalent under the rule set?</li>
+                    <li>Which equivalent expression is best for the current goal?</li>
+                </ul>
+                <p>
+                    Once these are separated, the extraction step can use a meaningful cost model rather than inheriting
+                    the accidental biases of one rewrite order.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Cost Models</span>
+                <h2>Best Means Best For Something</h2>
+                <p>
+                    Equality saturation does not define one universal notion of simplicity. A preferred result might be
+                    shorter to print, cheaper to evaluate, more numerically stable, easier to differentiate, or better
+                    suited to tensor fusion. The extraction rule depends on what the system is optimizing for.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Relation To Sym</span>
+                <h2>Why It Fits This Library</h2>
+                <p>
+                    Sym uses e-graphs and cost models, including tensor-aware cost logic. That makes equality saturation
+                    more than a theoretical curiosity here. It is part of the story of how symbolic search can support
+                    practical optimization tasks.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./e-graphs.html">E-Graphs</a>
+                    <a class="button-link secondary" href="../ai-math/tensor-expression-graphs.html">Tensor Expression Graphs</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

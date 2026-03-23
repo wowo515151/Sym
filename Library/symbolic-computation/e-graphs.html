@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is An E-Graph?</title>
+    <meta name="description" content="An introduction to e-graphs and equality saturation for symbolic optimization." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>What Is An E-Graph?</h1>
+            <p class="hero-copy">
+                An e-graph is a data structure for representing many equivalent expressions compactly at the same time.
+                It is central to equality saturation, a style of optimization that applies many valid rewrites first and
+                chooses a good result later.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Key Insight</span>
+                <h2>Keep Multiple Equivalent Forms Alive</h2>
+                <p>
+                    Traditional simplification often commits to one rewrite path at a time. If the chosen path is poor,
+                    useful alternatives may be lost. E-graphs solve part of this problem by storing equivalence classes
+                    of expressions, allowing multiple forms to coexist inside one shared structure.
+                </p>
+                <p>
+                    Instead of asking “which rewrite should I apply next,” equality saturation asks “which rewrites are
+                    valid here?” and adds all of them into the graph. Only after the graph has been enriched with many
+                    equivalent possibilities does a cost model extract a preferred result.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Search Without Immediate Commitment</h2>
+                <ul class="lead-list">
+                    <li>E-graphs reduce the need to commit early to a single rewrite order.</li>
+                    <li>Shared structure prevents many equivalent expressions from being stored redundantly.</li>
+                    <li>Cost models can be tailored to algebraic simplicity, runtime cost, tensor shape, or another target.</li>
+                </ul>
+                <p>
+                    This is one reason e-graphs are useful for modern symbolic optimization. They let the system explore
+                    a rich space of equivalent expressions without naively branching into separate full copies each time.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Connection To Sym</span>
+                <h3>Rule Packs And Cost Models</h3>
+                <p>
+                    Sym uses an e-graph-based solver and cost models, including tensor-aware cost logic, to reason about
+                    equivalent expressions. That makes the data structure relevant not only to textbook algebra, but also
+                    to expression-level optimization in more modern workloads.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./equality-saturation.html">Equality Saturation</a>
+                </div>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Practical Outcome</span>
+                <h3>Better Extraction</h3>
+                <p>
+                    Once many valid forms are present in the graph, the extraction step can choose an expression that is
+                    smaller, cheaper, more numerically stable, or better matched to the target execution environment.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Equality Saturation</span>
+                <h2>Add First, Choose Later</h2>
+                <p>
+                    Equality saturation changes the usual control flow of simplification. Instead of selecting one rewrite
+                    and immediately discarding alternatives, the system keeps adding equivalent forms into the e-graph.
+                    Saturation continues until a stopping criterion is reached, such as a node budget, a rewrite budget,
+                    or a fixed point where no new useful equalities are discovered.
+                </p>
+                <p>
+                    Extraction then becomes a separate problem: given all the equivalent expressions present in the graph,
+                    which one should be chosen? The answer depends on the cost model. A cost model might favor printed
+                    simplicity, arithmetic cost, tensor shape behavior, fusion opportunities, or some domain-specific goal.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./term-rewriting-systems.html">Rewrite Systems</a>
+                    <a class="button-link secondary" href="../ai-math/tensor-expression-graphs.html">Tensor Cost Models</a>
+                    <a class="button-link ghost" href="../../sym/rewrite-demo">Rewrite Demo</a>
+                </div>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Tradeoff</span>
+                <h2>More Search, Better Options</h2>
+                <p>
+                    E-graphs do not eliminate complexity; they manage it better. The graph can still grow large, and the
+                    rewrite space can still be expensive. But the data structure gives the system a disciplined way to
+                    represent many alternatives together instead of repeatedly branching and copying full expressions.
+                </p>
+                <p>
+                    That makes e-graphs especially attractive in domains where many rewrites are valid and the best final
+                    form depends on a meaningful notion of cost rather than a fixed rewrite order.
+                </p>
+                <p>
+                    Conceptually, an e-graph separates two ideas that are often tangled together in simpler systems:
+                    which expressions are equivalent, and which equivalent expression should be preferred. That separation
+                    is one of the reasons the technique scales to richer optimization problems.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

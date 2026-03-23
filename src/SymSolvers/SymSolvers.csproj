@@ -7,12 +7,13 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <EnableCobra Condition="'$(EnableCobra)' == ''">true</EnableCobra>
+  <EnableCSharpAnalysis Condition="'$(EnableCSharpAnalysis)' == ''">true</EnableCSharpAnalysis>
     <DefineConstants Condition="'$(EnableCobra)' == 'true'">$(DefineConstants);ENABLE_COBRA</DefineConstants>
     <IntermediateOutputPath Condition="'$(EnableCobra)' != 'true'">obj\$(Configuration)\nocobra\</IntermediateOutputPath>
     <OutputPath Condition="'$(EnableCobra)' != 'true'">bin\$(Configuration)\nocobra\</OutputPath>
   </PropertyGroup>
 
-  <ItemGroup>
+<ItemGroup Condition="'$(EnableCSharpAnalysis)' == 'true'">
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" />
   </ItemGroup>
 
@@ -31,5 +32,9 @@
     <Compile Remove="CobraConditionEvaluator.cs" />
     <Compile Remove="CobraSolverStrategy.cs" />
   </ItemGroup>
+
+<ItemGroup Condition="'$(EnableCSharpAnalysis)' != 'true'">
+  <Compile Remove="CSharpAnalysis\**\*.cs" />
+</ItemGroup>
 
 </Project>

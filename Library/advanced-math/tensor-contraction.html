@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is Tensor Contraction?</title>
+    <meta name="description" content="An introduction to tensor contraction, index summation, and why it matters in scientific computing and AI." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Advanced Mathematics</p>
+            <h1>What Is Tensor Contraction?</h1>
+            <p class="hero-copy">
+                Tensor contraction is the process of summing over one or more paired indices of a tensor expression.
+                It generalizes familiar operations such as inner products, matrix multiplication, and trace.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>Summation Over Matched Indices</h2>
+                <p>
+                    In index notation, contraction occurs when one index from one factor is matched with another index
+                    and summed over. Matrix multiplication is a familiar example:
+                    <code>(AB)_{ij} = sum_k A_{ik} B_{kj}</code>. The index <code>k</code> is contracted.
+                </p>
+                <p>
+                    Tensor contraction is therefore not a mysterious special case. It is the natural higher-rank
+                    extension of operations people already know from linear algebra.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>From Physics To AI</h2>
+                <p>
+                    Tensor contraction appears in scientific computing, continuum mechanics, relativity, multilinear
+                    algebra, and machine learning. Any time a system is built from matrix and tensor primitives, some
+                    form of contraction is likely nearby.
+                </p>
+                <p>
+                    It also matters computationally because there are often many ways to order a sequence of contractions.
+                    Choosing that order well can dramatically change runtime and memory usage.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Computation</span>
+                <h3>Expression-Level Optimization</h3>
+                <p>
+                    When tensor expressions are represented symbolically, contraction order and equivalent forms can be
+                    analyzed before execution. That makes symbolic methods relevant to real computational performance.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Intuition</span>
+                <h3>Reduce One Axis By Summing</h3>
+                <p>
+                    A useful mental model is that contraction ties together two indices and sums across the shared axis.
+                    The resulting tensor has fewer free indices than the original product.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Example</span>
+                <h2>Matrix Multiplication As Contraction</h2>
+                <p>
+                    People often learn matrix multiplication without being told that it is a tensor contraction. But that
+                    is exactly what it is. The product <code>(AB)_{ij}</code> sums over the repeated index
+                    <code>k</code>, which means one axis from <code>A</code> and one axis from <code>B</code> are tied
+                    together and eliminated by summation.
+                </p>
+                <p>
+                    Seeing matrix multiplication this way helps unify familiar linear algebra with more general tensor
+                    operations. The notation scales up naturally to higher-rank objects.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="../ai-math/tensor-expression-graphs.html">Tensor Graphs In AI</a>
+                    <a class="button-link secondary" href="./jacobian-matrix.html">Jacobian Matrix</a>
+                </div>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Optimization Question</span>
+                <h2>Order Can Matter A Lot</h2>
+                <p>
+                    In large tensor expressions, different contraction orders can produce the same mathematical result
+                    with very different intermediate tensor sizes. That means contraction is not just a matter of
+                    correctness. It is also a matter of computational cost, which is why symbolic reasoning and
+                    cost-guided search are so relevant here.
+                </p>
+                <p>
+                    This is one reason tensor contraction belongs in the same library as symbolic computation. Once a
+                    tensor expression is represented explicitly, rewrite rules, equivalence reasoning, and extraction
+                    strategies become relevant to performance-sensitive mathematical software.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

@@ -1,0 +1,82 @@
+@page "/sym/rewrite-demo"
+@page "/sym/rewrite-demo/"
+
+<div class="demo-page">
+    <p class="demo-kicker">Sym Demo</p>
+    <h1>Rewrite Demo</h1>
+    <p class="demo-summary">
+        This demo uses the real Sym backend to apply symbolic rewrite rules and show how equivalent expressions can
+        simplify into cleaner forms.
+    </p>
+
+    <SymDemoWorkbench Examples="@Examples" InitialInput="@Examples[0].Script" />
+</div>
+
+@code {
+    private static readonly IReadOnlyList<DemoExample> Examples =
+    [
+        new(
+            "Trig Identity",
+            """
+            <Options>
+              RulePacks: Trigonometry, AlgebraicStrategy
+              MaxIterations: 50
+            </Options>
+
+            sin(x)^2 + cos(x)^2
+            """,
+            "A classic trigonometric identity that simplifies exactly to 1."
+        ),
+        new(
+            "Algebraic Cleanup",
+            """
+            <Options>
+              RulePacks: AlgebraicStrategy
+            </Options>
+
+            x - x
+            """,
+            "A minimal algebraic simplification example."
+        ),
+        new(
+            "Inline Rewrite Rule",
+            """
+            <Rules>
+              Rule(foo(x), bar(x))
+            </Rules>
+
+            foo(y)
+            """,
+            "Shows Sym applying a custom inline rewrite rule."
+        )
+    ];
+}
+
+<style>
+    .demo-page {
+        min-height: 100vh;
+        padding: 1.5rem;
+        color: #edf5ff;
+        background: linear-gradient(180deg, #06111f 0%, #081a31 100%);
+    }
+
+    .demo-kicker {
+        margin: 0 0 0.4rem;
+        color: #89d1b6;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    .demo-page h1 {
+        margin: 0;
+        font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    }
+
+    .demo-summary {
+        max-width: 48rem;
+        margin: 0.75rem 0 1.25rem;
+        color: #c2d3e7;
+    }
+</style>

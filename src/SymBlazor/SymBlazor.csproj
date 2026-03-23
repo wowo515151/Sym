@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -20,7 +20,7 @@
     <ProjectReference Include="..\SymCore\SymCore.csproj" />
     <ProjectReference Include="..\SymRules\SymRules.csproj" />
     <ProjectReference Include="..\SymSolvers\SymSolvers.csproj">
-      <AdditionalProperties>EnableCobra=false</AdditionalProperties>
+    <AdditionalProperties>EnableCobra=false;EnableCSharpAnalysis=false</AdditionalProperties>
     </ProjectReference>
     <ProjectReference Include="..\Sym\Sym.csproj" />
     <ProjectReference Include="..\WordsToSym\WordsToSym.csproj" />
@@ -45,6 +45,34 @@
 
     <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(_RewriteScript)&quot;" />
     <Copy SourceFiles="@(_RootHelpFiles)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="CopySiteContentToPublishRoot" AfterTargets="Publish">
+    <PropertyGroup>
+      <_RepoRoot>$(MSBuildProjectDirectory)\..\..\</_RepoRoot>
+      <_PublishedSiteDir>$(PublishDir)wwwroot\</_PublishedSiteDir>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <_LibraryFiles Include="$(_RepoRoot)Library\**\*" />
+      <_ResumeFile Include="$(_RepoRoot)resume.html" />
+      <_LibraryIndexSource Include="$(_RepoRoot)Library\LibraryHome.html" />
+    </ItemGroup>
+
+    <Copy
+      SourceFiles="@(_LibraryFiles)"
+      DestinationFiles="@(_LibraryFiles->'$(_PublishedSiteDir)library\%(RecursiveDir)%(Filename)%(Extension)')"
+      SkipUnchangedFiles="true" />
+
+    <Copy
+      SourceFiles="@(_ResumeFile)"
+      DestinationFolder="$(_PublishedSiteDir)"
+      SkipUnchangedFiles="true" />
+
+    <Copy
+      SourceFiles="@(_LibraryIndexSource)"
+      DestinationFiles="@(_LibraryIndexSource->'$(_PublishedSiteDir)library\index.html')"
+      SkipUnchangedFiles="true" />
   </Target>
 
 </Project>

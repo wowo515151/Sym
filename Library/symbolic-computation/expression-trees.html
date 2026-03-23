@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Expression Trees Explained</title>
+    <meta name="description" content="An introduction to expression trees and how symbolic systems represent formulas as structured data." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Expression Trees Explained</h1>
+            <p class="hero-copy">
+                Expression trees are one of the most useful mental models in symbolic computation. They make it possible
+                to treat mathematics as structured data rather than plain text.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Core Idea</span>
+                <h2>Operators And Arguments</h2>
+                <p>
+                    An expression tree represents a formula by making each operator a node and each operand a child.
+                    The expression <code>x + y * z</code> is not stored as a flat string. It is stored as an addition
+                    node with two children: <code>x</code> and a multiplication node whose children are <code>y</code>
+                    and <code>z</code>.
+                </p>
+                <p>
+                    This representation matters because symbolic systems need to inspect and transform subexpressions.
+                    A string is difficult to reason about safely. A tree gives the system direct access to structure.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why Trees Matter</span>
+                <h2>Structure Enables Transformation</h2>
+                <ul class="lead-list">
+                    <li>Pattern matching becomes possible because the system can inspect shape directly.</li>
+                    <li>Substitution becomes clearer because variables correspond to identifiable subtrees.</li>
+                    <li>Rewriting becomes safer because changes can be localized to the right node.</li>
+                    <li>Further representations such as DAGs and e-graphs build naturally on the same idea.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Example</span>
+                <h2>A Small Formula</h2>
+                <p>
+                    Consider <code>sin(x^2 + 1)</code>. A natural tree representation has a top-level <code>sin</code>
+                    node. Its child is an addition node. One child of that addition is a power node for <code>x^2</code>,
+                    and the other is the constant <code>1</code>. Once the formula is represented this way, a symbolic
+                    system can target exactly the subtree it wants to simplify or differentiate.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Beyond Trees</span>
+                <h2>Why This Is Only The Beginning</h2>
+                <p>
+                    Trees are often the first useful representation, but not always the final one. Real systems may use
+                    DAGs to share repeated subexpressions, typed nodes to protect domain information, or e-graphs to keep
+                    multiple equivalent forms alive simultaneously.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./what-is-symbolic-computation.html">What Is Symbolic Computation?</a>
+                    <a class="button-link secondary" href="./term-rewriting-systems.html">Term Rewriting Systems</a>
+                    <a class="button-link secondary" href="./e-graphs.html">E-Graphs</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

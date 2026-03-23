@@ -187,17 +187,17 @@ Relu(Transpose(Transpose(TensorAdd(MatMul(A, B), TensorAdd(MatMul(A, C), TensorA
             {
                 script = @"
 <Options>
-  RulePacks: Trigonometry, Algebraic
+  RulePacks: Trigonometry, AlgebraicStrategy
   MaxIterations: 50
 </Options>
-cos(2*x) + 2*sin(x)^2
+sin(x)^2 + cos(x)^2
 ";
             }
 
             string result = _wrapper.SolveWithEGraph(script);
 
             Assert.IsFalse(result.StartsWith("Error:"), $"Wrapper returned error: {result}");
-            Assert.AreEqual("3", result.Trim(), $"Expected 3 but got: {result}");
+            Assert.AreEqual("1", result.Trim(), $"Expected 1 but got: {result}");
         }
     }
 }

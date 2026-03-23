@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tensor Expression Graphs</title>
+    <meta name="description" content="A first pass at explaining tensor expression graphs, rewrite-based optimization, and Sym's tensor capabilities." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>Tensor Expression Graphs</h1>
+            <p class="hero-copy">
+                Modern AI systems depend on matrix and tensor expressions. Those expressions can also be treated
+                symbolically, which makes it possible to rewrite, compare, and optimize them before execution.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Tensor Perspective</span>
+                <h2>Expressions Before Kernels</h2>
+                <p>
+                    A tensor program can be viewed as an expression graph built from operations such as matrix multiply,
+                    elementwise multiplication, addition, transpose, normalization, and activation functions. Before
+                    those operations are lowered to kernels or compiled code, they still have algebraic structure.
+                </p>
+                <p>
+                    That structure is useful. It allows a symbolic system to detect equivalent forms, identify fusion
+                    opportunities, and compare alternatives using a cost model that reflects shape, operation count,
+                    or execution goals.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Sym Relevance</span>
+                <h2>What Sym Already Handles</h2>
+                <p>
+                    Sym includes tensor-oriented operations and a tensor cost model. The codebase works with operators
+                    such as <code>MatMul</code>, <code>TensorAdd</code>, <code>TensorMul</code>, and <code>Transpose</code>,
+                    and the tests include rewrite-based fusion of expressions like:
+                </p>
+                <div class="code-block">Relu(TensorAdd(MatMul(A, B), C)) -> FusedMatMulAddRelu(A, B, C)</div>
+                <p>
+                    That is important in an AI context because it shows symbolic reasoning applied to the kinds of
+                    tensor equations that appear in real model pipelines.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Optimization</span>
+                <h3>Why Rewrite Tensor Graphs</h3>
+                <p>
+                    The same tensor computation can often be expressed in multiple equivalent ways. A rewrite system can
+                    search those alternatives and prefer one with better fusion, lower cost, or clearer structure.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">AI Link</span>
+                <h3>Symbolic Reasoning Meets ML Infrastructure</h3>
+                <p>
+                    This is one place where symbolic computation and AI overlap directly. AI uses tensor programs, and
+                    symbolic systems can reason about those programs before they become low-level execution plans.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Cost Models</span>
+                <h2>Equivalent Forms Are Not Equally Useful</h2>
+                <p>
+                    Two tensor expressions may be mathematically equivalent while differing significantly in runtime cost,
+                    memory traffic, or fusion opportunities. A symbolic optimizer therefore needs more than rewrite rules.
+                    It needs a way to compare results. That is where cost models come in. A cost model can reflect shape,
+                    operation count, extraction preference, or another domain-specific objective.
+                </p>
+                <p>
+                    This is one reason tensor optimization fits naturally with symbolic methods. Once the expressions are
+                    represented structurally, equivalence and preference can be handled separately.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="../symbolic-computation/e-graphs.html">E-Graphs</a>
+                    <a class="button-link secondary" href="../advanced-math/tensor-contraction.html">Tensor Contraction</a>
+                    <a class="button-link ghost" href="../../sym/tensor-demo">Open Tensor Demo</a>
+                </div>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">GPU Context</span>
+                <h2>Why This Matters For AI Infrastructure</h2>
+                <p>
+                    GPU workloads are often described operationally in terms of kernels, launches, and memory layouts.
+                    But before those implementation details take over, there is usually a higher-level tensor expression
+                    that can be reasoned about. That is the layer where symbolic optimization can detect fusion patterns,
+                    expose shared structure, and choose more efficient forms before execution is fixed.
+                </p>
+                <p>
+                    In Sym, this shows up in a concrete way through tensor-aware operators, rule packs, and cost models.
+                    The system is already able to recognize and improve some fused tensor-style expressions, which makes
+                    it a useful example of symbolic computation meeting AI-oriented workloads.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

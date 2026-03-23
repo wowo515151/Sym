@@ -1,0 +1,58 @@
+@page "/sym/tensor-demo"
+@page "/sym/tensor-demo/"
+
+<div class="demo-page">
+    <p class="demo-kicker">Sym Demo</p>
+    <h1>Tensor Fusion Demo</h1>
+    <p class="demo-summary">
+        This demo uses Sym's tensor rule packs and tensor cost model to optimize tensor-style expressions such as
+        matrix multiply plus bias plus activation forms.
+    </p>
+
+    <SymDemoWorkbench Examples="@Examples" InitialInput="@Examples[0].Script" />
+</div>
+
+@code {
+    private static readonly IReadOnlyList<DemoExample> Examples =
+    [
+        new(
+            "Simple Fusion",
+            """
+            <Options>
+              RulePacks: Tensor
+              CostModel: Tensor
+              MaxIterations: 100
+            </Options>
+
+            Relu(TensorAdd(MatMul(A, B), C))
+            """,
+            "Sym can fuse this into a tensor-oriented operator form such as FusedMatMulAddRelu(A, B, C)."
+        ),
+        new(
+            "Tensor Multiply Plus Add",
+            """
+            <Options>
+              RulePacks: Tensor
+              CostModel: Tensor
+              MaxIterations: 100
+            </Options>
+
+            TensorAdd(TensorMul(X, Y), Z)
+            """,
+            "A smaller tensor-style example showing how the tensor rule pack reasons over structured operator forms."
+        ),
+        new(
+            "Transpose Around MatMul",
+            """
+            <Options>
+              RulePacks: Tensor
+              CostModel: Tensor
+              MaxIterations: 100
+            </Options>
+
+            Transpose(Transpose(MatMul(A, B)))
+            """,
+            "Shows Sym simplifying a tensor-style expression with structural operators."
+        )
+    ];
+}

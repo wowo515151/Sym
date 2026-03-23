@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Symbolic Computation Library</title>
+    <meta name="description" content="Articles on symbolic computation, term rewriting systems, e-graphs, and algebraic reasoning." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Symbolic Computation</h1>
+            <p class="hero-copy">
+                Symbolic computation studies how mathematical expressions can be represented, transformed, simplified,
+                compared, and optimized while preserving their structure. Instead of treating formulas as strings or
+                collapsing them immediately to floating-point values, symbolic systems work directly with the internal
+                form of an expression.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="../LibraryHome.html">Back To Library Home</a>
+                <a class="button-link secondary" href="../../sym">Open Sym Online</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Overview</span>
+                <h2>Structure Matters</h2>
+                <p>
+                    In symbolic computation, the form of an expression is often as important as the numerical answer.
+                    Two formulas may evaluate to the same value for many inputs while behaving very differently under
+                    differentiation, simplification, factoring, or optimization. That is why symbolic systems track
+                    trees, operators, arguments, identities, and rewrite rules instead of working only with raw numbers.
+                </p>
+                <p>
+                    This area connects algebra, compiler design, automated reasoning, and mathematical software.
+                    It includes parsing, canonicalization, equality reasoning, rewrite systems, and cost-guided search
+                    through equivalent forms. Those ideas show up in computer algebra systems, theorem provers,
+                    optimization engines, and modern AI toolchains that need exact mathematical transformations.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Read First</span>
+                <h2>Core Concepts</h2>
+                <div class="article-list">
+                    <div class="article-item">
+                        <h3><a href="./what-is-symbolic-computation.html">What Is Symbolic Computation?</a></h3>
+                        <p>An introduction to exact expression manipulation, structure-preserving reasoning, and why symbolic systems differ from numerical code.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./expression-trees.html">Expression Trees Explained</a></h3>
+                        <p>How formulas become structured objects that symbolic software can inspect, match, and transform.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./term-rewriting-systems.html">Term Rewriting Systems</a></h3>
+                        <p>How rewrite rules transform expressions, why termination and confluence matter, and how local rules become global behavior.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./e-graphs.html">E-Graphs</a></h3>
+                        <p>A practical introduction to compactly representing many equivalent expressions at once.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./equality-saturation.html">Equality Saturation Explained</a></h3>
+                        <p>Why some symbolic optimizers search first and extract later instead of committing to one rewrite path early.</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-three">
+            <article class="feature-card">
+                <span class="mini-label">Expressions</span>
+                <h3>Representation</h3>
+                <p>
+                    Expression trees, typed operators, algebraic identities, and the choices that determine whether
+                    a symbolic system is easy to extend or difficult to reason about.
+                </p>
+                <div class="card-actions">
+                    <a class="button-link secondary" href="./expression-trees.html">Read More</a>
+                </div>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Rewrites</span>
+                <h3>Transformation</h3>
+                <p>
+                    Simplification depends on trustworthy transformations. Rules must be mathematically valid,
+                    well-scoped, and often ordered with care so they improve expressions instead of destabilizing them.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Search</span>
+                <h3>Optimization</h3>
+                <p>
+                    Advanced symbolic systems do not stop at one normal form. They may search through many equivalent
+                    alternatives and choose one using a cost model tied to the target problem.
+                </p>
+                <div class="card-actions">
+                    <a class="button-link secondary" href="./equality-saturation.html">Read More</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Reading Path</span>
+                <h2>From Expressions To Search</h2>
+                <p>
+                    A natural way to learn symbolic computation is to begin with representation, move into transformation,
+                    and then study search. First come expression trees and operators. Then come rewrite rules, substitution,
+                    pattern matching, and simplification. After that come the harder questions: what counts as a good form,
+                    how equivalence should be represented, and how a system can search through many alternatives without
+                    exploding combinatorially.
+                </p>
+                <p>
+                    That progression is also how many real systems are built. A parser and expression representation are
+                    not enough on their own. A useful symbolic engine also needs trustworthy rewrites, a way to compare
+                    equivalent expressions, and some notion of cost or preference.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Practical Scope</span>
+                <h2>More Than School Algebra</h2>
+                <p>
+                    Symbolic computation does include familiar algebraic manipulation, but it also reaches into code
+                    generation, tensor expression optimization, formal reasoning, theorem-prover support, and mathematical
+                    tooling for AI systems. Once expressions are represented explicitly, many kinds of analysis become
+                    possible that would be difficult or impossible with plain strings or eager numerical evaluation.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./term-rewriting-systems.html">Rewriting Systems</a>
+                    <a class="button-link secondary" href="./e-graphs.html">Equality Saturation</a>
+                    <a class="button-link secondary" href="../ai-math/tensor-expression-graphs.html">Tensor Optimization</a>
+                    <a class="button-link ghost" href="../../sym/rewrite-demo">Rewrite Demo</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Representation</span>
+                <h3>Expression Trees And DAGs</h3>
+                <p>
+                    Representation is the first serious question in symbolic computation. Trees make substructure visible,
+                    DAGs allow shared subexpressions, and richer forms make it possible to compare or transform formulas
+                    without collapsing them to text.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Search</span>
+                <h3>Rewriting And Equivalence</h3>
+                <p>
+                    Once expressions are represented explicitly, rules can transform them. Some systems orient those
+                    rules toward normalization, while others keep many equivalent forms alive and use search plus cost
+                    models to extract a preferred result.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

@@ -1,4 +1,5 @@
-@page "/"
+@page "/sym"
+@page "/sym/"
 @inject HttpClient Http
 @using WordsToSym
 @using System.Threading
@@ -6,12 +7,31 @@
 @using System.Text.RegularExpressions
 
 <div class="main-container">
+    <div class="page-header">
+        <div>
+            <p class="page-kicker">SymbolicComputation.com</p>
+            <h1>Sym Online</h1>
+            <p class="page-summary">
+                The main Sym interface for running ProblemScript, algebraic simplification, calculus queries,
+                equation-solving workflows, and tensor-oriented rewrites in the browser.
+            </p>
+        </div>
+        <div class="header-links">
+            <a class="btn btn-outline-light" href="/">Home</a>
+            <a class="btn btn-outline-light" href="/library/">Library</a>
+            <a class="btn btn-outline-light" href="/resume.html">ProductSection</a>
+            <a class="btn btn-outline-light" href="/sym/rewrite-demo">Rewrite Demo</a>
+            <a class="btn btn-outline-light" href="/sym/tensor-demo">Tensor Demo</a>
+            <a class="btn btn-outline-light" href="/sym/derivative-demo">Derivative Demo</a>
+        </div>
+    </div>
+
     <div class="toolbar">
         <div class="toolbar-section">
             <button class="btn btn-primary" @onclick="StartSolving" disabled="@_isSolving">Start</button>
             <button class="btn btn-secondary" @onclick="StopSolving" disabled="@(!_isSolving)">Stop</button>
         </div>
-        
+
         <fieldset class="group-box examples-group">
             <legend>Examples</legend>
             <select @onchange="OnExampleSelected" class="form-select">
@@ -53,7 +73,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        try 
+        try
         {
             _examples = await Http.GetFromJsonAsync<List<string>>("examples/examples.json") ?? new();
         }
@@ -68,7 +88,7 @@
         var name = e.Value?.ToString();
         if (string.IsNullOrEmpty(name)) return;
 
-        try 
+        try
         {
             _input = await Http.GetStringAsync($"examples/{name}");
         }
@@ -85,17 +105,12 @@
         _output = "Solving...";
         _cts = new CancellationTokenSource();
 
-        try 
+        try
         {
-            // Give the UI a chance to update
             await Task.Yield();
 
             var wrapper = new ProblemScriptEGraphWrapper();
             var effectiveInput = ApplyBlazorDefaultRulePacks(_input);
-            
-            // Blazor WASM is single-threaded unless AOT/MT is used.
-            // We use Task.Run but it might still block if not using Workers.
-            // However, the wrapper and EGraph engine should check the token.
             _output = await Task.Run(() => wrapper.SolveWithEGraph(effectiveInput, _cts.Token), _cts.Token);
         }
         catch (OperationCanceledException)
@@ -150,29 +165,65 @@
     .main-container {
         display: flex;
         flex-direction: column;
-        height: 100vh;
-        width: 100vw;
-        padding: 10px;
+        min-height: 100vh;
+        width: 100%;
+        padding: 1rem;
         box-sizing: border-box;
         overflow: hidden;
+        background:
+            radial-gradient(circle at top right, rgba(74, 144, 226, 0.18), transparent 28%),
+            linear-gradient(180deg, #06111f 0%, #081a31 100%);
+        color: #edf5ff;
+    }
+
+    .page-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .page-kicker {
+        margin: 0 0 0.35rem;
+        color: #89d1b6;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    h1 {
+        margin: 0;
+        font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+        letter-spacing: -0.03em;
+    }
+
+    .page-summary {
+        max-width: 52rem;
+        margin: 0.5rem 0 0;
+        color: #c2d3e7;
+    }
+
+    .header-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: flex-start;
     }
 
     .toolbar {
         display: flex;
         flex-direction: row;
-        align-items: stretch; /* make buttons fill toolbar height */
+        align-items: stretch;
         gap: 0.5rem;
-        height: 2.5rem;
         min-height: 2.5rem;
         padding: 0.25rem 0.5rem;
-        /* removed border-bottom separator to avoid stray line through toolbar */
-        margin-bottom: 1rem; /* ensure space between toolbar and content */
+        margin-bottom: 1rem;
         flex-wrap: wrap;
         box-sizing: border-box;
     }
 
-    /* If a group-box is placed inside the toolbar (examples selector), remove its fieldset border
-       and make it fit the toolbar height so it doesn't create a stray separator line. */
     .toolbar .group-box, .toolbar fieldset {
         border: none;
         padding: 0;
@@ -182,7 +233,6 @@
         align-items: center;
     }
 
-    /* Make selects inside the toolbar match the toolbar height */
     .toolbar .form-select {
         height: 100%;
         box-sizing: border-box;
@@ -207,17 +257,15 @@
         flex: 1;
         gap: 10px;
         overflow: hidden;
-        margin-top: 1rem; /* ensure toolbar doesn't overlap content */
+        margin-top: 1rem;
     }
 
-    /* Landscape (Default) */
     @@media (min-aspect-ratio: 1/1) {
         .content-container {
             flex-direction: row;
         }
     }
 
-    /* Portrait */
     @@media (max-aspect-ratio: 1/1) {
         .content-container {
             flex-direction: column;
@@ -225,13 +273,14 @@
     }
 
     .group-box {
-        border: 1px solid #888;
+        border: 1px solid rgba(255, 255, 255, 0.28);
         padding: 5px 10px 10px 10px;
-        border-radius: 4px;
+        border-radius: 10px;
         display: flex;
         flex-direction: column;
-        position: relative; /* ensure group boxes participate in stacking context above toolbar */
+        position: relative;
         z-index: 0;
+        background: rgba(255, 255, 255, 0.03);
     }
 
     .group-box legend {
@@ -241,6 +290,7 @@
         margin-bottom: 0;
         font-size: 0.9rem;
         font-weight: bold;
+        color: #b8d0f0;
     }
 
     .examples-group {
@@ -249,7 +299,7 @@
 
     .input-output-item {
         flex: 1;
-        min-height: 0; /* Important for flex children to allow shrink */
+        min-height: 0;
     }
 
     .fill-area {
@@ -258,11 +308,13 @@
         resize: none;
         font-family: 'Cascadia Code', 'Courier New', Courier, monospace;
         font-size: 0.9rem;
-        border: 1px solid #eee;
-        padding: 5px;
-        box-sizing: border-box; /* ensure padding doesn't change height */
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: #08111f;
+        color: #edf5ff;
+        padding: 10px;
+        box-sizing: border-box;
         height: 100%;
         min-height: 0;
+        border-radius: 8px;
     }
-
 </style>

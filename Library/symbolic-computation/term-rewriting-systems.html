@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is A Term Rewriting System?</title>
+    <meta name="description" content="A guide to term rewriting systems, rewrite rules, termination, confluence, and symbolic transformation." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>What Is A Term Rewriting System?</h1>
+            <p class="hero-copy">
+                A term rewriting system transforms expressions by repeatedly applying rules of the form “replace this
+                pattern with that one.” It is one of the most important ideas in symbolic computation because local
+                transformations can produce powerful global behavior.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Core Idea</span>
+                <h2>Rules Drive Transformation</h2>
+                <p>
+                    In a rewriting system, an expression is represented as a term built from operators and arguments.
+                    A rewrite rule specifies that when a certain pattern appears, it may be replaced by an equivalent
+                    form. Common examples include <code>x + 0 -> x</code>, <code>x * 1 -> x</code>, or distribution and
+                    factoring rules.
+                </p>
+                <p>
+                    Rewriting looks simple, but its behavior depends on details such as rule order, matching strategy,
+                    and whether the rules always reduce complexity. A good set of rules can simplify and stabilize
+                    expressions. A bad set can loop, explode the expression size, or bounce between equally valid forms.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Two Important Properties</span>
+                <h2>Termination And Confluence</h2>
+                <p>
+                    A rewriting system is <strong>terminating</strong> if repeated rule application always stops.
+                    It is <strong>confluent</strong> if different valid rewrite sequences still lead to the same final
+                    result. These properties matter because users want symbolic systems to be both powerful and predictable.
+                </p>
+                <ul class="lead-list">
+                    <li>Termination prevents endless rewriting.</li>
+                    <li>Confluence makes results less sensitive to rule order.</li>
+                    <li>In practice, systems often approximate these ideals rather than achieving them perfectly.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Example</span>
+                <h3>Local Rule, Global Effect</h3>
+                <p>
+                    A rule such as <code>sin(x)^2 + cos(x)^2 -> 1</code> appears narrow, but when combined with many
+                    other rules it becomes part of a much larger symbolic toolkit. Rewriting systems gain power by
+                    accumulating small trustworthy identities and applying them in structured ways.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Modern Use</span>
+                <h3>Beyond Algebra Class</h3>
+                <p>
+                    Term rewriting is used in automated reasoning, compiler optimization, theorem proving, expression
+                    simplification, equality saturation, and tensor-graph optimization. It remains one of the cleanest
+                    ways to describe symbolic behavior in software.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Matching</span>
+                <h2>Patterns, Variables, And Substitution</h2>
+                <p>
+                    Rewrite rules are usually expressed with pattern variables. A rule such as <code>a + 0 -> a</code>
+                    is not about one specific symbol; it is a schema that applies to any expression matching the pattern.
+                    The matching engine must decide whether part of an expression fits the left-hand side and, if so,
+                    what subexpressions should be substituted for the variables.
+                </p>
+                <p>
+                    This is where symbolic software starts to feel less like calculator logic and more like structured
+                    reasoning. The system is not merely evaluating. It is recognizing form and performing mathematically
+                    sanctioned replacements.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./what-is-symbolic-computation.html">Symbolic Basics</a>
+                    <a class="button-link secondary" href="./e-graphs.html">E-Graphs</a>
+                    <a class="button-link ghost" href="../../sym/rewrite-demo">Open Rewrite Demo</a>
+                </div>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Risk</span>
+                <h2>Why Rewriting Can Go Wrong</h2>
+                <p>
+                    Some valid identities are dangerous when used carelessly. Expansion can grow expressions too quickly.
+                    Factoring can reverse simplification. Trigonometric identities can cycle. Even a mathematically valid
+                    rule may be undesirable in a given context if it obscures structure or worsens computational cost.
+                </p>
+                <p>
+                    That is why real systems need strategy as well as rules. Rule quality matters, but rule scheduling,
+                    guards, and extraction criteria matter too.
+                </p>
+                <p>
+                    One common design split is between <strong>oriented rewriting</strong>, where the system chooses one
+                    preferred direction for a rule, and <strong>equational reasoning</strong>, where multiple equivalent
+                    forms remain available. Oriented rewriting is often simpler and faster for normalization. Equational
+                    reasoning is often more powerful when the best final form depends on context.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./e-graphs.html">Equality Saturation</a>
+                    <a class="button-link secondary" href="../ai-math/tensor-expression-graphs.html">Tensor Rewrites</a>
+                    <a class="button-link ghost" href="../../sym/rewrite-demo">Run In Sym</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>
