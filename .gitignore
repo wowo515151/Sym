@@ -10,6 +10,7 @@
 *.userosscache
 *.sln.docstates
 .codex/
+.azure/
 .dotnet-home/
 .gemini/
 .vscode/
