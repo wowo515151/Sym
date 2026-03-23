@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mathematical Research Agents</title>
+    <meta name="description" content="How AI research agents can support mathematical exploration, conjecture generation, exact tool use, and long-form technical work." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>Mathematical Research Agents</h1>
+            <p class="hero-copy">
+                Mathematical research agents are AI systems designed to support exploratory technical work over many
+                steps, not just answer isolated homework-style prompts. Their strength comes from combining planning,
+                symbolic tools, verification, and persistent notes.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Introduction</span>
+                <h2>Research Is Different From Solving One Problem</h2>
+                <p>
+                    Research tasks differ from one-shot problem solving because the objective is often not fully known in
+                    advance. The system may need to compare formulations, inspect examples, search for useful identities,
+                    and decide which subproblem is actually worth formalizing. That makes research-agent design more
+                    difficult and more interesting than narrow math QA.
+                </p>
+                <p>
+                    A useful research agent therefore needs more than answer generation. It needs branch management,
+                    research memory, exact tools, and the ability to summarize evolving understanding in a way that can
+                    survive beyond one session.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Research Value</span>
+                <h2>Exploration, Organization, And Follow-Through</h2>
+                <p>
+                    The best contribution of a research agent is often not a finished theorem. It is the ability to
+                    explore quickly, organize evidence, preserve promising lines of thought, and reduce the friction of
+                    moving from an informal idea to a more exact mathematical object.
+                </p>
+                <p>
+                    This makes research agents practical even before full autonomy becomes realistic. They can still
+                    create real value by accelerating literature synthesis, example generation, symbolic exploration, and
+                    careful technical note-taking.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Conjectures</span>
+                <h3>Generate And Refine Hypotheses</h3>
+                <p>
+                    Agents can suggest plausible identities, alternative formulations, and possible invariants, then use
+                    exact tools or examples to test which ones deserve more attention.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Examples</span>
+                <h3>Build Small Test Worlds</h3>
+                <p>
+                    Example generation is a strong use case. Many mathematical dead ends become obvious once a system
+                    constructs a few concrete cases and records what they reveal.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Symbolic Search</span>
+                <h3>Explore Equivalent Forms</h3>
+                <p>
+                    Research agents can use symbolic systems to inspect equivalent expressions, factorization patterns,
+                    and rewrite opportunities that might be difficult to hold mentally across long sessions.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Documentation</span>
+                <h3>Keep The Research Thread Intact</h3>
+                <p>
+                    Agents can maintain summaries of what was tried, what seems promising, and where the next effort
+                    should go. This can be valuable even when the human remains the primary mathematical decision maker.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Technical Angle</span>
+                <h2>Research Agents Need Better Evaluation Than QA Systems</h2>
+                <p>
+                    Standard question-answer benchmarks are not enough for research agents. A research workflow may be
+                    valuable even if it does not terminate in a formal proof, because it can still narrow the search
+                    space, produce useful examples, or identify a productive reformulation. Evaluation therefore needs to
+                    include process quality, artifact quality, and branch management, not only final-answer accuracy.
+                </p>
+                <p>
+                    This is one reason symbolic tooling and persistent notebooks are so useful. They create artifacts that
+                    can be inspected later. Once the process becomes visible, the system can be judged on more than its
+                    final sentence.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Where Sym Helps</span>
+                <h2>Symbolic Engines Support Research Loops</h2>
+                <p>
+                    Sym is especially relevant to research-agent workflows because it can manipulate exact expression
+                    structure, expose graphing surfaces, and provide CLI-level access to mathematical operations. This
+                    makes it useful for trying candidate rewrites, comparing forms, generating examples, and preserving
+                    structured outputs in files that the agent can revisit.
+                </p>
+                <p>
+                    In other words, Sym helps move an agent from "talking about mathematics" to "working with
+                    mathematical structure." That is exactly the shift research agents need.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Near-Term Reality</span>
+                <h3>Assistive Systems Are Already Valuable</h3>
+                <p>
+                    Fully autonomous mathematical discovery is a high bar, but assistive research systems are already
+                    useful. They can shorten setup time, maintain continuity, and reduce the overhead of structured
+                    experimentation.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Long-Term Direction</span>
+                <h3>Better Tooling Means Better Research Agents</h3>
+                <p>
+                    Much of the future progress in AI mathematicians will likely come from better architectures, better
+                    tool interfaces, and better workflow design rather than from language modeling alone.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Where To Continue</span>
+                <h2>Research Agents Depend On Good Architecture</h2>
+                <p>
+                    If this direction is the main focus, the next useful pages are the architectural ones: how to build
+                    the system, how to store its research memory, and how to manage planning and recovery. Those are the
+                    design choices that turn a clever assistant into a durable technical collaborator.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./how-to-build-an-ai-mathematician.html">Build One</a>
+                    <a class="button-link secondary" href="./ai-math-agent-architecture.html">Architecture</a>
+                    <a class="button-link secondary" href="./memory-and-notebooks-for-ai-mathematicians.html">Memory</a>
+                    <a class="button-link secondary" href="./planning-verification-and-recovery.html">Planning</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Research Reality</span>
+                <h2>Strong Systems Accumulate Useful Partial Results</h2>
+                <p>
+                    A research agent will not solve every problem cleanly, and it does not need to. It becomes valuable
+                    when it leaves behind useful partial work: examples, counterexamples, candidate lemmas, rewritten
+                    formulations, proof sketches, and careful notes about what failed. Those artifacts are the raw
+                    material of real mathematical progress.
+                </p>
+                <p>
+                    That is why research-agent design overlaps so strongly with memory, verification, and exact tooling.
+                    The goal is not only to produce a final claim. It is to support an ongoing mathematical process that
+                    humans can steer, inspect, and reuse.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

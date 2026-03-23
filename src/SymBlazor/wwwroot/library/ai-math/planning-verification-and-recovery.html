@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Planning, Verification, And Recovery For AI Mathematicians</title>
+    <meta name="description" content="How AI mathematicians plan mathematical work, verify correctness-sensitive steps, and recover from wrong turns during long research sessions." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>Planning, Verification, And Recovery For AI Mathematicians</h1>
+            <p class="hero-copy">
+                A useful AI mathematician must do more than produce steps. It must decide which steps are worth trying,
+                check important results, and recover gracefully when a branch turns out to be weak or wrong.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Easy Introduction</span>
+                <h2>Why Multi-Step Math Needs Process Control</h2>
+                <p>
+                    In mathematical work, small errors propagate. A wrong substitution or unjustified assumption can
+                    damage many later steps. That is why long mathematical workflows need process control. Planning helps
+                    the system decide where to spend effort. Verification checks the risky parts. Recovery keeps the
+                    whole session from collapsing when a branch fails.
+                </p>
+                <p>
+                    This is one of the clearest differences between a casual math assistant and an AI mathematician. The
+                    latter must manage the path, not just the prose.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Main Idea</span>
+                <h2>Verification Should Be Selective But Serious</h2>
+                <p>
+                    Not every step requires the same amount of checking. A practical system should verify the parts where
+                    risk is highest: equivalence-sensitive rewrites, proof obligations, key reductions, numerical
+                    consistency checks, and branch points that influence many later steps.
+                </p>
+                <p>
+                    Good verification is therefore not endless repetition. It is selective pressure applied at the most
+                    consequential moments in the workflow.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Planning</span>
+                <h3>Decide What Kind Of Task This Is</h3>
+                <p>
+                    The system should first decide whether the problem is best treated as symbolic simplification, proof
+                    search, tensor optimization, graphing, or code analysis. The right next step depends heavily on that
+                    classification.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Verification</span>
+                <h3>Check High-Leverage Steps</h3>
+                <p>
+                    Use verifiers or exact tools at the points where one step will affect many later steps. This keeps
+                    the system from building a large chain on top of an unstable foundation.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Recovery</span>
+                <h3>Fall Back To A Nearby Stable State</h3>
+                <p>
+                    When a branch fails, the system should return to the last clear checkpoint rather than improvising
+                    new logic on top of an already damaged path.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Review</span>
+                <h3>Write Short State Summaries</h3>
+                <p>
+                    Short summaries of the current branch make it easier to compare alternatives and decide whether the
+                    next move should be broader exploration or narrower proof-oriented work.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Technical Detail</span>
+                <h2>Planning Works Best With Explicit Branches</h2>
+                <p>
+                    A mathematical agent should not treat every possible idea as part of one continuous monologue.
+                    Explicit branches are better. One branch may explore symbolic simplification, another may test
+                    examples, and a third may attempt formal proof. This makes evaluation easier and helps the system
+                    compare strategies without mixing their assumptions.
+                </p>
+                <p>
+                    Branching also supports better cost control. Some paths are cheap but speculative. Others are slower
+                    but more exact. A planner can decide when to escalate from lightweight exploration to heavier
+                    verification or theorem-prover use.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Recovery Logic</span>
+                <h2>Failure Should Produce Information</h2>
+                <p>
+                    Recovery is not just error handling. It is a way to convert failure into useful structure. If a
+                    branch fails, the system should record why it failed, what assumptions were involved, and whether the
+                    failure suggests a reformulation of the original problem.
+                </p>
+                <p>
+                    This is especially important in research-style tasks, where failure often reveals more than success.
+                    A good AI mathematician should be able to preserve that information so later attempts begin from a
+                    better state rather than repeating the same mistake.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Symbolic Check</span>
+                <h3>Exact Tools Are Natural Verifiers</h3>
+                <p>
+                    Symbolic systems are useful not only for generating steps but also for checking whether proposed
+                    transformations preserve equivalence or produce the intended canonical form. This makes them natural
+                    building blocks in verification loops.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Human Oversight</span>
+                <h3>Review Should Remain Possible</h3>
+                <p>
+                    A well-structured planning and recovery system keeps the work inspectable by humans. That matters for
+                    trust, but also for speed. Human feedback is much more useful when branches and checkpoints are
+                    explicit.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Related Topics</span>
+                <h2>Planning Links Architecture To Research Practice</h2>
+                <p>
+                    The deeper you go with AI mathematicians, the more planning and verification become part of the core
+                    design. These topics connect directly to memory, architecture, theorem proving, and long research
+                    sessions where multiple candidate paths need to be evaluated side by side.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./ai-math-agent-architecture.html">Architecture</a>
+                    <a class="button-link secondary" href="./memory-and-notebooks-for-ai-mathematicians.html">Memory</a>
+                    <a class="button-link secondary" href="./mathematical-research-agents.html">Research Workflows</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Operational Lesson</span>
+                <h2>Failure Handling Is Part Of Mathematical Intelligence</h2>
+                <p>
+                    A system that cannot recognize a weak branch or recover from a failed attempt will eventually become
+                    brittle, no matter how fluent it sounds. Planning and verification therefore are not optional
+                    accessories. They are part of what makes the overall workflow mathematically serious.
+                </p>
+                <p>
+                    This framing is useful because it shifts evaluation away from perfect one-shot answers and toward the
+                    quality of the working process. In real research, the ability to fail productively is often as
+                    important as the ability to succeed quickly.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

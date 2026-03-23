@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Math Agent Architecture</title>
+    <meta name="description" content="An architectural guide to AI mathematics agents, including planning, symbolic tools, verification, memory, and representation management." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>AI Math Agent Architecture</h1>
+            <p class="hero-copy">
+                Good mathematical agents are architectural systems, not just bigger prompts. Their quality depends on
+                how they move between language, structure, exact tools, memory, and verification.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Simple View</span>
+                <h2>Five Layers Usually Matter</h2>
+                <p>
+                    Most serious AI math-agent systems can be understood in terms of five layers: interpretation,
+                    planning, tool execution, memory, and review. Interpretation turns an informal request into a more
+                    structured problem statement. Planning breaks it into steps. Tool execution handles exact operations.
+                    Memory stores the evolving thread. Review checks whether the branch remains valid.
+                </p>
+                <p>
+                    This layered view is useful because it prevents overloading the model with every role at once.
+                    Instead of asking one prompt to think, calculate, verify, and remember everything, the system can
+                    assign those functions to the right surfaces.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Main Thesis</span>
+                <h2>Representation Is The Central Architectural Decision</h2>
+                <p>
+                    The most important design choice is often not the model but the representation. Will the agent work
+                    with raw text, symbolic expressions, theorem states, graphs, tensors, or files containing structured
+                    subproblems? The answer changes what kinds of errors are likely and what kinds of exact tools can be
+                    attached.
+                </p>
+                <p>
+                    In mathematics, poor representation choices often create the illusion of progress while losing the
+                    underlying structure needed for correct work. Good architecture therefore spends real effort on how
+                    mathematical objects are externalized.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Interpretation Layer</span>
+                <h3>Turn Requests Into Mathematical Tasks</h3>
+                <p>
+                    This layer translates human language into objects the system can manipulate. It may identify whether
+                    the task is algebraic simplification, proof search, tensor optimization, graphing, or code analysis.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Planning Layer</span>
+                <h3>Choose Branches And Order Work</h3>
+                <p>
+                    Planning decides whether the system should search broadly, verify a candidate step, gather examples,
+                    or commit to a formal route. It is where cost, uncertainty, and branch management become explicit.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Tool Layer</span>
+                <h3>Call Exact Systems</h3>
+                <p>
+                    Symbolic tools, solvers, theorem provers, analyzers, and graphing systems live here. The tool layer
+                    should be predictable, inspectable, and easy to invoke from the planning surface.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Review Layer</span>
+                <h3>Catch Drift Before It Spreads</h3>
+                <p>
+                    Review mechanisms compare outputs, check consistency, and decide whether a branch should be trusted,
+                    revised, or discarded. In mathematical work, unchecked drift can become expensive very quickly.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Technical Detail</span>
+                <h2>Why Tool Interfaces Need To Be Stable</h2>
+                <p>
+                    A mathematical agent depends heavily on the quality of its tool interfaces. A stable command-line or
+                    file-based protocol is often preferable to a complicated ad hoc integration because the agent can
+                    inspect the invocation format and reason about the output. This is one reason Skills-style tools are
+                    attractive. They make the contract visible.
+                </p>
+                <p>
+                    Stable interfaces also make evaluation easier. If the agent repeatedly calls the same symbolic tool
+                    for the same class of subproblems, the workflow can be benchmarked, debugged, and improved in a much
+                    more disciplined way than if every run invents a new integration pattern.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Memory Layer</span>
+                <h2>Why Math Agents Need External Memory</h2>
+                <p>
+                    Mathematical work can span many turns and many false starts. Internal model context is rarely enough.
+                    External memory allows the system to preserve assumptions, open questions, candidate strategies,
+                    example calculations, and proof fragments without forcing all of them to stay in prompt space.
+                </p>
+                <p>
+                    In practice, external memory can be as simple as a research notebook folder with dated files and
+                    short state summaries. The important thing is not elegance but recoverability. If the system can stop
+                    and resume without losing the thread, its usefulness rises dramatically.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Symbolic Runtime</span>
+                <h3>Where Sym Fits Architecturally</h3>
+                <p>
+                    Sym fits into the tool layer as a symbolic runtime and into the representation layer as a way to keep
+                    mathematical structure explicit. It is especially relevant when the system needs to simplify,
+                    compare, rewrite, optimize, or visualize structured expressions.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Verifier Role</span>
+                <h3>Verification Should Not Be An Afterthought</h3>
+                <p>
+                    Verification belongs in the architecture from the start. Once a system performs multistep
+                    mathematical work, some form of checking becomes part of the reasoning process itself, not an
+                    optional polish step added at the end.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Further Reading</span>
+                <h2>Architecture Leads To Workflow Questions</h2>
+                <p>
+                    Once the architecture is clear, the next design questions become workflow questions. How should the
+                    system store notes? How should it recover from wrong turns? How should it decide when to verify? How
+                    should it structure long research sessions? Those are the questions that determine whether the
+                    architecture becomes a usable AI mathematician instead of a one-shot demo.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./planning-verification-and-recovery.html">Planning And Recovery</a>
+                    <a class="button-link secondary" href="./memory-and-notebooks-for-ai-mathematicians.html">Memory</a>
+                    <a class="button-link secondary" href="./mathematical-research-agents.html">Research Workflows</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Design Principle</span>
+                <h2>Good Architecture Makes Mathematical Work Legible</h2>
+                <p>
+                    Strong architecture does more than connect components. It makes the workflow understandable. A
+                    human should be able to see which layer interpreted the problem, which tool handled the exact work,
+                    which files hold the notebook state, and where verification happened. That legibility is part of
+                    quality, especially when a task unfolds across many turns.
+                </p>
+                <p>
+                    This matters because AI mathematicians are judged not only by whether they reach an answer, but also
+                    by whether their reasoning artifacts can be reviewed, trusted, and extended later. Architecture is
+                    what makes that possible.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

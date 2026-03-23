@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Mathematician Benchmarks</title>
+    <meta name="description" content="How to evaluate AI mathematicians with workflow benchmarks, artifact quality, verification success, and long-horizon mathematical tasks." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>AI Mathematician Benchmarks</h1>
+            <p class="hero-copy">
+                Evaluating an AI mathematician is harder than grading a short answer. Good evaluation should measure not
+                only final correctness, but also process quality, artifact quality, branch management, and the ability to
+                make progress over long technical sessions.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Easy Introduction</span>
+                <h2>Why Ordinary Math QA Is Not Enough</h2>
+                <p>
+                    Short benchmark questions can test whether a model can produce a correct local answer, but they do
+                    not tell us much about whether an AI mathematician can manage a real research thread. Research work
+                    involves reformulation, dead ends, supporting examples, intermediate artifacts, and long-range
+                    consistency.
+                </p>
+                <p>
+                    That means evaluation has to expand. The system should be measured partly on whether it reaches a
+                    correct conclusion, but also on whether it produced a disciplined and reusable path toward that
+                    conclusion.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Benchmark Thesis</span>
+                <h2>Measure Workflows, Not Just Answers</h2>
+                <p>
+                    A useful benchmark for AI mathematicians should include planning, tool use, verification, memory, and
+                    summary quality. In other words, the benchmark should resemble the workflow we care about rather than
+                    only the final sentence we hope to see.
+                </p>
+                <p>
+                    This shift is important because a mathematically weak process can still occasionally produce a good
+                    answer, while a mathematically strong process creates artifacts that remain useful even when the final
+                    goal is not fully reached.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Correctness</span>
+                <h3>Was The Main Claim Right?</h3>
+                <p>
+                    Final-answer correctness still matters. If the system ends in a wrong result, that should count
+                    heavily. But correctness alone does not capture the whole quality of the workflow.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Artifacts</span>
+                <h3>Did It Leave Behind Useful Work?</h3>
+                <p>
+                    Strong systems produce readable notes, saved outputs, and inspectable branches. Those artifacts make
+                    the work easier to verify, extend, and hand off to a human collaborator.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Verification</span>
+                <h3>Did It Check High-Risk Steps?</h3>
+                <p>
+                    A system should get credit for invoking exact checks at important moments and criticism when it
+                    pushes through risky reasoning without sufficient grounding.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Recovery</span>
+                <h3>Did It Handle Failure Well?</h3>
+                <p>
+                    Recovery behavior matters because research rarely proceeds in a straight line. A system that records
+                    failure constructively is more useful than one that simply collapses.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Technical View</span>
+                <h2>What Good Benchmark Tasks Look Like</h2>
+                <p>
+                    Good benchmark tasks for AI mathematicians should be long enough to require branch management and
+                    tool use, but scoped enough that progress can still be evaluated. That may include proving a bounded
+                    identity, deriving a symbolic simplification pipeline, comparing multiple formulations, or producing
+                    a small research memo with exact supporting artifacts.
+                </p>
+                <p>
+                    A benchmark should ideally require some combination of natural-language interpretation, exact tool
+                    calls, saved files, and a final summary. This makes it closer to a real mathematical workflow and
+                    more informative than isolated answer checking.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Why This Helps Development</span>
+                <h2>Benchmarking Shapes Better Agents</h2>
+                <p>
+                    Once the benchmark includes tool use, memory, and verification, developers are rewarded for building
+                    better architectures rather than only better prompt tricks. This is one reason AI mathematicians are a
+                    compelling direction: they force attention onto workflow quality.
+                </p>
+                <p>
+                    In practical terms, that means better interfaces, more inspectable tools, stronger summaries, and
+                    more thoughtful recovery behavior. Those are all desirable regardless of how fast the underlying
+                    models improve.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Related Topics</span>
+                <h2>Evaluation Belongs Next To Architecture</h2>
+                <p>
+                    Good AI mathematician benchmarks naturally connect to architecture, memory, verification, and exact
+                    tools. If those pieces are weak, the benchmark will reveal it. If they are strong, the benchmark
+                    becomes a way to show real progress rather than just better rhetoric.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./ai-math-agent-architecture.html">Architecture</a>
+                    <a class="button-link secondary" href="./exact-tools-for-ai-mathematicians.html">Exact Tools</a>
+                    <a class="button-link secondary" href="./planning-verification-and-recovery.html">Planning</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Practical Outcome</span>
+                <h2>Better Benchmarks Reward Better Mathematical Habits</h2>
+                <p>
+                    Once evaluation values saved artifacts, careful verification, and recovery from failure, developers
+                    are pushed toward building agents that behave more like real mathematical collaborators. That leads
+                    to better notebooks, clearer tool boundaries, and workflows that can be audited by humans instead of
+                    judged only by a polished final paragraph.
+                </p>
+                <p>
+                    This is one reason benchmark design matters so much in this area. It does not just measure progress
+                    after the fact. It also helps define what kinds of mathematical behavior the community will end up
+                    optimizing for.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

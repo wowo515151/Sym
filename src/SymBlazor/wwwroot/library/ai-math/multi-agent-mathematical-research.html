@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Multi-Agent Mathematical Research</title>
+    <meta name="description" content="How multiple AI agents can collaborate on mathematical research through branch exploration, role separation, shared memory, and exact tools." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>Multi-Agent Mathematical Research</h1>
+            <p class="hero-copy">
+                Some mathematical workflows benefit from more than one agent. One agent can explore conjectures, another
+                can verify steps, another can summarize progress, and a human can decide which branch deserves deeper
+                effort.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Easy Introduction</span>
+                <h2>Why More Than One Agent Can Help</h2>
+                <p>
+                    Mathematical research naturally branches. There may be several promising formulations, several proof
+                    ideas, or several families of examples worth testing. A single agent can handle this, but multiple
+                    agents can make the branching explicit and easier to compare.
+                </p>
+                <p>
+                    The value is not just parallelism. It is also role separation. One agent can be exploratory, another
+                    conservative, and another focused on producing clean summaries. This reduces the chance that every
+                    branch drifts in the same direction.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Role Separation</span>
+                <h2>Different Agents Can Play Different Mathematical Roles</h2>
+                <p>
+                    A useful multi-agent workflow often assigns different roles rather than duplicating the same prompt.
+                    One agent can search for identities, another can test concrete examples, another can run exact tools,
+                    and another can summarize what the team has learned so far.
+                </p>
+                <p>
+                    This makes the overall system feel more like a research process and less like one long stream of
+                    improvised reasoning.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Explorer</span>
+                <h3>Search For Promising Directions</h3>
+                <p>
+                    An exploratory agent can propose conjectures, analogies, and reformulations without being burdened by
+                    final verification on every step.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Verifier</span>
+                <h3>Check Exactness And Consistency</h3>
+                <p>
+                    A verification-oriented agent can focus on exact tools, theorem checks, symbolic equivalence, or
+                    numerical sanity tests for the current branch.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Archivist</span>
+                <h3>Maintain The Research Notebook</h3>
+                <p>
+                    A notebook-oriented agent can keep the branch summaries, open questions, and artifact inventory
+                    organized so the overall search remains legible.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Human Lead</span>
+                <h3>Choose Which Branches Matter</h3>
+                <p>
+                    Humans still play an important role by deciding which mathematical branches are meaningful and when
+                    the system should escalate from exploration to formal work.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Technical Angle</span>
+                <h2>Shared Memory Is The Hard Part</h2>
+                <p>
+                    The hardest part of multi-agent mathematics is often not spawning multiple workers. It is keeping the
+                    shared memory coherent. If each agent writes incompatible summaries or fails to record assumptions
+                    clearly, the system can become less useful rather than more useful.
+                </p>
+                <p>
+                    This is why notebook discipline matters so much. Multi-agent systems need common files, consistent
+                    naming, and clear branch ownership. Otherwise, the gain from parallel search is quickly lost.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Why This Matters</span>
+                <h2>Research Often Has Parallelizable Subproblems</h2>
+                <p>
+                    Mathematical research frequently contains independent subproblems: generating examples, testing
+                    invariants, searching for alternative formulations, or checking proof obligations. Multi-agent
+                    systems are attractive because they map naturally onto that structure when the coordination layer is
+                    good enough.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./memory-and-notebooks-for-ai-mathematicians.html">Memory</a>
+                    <a class="button-link secondary" href="./planning-verification-and-recovery.html">Planning</a>
+                    <a class="button-link secondary" href="./exact-tools-for-ai-mathematicians.html">Exact Tools</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Coordination</span>
+                <h3>Agents Need Clear Boundaries To Stay Useful</h3>
+                <p>
+                    Multi-agent systems work best when each worker owns a recognizable slice of the research process.
+                    If every agent edits the same notes, proposes the same style of conjecture, and repeats the same
+                    tests, the result is noise rather than leverage. Clear role boundaries make the outputs easier to
+                    compare and keep the overall search from collapsing into duplication.
+                </p>
+                <p>
+                    A good coordinator should therefore decide not only what the research question is, but also which
+                    artifacts each agent is responsible for producing. One branch might own examples, another branch
+                    might own formal obligations, and another branch might own the synthesis notebook.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Research Value</span>
+                <h3>Parallel Agents Can Turn Ideas Into A Real Research Process</h3>
+                <p>
+                    The deeper promise of multi-agent mathematical work is not just speed. It is the ability to run a
+                    more organized research process: multiple hypotheses explored in parallel, exact tools applied at
+                    the right moments, and a persistent written record that helps good ideas survive beyond one session.
+                </p>
+                <p>
+                    That matters for AI mathematicians because mathematical progress often comes from comparing several
+                    imperfect directions rather than following a single clean line. Multi-agent systems can make that
+                    comparison visible, inspectable, and easier for humans to guide.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

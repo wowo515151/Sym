@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Memory And Notebooks For AI Mathematicians</title>
+    <meta name="description" content="Why AI mathematicians need research memory, notebook workflows, branch tracking, and persistent files to support mathematical exploration." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>Memory And Notebooks For AI Mathematicians</h1>
+            <p class="hero-copy">
+                Mathematical research is not a single answer. It is a chain of examples, conjectures, wrong turns,
+                reformulations, and partial results. That is why AI mathematicians need notebooks, folders, and other
+                persistent memory surfaces.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Easy Introduction</span>
+                <h2>Why Prompt Memory Is Not Enough</h2>
+                <p>
+                    Mathematical work builds on earlier state. A system may test several examples, discover a useful
+                    reformulation, then return later to a branch that only makes sense if the assumptions and failures
+                    were recorded. Prompt memory alone is too fragile for that. Even if a model can remember many tokens,
+                    that does not provide the kind of stable, inspectable persistence that research requires.
+                </p>
+                <p>
+                    External notebooks solve a practical problem: they turn temporary reasoning into durable artifacts.
+                    That makes it possible for the agent and the human collaborator to return to the same branch later
+                    without reconstructing everything from scratch.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Main Benefit</span>
+                <h2>Notebooks Convert Exploration Into Process</h2>
+                <p>
+                    A notebook system gives mathematical exploration shape. Instead of a cloud of disconnected attempts,
+                    the work becomes a sequence of hypotheses, exact tool calls, results, summaries, and open questions.
+                    This makes the overall workflow easier to evaluate and much easier to improve.
+                </p>
+                <p>
+                    In practice, the strongest notebook systems are often very plain. Files, folders, and dated notes can
+                    outperform more elaborate systems simply because they are transparent and reliable.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">State</span>
+                <h3>Keep Assumptions Explicit</h3>
+                <p>
+                    Store assumptions, domains, variable meanings, and equivalence criteria in a stable place. This
+                    prevents later branches from silently drifting away from the original problem.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Branches</span>
+                <h3>Track Failed Paths Too</h3>
+                <p>
+                    Failed paths are often valuable. They tell the system what has already been tried and why it was
+                    rejected. Without that information, an agent can waste large amounts of time revisiting dead ends.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Artifacts</span>
+                <h3>Save Tool Outputs</h3>
+                <p>
+                    Symbolic outputs, proof fragments, plots, and code-analysis reports should be stored rather than
+                    paraphrased away. Preserving raw outputs makes later verification and comparison much easier.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Summaries</span>
+                <h3>Compress Progress Regularly</h3>
+                <p>
+                    The system should periodically write short summaries of what is known, what remains uncertain, and
+                    which branches seem promising. Good summaries make long research threads navigable.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Technical Role</span>
+                <h2>Memory Is Part Of The Agent Architecture</h2>
+                <p>
+                    External memory should be treated as an architectural component, not as a convenience. It interacts
+                    with planning, verification, and tool use. A planner needs access to prior summaries. A verifier
+                    needs access to prior assumptions. A symbolic tool call may need the exact input that was used
+                    earlier so results can be compared across branches.
+                </p>
+                <p>
+                    This also changes evaluation. Once a system writes down its intermediate states, it becomes possible
+                    to inspect not only whether the final answer was correct, but whether the path was coherent and
+                    reusable.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Practical Format</span>
+                <h2>A Useful Research Folder Structure</h2>
+                <p>
+                    A simple folder structure often works well: one folder for the problem statement, one for exact tool
+                    calls, one for experimental branches, one for summaries, and one for final deliverables. The exact
+                    naming matters less than consistency. The point is to give the agent a map of where different kinds
+                    of mathematical artifacts belong.
+                </p>
+                <div class="code-block">problem/  tools/  branches/  summaries/  results/</div>
+                <p>
+                    This kind of structure is especially helpful when combined with coding agents because they already
+                    know how to read, write, compare, and update file trees.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Human Collaboration</span>
+                <h3>Notebook Work Makes Review Easier</h3>
+                <p>
+                    Humans can join the loop much more effectively when the agent leaves behind organized notes rather
+                    than opaque chat traces. Review becomes a mathematical activity instead of a memory exercise.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">AI Benefit</span>
+                <h3>Good Memory Reduces Repetition</h3>
+                <p>
+                    Persistent notebooks reduce redundant exploration. The system can tell what was already attempted,
+                    what assumptions were used, and which exact outputs support the current branch.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Where To Continue</span>
+                <h2>Memory Connects To Planning And Recovery</h2>
+                <p>
+                    Memory by itself is not enough. The next problem is deciding how the system should react when a
+                    branch fails or when a verifier rejects a step. That requires explicit planning and recovery
+                    policies, which are central to serious AI mathematician workflows.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./planning-verification-and-recovery.html">Planning And Recovery</a>
+                    <a class="button-link secondary" href="./mathematical-research-agents.html">Research Agents</a>
+                    <a class="button-link secondary" href="./symcli-for-ai-agents.html">SymCLI</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Long-Horizon Value</span>
+                <h2>Persistent Notes Turn Sessions Into A Research Program</h2>
+                <p>
+                    The deepest value of notebook discipline is that it converts isolated sessions into something more
+                    cumulative. When assumptions, experiments, failures, and promising branches are recorded clearly,
+                    the system can build on prior work instead of reconstructing context each time the conversation
+                    restarts.
+                </p>
+                <p>
+                    That is especially important for AI mathematicians because mathematical progress is often uneven.
+                    Persistent notes make it possible to resume after pauses, compare branches over time, and hand the
+                    work to a human collaborator without losing the thread.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How To Build An AI Mathematician</title>
+    <meta name="description" content="A practical guide to building an AI mathematician with coding agents, symbolic tools, file-based workflows, verification, and research memory." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>How To Build An AI Mathematician</h1>
+            <p class="hero-copy">
+                The shortest route to an AI mathematician is not to wait for a mythical all-in-one model. It is to
+                combine a capable coding agent with exact mathematical tools, a disciplined file workflow, and a way to
+                preserve and verify intermediate work.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Quick Start</span>
+                <h2>The Minimum Useful System</h2>
+                <p>
+                    The minimum useful setup is smaller than many people expect. You need a coding agent that can read
+                    and write files, a symbolic tool such as SymCLI, a help file so the agent knows how to call the
+                    tool, and a working directory where the research thread can be recorded. That alone already creates a
+                    system that can propose mathematical steps, call exact operators, and save notes for later review.
+                </p>
+                <p>
+                    This file-based architecture is important because it lowers complexity while keeping the workflow
+                    inspectable. The agent does not need a grand research platform. It needs a stable way to externalize
+                    tasks, outputs, summaries, and questions.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Main Principle</span>
+                <h2>Use Tools For What Must Be Exact</h2>
+                <p>
+                    The design principle is simple: move correctness-sensitive work into exact systems whenever possible.
+                    Let the agent handle interpretation, orchestration, explanation, and search. Let symbolic tools,
+                    verifiers, and analyzers handle the parts where equivalence, derivation, or correctness cannot be
+                    trusted to prose alone.
+                </p>
+                <p>
+                    This split is the practical version of a broader idea in AI systems design. The more structured the
+                    subproblem becomes, the more value there is in handing it to a system that was built to manipulate
+                    the relevant objects directly.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Step 1</span>
+                <h3>Choose The Agent Shell</h3>
+                <p>
+                    Pick an agent that can browse the local filesystem, write research notes, call terminal tools, and
+                    iterate over multiple steps. Coding agents are a natural fit because mathematical research often
+                    looks like mixed work: text files, scripts, logs, and exact tool calls.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Step 2</span>
+                <h3>Expose Exact Math Tools</h3>
+                <p>
+                    Give the agent access to symbolic tools such as SymCLI, together with help files and examples. A
+                    command-line interface is often enough. The important property is that the tool boundary is stable
+                    and understandable.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Step 3</span>
+                <h3>Create A Research Folder</h3>
+                <p>
+                    Use folders for prompts, hypotheses, derivations, failures, and summaries. This gives the agent a
+                    place to persist thought across sessions and gives humans a place to inspect the process later.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Step 4</span>
+                <h3>Add Verification Loops</h3>
+                <p>
+                    Whenever possible, add a second pass that checks symbolic equivalence, numerical consistency,
+                    theorem-prover results, or code-level analysis. Verification turns a loose workflow into a serious
+                    mathematical process.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Technical Architecture</span>
+                <h2>How The Pieces Fit Together</h2>
+                <p>
+                    A practical architecture usually includes an instruction layer, a planning layer, one or more tool
+                    adapters, a memory surface, and a review layer. The instruction layer tells the agent how to behave
+                    and what tools exist. The planning layer decomposes the research goal into subproblems. The tool
+                    adapters call systems such as SymCLI, graphing tools, solvers, or theorem provers. The memory
+                    surface stores notes and outputs. The review layer checks whether the current branch is still
+                    coherent.
+                </p>
+                <p>
+                    This can remain surprisingly lightweight. You do not need every possible component to start. Many
+                    strong workflows begin with a single symbolic CLI plus careful note-taking, then grow toward richer
+                    verifiers or formal systems as the need becomes clearer.
+                </p>
+                <div class="code-block">task -> plan -> exact tool call -> result file -> summary -> next task</div>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Why File Workflows Work</span>
+                <h2>Research Is Not Just API Calls</h2>
+                <p>
+                    Mathematics generates a large amount of supporting material: conjectures, counterexamples, scratch
+                    derivations, notes about assumptions, and abandoned branches. A file-oriented workflow fits that
+                    reality well. It gives the agent a medium where reasoning can be recorded without needing to force
+                    everything through a single transient prompt window.
+                </p>
+                <p>
+                    This matters for AI mathematicians because the quality of the work depends on traceability. If a
+                    derivation can be written down, compared, and checked later, the system becomes easier to trust and
+                    easier to improve.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Sym Role</span>
+                <h3>Where Sym Fits</h3>
+                <p>
+                    Sym is useful in this architecture because it provides a concrete symbolic runtime. SymCLI can expose
+                    exact symbolic work to an agent through a simple interface, while the web UI and graphing surfaces
+                    provide a way to inspect and explain mathematical objects visually.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Human Role</span>
+                <h3>Humans Still Set The Direction</h3>
+                <p>
+                    Even in strong agent workflows, the human role remains important. Humans choose the research goal,
+                    judge whether the branch is promising, and decide when the system should explore broadly or narrow
+                    down toward formal proof or implementation.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Next Layer</span>
+                <h2>From Basic Workflow To Serious Mathematical Agent</h2>
+                <p>
+                    Once the minimum system works, the next improvements usually involve stronger planning, richer
+                    memory, benchmark tasks, and better recovery from wrong turns. These layers matter because research
+                    rarely proceeds in one straight line. A good AI mathematician needs to explore, compare branches, and
+                    avoid losing context when the problem becomes difficult.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./ai-math-agent-architecture.html">Architecture</a>
+                    <a class="button-link secondary" href="./planning-verification-and-recovery.html">Planning And Recovery</a>
+                    <a class="button-link secondary" href="./memory-and-notebooks-for-ai-mathematicians.html">Memory</a>
+                    <a class="button-link secondary" href="./mathematical-research-agents.html">Research Agents</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Implementation Advice</span>
+                <h2>Simple Systems Often Make The Best Starting Point</h2>
+                <p>
+                    In practice, a modest stack with a coding agent, a symbolic CLI, a notebook folder, and a few
+                    verification habits is often more useful than a grand architecture that cannot be inspected or
+                    maintained. Reliability grows from disciplined interfaces and saved artifacts, not from making the
+                    system mysterious.
+                </p>
+                <p>
+                    That makes this direction surprisingly approachable. You do not need to automate all of mathematics
+                    to build a meaningful AI mathematician workflow. You need a system that can repeatedly interpret a
+                    problem, use the right tool, and leave behind work that still makes sense tomorrow.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>
