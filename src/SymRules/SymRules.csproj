@@ -19,7 +19,6 @@
     <Compile Include="RuleParser.cs" />
     <Compile Include="GeneratedRuleStore.cs" />
     <Compile Include="GeneratedRuleTuner.cs" />
-    <Compile Include="EmbeddedRulePacks.cs" />
     <Compile Include="Inequality\InequalityRule.cs" />
     <Compile Include="Graph\GraphRules.cs" />
     <Compile Include="IRuleIndex.cs" />

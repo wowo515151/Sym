@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Opening Sym Online</title>
+    <meta name="robots" content="noindex" />
+    <link rel="stylesheet" href="./library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <p class="eyebrow">SymbolicComputation.com</p>
+            <h1 id="pageTitle">Opening Sym Online</h1>
+            <p class="hero-copy" id="statusMessage">
+                Checking where the Sym UI is currently being served.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link secondary" id="symLink" href="/sym/">Try /sym/</a>
+                <a class="button-link ghost" id="rootLink" href="/">Try /</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        (async function () {
+            const pageTitle = document.getElementById("pageTitle");
+            const statusMessage = document.getElementById("statusMessage");
+            const symLink = document.getElementById("symLink");
+            const rootLink = document.getElementById("rootLink");
+            const isLocalHost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+            const params = new URLSearchParams(window.location.search);
+            const requestedRoute = (params.get("route") || "").replace(/^\/+|\/+$/g, "");
+            const routeSuffix = requestedRoute.length > 0 ? "/" + requestedRoute : "";
+            const labelText = (params.get("label") || "Sym Online").trim();
+            const candidates = [
+                { url: "/sym/index.html", marker: '<base href="/sym/"' },
+                { url: "/sym/", marker: '<base href="/sym/"' },
+                { url: "/", marker: '<base href="/"' }
+            ];
+
+            pageTitle.textContent = requestedRoute.length > 0
+                ? "Opening " + labelText
+                : "Opening Sym Online";
+
+            symLink.href = "/sym" + routeSuffix;
+            rootLink.href = routeSuffix || "/";
+
+            async function findWorkingTarget() {
+                for (const candidate of candidates) {
+                    try {
+                        const response = await fetch(candidate.url, { cache: "no-store" });
+                        if (!response.ok) {
+                            continue;
+                        }
+
+                        const html = await response.text();
+                        if (html.includes(candidate.marker) && html.includes("blazor.webassembly")) {
+                            return candidate.url;
+                        }
+                    } catch {
+                    }
+                }
+
+                return "/sym" + routeSuffix;
+            }
+
+            if (isLocalHost) {
+                statusMessage.textContent = requestedRoute.length > 0
+                    ? "Redirecting to the local " + labelText + "."
+                    : "Redirecting to the local Sym UI.";
+                const localTarget = requestedRoute.length > 0
+                    ? "/sym-local.html?route=" + encodeURIComponent(requestedRoute)
+                    : "/sym-local.html";
+                window.location.replace(localTarget);
+                return;
+            }
+
+            const servingTarget = await findWorkingTarget();
+            const target = servingTarget.startsWith("/sym/")
+                ? "/sym" + routeSuffix
+                : (routeSuffix || "/");
+            statusMessage.textContent = "Redirecting to " + target;
+            window.location.replace(target);
+        })();
+    </script>
+</body>
+</html>

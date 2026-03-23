@@ -1,0 +1,296 @@
+This Sym help file has been written in .txt so that it can easily be used by AI agents. Feel free to copy it, SymbolicComputation.com.
+
+Sym Reference
+Sym, EGraphs, and Rule Sets
+
+Sym is a symbolic computation system built around rewrite rules and an EGraph solver. The same core engine powers the Blazor UI, command-line tools, and other wrappers such as ProblemScript-based tools.
+
+This help file explains how the EGraph model works, what kinds of rule sets are available, and how to think about Sym whether you are using the web UI at /sym/ or calling Sym from scripts and tools.
+
+Related pages
+Open the Blazor UI: /sym/
+Read UI-specific help: /SymUIHelp.html
+
+What An EGraph Is
+
+Equivalent forms live together
+An EGraph stores many equivalent expressions at once. Instead of repeatedly rewriting one expression into another and throwing the old form away, Sym keeps a family of equivalent forms in the same structure.
+
+ENodes and EClasses
+Each expression shape is represented by an ENode, and equivalent nodes are grouped into an EClass. If two expressions are proven equal by rules or constraints, their classes are unified.
+
+Extraction chooses a best answer
+After saturation, Sym extracts a preferred form from the EGraph. That is how the system can search many legal rewrites first and only choose a final printed result at the end.
+
+Why Sym uses this model
+Ordinary rewrite engines can get trapped by rewrite order. EGraphs reduce that problem by exploring many equivalent forms together. That is especially useful for algebraic simplification, equation solving, and tensor optimization where a locally bad-looking rewrite may still lead to the globally best result.
+
+How Sym Uses The EGraph
+
+1. Ingest the problem
+Sym parses your expressions, equalities, inline rules, and options. Equalities and constraints are inserted into the graph as a common reasoning space.
+
+2. Apply rewrite rules
+Pattern matches are found across the graph and equivalent nodes are merged. Rebuild and congruence closure keep the structure consistent as new equivalences appear.
+
+3. Extract a result
+Sym picks a final expression or equality from the saturated graph. For tensor work, a specialized cost model can prefer fused or cheaper forms.
+
+Example options block
+Options:
+Target: x
+RulePacks: EquationSolving, Algebraic
+MaxIterations: 50
+
+Problem:
+x + 5 = 10
+
+ProblemScript is the broadest public entry point. The Blazor UI sends the text you type through the same wrapper.
+
+ProblemScript Examples
+
+The Blazor UI dropdown uses the following example set.
+
+Numeric evaluation
+Example:
+1 + 2 * 3
+
+Tensor optimization
+Example:
+<Options>
+	RulePacks: Tensor
+	CostModel: Tensor
+	MaxIterations: 1000
+</Options>
+
+/* 
+	 Inefficient Tensor Equation Example
+	 Relu(Transpose(Transpose(MatMul(A, B) + MatMul(A, D) + C)))
+*/
+
+Relu(Transpose(Transpose(TensorAdd(TensorAdd(MatMul(A, B), MatMul(A, D)), C))))
+
+Algebraic simplification
+Example:
+<Options>
+	RulePacks: Algebraic
+	Target: x
+</Options>
+
+/* Simple Algebraic Simplification */
+(x + 1)^2 = x^2 + 2*x + 1
+
+Tensor system
+Example:
+<Options>
+	RulePacks: Tensor, EquationSolving
+	CostModel: Tensor
+	Target: x
+</Options>
+
+/* 
+	 Tensor System of Equations
+	 A * x = B
+	 C * x = D
+   
+	 The solver will find multiple equivalent expressions for x.
+	 The cost model will help it choose the "best" one.
+*/
+
+MatMul(A, x) = B;
+MatMul(C, x) = D;
+
+Complex tensor saturation
+Example:
+<Options>
+	RulePacks: Tensor
+	CostModel: Tensor
+	MaxIterations: 200
+</Options>
+
+/* 
+	 Complex Tensor Saturation & Optimization
+   
+	 This problem contains multiple factoring opportunities, nested transposes, 
+	 and potential for operation fusion.
+   
+	 Original:
+	 Relu(Transpose(Transpose(
+		 TensorAdd(
+			 MatMul(A, B), 
+			 TensorAdd(
+				 MatMul(A, C), 
+				 TensorAdd(
+					 MatMul(D, E), 
+					 MatMul(D, G)
+				 )
+			 )
+		 )
+	 )))
+
+	 Expected optimized form should involve:
+	 1. Transpose(Transpose(X)) -> X
+	 2. Factoring A: MatMul(A, B) + MatMul(A, C) -> MatMul(A, B + C)
+	 3. Factoring D: MatMul(D, E) + MatMul(D, G) -> MatMul(D, E + G)
+	 4. Fusion: Relu(MatMul(A, B+C) + MatMul(D, E+G)) -> FusedMatMulAddRelu(A, B+C, MatMul(D, E+G))
+*/
+
+Relu(Transpose(Transpose(TensorAdd(MatMul(A, B), TensorAdd(MatMul(A, C), TensorAdd(MatMul(D, E), MatMul(D, G)))))))
+
+Trig saturation
+Example:
+<Options>
+	RulePacks: Trigonometry, AlgebraicStrategy
+	MaxIterations: 100
+</Options>
+
+/* 
+	 Trigonometric Saturation & Summation
+	 (sin(x)^2 + cos(x)^2) + (sin(y)^2 + cos(y)^2) + (sin(z)^2 + cos(z)^2)
+	 Expected: 3
+*/
+
+(sin(x)^2 + cos(x)^2) + (sin(y)^2 + cos(y)^2) + (sin(z)^2 + cos(z)^2)
+
+Reading these examples
+A script can be as small as a single expression or as structured as an options block, a rules block, and one or more equations. Start small, then add Target, RulePacks, assumptions, or inline rules only when the problem needs more direction.
+
+Important Behavior For Rule Packs
+
+Folder names and friendly names both work
+The ProblemScript wrapper resolves RulePacks by either folder name such as Tensor or a friendly pack name such as MatrixStrategy when a pack has metadata.
+
+No RulePacks means broad loading
+If you do not specify RulePacks, Sym loads all discovered folder-based packs under src/SymRules except intentionally skipped folders such as Bad, bin, and obj.
+
+Some code-backed rules are always present
+Algebraic simplification, calculus rules, and curated identity libraries are injected directly by the rule provider even when pack selection is narrowed.
+
+Built-In Rule Libraries
+
+Algebraic simplification
+What it covers: Canonical algebraic cleanup and general-purpose symbolic simplification.
+Notes: Loaded directly by Sym's rule provider.
+
+Calculus rules
+What it covers: Differentiation, integration, and vector-calculus rule libraries.
+Notes: Loaded directly by Sym's rule provider.
+
+IdentityRuleLibrary
+What it covers: Recurrence reductions, piecewise expansions, complex helpers, and constant-folding transforms.
+Notes: Code-backed support not tied to one text folder.
+
+StabilityRuleLibrary
+What it covers: Numerically stable rewrites such as log1p, expm1, and softplus.
+Notes: Available in code, but not part of the default pack sweep.
+
+Folder-Based Rule Packs
+
+Algebraic
+Friendly name: AlgebraicStrategy
+Purpose: Standard algebraic simplifications and identities.
+Default: Yes
+
+Calculus
+Friendly name: DifferentiationStrategy
+Purpose: Differentiation and ordinary differential equation rules.
+Default: Yes
+
+EquationSolving
+Friendly name: EquationSolving
+Purpose: Isolation, structural matching, and conservative equation-solving rewrites.
+Default: Yes
+
+Graph
+Friendly name: Graph
+Purpose: Graph and DAG rewrites such as edge bypassing and redundant-edge cleanup.
+Default: Yes
+
+Inequality
+Friendly name: Inequality
+Purpose: Inequality-oriented rewrites and normalization.
+Default: Yes
+
+Integration
+Friendly name: IntegrationStrategy
+Purpose: Rule-based integral evaluation helpers.
+Default: Yes
+
+Limit
+Friendly name: LimitStrategy
+Purpose: Rules for evaluating limits.
+Default: Yes
+
+Logic
+Friendly name: Logic
+Purpose: Boolean and logical simplification rules.
+Default: Yes
+
+Matrix
+Friendly name: MatrixStrategy
+Purpose: Matrix operations, identities, determinants, and inverses.
+Default: Yes
+
+NumberTheory
+Friendly name: NumberTheoryStrategy
+Purpose: Modular arithmetic and number-theory rules.
+Default: Yes
+
+Recurrence
+Friendly name: RecurrenceStrategy
+Purpose: Common recurrence-relation rules.
+Default: Yes
+
+SpecialFunctions
+Friendly name: SpecialFunctions
+Purpose: Gamma, factorial, probability, and piecewise function rewrites.
+Default: Yes
+
+Tensor
+Friendly name: Tensor
+Purpose: Tensor and ML-style graph optimization, including fused operator patterns.
+Default: Yes
+
+Trigonometry
+Friendly name: Trigonometry
+Purpose: Trig identities such as parity, double-angle, and product-to-sum rewrites.
+Default: Yes
+
+Vector
+Friendly name: Vector
+Purpose: Dot-product and vector-expression rewrites.
+Default: Yes
+
+Generating
+Friendly name: Generating
+Purpose: Cleanup rules used for generated expressions and intermediate forms.
+Default: Yes
+
+Rules
+Friendly name: Rules
+Purpose: Legacy compatibility folder containing baseline text rules such as AddZero.
+Default: Yes
+
+The wrapper intentionally skips folders such as Bad, bin, and obj when it discovers packs.
+
+Options Commonly Used Across Sym
+
+General
+Target selects a symbol to solve for.
+MaxIterations caps saturation work.
+MaxConcurrency controls matching concurrency.
+EnableTracing enables richer solve traces.
+
+Rule loading
+RulePacks narrows the folder-based packs to load.
+Rules can add inline custom rewrite rules.
+When no packs are specified, all discovered folders are loaded.
+
+Advanced metadata
+Shapes annotates tensor symbols such as A=[64,128].
+Attributes attaches numeric metadata to symbols.
+AssumePositive, AssumeReal, AssumeComplex, and AssumeInteger provide assumptions.
+TreatNonEqualitiesAsError hard-fails mixed constraint sets when needed.
+
+Good Mental Model
+If you are solving equations, think of Sym as a system that builds a search space of equivalent statements and then extracts a clean answer. If you are optimizing expressions, especially tensor expressions, think of Sym as a graph optimizer whose rewrite rules expose cheaper structures that a final extraction step can prefer.

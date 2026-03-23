@@ -2,8 +2,11 @@
 #nullable enable
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text.Json;
 using WordsToSym;
 
 namespace SymSolvers.Tests
@@ -21,29 +24,23 @@ namespace SymSolvers.Tests
 
         [TestMethod]
         [Timeout(10000)]
-        [DataRow("NumericEvaluation.txt")]
-        [DataRow("SolveForTarget.txt")]
-        [DataRow("AlgebraicSimplification.txt")]
-        [DataRow("CalculusQuery.txt")]
-        [DataRow("InlineCustomRule.txt")]
-        [DataRow("TrigSaturation.txt")]
-        [DataRow("TensorOptimization.txt")]
+        [DynamicData(nameof(GetHomeDropdownExampleFiles), DynamicDataSourceType.Method)]
         public void ValidateExampleScript(string exampleFileName)
         {
-            // Find the examples directory relative to the solution root
             string baseDir = AppContext.BaseDirectory;
             string? projectRoot = FindProjectRoot(baseDir);
-            
+
             Assert.IsNotNull(projectRoot, "Could not find project root directory.");
-            
-            string examplePath = Path.Combine(projectRoot, "SymBlazor", "wwwroot", "examples", exampleFileName);
-            
+
+            string examplePath = Path.Combine(projectRoot, "SymBlazor", "wwwroot", "sym", "examples", exampleFileName);
+
             Assert.IsTrue(File.Exists(examplePath), $"Example file not found at: {examplePath}");
-            
-            string script = File.ReadAllText(examplePath);
+
+            string script = ApplyBlazorDefaultRulePacks(File.ReadAllText(examplePath));
             string result = _wrapper.SolveWithEGraph(script);
-            
+
             Assert.IsFalse(result.StartsWith("Error:"), $"Example '{exampleFileName}' failed with error:\n{result}");
+            Assert.IsFalse(string.IsNullOrWhiteSpace(result), $"Example '{exampleFileName}' returned an empty result.");
             
             if (exampleFileName == "TensorOptimization.txt")
             {
@@ -75,7 +72,54 @@ namespace SymSolvers.Tests
             }
         }
 
-        private string? FindProjectRoot(string startDir)
+        public static IEnumerable<object[]> GetHomeDropdownExampleFiles()
+        {
+            string baseDir = AppContext.BaseDirectory;
+            string? projectRoot = FindProjectRoot(baseDir);
+
+            if (projectRoot is null)
+            {
+                throw new DirectoryNotFoundException("Could not locate project root for example discovery.");
+            }
+
+            string manifestPath = Path.Combine(projectRoot, "SymBlazor", "wwwroot", "sym", "examples", "examples.json");
+            string manifestJson = File.ReadAllText(manifestPath);
+            var exampleFiles = JsonSerializer.Deserialize<List<string>>(manifestJson) ?? new List<string>();
+
+            return exampleFiles.Select(file => new object[] { file });
+        }
+
+        private static string ApplyBlazorDefaultRulePacks(string script)
+        {
+            const string blazorDefaultRulePacks = "AlgebraicStrategy, EquationSolving";
+            Regex rulePacksOptionRegex = new(@"^\s*(?:@option\s+)?RulePacks\s*[:=]", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            Regex xmlOptionsBlockRegex = new(@"<Options>(.*?)</Options>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+            if (string.IsNullOrWhiteSpace(script) || rulePacksOptionRegex.IsMatch(script))
+            {
+                return script;
+            }
+
+            string lineEnding = script.Contains("\r\n", StringComparison.Ordinal) ? "\r\n" : "\n";
+            Match xmlOptionsMatch = xmlOptionsBlockRegex.Match(script);
+            if (xmlOptionsMatch.Success)
+            {
+                string optionsContent = xmlOptionsMatch.Groups[1].Value;
+                string trimmedOptions = optionsContent.TrimEnd();
+                string updatedOptions = string.IsNullOrWhiteSpace(trimmedOptions)
+                    ? $"{lineEnding}  RulePacks: {blazorDefaultRulePacks}{lineEnding}"
+                    : $"{lineEnding}{trimmedOptions}{lineEnding}  RulePacks: {blazorDefaultRulePacks}{lineEnding}";
+
+                return script[..xmlOptionsMatch.Groups[1].Index] +
+                       updatedOptions +
+                       script[(xmlOptionsMatch.Groups[1].Index + xmlOptionsMatch.Groups[1].Length)..];
+            }
+
+            string trimmedScript = script.TrimStart();
+            return $"<Options>{lineEnding}  RulePacks: {blazorDefaultRulePacks}{lineEnding}</Options>{lineEnding}{lineEnding}{trimmedScript}";
+        }
+
+        private static string? FindProjectRoot(string startDir)
         {
             var dir = new DirectoryInfo(startDir);
             while (dir != null)

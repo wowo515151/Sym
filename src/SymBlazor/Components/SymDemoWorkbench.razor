@@ -10,8 +10,8 @@
 
         @if (Examples.Count > 0)
         {
-            <fieldset class="demo-group-box demo-examples-group">
-                <legend>Examples</legend>
+            <div class="demo-panel demo-examples-group">
+                <div class="demo-panel-title">Examples</div>
                 <select @onchange="OnExampleSelected" class="form-select">
                     <option value="">-- Select a Demo Example --</option>
                     @foreach (var example in Examples)
@@ -19,11 +19,11 @@
                         <option value="@example.Name">@example.Name</option>
                     }
                 </select>
-            </fieldset>
+            </div>
         }
 
         <div class="demo-toolbar-section">
-            <a class="btn btn-outline-light" href="/SymUIHelp.html" target="_blank" rel="noopener noreferrer">Sym Help</a>
+            <a class="btn btn-outline-light" href="/sym/SymUIHelp.html" target="_blank" rel="noopener noreferrer">Sym Help</a>
         </div>
     </div>
 
@@ -33,20 +33,20 @@
     }
 
     <div class="demo-content-container">
-        <fieldset class="demo-group-box demo-io-item">
-            <legend>Input</legend>
+        <div class="demo-panel demo-io-item">
+            <div class="demo-panel-title">Input</div>
             <textarea class="demo-fill-area" @bind="_input" @bind:event="oninput" spellcheck="false"></textarea>
-        </fieldset>
+        </div>
 
-        <fieldset class="demo-group-box demo-io-item">
-            <legend>Output</legend>
+        <div class="demo-panel demo-io-item">
+            <div class="demo-panel-title">Output</div>
             <textarea class="demo-fill-area" readonly @bind="_output" spellcheck="false"></textarea>
-        </fieldset>
+        </div>
     </div>
 </div>
 
 @code {
-    [Parameter] public IReadOnlyList<DemoExample> Examples { get; set; } = Array.Empty<DemoExample>();
+    [Parameter] public IReadOnlyList<BlazorDemoExample> Examples { get; set; } = Array.Empty<BlazorDemoExample>();
     [Parameter] public string InitialInput { get; set; } = string.Empty;
     [Parameter] public bool ApplyDefaultRulePacks { get; set; }
 
@@ -183,20 +183,20 @@
         align-items: center;
     }
 
-    .demo-group-box {
+    .demo-panel {
         border: 1px solid rgba(255, 255, 255, 0.24);
-        border-radius: 0.65rem;
-        padding: 0.5rem 0.75rem 0.75rem;
-        background: rgba(255, 255, 255, 0.04);
+        border-radius: 0.9rem;
+        padding: 0.75rem 0.85rem 0.85rem;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
     }
 
-    .demo-group-box legend {
-        float: none;
-        width: auto;
-        padding: 0 0.35rem;
-        margin-bottom: 0;
+    .demo-panel-title {
+        margin-bottom: 0.55rem;
         font-size: 0.82rem;
         font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
         color: #b8d0f0;
     }
 
@@ -207,6 +207,10 @@
     .demo-description {
         color: #c9d7e8;
         font-size: 0.95rem;
+        padding: 0.9rem 1rem;
+        border: 1px solid rgba(137, 209, 182, 0.18);
+        border-radius: 0.9rem;
+        background: rgba(9, 22, 40, 0.72);
     }
 
     .demo-content-container {
@@ -235,6 +239,12 @@
         font-family: "Cascadia Code", Consolas, "Courier New", monospace;
         font-size: 0.92rem;
         box-sizing: border-box;
+    }
+
+    .demo-fill-area:focus {
+        outline: 2px solid rgba(137, 209, 182, 0.28);
+        outline-offset: 0;
+        border-color: rgba(137, 209, 182, 0.38);
     }
 
     @@media (max-width: 900px) {

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is Symbolic Computation?</title>
+    <meta name="description" content="An introduction to symbolic computation, exact expression manipulation, and mathematical structure." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>What Is Symbolic Computation?</h1>
+            <p class="hero-copy">
+                Symbolic computation is the study and implementation of systems that manipulate mathematical expressions
+                as structured objects. Instead of treating a formula as plain text or immediately evaluating it to a
+                floating-point number, a symbolic system keeps track of operators, arguments, identities, and algebraic form.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>Working With Mathematical Form</h2>
+                <p>
+                    A numerical program asks for values. A symbolic program asks what the expression is. That difference
+                    matters because the form of an expression determines what transformations are possible. The formulas
+                    <code>x * x</code> and <code>x^2</code> may agree numerically, but symbolic systems may treat them
+                    differently depending on representation, rewrite rules, factoring strategy, and target task.
+                </p>
+                <p>
+                    Symbolic computation includes simplification, differentiation, integration, equation solving,
+                    substitution, factorization, rewriting, and equivalence reasoning. It also includes the less visible
+                    infrastructure required to make those tasks trustworthy: parsers, expression trees, canonical forms,
+                    pattern matching, and cost-guided optimization.
+                </p>
+                <p>
+                    The central idea is that mathematics has structure worth preserving. If you collapse everything to
+                    approximate numbers too early, you may lose identities, exact cancellations, domain information,
+                    and opportunities for better downstream computation.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Is Useful</span>
+                <h2>Exactness Changes What You Can Do</h2>
+                <ul class="lead-list">
+                    <li>It preserves algebraic relationships instead of discarding them during early evaluation.</li>
+                    <li>It makes simplification and transformation explicit rather than accidental.</li>
+                    <li>It supports exact derivatives, identities, substitutions, and expression-level optimization.</li>
+                    <li>It provides a strong tool layer for agents and software systems that need dependable math.</li>
+                </ul>
+                <p>
+                    This is one reason symbolic computation remains relevant even in an AI-heavy environment. Language
+                    models can explain or suggest, but symbolic systems can carry out exact manipulations whose meaning
+                    depends on mathematical rules rather than generated prose.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Example</span>
+                <h3>Numerical Versus Symbolic Thinking</h3>
+                <p>
+                    Suppose you want to work with <code>(x^2 - 1)/(x - 1)</code>. A purely numerical view may evaluate it
+                    at chosen points and observe values near <code>x + 1</code> for most inputs. A symbolic view can factor
+                    the numerator into <code>(x - 1)(x + 1)</code>, cancel the common factor where appropriate, and explain
+                    both the simplification and the domain restriction at <code>x = 1</code>.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Connection</span>
+                <h3>Where It Shows Up</h3>
+                <p>
+                    Symbolic computation appears in computer algebra systems, theorem provers, compilers, optimization
+                    engines, equation solvers, and tensor-graph optimizers. It also appears inside practical tools such
+                    as simplifiers, code generators, differentiators, and search systems that reason over equivalent forms.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./term-rewriting-systems.html">Rewrite Systems</a>
+                    <a class="button-link secondary" href="./e-graphs.html">E-Graphs</a>
+                    <a class="button-link secondary" href="../ai-math/symbolic-computation-and-ai.html">AI Connection</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Internal Representation</span>
+                <h2>Expressions Are Data Structures</h2>
+                <p>
+                    To manipulate mathematics symbolically, a program needs a representation richer than text. A common
+                    choice is an expression tree whose nodes represent operators and whose children represent arguments.
+                    For example, <code>sin(x + y)</code> might be represented as a <code>sin</code> node whose child is
+                    an addition node with children <code>x</code> and <code>y</code>. This makes pattern matching and
+                    transformation possible because the system can inspect mathematical structure directly.
+                </p>
+                <p>
+                    More advanced systems may use directed acyclic graphs to share common subexpressions, typed nodes to
+                    protect domain constraints, or equivalence-class structures such as e-graphs when many forms need to
+                    coexist. The representation affects both correctness and performance.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Design Question</span>
+                <h2>What Counts As A Better Expression?</h2>
+                <p>
+                    Not every symbolic task wants the same answer. One user may want the shortest printed form. Another
+                    may want a form that differentiates easily, evaluates stably, vectorizes well, or exposes shared
+                    substructure for later optimization. This is why symbolic computation often needs a notion of cost,
+                    preference, or target context rather than a single universal simplification rule.
+                </p>
+                <p>
+                    In practical systems, simplification is therefore not only about mathematical truth. It is also about
+                    selecting useful forms for human interpretation, downstream algorithms, or execution environments.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>
+
+

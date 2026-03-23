@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Symbolic Vs Numerical Computation</title>
+    <meta name="description" content="A comparison of symbolic and numerical computation, including strengths, tradeoffs, and how they fit AI workflows." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>Symbolic Vs Numerical Computation</h1>
+            <p class="hero-copy">
+                Symbolic and numerical computation solve different kinds of problems well. Most serious mathematical
+                software needs both, and the difference becomes especially important when AI systems are involved.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Side</span>
+                <h2>Preserve Form</h2>
+                <p>
+                    Symbolic computation keeps track of mathematical structure. It can simplify expressions, preserve
+                    exact identities, compute exact derivatives, and reason about equivalent forms. This is essential
+                    when the form of an expression matters as much as or more than its evaluated value.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Numerical Side</span>
+                <h2>Compute Values Efficiently</h2>
+                <p>
+                    Numerical computation is about approximating values efficiently and robustly. It is the natural tool
+                    for simulation, large-scale linear algebra, optimization at runtime, and final execution once the
+                    right form of a computation has already been chosen.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Tradeoff</span>
+                <h2>Different Questions</h2>
+                <p>
+                    A symbolic system asks what an expression is and how it can be transformed. A numerical system asks
+                    what value the expression has at particular inputs. Neither question replaces the other. They answer
+                    different parts of a larger workflow.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">AI Context</span>
+                <h2>Where The Split Matters</h2>
+                <p>
+                    In AI-assisted work, numerical systems often handle final execution while symbolic systems provide
+                    exact intermediate operations. That makes the symbolic layer especially useful for agentic workflows
+                    that need dependable transformations before numerical evaluation takes over.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./symbolic-computation-and-ai.html">Symbolic Computation And AI</a>
+                    <a class="button-link secondary" href="../../symbolic-computation/what-is-symbolic-computation.html">What Is Symbolic Computation?</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>
+
+

@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Avoid Roslyn compiler-server file locks that break IDE Run/Debug builds. -->
+    <UseSharedCompilation>false</UseSharedCompilation>
+  </PropertyGroup>
+</Project>

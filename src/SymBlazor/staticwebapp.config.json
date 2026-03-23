@@ -1,10 +1,41 @@
 {
+  "routes": [
+    {
+      "route": "/sym",
+      "rewrite": "/sym/index.html"
+    },
+    {
+      "route": "/sym/",
+      "rewrite": "/sym/index.html"
+    },
+    {
+      "route": "/sym/derivative-demo",
+      "rewrite": "/sym/index.html"
+    },
+    {
+      "route": "/sym/rewrite-demo",
+      "rewrite": "/sym/index.html"
+    },
+    {
+      "route": "/sym/tensor-demo",
+      "rewrite": "/sym/index.html"
+    },
+    {
+      "route": "/library",
+      "rewrite": "/library/index.html"
+    },
+    {
+      "route": "/library/",
+      "rewrite": "/library/index.html"
+    }
+  ],
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": [
       "/css/*",
       "/_framework/*",
       "/examples/*",
+      "/library/*",
       "/*.txt",
       "/*.html",
       "/*.png",

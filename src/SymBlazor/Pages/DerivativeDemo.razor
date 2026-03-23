@@ -1,51 +1,138 @@
-@page "/sym/derivative-demo"
-@page "/sym/derivative-demo/"
+@page "/derivative-demo"
 
 <div class="demo-page">
-    <p class="demo-kicker">Sym Demo</p>
-    <h1>Derivative Demo</h1>
-    <p class="demo-summary">
-        This demo uses the Sym backend to differentiate symbolic expressions with calculus rule packs enabled.
-    </p>
+    <div class="demo-page-shell">
+        <section class="demo-hero">
+            <p class="demo-kicker">Sym Demo</p>
+            <h1>Derivative Demo</h1>
+            <p class="demo-summary">
+                This demo drives Sym's symbolic differentiation pipeline with calculus and algebraic rule packs enabled,
+                so you can inspect exact derivative transformations instead of only seeing numeric approximations.
+            </p>
+            <p class="demo-summary">
+                It is useful for checking how the engine rewrites operator trees, applies product and chain-rule style
+                expansions, and simplifies the resulting symbolic expression into a more readable form.
+            </p>
 
-    <SymDemoWorkbench Examples="@Examples" InitialInput="@Examples[0].Script" />
+            <div class="demo-notes">
+                <div class="demo-note-card">
+                    <h2>What This Demo Exercises</h2>
+                    <p>
+                        Sym parses the input into structured expression nodes, activates calculus-aware rewrite packs,
+                        and repeatedly rewrites the graph until it reaches a stable or better-ranked symbolic form.
+                    </p>
+                </div>
+                <div class="demo-note-card">
+                    <h2>Technical Focus</h2>
+                    <ul>
+                        <li>Derivative operators such as <code>Derivative(f(x), x)</code></li>
+                        <li>Rule-pack driven simplification after differentiation expands the expression</li>
+                        <li>Exact symbolic output that stays inspectable for follow-on algebraic manipulation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <SymDemoWorkbench Examples="@Examples" InitialInput="@Examples[0].Script" />
+    </div>
 </div>
 
 @code {
-    private static readonly IReadOnlyList<DemoExample> Examples =
-    [
-        new(
-            "Derivative Of Sine",
-            """
-            <Options>
-              RulePacks: Calculus, AlgebraicStrategy
-            </Options>
-
-            Derivative(sin(x), x)
-            """,
-            "A direct calculus example showing a simple symbolic derivative."
-        ),
-        new(
-            "Product Rule",
-            """
-            <Options>
-              RulePacks: Calculus, AlgebraicStrategy
-            </Options>
-
-            Derivative(sin(x) * exp(x), x)
-            """,
-            "A slightly richer example that typically triggers product-rule style behavior."
-        ),
-        new(
-            "Polynomial Derivative",
-            """
-            <Options>
-              RulePacks: Calculus, AlgebraicStrategy
-            </Options>
-
-            Derivative(x^3 + 2*x^2 + x, x)
-            """,
-            "A symbolic polynomial derivative that should simplify cleanly."
-        )
-    ];
+    private static readonly IReadOnlyList<BlazorDemoExample> Examples = BlazorDemoCatalog.DerivativeExamples;
 }
+
+<style>
+    .demo-page {
+        min-height: 100vh;
+        padding: 1.5rem;
+        color: #edf5ff;
+        background:
+            radial-gradient(circle at top left, rgba(74, 144, 226, 0.14), transparent 28rem),
+            linear-gradient(180deg, #06111f 0%, #081a31 100%);
+    }
+
+    .demo-page-shell {
+        width: min(1180px, 100%);
+        margin: 0 auto;
+    }
+
+    .demo-hero {
+        margin-bottom: 1.35rem;
+    }
+
+    .demo-kicker {
+        margin: 0 0 0.4rem;
+        color: #89d1b6;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    .demo-page h1 {
+        margin: 0;
+        color: #edf5ff;
+        font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    }
+
+    .demo-page h1:focus,
+    .demo-page h1:focus-visible {
+        outline: none;
+    }
+
+    .demo-summary {
+        max-width: 60rem;
+        margin: 0.75rem 0 0;
+        color: #edf5ff;
+        line-height: 1.65;
+    }
+
+    .demo-notes {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        margin-top: 1.15rem;
+    }
+
+    .demo-note-card {
+        padding: 1rem 1.1rem;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 0.95rem;
+        background: rgba(6, 17, 31, 0.68);
+        color: #edf5ff;
+    }
+
+    .demo-note-card h2 {
+        margin: 0 0 0.55rem;
+        font-size: 1rem;
+        color: #edf5ff;
+    }
+
+    .demo-note-card p,
+    .demo-note-card li {
+        color: #edf5ff;
+        line-height: 1.6;
+    }
+
+    .demo-note-card ul {
+        margin: 0;
+        padding-left: 1.2rem;
+    }
+
+    .demo-note-card code {
+        color: #edf5ff;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 0.1rem 0.3rem;
+        border-radius: 0.35rem;
+    }
+
+    @@media (max-width: 900px) {
+        .demo-page {
+            padding: 1rem;
+        }
+
+        .demo-notes {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

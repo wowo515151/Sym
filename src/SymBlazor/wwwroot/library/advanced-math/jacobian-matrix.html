@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is A Jacobian Matrix?</title>
+    <meta name="description" content="An introduction to Jacobian matrices, derivatives of vector-valued functions, and local linear behavior." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Advanced Mathematics</p>
+            <h1>What Is A Jacobian Matrix?</h1>
+            <p class="hero-copy">
+                The Jacobian matrix collects first-order partial derivatives of a vector-valued function. It is one of
+                the most useful objects in multivariable calculus because it describes how outputs respond locally to
+                changes in inputs.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>Derivatives Of Vector-Valued Functions</h2>
+                <p>
+                    Suppose <code>F: R^n -> R^m</code>. The Jacobian of <code>F</code> is the <code>m x n</code> matrix
+                    whose entry in row <code>i</code>, column <code>j</code> is the partial derivative of the
+                    <code>i</code>-th output with respect to the <code>j</code>-th input.
+                </p>
+                <p>
+                    In one variable, the derivative is a number. In many variables, the Jacobian is the linear map that
+                    best approximates the function near a point. That local linear picture is what makes the Jacobian
+                    so important in optimization, nonlinear equations, control, robotics, and machine learning.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Interpretation</span>
+                <h2>Local Sensitivity</h2>
+                <p>
+                    The Jacobian answers a practical question: if the inputs move a little, how do the outputs move?
+                    Its entries measure directional sensitivity, and the full matrix captures how all small input
+                    changes combine to produce a first-order change in the output vector.
+                </p>
+                <div class="code-block">J_F(x) = [ dF_i / dx_j ]</div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Applications</span>
+                <h3>Why People Care About Jacobians</h3>
+                <p>
+                    Jacobians appear in Newton-style methods, backpropagation, sensitivity analysis, coordinate changes,
+                    implicit systems, and nonlinear dynamics. They are not just textbook objects; they are working tools.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Symbolic Link</span>
+                <h3>Why Symbolic Systems Help</h3>
+                <p>
+                    Symbolic computation can derive Jacobians exactly, simplify them, and preserve structural information
+                    that may be useful for later optimization or code generation.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Example</span>
+                <h2>A Small Concrete Case</h2>
+                <p>
+                    If <code>F(x, y) = (x^2 y, x + sin(y))</code>, then the Jacobian is the matrix whose first row contains
+                    the partial derivatives of <code>x^2 y</code> and whose second row contains the partial derivatives of
+                    <code>x + sin(y)</code>. The result is:
+                </p>
+                <div class="code-block">[ 2xy   x^2 ]<br />[  1   cos(y) ]</div>
+                <p>
+                    This matrix summarizes how small changes in <code>x</code> and <code>y</code> affect both outputs.
+                    It is the multivariable analogue of keeping track of the first derivative in one-variable calculus.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Computational Use</span>
+                <h2>Why The Structure Matters</h2>
+                <p>
+                    In optimization and machine learning, Jacobians are not only theoretical objects. Their sparsity,
+                    factorization, and symbolic form can strongly affect how expensive a method is to run. Symbolic
+                    computation can help derive them, simplify them, and expose patterns before numerical evaluation.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./hessian-matrix.html">Hessian Matrix</a>
+                    <a class="button-link secondary" href="../ai-math/symbolic-vs-numerical-computation.html">Symbolic Vs Numerical</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>
+
+

@@ -82,6 +82,20 @@ Known previously visible resources:
 - `ASP-AICodersResourceGroup-a5a1` (`Microsoft.Web/serverFarms`)
 - `SmolAgent1` (`Microsoft.Web/sites`)
 
+Known current Static Web App:
+
+- Name: `Sym`
+- Resource group: `AICodersResourceGroup`
+- Default hostname: `purple-pebble-07343a21e.4.azurestaticapps.net`
+- Repository: `https://github.com/Wowo51/Sym`
+- Branch: `main`
+
+To verify it directly:
+
+```powershell
+& $AzCli staticwebapp list --output table
+```
+
 ## Known issue
 
 Authorization has been flaky across logins. The same service principal login has sometimes returned:
@@ -99,9 +113,36 @@ If that happens:
 
 If repeated retries still fail, the service principal likely needs role assignment review in Azure IAM.
 
-## What is still needed for Sym deployment
+## GitHub to Azure deployment path
 
-To deploy Sym to Azure through GitHub, the agent still needs one of these:
+This repo already contains the workflow:
+
+- `.github/workflows/azure-static-web-apps-purple-pebble-07343a21e.yml`
+
+That workflow deploys pushes to `main` to the `Sym` Azure Static Web App using:
+
+- .NET publish output from `src/SymBlazor`
+- the GitHub secret `AZURE_STATIC_WEB_APPS_API_TOKEN`
+- the Azure Static Web Apps deploy action
+
+Recommended release flow:
+
+1. Commit site changes on `main`.
+2. Push to `origin/main`.
+3. Watch the GitHub Actions run for the Azure Static Web Apps workflow.
+4. Confirm the deployed site updates on the Azure Static Web App hostname or the bound custom domain.
+
+Helpful GitHub commands:
+
+```powershell
+gh auth status
+gh run list --workflow "azure-static-web-apps-purple-pebble-07343a21e.yml" --limit 5
+gh run watch <run-id>
+```
+
+## What is still needed if GitHub deployment fails
+
+To recover Sym deployment through GitHub, the agent still needs one of these if the current workflow path stops working:
 
 1. Permission to create or manage an Azure Static Web App.
 2. Permission to read deployment secrets for an existing Azure Static Web App.

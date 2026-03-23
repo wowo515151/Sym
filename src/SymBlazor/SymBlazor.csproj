@@ -16,26 +16,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CSharpIO\CSharpIO.csproj" />
-    <ProjectReference Include="..\SymCore\SymCore.csproj" />
-    <ProjectReference Include="..\SymRules\SymRules.csproj" />
     <ProjectReference Include="..\SymSolvers\SymSolvers.csproj">
     <AdditionalProperties>EnableCobra=false;EnableCSharpAnalysis=false</AdditionalProperties>
     </ProjectReference>
-    <ProjectReference Include="..\Sym\Sym.csproj" />
-    <ProjectReference Include="..\WordsToSym\WordsToSym.csproj" />
   </ItemGroup>
 
   <Target Name="ApplyPublishedBaseHref" AfterTargets="Publish" Condition="'$(PublishBaseHref)' != ''">
     <PropertyGroup>
       <_PublishedSiteDir>$(PublishDir)wwwroot\</_PublishedSiteDir>
-      <_PublishedIndexHtml>$(_PublishedSiteDir)index.html</_PublishedIndexHtml>
+      <_PublishedSymDir>$(_PublishedSiteDir)sym\</_PublishedSymDir>
+      <_PublishedIndexHtml>$(_PublishedSiteDir)sym\index.html</_PublishedIndexHtml>
       <_RewriteScript>$(IntermediateOutputPath)ApplyPublishedBaseHref.ps1</_RewriteScript>
     </PropertyGroup>
 
     <ItemGroup>
       <_RootHelpFiles Include="$(_PublishedSiteDir)SymHelp.txt" />
       <_RootHelpFiles Include="$(_PublishedSiteDir)SymUIHelp.html" />
+      <_FrameworkFiles Include="$(_PublishedSiteDir)_framework\**\*" />
+      <_SharedProductSection Include="$(MSBuildProjectDirectory)\wwwroot\ProductSection.html" />
     </ItemGroup>
 
     <WriteLinesToFile
@@ -44,35 +42,16 @@
       Lines="$ErrorActionPreference = 'Stop'&#x0D;&#x0A;$path = '$(_PublishedIndexHtml)'&#x0D;&#x0A;$content = Get-Content -Raw -LiteralPath $path&#x0D;&#x0A;$targetBaseHref = '&lt;base href=&quot;$(PublishBaseHref)&quot; /&gt;'&#x0D;&#x0A;if (-not $content.Contains($targetBaseHref)) {&#x0D;&#x0A;  $updated = $content.Replace('&lt;base href=&quot;/&quot; /&gt;', $targetBaseHref)&#x0D;&#x0A;  if ($content -ceq $updated) { throw 'Expected base href marker was not found in published index.html.' }&#x0D;&#x0A;  Set-Content -LiteralPath $path -Value $updated -NoNewline&#x0D;&#x0A;}&#x0D;&#x0A;Remove-Item -Force -ErrorAction SilentlyContinue '$(_PublishedSiteDir)index.html.br', '$(_PublishedSiteDir)index.html.gz'" />
 
     <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(_RewriteScript)&quot;" />
-    <Copy SourceFiles="@(_RootHelpFiles)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
-  </Target>
-
-  <Target Name="CopySiteContentToPublishRoot" AfterTargets="Publish">
-    <PropertyGroup>
-      <_RepoRoot>$(MSBuildProjectDirectory)\..\..\</_RepoRoot>
-      <_PublishedSiteDir>$(PublishDir)wwwroot\</_PublishedSiteDir>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <_LibraryFiles Include="$(_RepoRoot)Library\**\*" />
-      <_ResumeFile Include="$(_RepoRoot)resume.html" />
-      <_LibraryIndexSource Include="$(_RepoRoot)Library\LibraryHome.html" />
-    </ItemGroup>
-
     <Copy
-      SourceFiles="@(_LibraryFiles)"
-      DestinationFiles="@(_LibraryFiles->'$(_PublishedSiteDir)library\%(RecursiveDir)%(Filename)%(Extension)')"
+      SourceFiles="@(_FrameworkFiles)"
+      DestinationFiles="@(_FrameworkFiles->'$(_PublishedSymDir)_framework\%(RecursiveDir)%(Filename)%(Extension)')"
       SkipUnchangedFiles="true" />
-
     <Copy
-      SourceFiles="@(_ResumeFile)"
+      SourceFiles="@(_SharedProductSection)"
       DestinationFolder="$(_PublishedSiteDir)"
       SkipUnchangedFiles="true" />
-
-    <Copy
-      SourceFiles="@(_LibraryIndexSource)"
-      DestinationFiles="@(_LibraryIndexSource->'$(_PublishedSiteDir)library\index.html')"
-      SkipUnchangedFiles="true" />
+    <Delete Files="$(_PublishedSiteDir)ProductSection.html.br;$(_PublishedSiteDir)ProductSection.html.gz" />
+    <Copy SourceFiles="@(_RootHelpFiles)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
   </Target>
 
 </Project>

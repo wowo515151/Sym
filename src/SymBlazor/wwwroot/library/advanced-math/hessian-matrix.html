@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is A Hessian Matrix?</title>
+    <meta name="description" content="An introduction to Hessian matrices, second derivatives, curvature, and optimization." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Advanced Mathematics</p>
+            <h1>What Is A Hessian Matrix?</h1>
+            <p class="hero-copy">
+                The Hessian matrix collects second-order partial derivatives of a scalar-valued function. It captures
+                local curvature and is central to optimization, approximation, and stability analysis.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>Second Derivatives In Matrix Form</h2>
+                <p>
+                    If <code>f(x_1, ..., x_n)</code> is a scalar-valued function, the Hessian is the <code>n x n</code>
+                    matrix whose entry in row <code>i</code>, column <code>j</code> is the second partial derivative
+                    <code>d^2 f / dx_i dx_j</code>. It extends the idea of curvature from one variable to many variables.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Interpretation</span>
+                <h2>Curvature And Local Shape</h2>
+                <p>
+                    The gradient tells you the local direction of steepest change. The Hessian tells you how that
+                    direction itself changes. In optimization, this helps distinguish flat regions, saddle points,
+                    valleys, and locally curved surfaces.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Example</span>
+                <h2>A Simple Function</h2>
+                <p>
+                    For <code>f(x, y) = x^2 + xy + y^2</code>, the Hessian is:
+                </p>
+                <div class="code-block">[ 2  1 ]<br />[ 1  2 ]</div>
+                <p>
+                    The entries show how curvature in one direction interacts with curvature in another. Mixed partials
+                    such as <code>d^2 f / dx dy</code> describe coupling between variables.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Connection</span>
+                <h2>Why It Belongs Near Jacobians</h2>
+                <p>
+                    The Jacobian describes first-order behavior of vector-valued functions. The Hessian describes
+                    second-order behavior of scalar-valued functions. Together they form part of the core language of
+                    multivariable optimization and scientific computation.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./jacobian-matrix.html">Jacobian Matrix</a>
+                    <a class="button-link secondary" href="../ai-math/symbolic-vs-numerical-computation.html">Symbolic Vs Numerical</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>
+
+

@@ -1,5 +1,4 @@
-@page "/sym"
-@page "/sym/"
+@page "/"
 @inject HttpClient Http
 @using WordsToSym
 @using System.Threading
@@ -15,14 +14,6 @@
                 The main Sym interface for running ProblemScript, algebraic simplification, calculus queries,
                 equation-solving workflows, and tensor-oriented rewrites in the browser.
             </p>
-        </div>
-        <div class="header-links">
-            <a class="btn btn-outline-light" href="/">Home</a>
-            <a class="btn btn-outline-light" href="/library/">Library</a>
-            <a class="btn btn-outline-light" href="/resume.html">ProductSection</a>
-            <a class="btn btn-outline-light" href="/sym/rewrite-demo">Rewrite Demo</a>
-            <a class="btn btn-outline-light" href="/sym/tensor-demo">Tensor Demo</a>
-            <a class="btn btn-outline-light" href="/sym/derivative-demo">Derivative Demo</a>
         </div>
     </div>
 
@@ -44,7 +35,7 @@
         </fieldset>
 
         <div class="toolbar-section">
-            <a class="btn btn-primary" href="/SymUIHelp.html" target="_blank" rel="noopener noreferrer">Help</a>
+            <a class="btn btn-primary" href="/sym/SymUIHelp.html" target="_blank" rel="noopener noreferrer">Help</a>
         </div>
     </div>
 
@@ -70,12 +61,14 @@
     private bool _isSolving = false;
     private List<string> _examples = new();
     private CancellationTokenSource? _cts;
+    private string _exampleBasePath = "examples";
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            _examples = await Http.GetFromJsonAsync<List<string>>("examples/examples.json") ?? new();
+            _exampleBasePath = await ResolveExampleBasePathAsync();
+            _examples = await Http.GetFromJsonAsync<List<string>>($"{_exampleBasePath}/examples.json") ?? new();
         }
         catch (Exception ex)
         {
@@ -90,7 +83,7 @@
 
         try
         {
-            _input = await Http.GetStringAsync($"examples/{name}");
+            _input = await Http.GetStringAsync($"{_exampleBasePath}/{name}");
         }
         catch (Exception ex)
         {
@@ -132,6 +125,33 @@
     private void StopSolving()
     {
         _cts?.Cancel();
+    }
+
+    private async Task<string> ResolveExampleBasePathAsync()
+    {
+        var candidatePaths = new[]
+        {
+            "examples",
+            "/sym/examples",
+            "/examples"
+        };
+
+        foreach (var candidatePath in candidatePaths)
+        {
+            try
+            {
+                using var response = await Http.GetAsync($"{candidatePath}/examples.json", HttpCompletionOption.ResponseHeadersRead);
+                if (response.IsSuccessStatusCode)
+                {
+                    return candidatePath;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        return "examples";
     }
 
     private static string ApplyBlazorDefaultRulePacks(string script)
@@ -199,17 +219,15 @@
         letter-spacing: -0.03em;
     }
 
+    h1:focus,
+    h1:focus-visible {
+        outline: none;
+    }
+
     .page-summary {
         max-width: 52rem;
         margin: 0.5rem 0 0;
         color: #c2d3e7;
-    }
-
-    .header-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        align-items: flex-start;
     }
 
     .toolbar {
