@@ -34,11 +34,17 @@
     "exclude": [
       "/css/*",
       "/_framework/*",
+      "/sym/_framework/*",
+      "/sym/css/*",
+      "/sym/examples/*",
       "/examples/*",
       "/library/*",
       "/*.txt",
       "/*.html",
+      "/sym/*.txt",
+      "/sym/*.html",
       "/*.png",
+      "/sym/*.png",
       "/*.ico",
       "/favicon.ico"
     ]

@@ -43,7 +43,7 @@ jobs:
           dotnet-version: 10.0.x
 
       - name: Publish SymBlazor
-        run: dotnet publish src/SymBlazor/SymBlazor.csproj -c Release -m:1 -o artifacts/publish/staticwebapp
+        run: dotnet publish src/SymBlazor/SymBlazor.csproj -c Release -m:1 -o artifacts/publish/staticwebapp /p:PublishBaseHref=/sym/
 
       - name: Build And Deploy
         id: builddeploy

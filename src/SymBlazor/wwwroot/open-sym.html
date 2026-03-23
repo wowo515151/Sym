@@ -34,9 +34,9 @@
             const routeSuffix = requestedRoute.length > 0 ? "/" + requestedRoute : "";
             const labelText = (params.get("label") || "Sym Online").trim();
             const candidates = [
-                { url: "/sym/index.html", marker: '<base href="/sym/"' },
-                { url: "/sym/", marker: '<base href="/sym/"' },
-                { url: "/", marker: '<base href="/"' }
+                { indexUrl: "/sym/index.html", appBase: "/sym/", marker: '<base href="/sym/"' },
+                { indexUrl: "/sym/", appBase: "/sym/", marker: '<base href="/sym/"' },
+                { indexUrl: "/", appBase: "/", marker: '<base href="/"' }
             ];
 
             pageTitle.textContent = requestedRoute.length > 0
@@ -49,14 +49,25 @@
             async function findWorkingTarget() {
                 for (const candidate of candidates) {
                     try {
-                        const response = await fetch(candidate.url, { cache: "no-store" });
+                        const response = await fetch(candidate.indexUrl, { cache: "no-store" });
                         if (!response.ok) {
                             continue;
                         }
 
                         const html = await response.text();
-                        if (html.includes(candidate.marker) && html.includes("blazor.webassembly")) {
-                            return candidate.url;
+                        if (!html.includes(candidate.marker) || !html.includes("blazor.webassembly")) {
+                            continue;
+                        }
+
+                        const runtimeMatch = html.match(/<script[^>]+src="([^"]*_framework\/[^"]*blazor\.webassembly[^"]*\.js)"/i);
+                        if (!runtimeMatch) {
+                            continue;
+                        }
+
+                        const runtimeUrl = new URL(runtimeMatch[1], window.location.origin + candidate.appBase).pathname;
+                        const runtimeResponse = await fetch(runtimeUrl, { cache: "no-store" });
+                        if (runtimeResponse.ok) {
+                            return candidate.appBase;
                         }
                     } catch {
                     }
