@@ -1,0 +1,19 @@
+DriveCLISkill
+
+A thin wrapper around the repo's DriveCLI tool.
+
+Run (from this folder):
+
+  DriveCLI.bat help
+  DriveCLI.bat read <path>
+  DriveCLI.bat write <path> <text...>
+  DriveCLI.bat append <path> <text...>
+  DriveCLI.bat exists <path>
+  DriveCLI.bat delete <path>
+  DriveCLI.bat mkdir <path>
+  DriveCLI.bat list <directoryPath>
+
+Notes
+
+- The .bat runs: dotnet run --project ..\DriveCLI\DriveCLI.csproj -- %*
+- 'help' prints the same text as DriveCLI (DriveCliHelp.Text).

@@ -31,6 +31,11 @@
                     matrix whose entry in row <code>i</code>, column <code>j</code> is the second partial derivative
                     <code>d^2 f / dx_i dx_j</code>. It extends the idea of curvature from one variable to many variables.
                 </p>
+                <p>
+                    Where the gradient records first-order change, the Hessian records how those first-order changes vary
+                    from direction to direction. That is why it becomes the right object whenever local shape matters
+                    more than local slope alone.
+                </p>
             </article>
 
             <article class="panel prose quote-panel">
@@ -40,6 +45,11 @@
                     The gradient tells you the local direction of steepest change. The Hessian tells you how that
                     direction itself changes. In optimization, this helps distinguish flat regions, saddle points,
                     valleys, and locally curved surfaces.
+                </p>
+                <p>
+                    This is also why second-order methods can behave very differently from first-order ones. Once local
+                    curvature is visible, a solver can tell whether a direction is steepening, flattening, or bending
+                    toward a saddle instead of merely following the current gradient.
                 </p>
             </article>
         </section>
@@ -56,6 +66,11 @@
                     The entries show how curvature in one direction interacts with curvature in another. Mixed partials
                     such as <code>d^2 f / dx dy</code> describe coupling between variables.
                 </p>
+                <p>
+                    In this example the mixed partials are equal, which is typical for smooth functions under the usual
+                    regularity assumptions. That symmetry is one reason Hessians often carry strong geometric meaning and
+                    admit useful matrix analysis.
+                </p>
             </article>
 
             <article class="panel prose">
@@ -66,10 +81,46 @@
                     second-order behavior of scalar-valued functions. Together they form part of the core language of
                     multivariable optimization and scientific computation.
                 </p>
+                <p>
+                    In practical workflows, the Jacobian often appears first because it powers local linearization and
+                    sensitivity. The Hessian appears when that first-order picture is not enough, especially in
+                    constrained optimization, Newton-style methods, and stability analysis near critical points.
+                </p>
                 <div class="inline-links">
                     <a class="button-link secondary" href="./jacobian-matrix.html">Jacobian Matrix</a>
                     <a class="button-link secondary" href="../ai-math/symbolic-vs-numerical-computation.html">Symbolic Vs Numerical</a>
                 </div>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Optimization</span>
+                <h2>Why Definiteness Matters</h2>
+                <p>
+                    One major use of the Hessian is classifying critical points. A positive-definite Hessian suggests a
+                    local minimum, a negative-definite Hessian suggests a local maximum, and an indefinite Hessian often
+                    signals a saddle point. This is not the whole story in every setting, but it is the standard bridge
+                    from second derivatives to geometric interpretation.
+                </p>
+                <p>
+                    That bridge matters because optimization is not only about finding stationary points. It is about
+                    understanding what kind of stationary point has been found.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Relevance</span>
+                <h2>Exact Second Derivatives Support Better Analysis</h2>
+                <p>
+                    Symbolic systems are useful here because they can derive Hessians exactly, simplify their entries,
+                    and preserve sparsity or repeated structure before numerical evaluation begins. That can make later
+                    optimization code clearer and cheaper to execute.
+                </p>
+                <p>
+                    Even when the final solver is numerical, the symbolic Hessian can still improve the quality of the
+                    formulation by exposing curvature information in a form that is easier to inspect and reuse.
+                </p>
             </article>
         </section>
 

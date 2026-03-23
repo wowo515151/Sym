@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Canonical Forms In Symbolic Computation</title>
+    <meta name="description" content="Why symbolic systems use canonical forms to compare expressions, simplify matching, and stabilize rewriting." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Canonical Forms In Symbolic Computation</h1>
+            <p class="hero-copy">
+                A canonical form is a preferred representation for an expression among many mathematically equivalent
+                alternatives. Canonicalization is one of the simplest ways to make symbolic systems more predictable.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>Choosing One Form On Purpose</h2>
+                <p>
+                    The expressions <code>x + y</code> and <code>y + x</code> mean the same thing in ordinary algebra,
+                    but they are different trees. A symbolic system that wants stable equality checks often chooses a
+                    rule such as sorting commutative arguments so both expressions become the same internal form.
+                </p>
+                <p>
+                    That choice is a canonicalization policy. It does not mean the chosen form is uniquely beautiful or
+                    universally optimal. It means the system benefits from a deterministic representation that reduces
+                    ambiguity and keeps later reasoning steps simpler.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Benefits</span>
+                <h2>Why Canonicalization Pays Off</h2>
+                <ul class="lead-list">
+                    <li>Equality testing gets easier because more equivalent expressions collapse to the same structure.</li>
+                    <li>Pattern matching becomes more dependable because there are fewer structural variants to consider.</li>
+                    <li>Rewrite loops become easier to control when the system regularly returns to a stable normalized form.</li>
+                    <li>Cost models and extractors work better when there is a consistent baseline representation.</li>
+                </ul>
+                <p>
+                    In practice, this means canonicalization quietly removes a large amount of incidental complexity from
+                    the rest of the engine.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Examples</span>
+                <h2>Common Canonicalization Moves</h2>
+                <p>
+                    Symbolic systems often flatten nested sums and products, sort arguments of commutative operators,
+                    combine obvious numeric constants, remove identity elements like <code>+ 0</code> and
+                    <code>* 1</code>, and rewrite subtractions or divisions into more uniform internal forms.
+                </p>
+                <p>
+                    None of these moves solves every mathematical problem. What they do is create a stable platform on
+                    which more specialized reasoning can be built. Without that platform, the rest of the system spends
+                    too much effort rediscovering that superficially different trees mean the same thing.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Limits</span>
+                <h2>No Single Canonical Form Solves Everything</h2>
+                <p>
+                    Canonicalization is useful precisely because it is limited. A good symbolic engine cannot assume one
+                    representation is always best for differentiation, integration, numerical stability, readability, and
+                    code generation at the same time. In harder cases, canonical forms provide a baseline rather than a
+                    final answer.
+                </p>
+                <p>
+                    That is one reason e-graphs and equality saturation are attractive. Instead of committing too early
+                    to one normal form, they can keep many equivalent candidates alive and extract a preferred result
+                    later using a cost model.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Engineering</span>
+                <h3>Canonicalization Is A Design Choice</h3>
+                <p>
+                    Every canonicalization rule encodes a preference. Some systems prioritize short expressions, others
+                    prioritize exact rational structure, and others prefer representations that are friendlier to later
+                    rewrites. Good symbolic software makes those choices explicit.
+                </p>
+                <p>
+                    That is why canonicalization is never just a housekeeping step. It shapes later behavior throughout
+                    the system.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Mathematical Meaning</span>
+                <h3>Normalization Is Not Mere Formatting</h3>
+                <p>
+                    Canonical forms affect how expressions compare, how rule sets behave, and how much hidden work the
+                    engine has to do before it can reason effectively. They are part of the mathematics of the system,
+                    not just its user interface.
+                </p>
+                <p>
+                    A stable normal form changes the logic of equality and transformation, not only the way an output is
+                    printed.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Practical Takeaway</span>
+                <h2>Canonical Forms Create Stability</h2>
+                <p>
+                    If a symbolic engine feels inconsistent, one common reason is weak canonicalization. Equivalent
+                    expressions keep reappearing in slightly different forms, rule matches become fragile, and extracted
+                    results feel arbitrary. Strong canonicalization does not remove all hard cases, but it prevents many
+                    avoidable ones.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>Where This Connects</h2>
+                <p>
+                    Canonical forms sit naturally between representation and search. They complement pattern matching and
+                    rewriting, and they explain why equality reasoning often needs more than a bag of local algebraic
+                    rules.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./pattern-matching.html">Pattern Matching</a>
+                    <a class="button-link secondary" href="./term-rewriting-systems.html">Term Rewriting Systems</a>
+                    <a class="button-link secondary" href="./e-graphs.html">E-Graphs</a>
+                    <a class="button-link secondary" href="./equality-saturation.html">Equality Saturation</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

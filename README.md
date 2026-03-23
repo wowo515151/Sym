@@ -12,6 +12,7 @@ Sym has grown beyond the earlier Raven-only framing. The same core engine now po
 
 - The Blazor UI at `/sym/`
 - CLI and scripting workflows through `SymCLI`
+- AI-tooling and Skills-style workflows through `SymCLI` and the `Skills/` folder
 - Rule-pack driven algebraic, calculus, equation-solving, tensor, and graph optimization scenarios
 - Additional wrappers and companion apps in this repository
 
@@ -37,6 +38,30 @@ Run the CLI:
 dotnet run --project src/SymCLI/SymCLI.csproj
 ```
 
+Example solve flow:
+
+```powershell
+dotnet run --project src/SymCLI/SymCLI.csproj -- problem.ps result.txt
+```
+
+Example C# analysis flow:
+
+```powershell
+dotnet run --project src/SymCLI/SymCLI.csproj -- analyze csharp-math src out/report.txt --json
+```
+
+If you want to expose SymCLI to an AI agent through the checked-in skill wrappers, use:
+
+```powershell
+Skills/SymCLISkill/symcli.bat analyze csharp-math src out/report.txt --json
+```
+
+or on Unix-like systems:
+
+```sh
+./Skills/SymCLISkill/symcli.sh analyze csharp-math src out/report.txt --json
+```
+
 Run the Blazor UI locally:
 
 ```powershell
@@ -48,6 +73,7 @@ dotnet run --project src/SymBlazor/SymBlazor.csproj
 - `src/Sym`, `src/SymCore`, `src/SymSolvers`, `src/SymRules`: core symbolic engine, solver, and rule libraries
 - `src/SymBlazor`: the Blazor WebAssembly UI published to SymbolicComputation.com
 - `src/SymCLI`: command-line entry point
+- `Skills/SymCLISkill`: repo-relative wrapper scripts and help file for using `SymCLI` as an AI tool / skill
 - `src/WordsToSym`, `src/SymTools`, `src/HAMM`, `src/AGIMynd`: related tools and companion apps built around the wider Sym ecosystem
 
 ## Web deployment

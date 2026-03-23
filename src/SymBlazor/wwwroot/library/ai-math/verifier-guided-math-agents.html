@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Verifier-Guided Math Agents</title>
+    <meta name="description" content="Why verification layers matter for AI systems that perform mathematical or symbolic work." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>Verifier-Guided Math Agents</h1>
+            <p class="hero-copy">
+                A verifier-guided agent is an AI system that does not merely produce candidate mathematical steps. It
+                also checks them against structured criteria, formal constraints, or exact tools before trusting them.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why Verification Matters</span>
+                <h2>Generation Alone Is Not Enough</h2>
+                <p>
+                    In mathematical settings, a plausible step is not the same as a valid step. A model can easily
+                    propose a transformation that looks reasonable but changes the problem, drops a condition, or mixes
+                    symbolic and numerical assumptions incorrectly.
+                </p>
+                <p>
+                    Verification changes the loop. Instead of asking only what the model can generate, the system asks
+                    what generated steps survive exact checks. That usually produces more reliable behavior, especially in
+                    longer reasoning chains.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel chart-panel">
+                <span class="mini-label">Plotly View</span>
+                <h2>Candidate Generation Versus Verified Flow</h2>
+                <p>
+                    A verifier-guided pipeline still needs candidate generation, but it adds filtering, checking, and
+                    correction before the step is allowed to propagate into the next stage. The key branching point is
+                    the verifier itself: accepted steps continue forward, while rejected steps are pruned away.
+                </p>
+                <div id="verifierFlow" style="height: 320px; margin-top: 18px;" aria-label="Verifier-guided flow diagram"></div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">What Counts As Verification</span>
+                <h2>Checks Can Be Formal Or Operational</h2>
+                <p>
+                    Verification does not always mean a full theorem prover. It can mean checking algebraic equivalence,
+                    confirming a derivative with a symbolic engine, validating tensor shapes, enforcing type constraints,
+                    or asking a trusted solver whether the claimed step is actually correct.
+                </p>
+                <p>
+                    The important point is that the verifier should have a meaningfully different failure mode from the
+                    generative model. If both parts make errors in the same loose way, the verifier is not doing much.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Agent Behavior</span>
+                <h2>Verification Changes Planning</h2>
+                <p>
+                    Once a system knows its steps will be checked, it can plan differently. It can generate multiple
+                    candidates, let the verifier prune weak ones, and then continue from a smaller set of steps that have
+                    survived exact scrutiny.
+                </p>
+                <p>
+                    This is one of the main reasons verification is valuable in agentic settings: it improves not only
+                    final correctness, but also the quality of the search process.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Symbolic Systems</span>
+                <h3>Good Verifiers Are Structured</h3>
+                <p>
+                    Symbolic tools are especially useful here because they can check structure rather than only comparing
+                    outputs numerically. They can detect whether two expressions are equivalent, whether a rewrite is
+                    valid, or whether a candidate step preserves the mathematical object being manipulated.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">AI Systems</span>
+                <h3>Verification Makes Exploration Safer</h3>
+                <p>
+                    Agents still need flexible search and interpretation, but verification makes that flexibility less
+                    dangerous. It gives the system a way to recover from plausible-looking but invalid steps before they
+                    contaminate the rest of the reasoning chain.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Practical Direction</span>
+                <h2>Why This Topic Matters For Tool-Builders</h2>
+                <p>
+                    If you are building mathematical AI systems, verifiers are one of the most leverage-rich additions
+                    you can make. They turn a model from a source of candidate reasoning into part of a more disciplined
+                    reasoning architecture.
+                </p>
+                <p>
+                    They also make long reasoning chains easier to evaluate, because the system can record not just what
+                    it proposed, but what survived exact checks and why.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>Where To Continue</h2>
+                <p>
+                    Verifier-guided agents connect directly to symbolic tool use, theorem proving, and hybrid AI systems
+                    that need exactness at critical steps.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./math-tool-use.html">Math Tool Use</a>
+                    <a class="button-link secondary" href="./ai-for-theorem-proving.html">AI For Theorem Proving</a>
+                    <a class="button-link secondary" href="./neuro-symbolic-reasoning.html">Neuro-Symbolic Reasoning</a>
+                    <a class="button-link secondary" href="./symbolic-tools-for-agentic-systems.html">Symbolic Tools</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script>
+        Plotly.newPlot("verifierFlow", [{
+            type: "sankey",
+            arrangement: "snap",
+            node: {
+                pad: 18,
+                thickness: 18,
+                line: { color: "rgba(255,255,255,0.12)", width: 1 },
+                label: ["Prompt", "Candidates", "Verifier", "Accepted Steps", "Rejected Steps", "Final Answer"],
+                color: ["#4a90e2", "#4a90e2", "#89d1b6", "#89d1b6", "#f26d6d", "#f2b36f"]
+            },
+            link: {
+                source: [0, 1, 2, 2, 3],
+                target: [1, 2, 3, 4, 5],
+                value: [10, 10, 6, 4, 6],
+                color: ["rgba(74,144,226,0.35)", "rgba(74,144,226,0.35)", "rgba(137,209,182,0.35)", "rgba(242,109,109,0.28)", "rgba(242,179,111,0.35)"]
+            }
+        }], {
+            paper_bgcolor: "rgba(0,0,0,0)",
+            plot_bgcolor: "rgba(0,0,0,0)",
+            font: { color: "#edf5ff" },
+            margin: { l: 10, r: 10, t: 10, b: 10 }
+        }, {
+            responsive: true,
+            displaylogo: false
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<div class="plotly-host" @ref="_host"></div>
+
+@code {
+    [Parameter, EditorRequired] public Dictionary<string, object?> Figure { get; set; } = new();
+
+    private ElementReference _host;
+    private string? _lastSignature;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var signature = System.Text.Json.JsonSerializer.Serialize(Figure);
+        if (firstRender || !string.Equals(_lastSignature, signature, StringComparison.Ordinal))
+        {
+            _lastSignature = signature;
+            await JS.InvokeVoidAsync("symGraph.render", _host, Figure);
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("symGraph.purge", _host);
+        }
+        catch
+        {
+        }
+    }
+}

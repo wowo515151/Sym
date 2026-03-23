@@ -1,0 +1,173 @@
+# SymCLI Help
+
+SymCLI is the command-line interface for Sym.
+
+It currently supports two main workflows:
+
+1. Solving and optimizing ProblemScript (`.ps`) inputs with the Sym E-Graph engine.
+2. Analyzing C# source code for mathematical and security-oriented bug patterns.
+
+Because SymCLI is a console app with a help file and predictable file-based inputs and outputs, it also works well as an AI tool layer. In practice it can be used in a Skills-style setup for coding agents, or wrapped behind richer protocols such as MCP when a client/server model is preferred.
+
+For checked-in AI-agent wrappers, see `Skills/SymCLISkill/symcli.bat` on Windows or `Skills/SymCLISkill/symcli.sh` on Unix-like systems.
+
+## Basic Usage
+
+### Solve / optimize ProblemScript
+
+```text
+SymCLI <inputPath.ps> <outputPath>
+```
+
+- `inputPath.ps`: path to a ProblemScript file
+- `outputPath`: path where the solve result will be written
+
+### Analyze C# for math / security issues
+
+```text
+SymCLI analyze csharp-math <inputPath> <outputPath> [options]
+```
+
+- `inputPath`: a single `.cs` file or a directory to scan recursively
+- `outputPath`: path to a text or JSON report
+
+To print the analysis help:
+
+```text
+SymCLI analyze csharp-math --help
+```
+
+## Solve Mode
+
+Solve mode reads a ProblemScript file, runs it through Sym’s solver, and writes the result to the requested output path.
+
+```text
+SymCLI problem.ps result.txt
+```
+
+Typical uses include:
+
+- equation solving
+- rewrite-driven simplification
+- rule-pack based expression optimization
+- tensor-expression optimization workflows
+
+### ProblemScript Notes
+
+A ProblemScript may include:
+
+- an `<Options>...</Options>` block
+- equations or constraints
+- inline or block rule definitions
+
+Example options:
+
+```xml
+<Options>
+  Target: x
+  RulePacks: Algebraic,Integration
+  CostModel: Default
+  MaxIterations: 1000
+  MaxConcurrency: 8
+  EnableTracing: false
+</Options>
+```
+
+Common option fields used by Sym include:
+
+- `Target`
+- `RulePacks`
+- `CostModel`
+- `MaxIterations`
+- `MaxConcurrency`
+- `EnableTracing`
+- `Domain`
+- `AssumePositive`
+- `AssumeReal`
+- `AssumeComplex`
+- `AssumeInteger`
+- `TreatNonEqualitiesAsError`
+- `Shapes`
+- `Attributes`
+
+Example constraint:
+
+```text
+x^2 + 2*x + 1 = 0
+```
+
+Example custom rule:
+
+```text
+Rule(a + a, 2 * a);
+```
+
+## Analyze Mode
+
+The `analyze csharp-math` command scans C# source code and produces findings such as:
+
+- `CSMATH...` for mathematical correctness hazards
+- `CSSEC...` for security-oriented patterns
+
+This mode is useful for code review, security review, numeric-stability review, and AI-assisted coding workflows where an agent needs an exact analyzer instead of relying on text-only reasoning.
+
+### Analysis Options
+
+These reflect the CLI’s built-in help:
+
+- `--stability` Enable stability scoring.
+- `--max-findings <int>` Maximum findings to emit.
+- `--confidence-threshold <f>` Minimum confidence score in `[0,1]`.
+- `--max-iterations <int>` Max EGraph saturation iterations.
+- `--sample-budget <int>` Sample budget for stability checks.
+- `--saturation-timeout-seconds <f>` Time budget for EGraph saturation.
+- `--analysis-timeout-seconds <f>` End-to-end analysis wall-clock timeout.
+- `--max-parallelism <int>` Max worker threads for per-tree analysis.
+- `--security-flow-mode <mode>` Source/sink mode: `SinkOnly`, `IntraProcedural`, `Disabled`, `InterproceduralIfds`, `InterproceduralIde`.
+- `--security-max-trace-steps <int>` Max evidence steps to emit for flow findings.
+- `--user-source-only` Only report findings rooted in unverified external sources such as user or AI input.
+- `--external-source-only` Alias for `--user-source-only`.
+- `--repo-scan-info <path>` Load repo-specific source/sink/sanitizer rules from `RepoScanInfo.txt`.
+- `--disable-guard-prover` Disable the path-sensitive guard prover.
+- `--guard-max-facts <int>` Maximum derived facts per branch.
+- `--guard-max-iterations <int>` Maximum EGraph iterations for guard derivation.
+- `--guard-timeout-seconds <f>` Timeout for guard prover EGraph saturation.
+- `--json` Emit JSON output.
+- `--include-security` Include `CSSEC` findings.
+- `--math-only` Emit only `CSMATH` findings.
+- `--fail-on-findings` Return exit code `4` when findings are present.
+
+### Directory Scan Behavior
+
+When `inputPath` is a folder, SymCLI:
+
+- recursively searches for `.cs` files
+- skips common build and artifact folders such as `bin`, `obj`, `.git`, `.vs`, `.vscode`, `node_modules`, `packages`, `tests`, and similar directories
+- auto-loads `RepoScanInfo.txt` from the input directory when present unless `--repo-scan-info` is supplied explicitly
+
+## Exit Codes
+
+### Solve mode
+
+- `0`: success
+- `1`: configuration or input error
+- `2`: solving failed; output contains diagnostics
+- `3`: unexpected runtime exception
+
+### Analyze mode
+
+- `0`: analysis completed successfully
+- `1`: argument, option, or input-path error
+- `3`: unexpected runtime exception
+- `4`: findings were present and `--fail-on-findings` was supplied
+- `5`: cancelled or timed out
+
+## AI Tooling Note
+
+In an AI workflow, SymCLI can act as the mathematical tool runtime while the coding agent handles planning, interpretation, and explanation. That makes symbolic computation complementary to AI rather than competitive with it:
+
+- the AI agent interprets the task
+- SymCLI performs exact symbolic or analysis work
+- the agent uses the result to continue toward a stronger mathematical answer
+
+That pairing is one practical route toward an "AI mathematician": a capable coding agent backed by an exact symbolic CLI instead of relying on fluent but informal reasoning alone.

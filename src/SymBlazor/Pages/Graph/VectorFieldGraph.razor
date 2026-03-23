@@ -1,0 +1,135 @@
+@page "/graph/vector-field"
+@using SymBlazor.Graphing
+@inject NavigationManager Navigation
+
+<div class="page-shell graph-page-shell">
+    <section class="hero content-hero graph-hero">
+        <p class="eyebrow">Sym / Graphing</p>
+        <h1>Vector Field</h1>
+        <p class="hero-copy">
+            Draw a sampled 2D vector field by evaluating the x and y components over a grid. This is useful for
+            directional derivatives, flow fields, and qualitative differential-equation intuition.
+        </p>
+        <div class="hero-actions">
+            <a class="button-link primary" href="@GraphHomeHref">Graph Home</a>
+            <a class="button-link secondary" href="/library/index.html">Library Home</a>
+        </div>
+    </section>
+
+    <section class="section graph-workbench">
+        <article class="panel graph-controls">
+            <span class="mini-label">Inputs</span>
+            <h2>Field Settings</h2>
+
+            <label class="graph-label">dx/dt or U(x, y)
+                <input class="graph-input" @bind="_xComponentText" />
+            </label>
+
+            <label class="graph-label">dy/dt or V(x, y)
+                <input class="graph-input" @bind="_yComponentText" />
+            </label>
+
+            <div class="graph-inline-grid">
+                <label class="graph-label">Density
+                    <input class="graph-input" type="number" min="4" max="25" @bind="_density" />
+                </label>
+                <label class="graph-label">Arrow Scale
+                    <input class="graph-input" type="number" min="0.05" max="2" step="0.05" @bind="_scale" />
+                </label>
+            </div>
+
+            <div class="graph-inline-grid">
+                <label class="graph-label">X Min
+                    <input class="graph-input" type="number" step="0.1" @bind="_xMin" />
+                </label>
+                <label class="graph-label">X Max
+                    <input class="graph-input" type="number" step="0.1" @bind="_xMax" />
+                </label>
+            </div>
+
+            <div class="graph-inline-grid">
+                <label class="graph-label">Y Min
+                    <input class="graph-input" type="number" step="0.1" @bind="_yMin" />
+                </label>
+                <label class="graph-label">Y Max
+                    <input class="graph-input" type="number" step="0.1" @bind="_yMax" />
+                </label>
+            </div>
+
+            <button class="button-link primary graph-button" @onclick="RenderGraph">Render Graph</button>
+
+            <p class="graph-note">Example rotation field: <code>-y</code>, <code>x</code></p>
+            @if (!string.IsNullOrWhiteSpace(_error))
+            {
+                <div class="graph-error">@_error</div>
+            }
+        </article>
+
+        <article class="panel graph-output">
+            <span class="mini-label">Plot</span>
+            <h2>Large View</h2>
+            <div class="graph-canvas-shell">
+                <PlotlyChart Figure="@_figure" />
+            </div>
+        </article>
+    </section>
+
+    <section class="section grid-two">
+        <article class="panel prose">
+            <span class="mini-label">Reading The Plot</span>
+            <h2>Direction And Relative Size Both Matter</h2>
+            <p>
+                A vector field should show more than arrow direction. This page now keeps arrow length proportional to
+                the sampled vector magnitude up to a local cap so stronger regions still look stronger without letting a
+                few large values overwhelm the grid.
+            </p>
+        </article>
+        <article class="panel prose">
+            <span class="mini-label">Practical Tip</span>
+            <h2>Use Scale To Tune Readability</h2>
+            <p>
+                The arrow-scale setting multiplies the sampled field before drawing. If the plot feels too compressed,
+                increase the scale. If arrows crowd each other, reduce it or lower the density so the directional
+                pattern is easier to read.
+            </p>
+        </article>
+    </section>
+
+    <div class="product-shell">
+        <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+    </div>
+    <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+</div>
+
+@code {
+    private string _xComponentText = "-y";
+    private string _yComponentText = "x";
+    private int _density = 12;
+    private double _scale = 0.18d;
+    private double _xMin = -4d;
+    private double _xMax = 4d;
+    private double _yMin = -4d;
+    private double _yMax = 4d;
+    private string? _error;
+    private Dictionary<string, object?> _figure = new();
+    private string GraphHomeHref => $"{Navigation.BaseUri}graph";
+
+    protected override void OnInitialized()
+    {
+        RenderGraph();
+    }
+
+    private void RenderGraph()
+    {
+        try
+        {
+            var sample = GraphMath.SampleVectorField(_xComponentText, _yComponentText, "x", "y", _xMin, _xMax, _yMin, _yMax, _density, _scale);
+            _figure = GraphFigures.VectorFieldFigure($"({_xComponentText}, {_yComponentText})", sample.X, sample.Y);
+            _error = null;
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+    }
+}

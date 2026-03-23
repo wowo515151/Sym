@@ -60,6 +60,10 @@
                     When tensor expressions are represented symbolically, contraction order and equivalent forms can be
                     analyzed before execution. That makes symbolic methods relevant to real computational performance.
                 </p>
+                <p>
+                    In large workloads, that analysis can matter a great deal because intermediate tensor sizes often
+                    dominate both runtime and memory traffic.
+                </p>
             </article>
             <article class="topic-card prose">
                 <span class="mini-label">Intuition</span>
@@ -67,6 +71,10 @@
                 <p>
                     A useful mental model is that contraction ties together two indices and sums across the shared axis.
                     The resulting tensor has fewer free indices than the original product.
+                </p>
+                <p>
+                    That reduction in free indices is the visible sign that information has been combined rather than
+                    merely rearranged.
                 </p>
             </article>
         </section>
@@ -104,6 +112,36 @@
                     This is one reason tensor contraction belongs in the same library as symbolic computation. Once a
                     tensor expression is represented explicitly, rewrite rules, equivalence reasoning, and extraction
                     strategies become relevant to performance-sensitive mathematical software.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Notation</span>
+                <h2>Repeated Indices Encode Real Structure</h2>
+                <p>
+                    Index notation is powerful because it makes the contraction pattern explicit. A repeated index marks
+                    exactly which dimensions interact and which dimensions remain free. That clarity is one reason tensor
+                    notation scales well from familiar matrix formulas to much larger multilinear expressions.
+                </p>
+                <p>
+                    For software, that same clarity can become metadata for optimization. Once the index structure is
+                    known, the system can reason about valid reorderings and better contraction schedules.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">AI Relevance</span>
+                <h2>Why This Topic Shows Up In Model Workloads</h2>
+                <p>
+                    Modern AI systems are full of tensor operations even when users never see explicit index notation.
+                    Attention mechanisms, batched matrix products, tensor reshaping, and fused kernels all sit near the
+                    same underlying idea: structured operations on higher-rank arrays.
+                </p>
+                <p>
+                    That makes tensor contraction more than an advanced-math curiosity. It is part of the conceptual
+                    language behind real computational pipelines.
                 </p>
             </article>
         </section>

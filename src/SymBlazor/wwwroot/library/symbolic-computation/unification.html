@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is Unification?</title>
+    <meta name="description" content="An introduction to unification in symbolic computation, logic, and rule-based reasoning." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>What Is Unification?</h1>
+            <p class="hero-copy">
+                Unification asks whether two symbolic structures can be made identical by choosing appropriate bindings
+                for their variables. It is a deeper cousin of pattern matching and a central idea in logic, theorem
+                proving, and symbolic rule systems.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Core Question</span>
+                <h2>Can Two Expressions Be Made The Same?</h2>
+                <p>
+                    If one pattern is <code>f(x, y)</code> and another is <code>f(a, b)</code>, unification is easy:
+                    bind <code>x -> a</code> and <code>y -> b</code>. If one side is <code>f(x, x)</code> and the other
+                    is <code>f(a, b)</code>, unification only succeeds when <code>a</code> and <code>b</code> are the
+                    same expression.
+                </p>
+                <p>
+                    This makes unification stricter and more informative than one-way pattern matching. Instead of
+                    checking whether a target fits a fixed pattern, it tries to solve a structural compatibility problem
+                    between two symbolic objects.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Where It Appears</span>
+                <h2>Why People Care About It</h2>
+                <ul class="lead-list">
+                    <li>Logic programming uses unification to satisfy predicates and propagate substitutions.</li>
+                    <li>Theorem provers use it to align goals with lemmas or inference rules.</li>
+                    <li>Symbolic systems use related ideas when matching rule schemas with complex expressions.</li>
+                    <li>Type inference can also be understood as a form of structured unification over type expressions.</li>
+                </ul>
+                <p>
+                    This range of applications is part of what makes unification such an important concept. It is not a
+                    niche trick for one branch of logic; it is a reusable mechanism for structured agreement.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Difference From Matching</span>
+                <h2>Matching Is One-Way, Unification Is Two-Way</h2>
+                <p>
+                    Pattern matching usually treats one side as fixed structure and the other as concrete input.
+                    Unification is more symmetric. Both sides may contain variables, and the job is to discover whether a
+                    consistent substitution exists that makes them coincide.
+                </p>
+                <p>
+                    That symmetry makes unification powerful, but it also makes it more demanding. The system must avoid
+                    inconsistent bindings and usually must reject self-referential substitutions that would create
+                    infinite terms.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Important Guard</span>
+                <h2>The Occurs Check</h2>
+                <p>
+                    A standard subtlety is the occurs check. If a system tries to bind <code>x</code> to
+                    <code>f(x)</code>, it would create a circular definition rather than a finite expression. Good
+                    unification algorithms detect and reject this case.
+                </p>
+                <p>
+                    This detail matters because it shows that symbolic reasoning is not just about finding convenient
+                    substitutions. It is about finding substitutions that preserve meaningful finite structure.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Logic</span>
+                <h3>Unification Supports Inference</h3>
+                <p>
+                    In automated reasoning, inference rules often fire only after goals and rule schemas are unified.
+                    That turns unification into a gatekeeper for search, proof construction, and symbolic deduction.
+                </p>
+                <p>
+                    Without it, many proof steps would have to be hard-coded for special cases rather than discovered by
+                    general structural alignment.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Symbolic Software</span>
+                <h3>It Connects Rules To Structure</h3>
+                <p>
+                    Even when a system does not expose full first-order unification directly, related mechanisms show up
+                    in rule engines, simplifiers, substitution systems, and shape-aware symbolic transformations.
+                </p>
+                <p>
+                    That is one reason unification is useful as a library topic even for readers who are not building a
+                    logic programming system directly.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Practical View</span>
+                <h2>Why It Belongs In This Library</h2>
+                <p>
+                    Unification is one of those topics that sits at the intersection of symbolic computation, logic, and
+                    programming language theory. It helps explain why symbolic systems can act like disciplined reasoning
+                    engines rather than collections of ad hoc formula tricks.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>Where To Continue</h2>
+                <p>
+                    If pattern matching explains how rules recognize a shape, unification explains how two symbolic forms
+                    can be solved into agreement. From there, term rewriting and theorem-proving workflows become easier
+                    to understand.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./pattern-matching.html">Pattern Matching</a>
+                    <a class="button-link secondary" href="./term-rewriting-systems.html">Term Rewriting Systems</a>
+                    <a class="button-link secondary" href="../ai-math/ai-for-theorem-proving.html">AI For Theorem Proving</a>
+                    <a class="button-link secondary" href="./expression-trees.html">Expression Trees</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Practical Intuition</span>
+                <h2>Agreement Requires Consistent Bindings</h2>
+                <p>
+                    The hard part of unification is not assigning variables once. It is assigning them consistently
+                    across an entire structure. A variable that appears in two places must be bound in a way that makes
+                    both appearances compatible at the same time.
+                </p>
+                <p>
+                    That requirement is what makes unification stronger than loose matching and more useful for exact
+                    symbolic reasoning.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Broader Importance</span>
+                <h2>Why It Keeps Reappearing In Exact Systems</h2>
+                <p>
+                    Whenever a system needs to align one structured object with another under variable bindings,
+                    unification or something close to it tends to appear. That recurring role is why it deserves a place
+                    alongside pattern matching, rewriting, and theorem proving in the broader story of symbolic
+                    computation.
+                </p>
+                <p>
+                    It is one of the mechanisms that turns symbolic software from formula handling into actual structural
+                    reasoning.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

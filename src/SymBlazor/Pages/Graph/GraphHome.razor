@@ -1,0 +1,112 @@
+@page "/graph"
+@inject NavigationManager Navigation
+
+<div class="page-shell graph-page-shell">
+    <section class="hero content-hero graph-hero">
+        <p class="eyebrow">Sym / Graphing</p>
+        <h1>Graph Home</h1>
+        <p class="hero-copy">
+            Plot standard functions, parametric curves, polar forms, 3D surfaces, vector fields, and expression trees
+            with Sym handling the safe expression parsing and numeric sampling before Plotly renders the result.
+        </p>
+        <div class="hero-actions">
+            <a class="button-link primary" href="@SymHomeHref">Open Sym Online</a>
+            <a class="button-link secondary" href="/library/index.html">Library Home</a>
+        </div>
+    </section>
+
+    <section class="section grid-three">
+        @foreach (var graphPage in GraphPages)
+        {
+            <article class="feature-card">
+                <span class="mini-label">@graphPage.Category</span>
+                <h3>@graphPage.Title</h3>
+                <p>@graphPage.Description</p>
+                <div class="card-actions">
+                    <a class="button-link secondary" href="@graphPage.Href">Open Page</a>
+                </div>
+            </article>
+        }
+    </section>
+
+    <section class="section grid-two">
+        <article class="panel prose">
+            <span class="mini-label">How It Works</span>
+            <h2>Sym Samples, Plotly Draws</h2>
+            <p>
+                Each graph page parses the input expression with Sym, substitutes the sampled variables in C#, and
+                evaluates only the supported numeric subset needed for graphing. The browser then receives arrays or
+                surface meshes and hands them off to Plotly for rendering.
+            </p>
+            <p>
+                That split keeps the math side explicit and safe. Sym handles parsing and evaluation of the numeric
+                subset, while Plotly focuses on rendering large interactive views in the browser.
+            </p>
+        </article>
+        <article class="panel prose">
+            <span class="mini-label">Included</span>
+            <h2>Separate Pages For Separate Jobs</h2>
+            <p>
+                The plotting tools are split so each page can give the graph more space, clearer controls, and a
+                simpler mental model. Standard functions, parametric inputs, 3D views, and symbolic tree structure each
+                get their own focused workspace.
+            </p>
+            <p>
+                That keeps each page easier to read. Instead of one crowded interface trying to handle every graph type,
+                the controls stay close to the assumptions of the specific plot you are building.
+            </p>
+        </article>
+    </section>
+
+    <section class="section grid-two">
+        <article class="panel prose">
+            <span class="mini-label">Evaluator Scope</span>
+            <h2>Safe Numeric Graphing Subset</h2>
+            <p>
+                The graphing pages are designed around Sym’s safe numeric evaluation path. They work with numbers,
+                operators, parentheses, constants, and the supported function set needed for graphing, then sample those
+                expressions into arrays or meshes before Plotly takes over.
+            </p>
+            <p>
+                That keeps the graph pages focused and predictable. They are not trying to expose every symbolic feature
+                at once. They are exposing the subset that supports reliable visual sampling and fast interactive plots.
+            </p>
+        </article>
+        <article class="panel prose">
+            <span class="mini-label">Best Use</span>
+            <h2>Graphs First, Symbolic Detail Second</h2>
+            <p>
+                These pages are meant for visual inspection and intuition-building. Once a curve or surface looks
+                interesting, the rest of Sym can take over for symbolic manipulation, rewriting, differentiation, and
+                related exact operations.
+            </p>
+            <p>
+                In practice, that means the graphing area works best as a front door into the math. You can quickly
+                inspect behavior visually, then move into symbolic tools once you know what you want to analyze more
+                deeply.
+            </p>
+        </article>
+    </section>
+
+    <div class="product-shell">
+        <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+    </div>
+    <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+</div>
+
+@code {
+    private string SymHomeHref => Navigation.BaseUri;
+
+    private IReadOnlyList<GraphPageLink> GraphPages =>
+    [
+        new("2D Essentials", "Standard Function Plot", "Plot y = f(x) over a sampled x-range.", $"{Navigation.BaseUri}graph/function-2d"),
+        new("2D Essentials", "Parametric 2D Plot", "Plot x = f(t), y = g(t) for circles, spirals, and other curves.", $"{Navigation.BaseUri}graph/parametric-2d"),
+        new("2D Essentials", "Polar Plot", "Plot r = f(theta) in a native polar view.", $"{Navigation.BaseUri}graph/polar"),
+        new("3D Plotting", "3D Surface Plot", "Render z = f(x, y) as a surface mesh.", $"{Navigation.BaseUri}graph/surface-3d"),
+        new("3D Plotting", "3D Parametric Curve", "Plot x(t), y(t), z(t) as a 3D curve.", $"{Navigation.BaseUri}graph/parametric-3d"),
+        new("Specialized", "Vector Field", "Sample a 2D vector field and draw arrows over a grid.", $"{Navigation.BaseUri}graph/vector-field"),
+        new("Specialized", "Expression Tree", "Visualize how Sym parsed an expression into a tree.", $"{Navigation.BaseUri}graph/expression-tree")
+    ];
+
+    private sealed record GraphPageLink(string Category, string Title, string Description, string Href);
+}

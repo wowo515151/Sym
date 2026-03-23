@@ -34,6 +34,11 @@
                     not only an abstract tensor operation; it is also a central pattern in scientific computing and
                     AI workloads built from matrix and tensor primitives.
                 </p>
+                <p>
+                    The same pattern appears across the rest of this section. Generating functions, Grobner bases, and
+                    Lagrange multipliers all matter partly because they convert difficult mathematical structure into a
+                    form that can actually be manipulated, reduced, or solved computationally.
+                </p>
             </article>
 
             <article class="panel prose quote-panel">
@@ -52,6 +57,18 @@
                         <h3><a href="./tensor-contraction.html">What Is Tensor Contraction?</a></h3>
                         <p>An introduction to index summation, dimensional reduction, and why tensor contraction appears everywhere from physics to AI.</p>
                     </div>
+                    <div class="article-item">
+                        <h3><a href="./grobner-bases.html">What Is A Grobner Basis?</a></h3>
+                        <p>A practical introduction to polynomial ideals, elimination, and why Grobner bases matter in computer algebra.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./generating-functions.html">What Is A Generating Function?</a></h3>
+                        <p>How sequences become formal series and why that change of representation is so powerful.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./lagrange-multipliers.html">What Are Lagrange Multipliers?</a></h3>
+                        <p>An introduction to constrained optimization, gradient alignment, and geometric reasoning.</p>
+                    </div>
                 </div>
             </article>
         </section>
@@ -65,6 +82,11 @@
                     sensitivity, and curvature, which is why they appear so often in optimization, control, machine
                     learning, and nonlinear modeling.
                 </p>
+                <p>
+                    Lagrange multipliers belong naturally beside them because constrained optimization depends on the same
+                    differential language. Once gradients and local structure are explicit, symbolic tools can often help
+                    derive the systems that numerical methods later solve.
+                </p>
             </article>
 
             <article class="panel prose">
@@ -75,12 +97,48 @@
                     software expresses structured computation. Once those expressions are explicit, they can be analyzed
                     mathematically and optimized symbolically.
                 </p>
+                <p>
+                    More algebraic topics such as Grobner bases and generating functions expand that same theme into other
+                    domains. The details differ, but the shared idea is that representation and computation remain tightly
+                    linked.
+                </p>
                 <div class="inline-links">
                     <a class="button-link secondary" href="./jacobian-matrix.html">Jacobian Matrix</a>
                     <a class="button-link secondary" href="./hessian-matrix.html">Hessian Matrix</a>
                     <a class="button-link secondary" href="./tensor-contraction.html">Tensor Contraction</a>
+                    <a class="button-link secondary" href="./grobner-bases.html">Grobner Bases</a>
+                    <a class="button-link secondary" href="./generating-functions.html">Generating Functions</a>
+                    <a class="button-link secondary" href="./lagrange-multipliers.html">Lagrange Multipliers</a>
                     <a class="button-link secondary" href="../ai-math/tensor-expression-graphs.html">Tensor Graphs In AI</a>
                 </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Algebraic Structure</span>
+                <h3>Exact Objects Still Matter</h3>
+                <p>
+                    Grobner bases and generating functions show that advanced mathematics often becomes more useful after
+                    it is recast into an exact symbolic object that supports reduction, transformation, or coefficient
+                    extraction.
+                </p>
+                <p>
+                    That is part of the larger theme of this library: mathematical representation is not merely a matter
+                    of notation. It changes what can be computed, simplified, and explained.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Optimization</span>
+                <h3>Geometry Meets Computation</h3>
+                <p>
+                    Topics such as Jacobians, Hessians, and Lagrange multipliers matter because they tie local geometric
+                    reasoning directly to algorithms used in optimization and scientific computing.
+                </p>
+                <p>
+                    Once those geometric objects are written explicitly, symbolic and numerical tools can divide the work
+                    between exact setup and efficient evaluation.
+                </p>
             </article>
         </section>
 

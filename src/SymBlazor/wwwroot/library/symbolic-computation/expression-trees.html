@@ -47,6 +47,11 @@
                     <li>Rewriting becomes safer because changes can be localized to the right node.</li>
                     <li>Further representations such as DAGs and e-graphs build naturally on the same idea.</li>
                 </ul>
+                <p>
+                    This is why expression trees show up so early in both symbolic computation and compiler-adjacent
+                    discussions. Once structure is explicit, a large class of operations stops being fragile text
+                    processing and becomes structured manipulation.
+                </p>
             </article>
         </section>
 
@@ -60,6 +65,11 @@
                     and the other is the constant <code>1</code>. Once the formula is represented this way, a symbolic
                     system can target exactly the subtree it wants to simplify or differentiate.
                 </p>
+                <p>
+                    That same locality is what makes symbolic debugging easier as well. Instead of asking vaguely where a
+                    formula "went wrong," one can inspect the precise subtree that matched a rule, changed shape, or
+                    produced an unexpected intermediate form.
+                </p>
             </article>
 
             <article class="panel prose">
@@ -70,10 +80,47 @@
                     DAGs to share repeated subexpressions, typed nodes to protect domain information, or e-graphs to keep
                     multiple equivalent forms alive simultaneously.
                 </p>
+                <p>
+                    In other words, trees are the starting point for structural reasoning, not the endpoint. They teach
+                    the basic vocabulary that richer symbolic representations later generalize.
+                </p>
                 <div class="inline-links">
                     <a class="button-link secondary" href="./what-is-symbolic-computation.html">What Is Symbolic Computation?</a>
                     <a class="button-link secondary" href="./term-rewriting-systems.html">Term Rewriting Systems</a>
                     <a class="button-link secondary" href="./e-graphs.html">E-Graphs</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose chart-panel">
+                <span class="mini-label">Plotly View</span>
+                <h2>A Tree As Nested Structure</h2>
+                <p>
+                    One helpful way to picture an expression tree is as a nested hierarchy of operators and leaves. The
+                    exact rendering here is only illustrative, but it shows the main point clearly: each operator owns a
+                    subtree, and symbolic transformations work by navigating and replacing those subtrees.
+                </p>
+                <div id="expressionTreePlot" style="height: 320px; margin-top: 18px;" aria-label="Expression tree hierarchy"></div>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Why This Matters In Practice</span>
+                <h2>Every Serious Symbolic Feature Builds On This</h2>
+                <p>
+                    Once a formula becomes a tree, the rest of symbolic computation becomes easier to explain. Pattern
+                    matching compares tree shape. Substitution replaces subtrees. Rewriting swaps one subtree for another.
+                    Canonicalization normalizes local structure. Even more advanced representations such as DAGs and
+                    e-graphs begin from the same basic insight that expressions must be structured explicitly.
+                </p>
+                <p>
+                    That is why expression trees are not just an introductory concept. They are the entry point to most
+                    of the topics that follow in this section.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./pattern-matching.html">Pattern Matching</a>
+                    <a class="button-link secondary" href="./canonical-forms.html">Canonical Forms</a>
+                    <a class="button-link secondary" href="./unification.html">Unification</a>
                 </div>
             </article>
         </section>
@@ -83,6 +130,27 @@
         </div>
         <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
     </main>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script>
+        Plotly.newPlot("expressionTreePlot", [{
+            type: "treemap",
+            labels: ["sin", "+", "Pow", "1", "x", "2"],
+            parents: ["", "sin", "+", "+", "Pow", "Pow"],
+            marker: {
+                colors: ["#4a90e2", "#89d1b6", "#f2b36f", "#9bb0c9", "#4a90e2", "#f26d6d"]
+            },
+            textinfo: "label"
+        }], {
+            paper_bgcolor: "rgba(0,0,0,0)",
+            plot_bgcolor: "rgba(0,0,0,0)",
+            font: { color: "#edf5ff" },
+            margin: { l: 8, r: 8, t: 8, b: 8 }
+        }, {
+            responsive: true,
+            displaylogo: false
+        });
+    </script>
 </body>
 </html>
 

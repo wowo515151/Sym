@@ -48,6 +48,10 @@
                     <li>They preserve the mathematical objects an agent is reasoning about.</li>
                     <li>They give the system a way to verify or refine intermediate steps.</li>
                 </ul>
+                <p>
+                    These benefits are especially important when an agent’s work spans many steps. Small ambiguities are
+                    manageable in a single reply, but they become dangerous in a long chain of dependent operations.
+                </p>
             </article>
         </section>
 
@@ -60,6 +64,10 @@
                     normalization, code generation from formulas, differential operators, and exact substeps inside
                     larger planning workflows.
                 </p>
+                <p>
+                    The common feature is that the tool is doing something formal enough that a plain-language guess is
+                    not a reliable substitute.
+                </p>
             </article>
             <article class="topic-card prose">
                 <span class="mini-label">Practical View</span>
@@ -68,6 +76,10 @@
                     The more autonomy an agent has, the more important trustworthy instruments become. Symbolic tools are
                     valuable because they narrow the space between “the agent intended the right step” and “the system
                     actually executed the right step.”
+                </p>
+                <p>
+                    That reliability is not just about correctness in the abstract. It is about making larger workflows
+                    debuggable, inspectable, and worth trusting.
                 </p>
             </article>
         </section>
@@ -105,6 +117,35 @@
                     This also changes evaluation. Instead of asking only whether the final answer looks plausible, one can
                     inspect which tools were called, what formal inputs they received, and whether the intermediate
                     transformations were valid. That makes agent behavior easier to debug and improve.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Boundary Design</span>
+                <h2>The Tool Boundary Is A Real Architecture Choice</h2>
+                <p>
+                    One of the hardest design questions is deciding what the agent should do in free-form reasoning and
+                    what should be delegated to a symbolic runtime. If that boundary is too loose, the system drifts into
+                    unreliable text-only behavior. If it is too rigid, the agent becomes awkward and loses flexibility.
+                </p>
+                <p>
+                    Good systems choose boundaries that keep interpretation flexible but push exact mathematical work into
+                    tools with clear semantics.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Why This Matters</span>
+                <h2>Better Tools Improve The Agent, Not Just The Math</h2>
+                <p>
+                    Once an agent depends on tools, the quality of those tools becomes part of the quality of the agent.
+                    Better symbolic engines, clearer schemas, and more informative outputs directly improve planning,
+                    verification, and final explanations.
+                </p>
+                <p>
+                    That is why symbolic-tool design belongs in the same conversation as AI capability design.
                 </p>
             </article>
         </section>

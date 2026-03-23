@@ -1,0 +1,128 @@
+@page "/graph/parametric-2d"
+@using SymBlazor.Graphing
+@inject NavigationManager Navigation
+
+<div class="page-shell graph-page-shell">
+    <section class="hero content-hero graph-hero">
+        <p class="eyebrow">Sym / Graphing</p>
+        <h1>Parametric 2D Plot</h1>
+        <p class="hero-copy">
+            Plot curves that are easier to describe as x = f(t) and y = g(t). This is where circles, ellipses,
+            spirals, and many non-function curves become straightforward to draw.
+        </p>
+        <div class="hero-actions">
+            <a class="button-link primary" href="@GraphHomeHref">Graph Home</a>
+            <a class="button-link secondary" href="/library/index.html">Library Home</a>
+        </div>
+    </section>
+
+    <section class="section grid-two">
+        <article class="panel prose">
+            <span class="mini-label">Reading The Plot</span>
+            <h2>Why Parametric Form Helps</h2>
+            <p>
+                Parametric plots are ideal when a curve doubles back, closes on itself, or fails the vertical-line test.
+                By sampling a parameter directly, the page can trace circles, spirals, loops, and other shapes that are
+                awkward to describe as a single y-value for each x.
+            </p>
+        </article>
+        <article class="panel prose">
+            <span class="mini-label">Practical Tip</span>
+            <h2>Choose A Meaningful Parameter Range</h2>
+            <p>
+                The same parametric rule can produce a partial arc, a full closed curve, or many repeated turns
+                depending on the t-range. If a graph looks incomplete or overly dense, the first thing to adjust is
+                usually the parameter interval.
+            </p>
+        </article>
+    </section>
+
+    <section class="section graph-workbench">
+        <article class="panel graph-controls">
+            <span class="mini-label">Inputs</span>
+            <h2>Parametric Settings</h2>
+
+            <label class="graph-label">x(t)
+                <input class="graph-input" @bind="_xExpressionText" />
+            </label>
+
+            <label class="graph-label">y(t)
+                <input class="graph-input" @bind="_yExpressionText" />
+            </label>
+
+            <div class="graph-inline-grid">
+                <label class="graph-label">Parameter
+                    <input class="graph-input" @bind="_parameterName" />
+                </label>
+                <label class="graph-label">Samples
+                    <input class="graph-input" type="number" min="50" max="1600" @bind="_samples" />
+                </label>
+            </div>
+
+            <div class="graph-inline-grid">
+                <label class="graph-label">t Min
+                    <input class="graph-input" type="number" step="0.1" @bind="_tMin" />
+                </label>
+                <label class="graph-label">t Max
+                    <input class="graph-input" type="number" step="0.1" @bind="_tMax" />
+                </label>
+            </div>
+
+            <button class="button-link primary graph-button" @onclick="RenderGraph">Render Graph</button>
+
+            <p class="graph-note">Example circle: <code>x(t) = cos(t)</code>, <code>y(t) = sin(t)</code></p>
+            @if (!string.IsNullOrWhiteSpace(_error))
+            {
+                <div class="graph-error">@_error</div>
+            }
+        </article>
+
+        <article class="panel graph-output">
+            <span class="mini-label">Plot</span>
+            <h2>Large View</h2>
+            <div class="graph-canvas-shell">
+                <PlotlyChart Figure="@_figure" />
+            </div>
+        </article>
+    </section>
+
+    <div class="product-shell">
+        <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+    </div>
+    <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+</div>
+
+@code {
+    private string _xExpressionText = "cos(t)";
+    private string _yExpressionText = "sin(t)";
+    private string _parameterName = "t";
+    private int _samples = 300;
+    private double _tMin = 0d;
+    private double _tMax = 6.283185307179586d;
+    private string? _error;
+    private Dictionary<string, object?> _figure = new();
+    private string GraphHomeHref => $"{Navigation.BaseUri}graph";
+
+    protected override void OnInitialized()
+    {
+        RenderGraph();
+    }
+
+    private void RenderGraph()
+    {
+        try
+        {
+            var sample = GraphMath.SampleParametric2D(_xExpressionText, _yExpressionText, _parameterName, _tMin, _tMax, _samples);
+            _figure = GraphFigures.Parametric2DFigure(
+                $"x({_parameterName}) = {_xExpressionText}, y({_parameterName}) = {_yExpressionText}",
+                sample.X,
+                sample.Y,
+                "curve");
+            _error = null;
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+    }
+}

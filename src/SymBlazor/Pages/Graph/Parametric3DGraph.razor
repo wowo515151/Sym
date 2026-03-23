@@ -1,0 +1,133 @@
+@page "/graph/parametric-3d"
+@using SymBlazor.Graphing
+@inject NavigationManager Navigation
+
+<div class="page-shell graph-page-shell">
+    <section class="hero content-hero graph-hero">
+        <p class="eyebrow">Sym / Graphing</p>
+        <h1>3D Parametric Curve</h1>
+        <p class="hero-copy">
+            Draw a curve in space using x(t), y(t), and z(t). This view is ideal for helices, knots, spring-like
+            curves, and other paths that do not sit in a single plane.
+        </p>
+        <div class="hero-actions">
+            <a class="button-link primary" href="@GraphHomeHref">Graph Home</a>
+            <a class="button-link secondary" href="/library/index.html">Library Home</a>
+        </div>
+    </section>
+
+    <section class="section grid-two">
+        <article class="panel prose">
+            <span class="mini-label">Reading The Plot</span>
+            <h2>3D Curves Show Paths, Not Surfaces</h2>
+            <p>
+                Parametric 3D curves are useful when one parameter traces a path through space. Helices, coils, and
+                space curves are easier to study this way than by trying to solve for one coordinate in terms of the
+                others.
+            </p>
+        </article>
+        <article class="panel prose">
+            <span class="mini-label">Practical Tip</span>
+            <h2>Longer Intervals Mean More Turns</h2>
+            <p>
+                The t-range controls how much of the path is drawn. If you want a tighter local view, shorten the range.
+                If you want more coils or repeated structure, extend it and increase the sample count enough to keep the
+                path smooth.
+            </p>
+        </article>
+    </section>
+
+    <section class="section graph-workbench">
+        <article class="panel graph-controls">
+            <span class="mini-label">Inputs</span>
+            <h2>Curve Settings</h2>
+
+            <label class="graph-label">x(t)
+                <input class="graph-input" @bind="_xExpressionText" />
+            </label>
+
+            <label class="graph-label">y(t)
+                <input class="graph-input" @bind="_yExpressionText" />
+            </label>
+
+            <label class="graph-label">z(t)
+                <input class="graph-input" @bind="_zExpressionText" />
+            </label>
+
+            <div class="graph-inline-grid">
+                <label class="graph-label">Parameter
+                    <input class="graph-input" @bind="_parameterName" />
+                </label>
+                <label class="graph-label">Samples
+                    <input class="graph-input" type="number" min="50" max="1500" @bind="_samples" />
+                </label>
+            </div>
+
+            <div class="graph-inline-grid">
+                <label class="graph-label">t Min
+                    <input class="graph-input" type="number" step="0.1" @bind="_tMin" />
+                </label>
+                <label class="graph-label">t Max
+                    <input class="graph-input" type="number" step="0.1" @bind="_tMax" />
+                </label>
+            </div>
+
+            <button class="button-link primary graph-button" @onclick="RenderGraph">Render Graph</button>
+
+            <p class="graph-note">Example helix: <code>cos(t)</code>, <code>sin(t)</code>, <code>t / 3</code></p>
+            @if (!string.IsNullOrWhiteSpace(_error))
+            {
+                <div class="graph-error">@_error</div>
+            }
+        </article>
+
+        <article class="panel graph-output">
+            <span class="mini-label">Plot</span>
+            <h2>Large View</h2>
+            <div class="graph-canvas-shell">
+                <PlotlyChart Figure="@_figure" />
+            </div>
+        </article>
+    </section>
+
+    <div class="product-shell">
+        <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+    </div>
+    <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+</div>
+
+@code {
+    private string _xExpressionText = "cos(t)";
+    private string _yExpressionText = "sin(t)";
+    private string _zExpressionText = "t / 3";
+    private string _parameterName = "t";
+    private int _samples = 360;
+    private double _tMin = 0d;
+    private double _tMax = 18.84955592153876d;
+    private string? _error;
+    private Dictionary<string, object?> _figure = new();
+    private string GraphHomeHref => $"{Navigation.BaseUri}graph";
+
+    protected override void OnInitialized()
+    {
+        RenderGraph();
+    }
+
+    private void RenderGraph()
+    {
+        try
+        {
+            var sample = GraphMath.SampleParametric3D(_xExpressionText, _yExpressionText, _zExpressionText, _parameterName, _tMin, _tMax, _samples);
+            _figure = GraphFigures.Parametric3DFigure(
+                $"x({_parameterName}) = {_xExpressionText}, y({_parameterName}) = {_yExpressionText}, z({_parameterName}) = {_zExpressionText}",
+                sample.X,
+                sample.Y,
+                sample.Z);
+            _error = null;
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+    }
+}

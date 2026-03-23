@@ -31,6 +31,12 @@
                     exact identities, compute exact derivatives, and reason about equivalent forms. This is essential
                     when the form of an expression matters as much as or more than its evaluated value.
                 </p>
+                <p>
+                    That structural view also preserves information that can be useful later. A symbolic result can be
+                    factored, substituted into a larger derivation, inspected for singularities, or compared against a
+                    known identity. Once everything has already been collapsed to approximate numbers, those follow-on
+                    operations become much harder or impossible.
+                </p>
             </article>
 
             <article class="panel prose quote-panel">
@@ -40,6 +46,11 @@
                     Numerical computation is about approximating values efficiently and robustly. It is the natural tool
                     for simulation, large-scale linear algebra, optimization at runtime, and final execution once the
                     right form of a computation has already been chosen.
+                </p>
+                <p>
+                    This is why numerical methods remain indispensable even in workflows that begin symbolically. At some
+                    point a model must be trained, a trajectory must be simulated, or a value must be estimated under
+                    real computational constraints. Numerical methods are the part of the stack built for that reality.
                 </p>
             </article>
         </section>
@@ -53,6 +64,12 @@
                     what value the expression has at particular inputs. Neither question replaces the other. They answer
                     different parts of a larger workflow.
                 </p>
+                <p>
+                    A good way to think about the difference is that symbolic work is often representation-sensitive,
+                    while numerical work is usually execution-sensitive. Symbolic systems care whether two expressions
+                    are structurally equivalent, reducible, or better suited to later manipulation. Numerical systems
+                    care whether the chosen computation is stable, accurate enough, and efficient on the actual machine.
+                </p>
             </article>
 
             <article class="panel prose">
@@ -65,8 +82,42 @@
                 </p>
                 <div class="inline-links">
                     <a class="button-link secondary" href="./symbolic-computation-and-ai.html">Symbolic Computation And AI</a>
-                    <a class="button-link secondary" href="../../symbolic-computation/what-is-symbolic-computation.html">What Is Symbolic Computation?</a>
+                    <a class="button-link secondary" href="../symbolic-computation/what-is-symbolic-computation.html">What Is Symbolic Computation?</a>
                 </div>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Working Together</span>
+                <h2>Most Serious Systems Need Both Layers</h2>
+                <p>
+                    In practice, symbolic and numerical computation are strongest when they cooperate. A symbolic system
+                    can normalize an expression, derive exact gradients, expose shared structure, or choose a cheaper
+                    equivalent form. A numerical system can then evaluate that form at scale using hardware-friendly
+                    kernels, iterative solvers, and approximation methods that are appropriate for runtime.
+                </p>
+                <p>
+                    This layered approach shows up in optimization, control, simulation, and AI infrastructure. The
+                    symbolic layer improves the formulation. The numerical layer carries the computation through to a
+                    usable result.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Practical Rule</span>
+                <h2>Choose The Question Before The Tool</h2>
+                <p>
+                    If the task is to preserve exact structure, compare equivalent forms, or reason about the meaning of
+                    an expression, begin symbolically. If the task is to approximate values quickly, solve at scale, or
+                    run a model efficiently, numerical methods will usually dominate. The mistake is not choosing one or
+                    the other. The mistake is asking one style of computation to answer a question that belongs to the
+                    other.
+                </p>
+                <p>
+                    That is one reason this distinction matters so much in an educational library. It clarifies not only
+                    how software works, but what kind of mathematical task you are actually trying to perform.
+                </p>
             </article>
         </section>
 

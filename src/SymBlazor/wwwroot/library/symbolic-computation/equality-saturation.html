@@ -51,6 +51,10 @@
                     Once these are separated, the extraction step can use a meaningful cost model rather than inheriting
                     the accidental biases of one rewrite order.
                 </p>
+                <p>
+                    This change in control flow is what makes equality saturation feel so different from traditional
+                    simplification. It turns rewrite choice into a search problem with an explicit decision stage.
+                </p>
             </article>
         </section>
 
@@ -63,6 +67,11 @@
                     shorter to print, cheaper to evaluate, more numerically stable, easier to differentiate, or better
                     suited to tensor fusion. The extraction rule depends on what the system is optimizing for.
                 </p>
+                <p>
+                    This is one of the strongest reasons to separate saturation from extraction. The graph can record
+                    equivalence broadly, while the cost model can stay honest about the actual target: readability,
+                    runtime, memory behavior, numerical quality, or some domain-specific objective.
+                </p>
             </article>
 
             <article class="panel prose">
@@ -73,10 +82,51 @@
                     more than a theoretical curiosity here. It is part of the story of how symbolic search can support
                     practical optimization tasks.
                 </p>
+                <p>
+                    That practical angle matters. Equality saturation becomes much easier to appreciate once it is tied
+                    to actual extraction decisions rather than described only as an abstract data-structure technique.
+                </p>
                 <div class="inline-links">
                     <a class="button-link secondary" href="./e-graphs.html">E-Graphs</a>
                     <a class="button-link secondary" href="../ai-math/tensor-expression-graphs.html">Tensor Expression Graphs</a>
                 </div>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Workflow</span>
+                <h2>How A Saturation Loop Usually Feels</h2>
+                <p>
+                    In broad outline, a system starts with one expression, adds it to an e-graph, applies a set of
+                    valid rewrites, merges any newly discovered equivalent forms, and repeats until a stopping condition
+                    is reached. The stopping condition might be a node budget, a rewrite budget, or a point where new
+                    rewrites no longer add useful structure.
+                </p>
+                <p>
+                    Extraction comes afterward. That separation is why equality saturation often feels different from
+                    traditional simplifiers. It behaves less like a single rewrite path and more like a managed search
+                    over a space of equivalent forms.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Tradeoff</span>
+                <h2>Power Comes With Search Costs</h2>
+                <p>
+                    Equality saturation is not free. Rich rule sets can make the graph grow quickly, and cost-model
+                    design can become a serious engineering problem. The technique pays off when there are many valid
+                    alternatives and the best final form genuinely depends on context.
+                </p>
+                <p>
+                    That is why it belongs beside e-graphs, canonical forms, and tensor optimization in this library.
+                    It is a disciplined answer to the question of how symbolic software can explore widely without
+                    losing track of mathematical equivalence.
+                </p>
+                <p>
+                    In that sense, equality saturation is not only a technique for optimization. It is also a way of
+                    organizing symbolic search so that exploration and preference do not get tangled together too early.
+                </p>
             </article>
         </section>
 

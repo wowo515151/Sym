@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is A Generating Function?</title>
+    <meta name="description" content="An introduction to generating functions, sequence encoding, and why they are valuable in symbolic mathematics." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Advanced Mathematics</p>
+            <h1>What Is A Generating Function?</h1>
+            <p class="hero-copy">
+                A generating function packages an infinite sequence into a formal power series. This turns questions
+                about coefficients into questions about algebraic manipulation, which is why generating functions are so
+                valuable in combinatorics and symbolic mathematics.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>Sequences Become Formal Series</h2>
+                <p>
+                    If a sequence is <code>a_0, a_1, a_2, ...</code>, its ordinary generating function is typically
+                    written as <code>A(x) = a_0 + a_1 x + a_2 x^2 + ...</code>. The point is not that this always
+                    converges numerically. The point is that the series encodes the sequence structurally.
+                </p>
+                <p>
+                    Once encoded that way, recurrence relations, counting arguments, and coefficient identities can often
+                    be turned into algebraic manipulations of the generating function itself.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel chart-panel">
+                <span class="mini-label">Plotly View</span>
+                <h2>Coefficients As A Shape</h2>
+                <p>
+                    One helpful way to think about a generating function is that it turns a sequence into a manipulable
+                    object whose coefficients still carry the original combinatorial information. This example uses the
+                    first six nonzero Fibonacci coefficients to show how a recognizable sequence becomes a visible shape.
+                </p>
+                <div id="generatingFunctionChart" style="height: 300px; margin-top: 18px;" aria-label="Generating function coefficient chart"></div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Why They Are Useful</span>
+                <h2>Counting Problems Become Algebra Problems</h2>
+                <p>
+                    Generating functions let you move between sequences and algebraic forms. That is useful because some
+                    recurrence or counting problems are hard to reason about term by term but become simpler once the
+                    whole sequence is encoded in a single formal object.
+                </p>
+                <p>
+                    This is a recurring pattern in symbolic mathematics: a difficult discrete problem becomes easier
+                    after a change of representation.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Relevance</span>
+                <h2>Generating Functions Are Perfect Symbolic Objects</h2>
+                <p>
+                    Power series are exactly the sort of structured mathematical objects symbolic systems are good at
+                    manipulating. They can be added, multiplied, differentiated, truncated, and compared coefficient by
+                    coefficient without immediately losing structural meaning.
+                </p>
+                <p>
+                    That makes generating functions a natural topic in a library that connects mathematical theory to
+                    symbolic software.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Combinatorics</span>
+                <h3>Encoding Structure Compactly</h3>
+                <p>
+                    Generating functions show how much information can be compressed into a formal series. They often act
+                    as a bridge between recursive structure and closed-form algebraic manipulation.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Computation</span>
+                <h3>Series Operations Become Algorithms</h3>
+                <p>
+                    Once a sequence is represented as a formal power series, symbolic operations on that series become
+                    algorithmic transformations. That is precisely the kind of shift symbolic computation thrives on.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Big Picture</span>
+                <h2>Why This Topic Keeps Reappearing</h2>
+                <p>
+                    Generating functions are one of the most elegant demonstrations that representation changes
+                    difficulty. They take a sequence problem and move it into a domain where algebraic structure can do
+                    more of the work.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>Where To Continue</h2>
+                <p>
+                    If this perspective appeals to you, it pairs naturally with recurrence reasoning, symbolic
+                    differentiation, and other topics where exact algebraic form becomes a computational advantage.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="../symbolic-computation/symbolic-differentiation.html">Symbolic Differentiation</a>
+                    <a class="button-link secondary" href="../symbolic-computation/what-is-symbolic-computation.html">Symbolic Computation</a>
+                    <a class="button-link secondary" href="./grobner-bases.html">Grobner Bases</a>
+                    <a class="button-link secondary" href="../ai-math/symbolic-vs-numerical-computation.html">Symbolic Vs Numerical</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script>
+        Plotly.newPlot("generatingFunctionChart", [{
+            type: "bar",
+            x: ["F1", "F2", "F3", "F4", "F5", "F6"],
+            y: [1, 1, 2, 3, 5, 8],
+            marker: { color: "#4a90e2" }
+        }], {
+            paper_bgcolor: "rgba(0,0,0,0)",
+            plot_bgcolor: "rgba(255,255,255,0.02)",
+            font: { color: "#edf5ff" },
+            margin: { l: 44, r: 12, t: 12, b: 44 },
+            yaxis: { gridcolor: "rgba(122,164,224,0.18)" }
+        }, {
+            responsive: true,
+            displaylogo: false
+        });
+    </script>
+</body>
+</html>

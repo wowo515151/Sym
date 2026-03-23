@@ -66,6 +66,22 @@
                         <h3><a href="./equality-saturation.html">Equality Saturation Explained</a></h3>
                         <p>Why some symbolic optimizers search first and extract later instead of committing to one rewrite path early.</p>
                     </div>
+                    <div class="article-item">
+                        <h3><a href="./pattern-matching.html">Pattern Matching In Symbolic Computation</a></h3>
+                        <p>How rule-based systems recognize expression shape and bind concrete subexpressions to symbolic patterns.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./canonical-forms.html">Canonical Forms In Symbolic Computation</a></h3>
+                        <p>Why symbolic engines normalize expressions into stable preferred forms before deeper reasoning.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./symbolic-differentiation.html">Symbolic Differentiation Explained</a></h3>
+                        <p>How derivative rules operate on expression structure and why exact derivatives remain useful objects.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./unification.html">What Is Unification?</a></h3>
+                        <p>A practical introduction to structural variable binding in logic, theorem proving, and symbolic rule systems.</p>
+                    </div>
                 </div>
             </article>
         </section>
@@ -78,6 +94,11 @@
                     Expression trees, typed operators, algebraic identities, and the choices that determine whether
                     a symbolic system is easy to extend or difficult to reason about.
                 </p>
+                <p>
+                    Representation is also where later capabilities are either enabled or constrained. If substructure is
+                    hard to address directly, then matching, substitution, simplification, and extraction all become more
+                    fragile than they need to be.
+                </p>
                 <div class="card-actions">
                     <a class="button-link secondary" href="./expression-trees.html">Read More</a>
                 </div>
@@ -89,6 +110,14 @@
                     Simplification depends on trustworthy transformations. Rules must be mathematically valid,
                     well-scoped, and often ordered with care so they improve expressions instead of destabilizing them.
                 </p>
+                <p>
+                    This is why symbolic computation is not just a bag of algebra tricks. A useful rule system needs
+                    pattern matching, substitution logic, shape awareness, and enough normalization to keep the rule set
+                    from fighting itself.
+                </p>
+                <div class="card-actions">
+                    <a class="button-link secondary" href="./pattern-matching.html">Pattern Matching</a>
+                </div>
             </article>
             <article class="feature-card">
                 <span class="mini-label">Search</span>
@@ -96,6 +125,11 @@
                 <p>
                     Advanced symbolic systems do not stop at one normal form. They may search through many equivalent
                     alternatives and choose one using a cost model tied to the target problem.
+                </p>
+                <p>
+                    That shift from local rewriting to managed search is one of the places where symbolic computation
+                    starts to overlap with compiler optimization, automated reasoning, and AI-adjacent mathematical
+                    tooling.
                 </p>
                 <div class="card-actions">
                     <a class="button-link secondary" href="./equality-saturation.html">Read More</a>
@@ -133,6 +167,8 @@
                 <div class="inline-links">
                     <a class="button-link secondary" href="./term-rewriting-systems.html">Rewriting Systems</a>
                     <a class="button-link secondary" href="./e-graphs.html">Equality Saturation</a>
+                    <a class="button-link secondary" href="./symbolic-differentiation.html">Symbolic Differentiation</a>
+                    <a class="button-link secondary" href="./unification.html">Unification</a>
                     <a class="button-link secondary" href="../ai-math/tensor-expression-graphs.html">Tensor Optimization</a>
                     <a class="button-link ghost" href="../../open-sym.html?route=rewrite-demo&amp;label=Rewrite%20Demo">Rewrite Demo</a>
                 </div>
@@ -148,6 +184,10 @@
                     DAGs allow shared subexpressions, and richer forms make it possible to compare or transform formulas
                     without collapsing them to text.
                 </p>
+                <p>
+                    Those choices also affect performance, memory use, and how naturally a system can support later ideas
+                    such as common-subexpression sharing or equivalence-class reasoning.
+                </p>
             </article>
             <article class="topic-card prose">
                 <span class="mini-label">Search</span>
@@ -156,6 +196,11 @@
                     Once expressions are represented explicitly, rules can transform them. Some systems orient those
                     rules toward normalization, while others keep many equivalent forms alive and use search plus cost
                     models to extract a preferred result.
+                </p>
+                <p>
+                    That distinction matters because it changes what "simplification" really means. In one system it may
+                    mean pushing toward a normal form. In another it may mean exploring many forms first and deciding
+                    later which one is best for the task at hand.
                 </p>
             </article>
         </section>

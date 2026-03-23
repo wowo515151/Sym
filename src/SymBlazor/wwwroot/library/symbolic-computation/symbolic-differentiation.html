@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Symbolic Differentiation Explained</title>
+    <meta name="description" content="An introduction to symbolic differentiation, derivative rules, and why exact derivative structure matters." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Symbolic Differentiation Explained</h1>
+            <p class="hero-copy">
+                Symbolic differentiation computes derivatives by transforming expression structure directly. Instead of
+                estimating slopes numerically at sample points, it applies exact derivative rules to the internal form of
+                the formula and produces another symbolic expression.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Main Idea</span>
+                <h2>Differentiate The Structure, Not Just The Values</h2>
+                <p>
+                    If the input is <code>x^3 + sin(x)</code>, a symbolic system can return
+                    <code>3x^2 + cos(x)</code> exactly. That result is still an expression, which means it can be
+                    simplified further, substituted into another derivation, analyzed structurally, or turned into code.
+                </p>
+                <p>
+                    This matters because the derivative is not only a number-producing function. It is also a useful
+                    symbolic object. In optimization, sensitivity analysis, machine learning, and scientific computing,
+                    the exact form of the derivative can matter as much as its sampled values.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Key Rules</span>
+                <h2>How The Engine Proceeds</h2>
+                <ul class="lead-list">
+                    <li>Sums differentiate term by term.</li>
+                    <li>Products expand through the product rule.</li>
+                    <li>Compositions trigger the chain rule.</li>
+                    <li>Powers, exponentials, and trigonometric functions each introduce their own rule schemas.</li>
+                </ul>
+                <div class="code-block">d/dx [u(x) * v(x)] = u'(x) * v(x) + u(x) * v'(x)</div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose chart-panel">
+                <span class="mini-label">Plotly View</span>
+                <h2>Function And Derivative Together</h2>
+                <p>
+                    Seeing a function alongside its derivative helps make the symbolic result concrete. The derivative is
+                    not a decorative side calculation. It tracks local change and reveals where the original curve rises,
+                    falls, flattens, or turns sharply. This plot uses the same example as the text above:
+                    <code>f(x) = x^3 + sin(x)</code> and <code>f'(x) = 3x^2 + cos(x)</code>.
+                </p>
+                <div id="derivativePlot" style="height: 320px; margin-top: 18px;" aria-label="Function and derivative plot"></div>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Interpretation</span>
+                <h2>Why Exact Derivatives Help</h2>
+                <p>
+                    Once the derivative is symbolic, the system can simplify it, factor it, check for zeros, compare it
+                    against expected identities, or feed it into higher-order operations such as Jacobian and Hessian
+                    construction. Numerical differentiation is often useful, but it usually does not provide that kind of
+                    structural leverage.
+                </p>
+                <p>
+                    This is one of the clearest examples of why symbolic computation is not reducible to numerical
+                    approximation. The exact derivative becomes part of the problem-solving vocabulary rather than merely
+                    a transient estimate.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Engineering Detail</span>
+                <h3>Raw Derivatives Often Need Simplification</h3>
+                <p>
+                    A naive derivative engine can generate correct but messy output. That is why derivative rules are
+                    usually paired with simplification and canonicalization passes. Exactness is the first step, not the
+                    last one.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Broader Use</span>
+                <h3>Derivatives Feed Larger Systems</h3>
+                <p>
+                    Symbolic differentiation becomes especially valuable when used inside bigger workflows: nonlinear
+                    solvers, optimization pipelines, tensor programs, code generators, and AI tools that need exact
+                    calculus operators rather than prose approximations.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Practical Point</span>
+                <h2>Why This Topic Still Matters</h2>
+                <p>
+                    Symbolic differentiation is sometimes presented as a solved textbook feature, but in practice it is a
+                    useful test of whether a symbolic engine has coherent representation, rule application, substitution,
+                    and simplification. If those foundations are weak, derivative output becomes hard to trust.
+                </p>
+                <p>
+                    That is why derivative support still says a great deal about the maturity of a symbolic system. It
+                    forces several core pieces of the engine to work together correctly.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>Where To Go Next</h2>
+                <p>
+                    From symbolic differentiation, it is natural to move toward Jacobians, Hessians, and the wider
+                    question of how exact symbolic operators support AI-adjacent mathematical workflows.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="../advanced-math/jacobian-matrix.html">Jacobian Matrix</a>
+                    <a class="button-link secondary" href="../advanced-math/hessian-matrix.html">Hessian Matrix</a>
+                    <a class="button-link secondary" href="../ai-math/symbolic-tools-for-agentic-systems.html">Agent Tools</a>
+                    <a class="button-link ghost" href="../../open-sym.html?route=derivative-demo&amp;label=Derivative%20Demo">Derivative Demo</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script>
+        (function () {
+            const xs = [];
+            const f = [];
+            const df = [];
+
+            for (let i = 0; i <= 160; i++) {
+                const x = -4 + (8 * i / 160);
+                xs.push(x);
+                f.push((x * x * x) + Math.sin(x));
+                df.push((3 * x * x) + Math.cos(x));
+            }
+
+            Plotly.newPlot("derivativePlot", [
+                {
+                    x: xs,
+                    y: f,
+                    type: "scatter",
+                    mode: "lines",
+                    name: "f(x)",
+                    line: { color: "#4a90e2", width: 3 }
+                },
+                {
+                    x: xs,
+                    y: df,
+                    type: "scatter",
+                    mode: "lines",
+                    name: "f'(x)",
+                    line: { color: "#89d1b6", width: 3 }
+                }
+            ], {
+                paper_bgcolor: "rgba(0,0,0,0)",
+                plot_bgcolor: "rgba(255,255,255,0.02)",
+                font: { color: "#edf5ff" },
+                margin: { l: 52, r: 20, t: 16, b: 42 },
+                xaxis: { gridcolor: "rgba(122,164,224,0.18)", zerolinecolor: "rgba(122,164,224,0.35)" },
+                yaxis: { gridcolor: "rgba(122,164,224,0.18)", zerolinecolor: "rgba(122,164,224,0.35)" },
+                legend: { orientation: "h", y: 1.12 }
+            }, {
+                responsive: true,
+                displaylogo: false
+            });
+        })();
+    </script>
+</body>
+</html>

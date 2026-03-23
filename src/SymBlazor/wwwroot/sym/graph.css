@@ -1,0 +1,246 @@
+.graph-page-shell {
+    position: relative;
+    z-index: 0;
+    min-height: 100vh;
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+}
+
+.graph-page-shell::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(circle at top right, rgba(74, 144, 226, 0.18), transparent 28%),
+        radial-gradient(circle at top left, rgba(19, 76, 145, 0.24), transparent 36%),
+        linear-gradient(180deg, #06111f 0%, #081a31 100%);
+}
+
+.graph-page-shell,
+.graph-page-shell a,
+.graph-page-shell p,
+.graph-page-shell li,
+.graph-page-shell label,
+.graph-page-shell h1,
+.graph-page-shell h2,
+.graph-page-shell h3,
+.graph-page-shell span {
+    color: #edf5ff;
+}
+
+.graph-page-shell .hero-copy,
+.graph-page-shell .graph-note,
+.graph-page-shell .feature-card p,
+.graph-page-shell .panel p,
+.graph-page-shell .prose p {
+    color: #c9d7e8;
+}
+
+.graph-page-shell h1:focus,
+.graph-page-shell h1:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+.graph-page-shell .hero,
+.graph-page-shell .panel,
+.graph-page-shell .feature-card {
+    border-color: rgba(122, 164, 224, 0.2);
+    background:
+        linear-gradient(145deg, rgba(15, 42, 79, 0.95), rgba(7, 20, 40, 0.98)),
+        rgba(11, 31, 59, 0.96);
+}
+
+.graph-page-shell .mini-label {
+    color: #89d1b6;
+}
+
+.graph-page-shell .button-link.secondary {
+    color: #edf5ff;
+}
+
+.graph-page-shell .button-link.ghost {
+    color: #89d1b6;
+}
+
+.graph-hero h1 {
+    max-width: 14ch;
+}
+
+.graph-workbench {
+    display: grid;
+    grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+    gap: 18px;
+    align-items: start;
+}
+
+.graph-workbench-single {
+    grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+}
+
+.graph-output h2,
+.graph-controls h2 {
+    margin-bottom: 0.9rem;
+}
+
+.graph-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.85rem;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.graph-inline-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.graph-input {
+    min-height: 44px;
+    border: 1px solid rgba(122, 164, 224, 0.24);
+    border-radius: 12px;
+    background: rgba(8, 17, 31, 0.9);
+    color: var(--text);
+    padding: 0.7rem 0.9rem;
+    font-size: 0.98rem;
+}
+
+.graph-input:focus {
+    outline: 2px solid rgba(137, 209, 182, 0.22);
+    border-color: rgba(137, 209, 182, 0.42);
+}
+
+.graph-button {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.graph-note {
+    margin-top: 0.9rem;
+    color: var(--muted);
+    font-size: 0.94rem;
+}
+
+.graph-error {
+    margin-top: 0.9rem;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid rgba(242, 109, 109, 0.32);
+    border-radius: 14px;
+    background: rgba(94, 23, 23, 0.28);
+    color: #ffd9d9;
+}
+
+.graph-canvas-shell {
+    min-height: 36rem;
+    padding-top: 0.4rem;
+}
+
+.graph-page-shell .plotly-host .main-svg,
+.graph-page-shell .plotly-host .svg-container {
+    border-radius: 16px;
+}
+
+.plotly-host {
+    width: 100%;
+    min-height: 36rem;
+}
+
+.expression-tree-shell {
+    overflow: auto;
+    padding: 0.6rem 0 0.2rem;
+}
+
+.expression-tree-root,
+.expression-tree-children {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.expression-tree-root {
+    display: flex;
+    justify-content: center;
+}
+
+.expression-tree-children {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.35rem;
+    position: relative;
+}
+
+.expression-tree-item {
+    position: relative;
+    padding: 0 0.3rem;
+    text-align: center;
+}
+
+.expression-tree-item::before {
+    content: "";
+    position: absolute;
+    top: -0.8rem;
+    left: 50%;
+    width: 1px;
+    height: 0.8rem;
+    background: rgba(122, 164, 224, 0.35);
+}
+
+.expression-tree-root > .expression-tree-item::before {
+    display: none;
+}
+
+.expression-tree-children::before {
+    content: "";
+    position: absolute;
+    top: -0.8rem;
+    left: 12%;
+    right: 12%;
+    height: 1px;
+    background: rgba(122, 164, 224, 0.35);
+}
+
+.expression-tree-node {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 4rem;
+    padding: 0.65rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(122, 164, 224, 0.24);
+    background: linear-gradient(180deg, rgba(15, 42, 79, 0.95), rgba(7, 20, 40, 0.98));
+    color: var(--text);
+    font-weight: 700;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+}
+
+@media (max-width: 1024px) {
+    .graph-workbench,
+    .graph-workbench-single {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .graph-inline-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .graph-canvas-shell,
+    .plotly-host {
+        min-height: 28rem;
+    }
+
+    .expression-tree-children {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .expression-tree-children::before {
+        display: none;
+    }
+}

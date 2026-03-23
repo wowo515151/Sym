@@ -1,0 +1,133 @@
+@page "/graph/expression-tree"
+@using SymBlazor.Graphing
+@inject NavigationManager Navigation
+
+<div class="page-shell graph-page-shell">
+    <section class="hero content-hero graph-hero">
+        <p class="eyebrow">Sym / Graphing</p>
+        <h1>Expression Tree</h1>
+        <p class="hero-copy">
+            This page shows how Sym parsed the input into a tree of operators, functions, constants, and symbols. It is
+            a structural view rather than a numeric graph, but it is often the most direct way to understand what the
+            symbolic engine is actually working with.
+        </p>
+        <div class="hero-actions">
+            <a class="button-link primary" href="@GraphHomeHref">Graph Home</a>
+            <a class="button-link secondary" href="/library/index.html">Library Home</a>
+        </div>
+    </section>
+
+    <section class="section grid-two">
+        <article class="panel prose">
+            <span class="mini-label">Reading The Tree</span>
+            <h2>Structure Comes Before Evaluation</h2>
+            <p>
+                The expression tree shows how Sym grouped operators and operands before any graphing or numeric
+                evaluation happened. That structural view is what later makes substitution, differentiation, rewriting,
+                and matching possible.
+            </p>
+            <p>
+                It is also the cleanest reminder that symbolic systems do not work on raw text. They work on explicit
+                mathematical structure.
+            </p>
+        </article>
+        <article class="panel prose">
+            <span class="mini-label">Practical Tip</span>
+            <h2>Useful For Debugging Input Shape</h2>
+            <p>
+                If a formula behaves differently than you expected, the tree is often the quickest way to spot how the
+                parser actually associated powers, products, sums, and function arguments. It is a direct check on the
+                symbolic structure Sym is using internally.
+            </p>
+            <p>
+                That makes this page helpful not only for learning, but also for debugging expressions before they go
+                into later symbolic workflows.
+            </p>
+        </article>
+    </section>
+
+    <section class="section graph-workbench graph-workbench-single">
+        <article class="panel graph-controls">
+            <span class="mini-label">Input</span>
+            <h2>Expression</h2>
+
+            <label class="graph-label">Formula
+                <input class="graph-input" @bind="_expressionText" />
+            </label>
+
+            <button class="button-link primary graph-button" @onclick="RenderTree">Build Tree</button>
+
+            <p class="graph-note">Example: <code>sin(x) + (x^2 / (1 + y))</code></p>
+            @if (!string.IsNullOrWhiteSpace(_error))
+            {
+                <div class="graph-error">@_error</div>
+            }
+        </article>
+
+        <article class="panel graph-output">
+            <span class="mini-label">Structure</span>
+            <h2>Parsed Tree</h2>
+
+            @if (_rootNode is not null)
+            {
+                <div class="expression-tree-shell">
+                    <ul class="expression-tree-root">
+                        <ExpressionTreeNodeView Node="@_rootNode" />
+                    </ul>
+                </div>
+            }
+        </article>
+    </section>
+
+    <section class="section grid-two">
+        <article class="panel prose">
+            <span class="mini-label">What To Look For</span>
+            <h2>Operators Become Internal Nodes</h2>
+            <p>
+                Functions, binary operators, and grouped subexpressions appear as higher nodes in the tree, while
+                constants and symbols show up at the leaves. That shape is exactly what later rule systems inspect when
+                they decide whether a simplification or transformation applies.
+            </p>
+        </article>
+        <article class="panel prose">
+            <span class="mini-label">Why It Matters</span>
+            <h2>Tree Shape Affects Every Later Step</h2>
+            <p>
+                Once the parser commits to a structure, everything downstream depends on it. Matching, substitution,
+                differentiation, and canonicalization all inherit the same tree, which is why seeing that structure
+                directly can be so useful.
+            </p>
+        </article>
+    </section>
+
+    <div class="product-shell">
+        <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+    </div>
+    <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+</div>
+
+@code {
+    private string _expressionText = "sin(x) + (x^2 / (1 + y))";
+    private GraphMath.ExpressionTreeNode? _rootNode;
+    private string? _error;
+    private string GraphHomeHref => $"{Navigation.BaseUri}graph";
+
+    protected override void OnInitialized()
+    {
+        RenderTree();
+    }
+
+    private void RenderTree()
+    {
+        try
+        {
+            _rootNode = GraphMath.BuildExpressionTree(_expressionText);
+            _error = null;
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+            _rootNode = null;
+        }
+    }
+}

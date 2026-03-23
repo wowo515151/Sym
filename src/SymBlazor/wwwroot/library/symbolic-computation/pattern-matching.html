@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pattern Matching In Symbolic Computation</title>
+    <meta name="description" content="How symbolic systems use pattern matching to recognize algebraic structure and apply exact transformations." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Pattern Matching In Symbolic Computation</h1>
+            <p class="hero-copy">
+                Pattern matching is the mechanism that lets a symbolic system recognize when an expression has the shape
+                required by a rule. It is one of the quiet foundations of simplification, differentiation, factoring,
+                canonicalization, and many kinds of automated reasoning.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Core Idea</span>
+                <h2>Rules Need Shape Recognition</h2>
+                <p>
+                    A rewrite rule such as <code>x + 0 -> x</code> is only useful if the system can detect when part of
+                    the current expression fits that form. Pattern matching is the process of checking that fit and, when
+                    it succeeds, recording which concrete subexpressions correspond to the pattern variables.
+                </p>
+                <p>
+                    In a symbolic engine, this is more disciplined than a text search. The system is not scanning for a
+                    string like <code>"+ 0"</code>. It is inspecting a structured representation and asking whether the
+                    root operator, argument count, and nested subexpressions line up with the rule.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Matching Drives Transformation</h2>
+                <ul class="lead-list">
+                    <li>Simplification rules rely on successful matches before they rewrite anything.</li>
+                    <li>Differentiation systems recognize products, powers, sums, and function calls by pattern.</li>
+                    <li>Equation-solving heuristics look for recognizable structural cases such as linear or separable forms.</li>
+                    <li>More advanced systems use constraints so a wildcard only matches constants, scalars, or tensors of the right shape.</li>
+                </ul>
+                <p>
+                    Without dependable matching, even a strong rule library becomes brittle because the system cannot
+                    reliably tell when a mathematically valid rule should fire.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Example</span>
+                <h2>A Small Match Walkthrough</h2>
+                <p>
+                    Suppose the pattern is <code>a * (b + c)</code> and the current expression is
+                    <code>y * (x + 3)</code>. The root operator is multiplication in both cases, so the system checks the
+                    children. It can bind <code>a</code> to <code>y</code>, then move into the addition subtree and bind
+                    <code>b</code> to <code>x</code> and <code>c</code> to <code>3</code>.
+                </p>
+                <p>
+                    Once the bindings are known, the replacement side of a rule can be instantiated. For distributive
+                    expansion, a replacement like <code>(a * b) + (a * c)</code> becomes
+                    <code>(y * x) + (y * 3)</code>. The rule did not operate on letters. It operated on structure plus
+                    the bindings recovered from the match.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Important Detail</span>
+                <h2>Matching Is Not Always Trivial</h2>
+                <p>
+                    Some operators are commutative or associative, which means structure may need to be normalized before
+                    matching becomes predictable. A system may canonicalize an addition so that <code>x + y</code> and
+                    <code>y + x</code> have a consistent internal order, or it may use a matcher that understands
+                    commutative groups directly.
+                </p>
+                <p>
+                    This is one of the reasons canonical forms and pattern matching reinforce each other. Good
+                    canonicalization reduces the number of special cases a matcher must handle, while a strong matcher
+                    makes more rewrite rules practically usable.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Constraints</span>
+                <h3>Wildcards Usually Need Guardrails</h3>
+                <p>
+                    In real symbolic systems, pattern variables may come with restrictions. A rule might require a term
+                    to be constant with respect to a variable, scalar rather than matrix-valued, or free of a forbidden
+                    symbol. Those constraints prevent mathematically invalid rewrites.
+                </p>
+                <p>
+                    They also make rule libraries more trustworthy by stating the intended domain of a rule explicitly.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Scaling Up</span>
+                <h3>Large Rule Sets Depend On Reliable Matching</h3>
+                <p>
+                    Once a system contains dozens or hundreds of rules, matching quality becomes a core design concern.
+                    If matching is too weak, rules never fire when they should. If it is too permissive, the system can
+                    become unstable or produce invalid transformations.
+                </p>
+                <p>
+                    That balance between expressive power and safety is one of the real engineering challenges in
+                    symbolic software.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Practical View</span>
+                <h2>Why This Topic Deserves Its Own Page</h2>
+                <p>
+                    Pattern matching is sometimes treated as an implementation detail, but it is more than that. It is
+                    one of the places where mathematical meaning becomes operational. The rule author states a form, and
+                    the matcher decides whether the current expression really is an instance of that form.
+                </p>
+                <p>
+                    If you want to understand why one symbolic engine feels powerful and another feels brittle, pattern
+                    matching is often part of the answer. Strong matchers make rule libraries expressive. Weak or ad hoc
+                    matching forces the rest of the system to compensate.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>Where To Go Next</h2>
+                <p>
+                    Pattern matching sits between representation and transformation. Expression trees make matching
+                    possible, and term rewriting systems give the matcher something meaningful to do. Once you move into
+                    equality saturation, the same idea scales into richer equivalence search.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./expression-trees.html">Expression Trees</a>
+                    <a class="button-link secondary" href="./term-rewriting-systems.html">Term Rewriting Systems</a>
+                    <a class="button-link secondary" href="./canonical-forms.html">Canonical Forms</a>
+                    <a class="button-link secondary" href="./unification.html">Unification</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

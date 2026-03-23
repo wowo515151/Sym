@@ -63,6 +63,10 @@
                     equivalent expressions. That makes the data structure relevant not only to textbook algebra, but also
                     to expression-level optimization in more modern workloads.
                 </p>
+                <p>
+                    That connection is useful because it shows e-graphs as a working engineering choice rather than a
+                    purely academic abstraction.
+                </p>
                 <div class="inline-links">
                     <a class="button-link secondary" href="./equality-saturation.html">Equality Saturation</a>
                 </div>
@@ -73,6 +77,10 @@
                 <p>
                     Once many valid forms are present in the graph, the extraction step can choose an expression that is
                     smaller, cheaper, more numerically stable, or better matched to the target execution environment.
+                </p>
+                <p>
+                    That is the practical payoff for carrying many equivalent forms at once: better choices become
+                    available at the moment the system actually needs to commit.
                 </p>
             </article>
         </section>

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tensor Expression Graphs</title>
-    <meta name="description" content="A first pass at explaining tensor expression graphs, rewrite-based optimization, and Sym's tensor capabilities." />
+    <meta name="description" content="An introduction to tensor expression graphs, rewrite-based optimization, and Sym's tensor capabilities." />
     <link rel="stylesheet" href="../../library.css" />
 </head>
 <body>
@@ -62,6 +62,10 @@
                     The same tensor computation can often be expressed in multiple equivalent ways. A rewrite system can
                     search those alternatives and prefer one with better fusion, lower cost, or clearer structure.
                 </p>
+                <p>
+                    That makes tensor graphs a natural target for the same kinds of techniques used in symbolic
+                    optimization more generally: rewriting, equivalence classes, and cost-guided extraction.
+                </p>
             </article>
             <article class="topic-card prose">
                 <span class="mini-label">AI Link</span>
@@ -69,6 +73,10 @@
                 <p>
                     This is one place where symbolic computation and AI overlap directly. AI uses tensor programs, and
                     symbolic systems can reason about those programs before they become low-level execution plans.
+                </p>
+                <p>
+                    That overlap matters because it gives symbolic methods a role in modern workloads that is concrete
+                    rather than merely historical.
                 </p>
             </article>
         </section>
@@ -88,7 +96,7 @@
                     represented structurally, equivalence and preference can be handled separately.
                 </p>
                 <div class="inline-links">
-                    <a class="button-link secondary" href="../../symbolic-computation/e-graphs.html">E-Graphs</a>
+                    <a class="button-link secondary" href="../symbolic-computation/e-graphs.html">E-Graphs</a>
                     <a class="button-link secondary" href="../advanced-math/tensor-contraction.html">Tensor Contraction</a>
                     <a class="button-link ghost" href="../../open-sym.html?route=tensor-demo&amp;label=Tensor%20Demo">Open Tensor Demo</a>
                 </div>
@@ -107,6 +115,35 @@
                     In Sym, this shows up in a concrete way through tensor-aware operators, rule packs, and cost models.
                     The system is already able to recognize and improve some fused tensor-style expressions, which makes
                     it a useful example of symbolic computation meeting AI-oriented workloads.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Representation</span>
+                <h2>Why Graph Form Matters Before Execution</h2>
+                <p>
+                    Once a tensor computation is represented as a graph, subexpressions, dependencies, and possible
+                    fusion boundaries become visible in a way that flat code often obscures. That visibility matters for
+                    both optimization and explanation.
+                </p>
+                <p>
+                    It also makes the connection to symbolic computation more direct: the graph is a structured object
+                    that can be rewritten and compared rather than a fixed sequence of opaque steps.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Bigger Picture</span>
+                <h2>Why This Topic Belongs In The Library</h2>
+                <p>
+                    Tensor expression graphs are a good example of symbolic ideas leaving the textbook and entering
+                    modern infrastructure. They show that representation, equivalence, and extraction are not only
+                    concerns for algebra systems. They matter in the optimization of real AI workloads too.
+                </p>
+                <p>
+                    That makes this topic a bridge between the symbolic-computation section and the broader AI section.
                 </p>
             </article>
         </section>

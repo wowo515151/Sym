@@ -1,0 +1,127 @@
+@page "/graph/function-2d"
+@using SymBlazor.Graphing
+@inject NavigationManager Navigation
+
+<div class="page-shell graph-page-shell">
+    <section class="hero content-hero graph-hero">
+        <p class="eyebrow">Sym / Graphing</p>
+        <h1>Standard Function Plot</h1>
+        <p class="hero-copy">
+            Sample a single-variable expression and draw the classic y = f(x) curve. This is the core plotting page
+            for algebra, calculus, and quick inspection of how a formula behaves over an interval.
+        </p>
+        <div class="hero-actions">
+            <a class="button-link primary" href="@GraphHomeHref">Graph Home</a>
+            <a class="button-link secondary" href="/library/index.html">Library Home</a>
+        </div>
+    </section>
+
+    <section class="section grid-two">
+        <article class="panel prose">
+            <span class="mini-label">Reading The Plot</span>
+            <h2>What A Standard Function Graph Gives You</h2>
+            <p>
+                A standard function plot is the fastest way to inspect roots, turning points, asymmetry, oscillation,
+                and general growth over an interval. Because Sym samples the formula numerically at chosen x-values, the
+                picture reflects the actual evaluated expression rather than a hand-drawn sketch.
+            </p>
+        </article>
+        <article class="panel prose">
+            <span class="mini-label">Practical Tip</span>
+            <h2>Sampling And Window Size Matter</h2>
+            <p>
+                If a curve looks jagged or important detail seems missing, increase the sample count or narrow the x
+                range. Rapid oscillation and sharp features can require denser sampling before the graph shows the shape
+                you expect.
+            </p>
+        </article>
+    </section>
+
+    <section class="section graph-workbench">
+        <article class="panel graph-controls">
+            <span class="mini-label">Inputs</span>
+            <h2>Function Settings</h2>
+
+            <label class="graph-label">Expression
+                <input class="graph-input" @bind="_expressionText" />
+            </label>
+
+            <div class="graph-inline-grid">
+                <label class="graph-label">Variable
+                    <input class="graph-input" @bind="_variableName" />
+                </label>
+                <label class="graph-label">Samples
+                    <input class="graph-input" type="number" min="50" max="1200" @bind="_samples" />
+                </label>
+            </div>
+
+            <div class="graph-inline-grid">
+                <label class="graph-label">X Min
+                    <input class="graph-input" type="number" step="0.1" @bind="_xMin" />
+                </label>
+                <label class="graph-label">X Max
+                    <input class="graph-input" type="number" step="0.1" @bind="_xMax" />
+                </label>
+            </div>
+
+            <button class="button-link primary graph-button" @onclick="RenderGraph">Render Graph</button>
+
+            <p class="graph-note">Examples: <code>x^2 - 4</code>, <code>sin(x)</code>, <code>(x^3 - x) / 3</code></p>
+            @if (!string.IsNullOrWhiteSpace(_error))
+            {
+                <div class="graph-error">@_error</div>
+            }
+        </article>
+
+        <article class="panel graph-output">
+            <span class="mini-label">Plot</span>
+            <h2>Large View</h2>
+            <div class="graph-canvas-shell">
+                <PlotlyChart Figure="@_figure" />
+            </div>
+        </article>
+    </section>
+
+    <div class="product-shell">
+        <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+    </div>
+    <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+</div>
+
+@code {
+    private string _expressionText = "sin(x) + x^2 / 8";
+    private string _variableName = "x";
+    private int _samples = 240;
+    private double _xMin = -8d;
+    private double _xMax = 8d;
+    private string? _error;
+    private Dictionary<string, object?> _figure = new();
+    private string GraphHomeHref => $"{Navigation.BaseUri}graph";
+
+    protected override void OnInitialized()
+    {
+        RenderGraph();
+    }
+
+    private void RenderGraph()
+    {
+        try
+        {
+            var x = GraphMath.CreateLinearRange(_xMin, _xMax, _samples);
+            var y = GraphMath.SampleFunction(_expressionText, _variableName, _xMin, _xMax, _samples);
+
+            _figure = GraphFigures.LineFigure(
+                title: $"y = {_expressionText}",
+                xTitle: _variableName,
+                yTitle: "y",
+                xValues: x,
+                yValues: y,
+                traceName: "f(x)");
+            _error = null;
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+    }
+}

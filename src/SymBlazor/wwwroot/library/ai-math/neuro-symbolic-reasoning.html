@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is Neuro-Symbolic Reasoning?</title>
+    <meta name="description" content="An introduction to neuro-symbolic reasoning and why AI systems benefit from combining learned models with symbolic structure." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>What Is Neuro-Symbolic Reasoning?</h1>
+            <p class="hero-copy">
+                Neuro-symbolic reasoning combines learned pattern recognition with explicit symbolic structure. The core
+                idea is not to force neural and symbolic methods into competition, but to make each handle the part of
+                the problem it is naturally better at.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Main Idea</span>
+                <h2>Learned Flexibility Meets Explicit Structure</h2>
+                <p>
+                    Neural models are strong at perception, language, approximation, and pattern-heavy tasks. Symbolic
+                    systems are strong at exact operators, explicit constraints, and inspectable reasoning over
+                    structured expressions. Neuro-symbolic work tries to combine those strengths rather than pretending
+                    one tool is enough for every mathematically meaningful task.
+                </p>
+                <p>
+                    In practice, that can mean a neural model proposes a candidate expression, retrieves a relevant rule,
+                    selects a strategy, or interprets user intent, while a symbolic engine performs exact algebra,
+                    calculus, logic, or tensor rewrites.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel chart-panel">
+                <span class="mini-label">Plotly View</span>
+                <h2>A Division Of Labor</h2>
+                <p>
+                    The value of neuro-symbolic systems often lies in assigning the right subproblem to the right tool.
+                    The neural part handles ambiguity and rich context. The symbolic part handles exact structure and
+                    correctness-sensitive transformations. The bars below are an illustrative capability profile rather
+                    than an empirical benchmark.
+                </p>
+                <div id="neuroSymbolicChart" style="height: 310px; margin-top: 18px;" aria-label="Neuro-symbolic capability chart"></div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Mathematical Tasks Are Mixed Tasks</h2>
+                <p>
+                    Many real mathematical workflows are not purely symbolic and not purely statistical. A user may ask
+                    a vague natural-language question, supply partial notation, or require an answer that combines
+                    explanation with exact transformation. That is precisely the sort of setting where a hybrid approach
+                    becomes attractive.
+                </p>
+                <p>
+                    The language model can translate the request into something operational, but the exact computation
+                    still benefits from symbolic machinery. That is one reason symbolic tools keep reappearing in serious
+                    discussions of tool-using AI.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Common Misunderstanding</span>
+                <h2>Hybrid Does Not Mean Hand-Wavy</h2>
+                <p>
+                    Neuro-symbolic reasoning is sometimes described too vaguely, as if any pipeline containing both a
+                    model and a rule counts. The more useful definition is sharper: the symbolic component should carry
+                    real structured semantics, and the neural component should contribute something more substantial than
+                    superficial glue.
+                </p>
+                <p>
+                    Otherwise the system is not meaningfully hybrid. It is just a stack of unrelated parts.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">AI Systems</span>
+                <h3>Interpretation And Search</h3>
+                <p>
+                    Neural components are often best used for interpretation, ranking, retrieval, and search guidance.
+                    They are good at proposing which symbolic action might be worth trying next.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Symbolic Systems</span>
+                <h3>Execution And Guarantees</h3>
+                <p>
+                    Symbolic components are most useful where correctness, exactness, or structural transparency matter.
+                    They turn high-level intent into concrete mathematical transformations that can be inspected later.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Practical Direction</span>
+                <h2>Why This Area Will Keep Growing</h2>
+                <p>
+                    As AI systems become more agentic, they will need more dependable internal tools. Symbolic
+                    computation offers one of the clearest paths toward structured mathematical reliability. That does
+                    not eliminate the need for learned models. It raises the value of combining them intelligently.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>Where To Continue</h2>
+                <p>
+                    The next natural questions are how agents use tools, how results get verified, and how tensor-style
+                    expressions in AI workloads can benefit from symbolic representations.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./math-tool-use.html">Math Tool Use</a>
+                    <a class="button-link secondary" href="./verifier-guided-math-agents.html">Verifier-Guided Agents</a>
+                    <a class="button-link secondary" href="./tensor-expression-graphs.html">Tensor Expression Graphs</a>
+                    <a class="button-link secondary" href="./symbolic-computation-and-ai.html">Symbolic And AI</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script>
+        Plotly.newPlot("neuroSymbolicChart", [{
+            type: "bar",
+            x: ["Language interpretation", "Search guidance", "Exact algebra", "Formal constraints", "Readable explanation"],
+            y: [92, 82, 95, 96, 78],
+            marker: {
+                color: ["#4a90e2", "#4a90e2", "#89d1b6", "#89d1b6", "#f2b36f"]
+            }
+        }], {
+            paper_bgcolor: "rgba(0,0,0,0)",
+            plot_bgcolor: "rgba(255,255,255,0.02)",
+            font: { color: "#edf5ff" },
+            margin: { l: 48, r: 12, t: 10, b: 110 },
+            yaxis: {
+                title: "Illustrative score",
+                range: [0, 100],
+                gridcolor: "rgba(122,164,224,0.18)"
+            }
+        }, {
+            responsive: true,
+            displaylogo: false
+        });
+    </script>
+</body>
+</html>

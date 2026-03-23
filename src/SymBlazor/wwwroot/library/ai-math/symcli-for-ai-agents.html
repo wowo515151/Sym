@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SymCLI For AI Agents</title>
+    <meta name="description" content="How SymCLI works as a practical symbolic-computation tool for AI agents, coding assistants, and Skills-style workflows." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>SymCLI For AI Agents</h1>
+            <p class="hero-copy">
+                SymCLI is the practical command-line face of Sym. In an AI workflow, that matters because a console app
+                with a clear help file is often the simplest way to give an agent exact mathematical tools.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Main Idea</span>
+                <h2>A Simple Tool Boundary Matters</h2>
+                <p>
+                    AI agents need tools, but not every tool integration needs a full client-server protocol. One common
+                    pattern in AI tooling is a Skills-style wrapper: a console app plus a help file. That pattern is
+                    easy for coding agents to understand because the inputs, outputs, and invocation style are explicit.
+                </p>
+                <p>
+                    SymCLI fits that pattern well. It is a command-line interface to Sym’s symbolic engine and analyzers,
+                    which makes it straightforward to call from coding agents, scripts, automation, and other AI
+                    orchestration layers.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Skills-Style Tooling Can Be Enough</h2>
+                <p>
+                    MCP and similar protocols are useful when an agent needs a richer client-server contract. But many
+                    practical AI workflows do not need that extra machinery. A well-behaved CLI is often enough, and in
+                    some cases it is easier to integrate, debug, version, and ship.
+                </p>
+                <p>
+                    That is one reason SymCLI deserves to be mentioned prominently. It is not only a convenience wrapper.
+                    It is a concrete AI-facing surface for symbolic computation.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Current Capabilities</span>
+                <h2>What SymCLI Already Exposes</h2>
+                <p>
+                    Today SymCLI supports two especially useful AI-facing workflows. First, it can solve and optimize
+                    ProblemScript inputs with Sym’s E-Graph engine. Second, it can analyze C# source code for
+                    mathematical and security-oriented bug patterns through <code>analyze csharp-math</code>.
+                </p>
+                <p>
+                    Those are exactly the kinds of capabilities an AI coding agent can benefit from: exact symbolic
+                    execution on one side and exact code analysis on the other.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Workflow</span>
+                <h2>How Agents Use It In Practice</h2>
+                <p>
+                    A coding agent can interpret a mathematical or programming request, decide that exact symbolic work is
+                    needed, call SymCLI with a file-based input, read the output, and continue. That division of labor
+                    keeps the agent flexible while moving correctness-sensitive work into a stronger mathematical runtime.
+                </p>
+                <div class="code-block">Agent plan -> SymCLI call -> exact symbolic or analysis result -> grounded continuation</div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Complementarity</span>
+                <h3>AI Interprets, SymCLI Executes</h3>
+                <p>
+                    Symbolic computation complements AI because the two sides solve different problems. The AI agent is
+                    good at language, intent, and strategy. SymCLI is good at exact symbolic execution and exact code
+                    analysis. Together they make a stronger mathematical system.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Practical Outcome</span>
+                <h3>Toward An AI Mathematician</h3>
+                <p>
+                    An "AI mathematician" is not just a fluent model talking about math. It is an agent with access to
+                    exact mathematical tools. SymCLI is one concrete way to supply that tool layer without forcing every
+                    workflow into a heavyweight protocol stack.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Practical Recipe</span>
+                <h2>Creating An AI Mathematician Is Surprisingly Simple</h2>
+                <p>
+                    In practice, you do not need a complicated architecture to get useful mathematical research behavior
+                    from a coding agent. Tell the agent that SymCLI exists, point it to the SymCLI help file, explain
+                    the research problem, and give it a folder where it should save notes, scripts, and intermediate
+                    results.
+                </p>
+                <p>
+                    Once that setup is in place, the agent can use SymCLI as its exact mathematical tool layer while it
+                    handles planning, iteration, and documentation. That is already enough to produce something that
+                    behaves much more like an AI mathematician than a plain chat assistant.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Why It Works</span>
+                <h2>Coding Agents Already Understand File-Based Work</h2>
+                <p>
+                    Coding agents such as Codex CLI, Gemini CLI, and similar tools do not need everything to be source
+                    code. They can work with plain text research notes, prompts, logs, result summaries, and other
+                    `.txt` files just as naturally as they work with `.cs`, `.py`, or `.md` files.
+                </p>
+                <p>
+                    That matters because mathematical research is not only code. It is also conjectures, derivations,
+                    experiment logs, failed paths, and saved intermediate results. A file-oriented agent plus SymCLI is
+                    already enough to support that style of work.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Agent Setup</span>
+                <h3>What You Need To Tell The Agent</h3>
+                <p>
+                    The minimum setup is very small: tell it where SymCLI lives, give it the help file, describe the
+                    research question, and point it at a working directory where it should save outputs. After that, the
+                    agent has both a mathematical runtime and a place to persist its work.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Research Flow</span>
+                <h3>Math, Notes, And Iteration Belong Together</h3>
+                <p>
+                    The strongest workflows usually mix exact tool calls with ordinary research writing. The agent can
+                    call SymCLI for symbolic work, then write summaries, questions, and next steps into text files so
+                    the research thread stays organized over time.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Repository Angle</span>
+                <h2>Why The Skills Folder Matters</h2>
+                <p>
+                    The repository includes a <code>Skills/SymCLISkill</code> folder with repo-relative wrapper scripts
+                    and a help file so the SymCLI interface can be used directly in Skills-style environments. That is
+                    important because it turns the CLI from an internal developer tool into an explicit AI integration
+                    surface without depending on one machine-specific path or one operating system.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>Where To Continue</h2>
+                <p>
+                    If this direction interests you, the next helpful topics are symbolic tools for agentic systems, math
+                    tool use, verifier-guided agents, and the broader relationship between symbolic computation and AI.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./symbolic-tools-for-agentic-systems.html">Symbolic Tools</a>
+                    <a class="button-link secondary" href="./math-tool-use.html">Math Tool Use</a>
+                    <a class="button-link secondary" href="./verifier-guided-math-agents.html">Verifier-Guided Agents</a>
+                    <a class="button-link secondary" href="./symbolic-computation-and-ai.html">Symbolic And AI</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

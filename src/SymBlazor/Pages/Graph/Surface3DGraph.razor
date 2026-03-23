@@ -1,0 +1,130 @@
+@page "/graph/surface-3d"
+@using SymBlazor.Graphing
+@inject NavigationManager Navigation
+
+<div class="page-shell graph-page-shell">
+    <section class="hero content-hero graph-hero">
+        <p class="eyebrow">Sym / Graphing</p>
+        <h1>3D Surface Plot</h1>
+        <p class="hero-copy">
+            Sample z = f(x, y) on a mesh grid and render the result as a 3D surface. This is a good view for maxima,
+            minima, ridges, valleys, and other multivariable structure.
+        </p>
+        <div class="hero-actions">
+            <a class="button-link primary" href="@GraphHomeHref">Graph Home</a>
+            <a class="button-link secondary" href="/library/index.html">Library Home</a>
+        </div>
+    </section>
+
+    <section class="section grid-two">
+        <article class="panel prose">
+            <span class="mini-label">Reading The Plot</span>
+            <h2>What A Surface Plot Reveals</h2>
+            <p>
+                A surface plot turns a two-variable expression into something you can inspect geometrically. Peaks,
+                valleys, ridges, bowls, and saddle-like regions become much easier to notice when the sampled z-values
+                are rendered as a mesh instead of read from a formula alone.
+            </p>
+        </article>
+        <article class="panel prose">
+            <span class="mini-label">Practical Tip</span>
+            <h2>Mesh Density Changes Detail</h2>
+            <p>
+                Higher x- and y-sample counts produce a smoother surface, but they also increase the amount of data sent
+                to Plotly. If the shape seems too blocky, increase the mesh. If performance feels heavy, reduce it and
+                narrow the window to the region you care about most.
+            </p>
+        </article>
+    </section>
+
+    <section class="section graph-workbench">
+        <article class="panel graph-controls">
+            <span class="mini-label">Inputs</span>
+            <h2>Surface Settings</h2>
+
+            <label class="graph-label">z(x, y)
+                <input class="graph-input" @bind="_expressionText" />
+            </label>
+
+            <div class="graph-inline-grid">
+                <label class="graph-label">X Min
+                    <input class="graph-input" type="number" step="0.1" @bind="_xMin" />
+                </label>
+                <label class="graph-label">X Max
+                    <input class="graph-input" type="number" step="0.1" @bind="_xMax" />
+                </label>
+            </div>
+
+            <div class="graph-inline-grid">
+                <label class="graph-label">Y Min
+                    <input class="graph-input" type="number" step="0.1" @bind="_yMin" />
+                </label>
+                <label class="graph-label">Y Max
+                    <input class="graph-input" type="number" step="0.1" @bind="_yMax" />
+                </label>
+            </div>
+
+            <div class="graph-inline-grid">
+                <label class="graph-label">X Samples
+                    <input class="graph-input" type="number" min="12" max="120" @bind="_xSamples" />
+                </label>
+                <label class="graph-label">Y Samples
+                    <input class="graph-input" type="number" min="12" max="120" @bind="_ySamples" />
+                </label>
+            </div>
+
+            <button class="button-link primary graph-button" @onclick="RenderGraph">Render Graph</button>
+
+            <p class="graph-note">Example: <code>sin(x) + cos(y) + (x^2 - y^2) / 12</code></p>
+            @if (!string.IsNullOrWhiteSpace(_error))
+            {
+                <div class="graph-error">@_error</div>
+            }
+        </article>
+
+        <article class="panel graph-output">
+            <span class="mini-label">Plot</span>
+            <h2>Large View</h2>
+            <div class="graph-canvas-shell">
+                <PlotlyChart Figure="@_figure" />
+            </div>
+        </article>
+    </section>
+
+    <div class="product-shell">
+        <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+    </div>
+    <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+</div>
+
+@code {
+    private string _expressionText = "sin(x) + cos(y) + (x^2 - y^2) / 12";
+    private double _xMin = -6d;
+    private double _xMax = 6d;
+    private double _yMin = -6d;
+    private double _yMax = 6d;
+    private int _xSamples = 36;
+    private int _ySamples = 36;
+    private string? _error;
+    private Dictionary<string, object?> _figure = new();
+    private string GraphHomeHref => $"{Navigation.BaseUri}graph";
+
+    protected override void OnInitialized()
+    {
+        RenderGraph();
+    }
+
+    private void RenderGraph()
+    {
+        try
+        {
+            var sample = GraphMath.SampleSurface(_expressionText, "x", "y", _xMin, _xMax, _yMin, _yMax, _xSamples, _ySamples);
+            _figure = GraphFigures.SurfaceFigure($"z = {_expressionText}", sample.X, sample.Y, sample.Z);
+            _error = null;
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+    }
+}
