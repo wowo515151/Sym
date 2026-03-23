@@ -1,4 +1,5 @@
 // Copyright Warren Harding 2026
+#nullable enable
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using Sym.Atoms;

@@ -36,16 +36,16 @@ namespace SymSolvers.Tests
             }
         }
 
-        public static IEnumerable<object[]> GetAllDemoExamples()
+        public static IEnumerable<object?[]> GetAllDemoExamples()
         {
             return EnumerateExamples("Derivative", BlazorDemoCatalog.DerivativeExamples)
                 .Concat(EnumerateExamples("Rewrite", BlazorDemoCatalog.RewriteExamples))
                 .Concat(EnumerateExamples("Tensor", BlazorDemoCatalog.TensorExamples));
         }
 
-        private static IEnumerable<object[]> EnumerateExamples(string category, IReadOnlyList<BlazorDemoExample> examples)
+        private static IEnumerable<object?[]> EnumerateExamples(string category, IReadOnlyList<BlazorDemoExample> examples)
         {
-            return examples.Select(example => new object[] { category, example.Name, example.Script, example.ExpectedSubstring });
+            return examples.Select(example => new object?[] { category, example.Name, example.Script, example.ExpectedSubstring });
         }
     }
 }

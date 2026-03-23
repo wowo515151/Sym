@@ -25,8 +25,8 @@ namespace SymSolvers.Tests
             string baseDir = AppContext.BaseDirectory;
             string? projectRoot = FindProjectRoot(baseDir);
             Assert.IsNotNull(projectRoot, "Could not find project root directory.");
-            
-            string examplePath = Path.Combine(projectRoot, "SymBlazor", "wwwroot", "examples", "TensorSaturationIdentity.txt");
+
+            string examplePath = FindExamplePath(projectRoot, "TensorSaturationIdentity.txt");
             Assert.IsTrue(File.Exists(examplePath), $"Example file not found at: {examplePath}");
             
             string script = File.ReadAllText(examplePath);
@@ -60,6 +60,27 @@ namespace SymSolvers.Tests
                 dir = dir.Parent;
             }
             return null;
+        }
+
+        private static string FindExamplePath(string projectRoot, string fileName)
+        {
+            string[] candidates =
+            {
+                Path.Combine(projectRoot, "src", "SymBlazor", "wwwroot", "sym", "examples", fileName),
+                Path.Combine(projectRoot, "src", "SymBlazor", "wwwroot", "examples", fileName),
+                Path.Combine(projectRoot, "SymBlazor", "wwwroot", "sym", "examples", fileName),
+                Path.Combine(projectRoot, "SymBlazor", "wwwroot", "examples", fileName)
+            };
+
+            foreach (var candidate in candidates)
+            {
+                if (File.Exists(candidate))
+                {
+                    return candidate;
+                }
+            }
+
+            return candidates[0];
         }
     }
 }
