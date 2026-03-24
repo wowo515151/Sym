@@ -1,0 +1,17 @@
+# smithery.yaml
+# Managed by Gemini CLI for SymWork
+name: sym-mcp
+version: 1.0.0
+description: "High-performance symbolic math and tensor optimization engine. Bridges the gap between LLMs and precise mathematical reasoning."
+author: "SymbolicComputation.com"
+repository: "https://github.com/wowod/SymWork"
+license: "MIT"
+categories:
+  - "Mathematics"
+  - "AI Tools"
+  - "GPU Optimization"
+runtime: "dotnet"
+entrypoint: "src/SymCLI/bin/Release/net10.0/SymCLI.dll"
+config:
+  env:
+    SYM_AGENTVERSE_ADDR: "agent1qdd7zue9uh2pj5djudx4udc8m9e55ajtxxlczpps2azvjmj3xmtewgwhfmc"

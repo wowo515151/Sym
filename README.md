@@ -81,3 +81,18 @@ dotnet run --project src/SymBlazor/SymBlazor.csproj
 The Blazor deployment notes live in [`src/SymBlazor/DEPLOYMENT.md`](src/SymBlazor/DEPLOYMENT.md).
 
 For the production site, the published app is staged under `/sym/`, with `SymHelp.txt` and `SymUIHelp.html` copied to the site root.
+
+## Hosted MCP Service (Premium)
+
+For production AI agents and high-availability workloads, we offer a managed **Model Context Protocol (MCP)** endpoint hosted on Azure. This service provides:
+
+- **Low-Latency Solve Tiers:** Optimized for real-time agent responses.
+- **Agentverse Integration:** Native support for Fetch.ai agents with built-in FET payment handling.
+- **Tensor Graph Optimization:** Specialized high-performance rule-packs for GPU expression fusion.
+
+### Accessing the Hosted Service
+
+You can access the hosted solver through the following Agentverse address:
+`agent1qdd7zue9uh2pj5djudx4udc8m9e55ajtxxlczpps2azvjmj3xmtewgwhfmc`
+
+Please see the [Hosted MCP Service Guide](HOSTED_MCP_GUIDE.md) for full details on message formats, pricing tiers (Lightning, Standard, Deep), and how to submit FET payment hashes. Or visit [SymbolicComputation.com/mcp](https://symboliccomputation.com/mcp).
