@@ -360,6 +360,10 @@ ASALocalRun/
 /build_sym_egraph_diag.txt
 /cobra_bench_results.txt
 /test_no_workload_diag.log
+/Business/
+/src/McpKeys/
+/src/McpKeys.Core/
+/src/McpKeys.Tests/
 
 # NVidia Nsight GPU debugger configuration file
 *.nvuser
