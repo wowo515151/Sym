@@ -99,4 +99,4 @@ Please see the [Hosted MCP Service Guide](HOSTED_MCP_GUIDE.md) for full details 
 
 ![Sym image](SymPic.jpg)
 
-Copyright [TranscendAI.tech](https://transcendai.tech) 2026. Authored by Warren Harding. AI assisted.
+Copyright [SymbolicComputation.com](https://symboliccomputation.com) 2026. Authored by Warren Harding. AI assisted.
