@@ -1,3 +1,7 @@
+---
+name: symcli-skill
+description: Execute SymCLI to solve math equations, optimize tensor graphs, or analyze C# code for vulnerabilities. Use when you need a deterministic 'System 2' math engine to prevent hallucination.
+---
 # SymCLI Skill
 
 SymCLI is a practical AI math tool that provides a deterministic "System 2" mathematical reasoning and C# analysis engine for autonomous agents.
@@ -34,12 +38,12 @@ When given a mathematical task, equation to solve, tensor optimization problem, 
 <available_resources>
 <resource>
   <name>Windows Wrapper</name>
-  <path>Skills/SymCLISkill/symcli.bat</path>
+  <path>Skills/symcli-skill/symcli.bat</path>
   <description>Batch script to execute SymCLI. Usage: `symcli.bat <input.ps> <output.txt>` or `symcli.bat analyze csharp-math <input> <output> [options]`</description>
 </resource>
 <resource>
   <name>Unix Wrapper</name>
-  <path>Skills/SymCLISkill/symcli.sh</path>
+  <path>Skills/symcli-skill/symcli.sh</path>
   <description>Shell script to execute SymCLI. Usage: `./symcli.sh <input.ps> <output.txt>` or `./symcli.sh analyze csharp-math <input> <output> [options]`</description>
 </resource>
 </available_resources>
@@ -56,14 +60,14 @@ When given a mathematical task, equation to solve, tensor optimization problem, 
        </Options>
        x^2 - 4 = 0
        ```
-    2. Agent executes: `Skills/SymCLISkill/symcli.bat problem.ps result.txt`
+    2. Agent executes: `Skills/symcli-skill/symcli.bat problem.ps result.txt`
     3. Agent reads `result.txt` to find `x = 2, x = -2`.
   </steps>
 </example>
 <example>
   <description>Analyzing C# code for math vulnerabilities</description>
   <steps>
-    1. Agent executes: `Skills/SymCLISkill/symcli.bat analyze csharp-math src/MathCore/Calculator.cs report.json --json`
+    1. Agent executes: `Skills/symcli-skill/symcli.bat analyze csharp-math src/MathCore/Calculator.cs report.json --json`
     2. Agent reads `report.json` to review any `CSMATH` or `CSSEC` findings.
   </steps>
 </example>

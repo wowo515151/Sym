@@ -53,13 +53,13 @@ dotnet run --project src/SymCLI/SymCLI.csproj -- analyze csharp-math src out/rep
 If you want to expose SymCLI to an AI agent through the checked-in skill wrappers, use:
 
 ```powershell
-Skills/SymCLISkill/symcli.bat analyze csharp-math src out/report.txt --json
+Skills/symcli-skill/symcli.bat analyze csharp-math src out/report.txt --json
 ```
 
 or on Unix-like systems:
 
 ```sh
-./Skills/SymCLISkill/symcli.sh analyze csharp-math src out/report.txt --json
+./Skills/symcli-skill/symcli.sh analyze csharp-math src out/report.txt --json
 ```
 
 Run the Blazor UI locally:
@@ -73,7 +73,7 @@ dotnet run --project src/SymBlazor/SymBlazor.csproj
 - `src/Sym`, `src/SymCore`, `src/SymSolvers`, `src/SymRules`: core symbolic engine, solver, and rule libraries
 - `src/SymBlazor`: the Blazor WebAssembly UI published to SymbolicComputation.com
 - `src/SymCLI`: command-line entry point
-- `Skills/SymCLISkill`: repo-relative wrapper scripts and `SKILL.md` instructions for using `SymCLI` as an AI tool / skill
+- `Skills/symcli-skill`: repo-relative wrapper scripts and `SKILL.md` instructions for using `SymCLI` as an AI tool / skill
 - `src/WordsToSym`, `src/SymTools`, `src/HAMM`, `src/AGIMynd`: related tools and companion apps built around the wider Sym ecosystem
 
 ## Web deployment
