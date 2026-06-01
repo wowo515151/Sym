@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is A Directional Derivative?</title>
+    <meta name="description" content="What a directional derivative is, how it measures change in a chosen direction, and why it connects gradients to local geometric reasoning." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Advanced Mathematics</p>
+            <h1>What Is A Directional Derivative?</h1>
+            <p class="hero-copy">
+                A directional derivative measures how a function changes at a point when you move in one chosen
+                direction rather than in every coordinate direction separately.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>Change Along A Chosen Direction</h2>
+                <p>
+                    If <code>f</code> is a multivariable function and <code>u</code> is a direction vector, the
+                    directional derivative asks how fast <code>f</code> changes when you move from the point in the
+                    direction of <code>u</code>.
+                </p>
+                <p>
+                    This is more flexible than looking only at coordinate partial derivatives. It lets us talk about
+                    local change along meaningful geometric or physical directions.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Key Formula</span>
+                <h2>The Gradient Turns Direction Into Rate</h2>
+                <p>
+                    When the function is differentiable, the directional derivative in direction <code>u</code> is the
+                    dot product of the gradient with <code>u</code>. This is one of the cleanest places where the
+                    gradient earns its geometric meaning.
+                </p>
+                <div class="code-block">D_u f = grad f . u</div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Geometry</span>
+                <h3>Why Direction Matters</h3>
+                <p>
+                    A function may increase in one direction, decrease in another, and remain flat in a third. The
+                    directional derivative makes that local directional behavior explicit.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Optimization</span>
+                <h3>How It Connects To Steepest Ascent</h3>
+                <p>
+                    Because directional derivatives are controlled by the gradient, the largest local increase occurs in
+                    the gradient direction. This ties local directional reasoning directly to optimization methods.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>A Bridge Between Partial Derivatives And Geometry</h2>
+                <p>
+                    Partial derivatives talk about coordinate directions. Directional derivatives talk about arbitrary
+                    directions. That bridge is useful in optimization, manifold-style reasoning, numerical analysis, and
+                    physical interpretation of gradients and flows.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./gradient-vector.html">Gradient Vector</a>
+                    <a class="button-link secondary" href="./jacobian-matrix.html">Jacobian Matrix</a>
+                    <a class="button-link secondary" href="./lagrange-multipliers.html">Lagrange Multipliers</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Use</span>
+                <h2>Another Good Fit For Symbolic Differentiation</h2>
+                <p>
+                    Directional derivatives are especially nice in symbolic workflows because they can often be derived
+                    and simplified exactly before being evaluated for any particular direction or point.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

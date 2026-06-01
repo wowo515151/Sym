@@ -1,0 +1,9 @@
+<Options>
+  RulePacks: Tensor
+  CostModel: Tensor
+  MaxIterations: 50
+  EnableTracing: true
+  Shapes: X=[32,128], Y=[32,128], W=[128,256], g1=Scalar, g2=Scalar
+</Options>
+
+TensorAdd(TensorMul(MatMul(X, W), g1), TensorMul(MatMul(Y, W), g2))

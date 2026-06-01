@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Factoring Higher-Order Polynomials Symbolically</title>
+    <meta name="description" content="A study of recursive symbolic factoring for higher-order polynomials like x^4 - y^4." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation / Algebraic Methods</p>
+            <h1>Factoring Higher-Order Polynomials</h1>
+            <p class="hero-copy">
+                Factoring is more than a high-school exercise; it is a fundamental symbolic operation 
+                required for equation solving and integration. By recursively applying basic identities like 
+                the Difference of Squares, a symbolic engine can decompose complex higher-order polynomials.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>Recursive Decompositions</h2>
+                <p>
+                    Take a polynomial like <code>x<sup>4</sup> - y<sup>4</sup></code>. To a human, this looks 
+                    like one problem. To a symbolic engine, this is a target for recursive transformation.
+                </p>
+                <p>
+                    While many software tools simply "expand" or "simplify," a true symbolic engine looks 
+                    for the deepest possible decomposition by identifying sub-patterns that match known 
+                    algebraic identities.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>The Power of Recursion</h2>
+                <p>
+                    The <code>DiffSquares</code> rule is defined as:
+                    <br><code>a<sup>2</sup> - b<sup>2</sup> &rarr; (a - b)(a + b)</code>
+                </p>
+                <p>
+                    For <code>x<sup>4</sup> - y<sup>4</sup></code>, the engine sees <code>(x<sup>2</sup>)<sup>2</sup> - (y<sup>2</sup>)<sup>2</sup></code>.
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Step 1:</strong> <code>(x<sup>2</sup> - y<sup>2</sup>)(x<sup>2</sup> + y<sup>2</sup>)</code></li>
+                    <li><strong>Step 2:</strong> Re-examine terms. <code>(x<sup>2</sup> - y<sup>2</sup>)</code> still matches the rule.</li>
+                    <li><strong>Final Result:</strong> <code>(x - y)(x + y)(x<sup>2</sup> + y<sup>2</sup>)</code></li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Partial Fraction Decomposition</h2>
+                <p>
+                    Factoring to the lowest possible degree is a prerequisite for <strong>Partial Fraction 
+                    Decomposition</strong>. If an engine cannot fully factor the denominator of a rational 
+                    function, it cannot solve the corresponding integral.
+                </p>
+                <p>
+                    Advanced symbolic systems use algorithms like <strong>Berlekamp's algorithm</strong> or 
+                    <strong>Hensel lifting</strong>, but the core "System 1" reasoning is driven by 
+                    pattern-matching rules like the ones shown here.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Proof</span>
+                <h2>E-Graph Trace</h2>
+                <p>
+                    The Sym engine uses the <code>DiffSquares</code> rule in a saturation loop, allowing it to 
+                    "see" the quadratic structure within the quartic expression.
+                </p>
+                <div class="code-block">
+                    // Rule Applied: DiffSquares
+                    Pow(a, 2) - Pow(b, 2) -> (a - b) * (a + b)
+                    <br><br>
+                    // Trace for x^4 - y^4
+                    Iteration 1: (Pow(x, 2) - Pow(y, 2)) * (Pow(x, 2) + Pow(y, 2))
+                    Iteration 2: (x - y) * (x + y) * (Pow(x, 2) + Pow(y, 2))
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

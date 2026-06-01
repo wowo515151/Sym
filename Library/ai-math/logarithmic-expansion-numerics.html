@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Logarithmic Expansion for Numerical Stability</title>
+    <meta name="description" content="A study of how symbolic log expansion rules prevent underflow and improve numerical stability in machine learning." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Numerical Methods</p>
+            <h1>Log-Expansion for Numerical Stability</h1>
+            <p class="hero-copy">
+                In machine learning, we often multiply long chains of probabilities. This leads to 
+                catastrophic floating-point underflow. Symbolic log-expansion converts these products into sums, 
+                dramatically improving numerical stability and precision.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The Underflow Bottleneck</h2>
+                <p>
+                    Probabilities are values in [0, 1]. Multiplying 100 small probabilities (e.g., <code>0.01<sup>100</sup></code>) 
+                    quickly exceeds the capacity of standard 64-bit floats, resulting in a "zero" that 
+                    destroys gradients during backpropagation.
+                </p>
+                <p>
+                    This is why we work in <strong>Log-Space</strong>. But transforming a complex mathematical 
+                    model into its log-equivalent manually is error-prone.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>The Log-Expansion Cascade</h2>
+                <p>
+                    A symbolic engine uses three fundamental laws of logarithms to expand a product into a sum:
+                </p>
+                <ul class="article-list">
+                    <li><strong>LogProduct:</strong> <code>log(x &times; y) &rarr; log(x) + log(y)</code></li>
+                    <li><strong>LogPower:</strong> <code>log(x<sup>k</sup>) &rarr; k &times; log(x)</code></li>
+                    <li><strong>LogQuotient:</strong> <code>log(x / y) &rarr; log(x) - log(y)</code></li>
+                </ul>
+                <p>
+                    By applying these rules, <code>log( (P1 &times; P2) / P3<sup>k</sup> )</code> becomes 
+                    <code>log(P1) + log(P2) - k &times; log(P3)</code>, which is numerically robust.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Cross-Entropy and Log-Sum-Exp</h2>
+                <p>
+                    This expansion is the foundation of the <strong>Cross-Entropy Loss</strong> function and the 
+                    <strong>Log-Sum-Exp</strong> trick. Without symbolic expansion, the gradients of these 
+                    functions would vanish or explode.
+                </p>
+                <p>
+                    By automating the expansion, researchers can define high-level probabilistic models without 
+                    worrying about the low-level numerical implementation details.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Proof</span>
+                <h2>Symbolic Trace</h2>
+                <p>
+                    The Sym engine uses the <code>Log.rule</code> pack to expand nested product terms.
+                </p>
+                <div class="code-block">
+                    // Rule Applied: LogProduct
+                    log(b, x * y) -> log(b, x) + log(b, y)
+                    <br><br>
+                    // Trace for log(P1 * P2 / Pow(P3, 2))
+                    Iteration 1: log(P1 * P2) - log(Pow(P3, 2))
+                    Iteration 2: log(P1) + log(P2) - 2 * log(P3)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

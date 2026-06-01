@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Associative-Commutative Matching Explained</title>
+    <meta name="description" content="What associative-commutative matching is, why it is harder than ordinary pattern matching, and why it matters for symbolic computation." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Associative-Commutative Matching Explained</h1>
+            <p class="hero-copy">
+                Associative-commutative matching is pattern matching under operators like addition and multiplication,
+                where grouping and order are not supposed to matter. That makes rule application more powerful and much
+                more subtle.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Ordinary Case</span>
+                <h2>Simple Matching Cares About Shape</h2>
+                <p>
+                    In ordinary tree matching, the pattern <code>a + b</code> matches only an addition node with two
+                    children in a particular arrangement. But mathematical addition is associative and commutative. A
+                    human expects that <code>a + b</code>, <code>b + a</code>, and <code>(a + b) + c</code> all belong
+                    to the same family of additive structure.
+                </p>
+                <p>
+                    Associative-commutative matching tries to respect that mathematical reality. Instead of matching
+                    only rigid tree shape, it matches modulo regrouping and reordering.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Is Hard</span>
+                <h2>Many Decompositions Become Possible</h2>
+                <p>
+                    Once order and grouping stop mattering, the number of possible matches can grow quickly. A pattern
+                    such as <code>x + y</code> can match many different submultisets of a larger sum. This makes
+                    matching far more expressive, but also more expensive and more ambiguous.
+                </p>
+                <p>
+                    That is why AC matching is an advanced topic rather than a tiny extension to ordinary pattern
+                    matching.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Example</span>
+                <h3>Matching Inside A Sum</h3>
+                <p>
+                    Suppose a rule wants to identify <code>u + v</code> inside <code>a + b + c</code>. Under AC
+                    reasoning, the system may need to consider <code>(a, b)</code>, <code>(a, c)</code>,
+                    <code>(b, c)</code>, or even bindings where one variable absorbs multiple terms depending on the
+                    pattern language.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Practical Value</span>
+                <h3>Many Useful Algebraic Rules Depend On It</h3>
+                <p>
+                    Collection of like terms, cancellation logic, factor extraction, polynomial normalization, and
+                    large classes of rewrite rules become much more natural once addition and multiplication are matched
+                    as the mathematics intends.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Engineering Tradeoff</span>
+                <h2>Power Versus Cost</h2>
+                <p>
+                    Supporting AC matching typically requires more normalization, smarter data structures, or more
+                    careful search than rigid tree matching. Some systems flatten associative operators up front, sort
+                    commutative arguments, or move toward multiset-style representations so that common cases become
+                    easier to handle.
+                </p>
+                <p>
+                    Even then, the engine still needs to decide how much search is acceptable and how broad a match
+                    family a given rule should allow.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Better Matching Produces Better Symbolic Results</h2>
+                <p>
+                    If a symbolic system cannot match algebraic structure the way mathematicians think about it, many
+                    useful rewrites become brittle. AC matching helps close that gap. It is one of the reasons symbolic
+                    computation can manipulate formulas as mathematics rather than as decorative syntax trees.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./pattern-matching.html">Pattern Matching</a>
+                    <a class="button-link secondary" href="./canonical-forms.html">Canonical Forms</a>
+                    <a class="button-link secondary" href="./what-is-symbolic-simplification.html">Simplification</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

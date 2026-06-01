@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Unification And Matching Lab</title>
+    <link rel="stylesheet" href="../library.css" />
+    <link rel="stylesheet" href="./tools.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <p class="eyebrow">Tools / Matching</p>
+            <h1>Unification And Matching Lab</h1>
+            <p class="hero-copy">
+                Test whether two simple first-order terms unify, and whether a pattern matches a concrete target. This lab
+                is designed to make substitution and binding behavior visible instead of leaving it as a hidden part of a
+                symbolic rule engine.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">All Tools</a>
+                <a class="button-link secondary" href="../library/symbolic-computation/unification.html">Unification Article</a>
+                <a class="button-link ghost" href="../library/symbolic-computation/pattern-matching.html">Pattern Matching Article</a>
+            </div>
+        </section>
+
+        <section class="tool-grid">
+            <article class="tool-panel">
+                <h2>Term Inputs</h2>
+                <div class="tool-controls">
+                    <label class="tool-field">Pattern or term
+                        <input id="unifyPattern" value="f(?x, g(?y))" />
+                    </label>
+                    <label class="tool-field">Target term
+                        <input id="unifyTarget" value="f(a, g(b))" />
+                    </label>
+                    <div class="tool-actions">
+                        <button class="tool-button primary" id="runUnification">Run Unification</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="tool-panel tool-output">
+                <h2>Binding Summary</h2>
+                <div id="unifyStats" class="tool-stat-grid"></div>
+                <div class="tool-surface">
+                    <h3>Substitutions</h3>
+                    <div id="unifyResult"></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="tool-grid">
+            <article class="tool-panel">
+                <h2>Educational Notes</h2>
+                <p>
+                    Matching is directional: the pattern can bind variables to fit the target. Unification is symmetric:
+                    both terms are allowed to constrain the final substitution as long as they can be made identical.
+                </p>
+                <ul class="lead-list">
+                    <li>Try changing only the inner argument to see when a match fails.</li>
+                    <li>Use repeated variables like <code>f(?x, ?x)</code> to test consistency constraints.</li>
+                    <li>Use different function symbols to see structural mismatch immediately.</li>
+                </ul>
+            </article>
+            <article class="tool-panel">
+                <h2>Why This Matters</h2>
+                <p>
+                    Unification and matching sit underneath rewrite engines, theorem provers, logic programming, and many
+                    symbolic assistants. Even when a tool feels algebraic on the surface, this kind of structural binding is
+                    often what determines whether a rule can fire.
+                </p>
+            </article>
+        </section>
+
+        <section class="tool-grid">
+            <article class="tool-panel">
+                <h2>How To Use This Lab</h2>
+                <p>
+                    Enter two terms in simple prefix form such as <code>f(?x, g(?y))</code> and <code>f(a, g(b))</code>. Terms
+                    with leading <code>?</code> names are treated as variables that may bind to subterms.
+                </p>
+                <ul class="lead-list">
+                    <li>Use repeated variables like <code>pair(?x, ?x)</code> to test consistency constraints.</li>
+                    <li>Change function symbols to see structural mismatch immediately.</li>
+                    <li>Compare the unification result with the one-way pattern-match result.</li>
+                </ul>
+            </article>
+            <article class="tool-panel">
+                <h2>Fundamental Mathematics</h2>
+                <p>
+                    Unification asks whether two symbolic terms can be made identical by substituting values for variables.
+                    Matching is the directional version where only the pattern side is allowed to bind. These operations are
+                    central to rule application, logic programming, theorem proving, and symbolic pattern systems.
+                </p>
+                <p>
+                    The important point is that this is structural mathematics, not string replacement. The tree shape of the
+                    expression determines whether a substitution is valid.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+    <script type="module" src="./js/pages/unification-lab.js"></script>
+</body>
+</html>

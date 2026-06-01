@@ -62,6 +62,106 @@
                     </div>
                 </div>
             </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Case Studies</span>
+                <h2>Tensor Optimization Gallery</h2>
+                <p>Explore specific, verified symbolic optimizations for common AI and deep learning workloads.</p>
+                <div class="article-list">
+                    <div class="article-item">
+                        <h4><a href="./optimizing-attention-chains.html">Multi-Head Attention (QK^T V)</a></h4>
+                        <p>Minimize FLOPs in attention blocks through re-association.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./weighted-matmul-factoring.html">Shared Weight Factoring</a></h4>
+                        <p>Optimize parallel paths by stacking and shared weight reuse.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./multi-query-attention-optimization.html">Multi-Query Attention (MQA)</a></h4>
+                        <p>Avoid massive attention matrices in asymmetric MQA projections.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./tensor-fusion-opportunities.html">Bias and Activation Fusion</a></h4>
+                        <p>Identify hardware-efficient fused kernels for neural layers.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./matrix-vector-chain-association.html">Matrix-Vector Products</a></h4>
+                        <p>Reduce algorithmic complexity from O(N^3) to O(N^2) in vector-bound chains.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./l2-distance-optimization.html">L2 Distance (RAG)</a></h4>
+                        <p>Optimizing similarity search by expanding squared differences into dot products.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./scale_folding-inference.html">Scale Folding</a></h4>
+                        <p>Folding constants into weight matrices to reduce inference kernel overhead.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./transpose-hoisting-fusion.html">Transpose Hoisting</a></h4>
+                        <p>Moving memory-intensive transposes to optimize GPU kernel layout and fusion.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./lora-fusion-inference.html">LoRA Fusion</a></h4>
+                        <p>Symbolically merging adapter weights (W + AB) for zero-overhead inference.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./mixture-of-experts-dispatch.html">MoE Dispatch</a></h4>
+                        <p>Optimizing token routing and expert stacking in Mixture of Experts architectures.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./rmsnorm-symbolic-optimization.html">RMSNorm Optimization</a></h4>
+                        <p>Symbolic simplification of normalization layers for high-throughput LLM serving.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./grouped-query-attention-gqa.html">Grouped-Query Attention (GQA)</a></h4>
+                        <p>Analyzing the symbolic bridge between MHA and MQA for optimal GPU memory usage.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./rotary-positional-embeddings-rope.html">Rotary Embeddings (RoPE)</a></h4>
+                        <p>The symbolic rotation identities that enable relative position encoding in modern LLMs.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./kv-cache-quantization-folding.html">KV Cache Quantization</a></h4>
+                        <p>Scaling folding and propagation techniques for memory-efficient 4-bit and 8-bit caches.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./online-softmax-fusion.html">Online Softmax</a></h4>
+                        <p>Symbolic reduction of multi-pass softmax into a high-performance single-pass GPU kernel.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./weight-dequantization-hoisting.html">Dequantization Hoisting</a></h4>
+                        <p>Maximizing INT4 GEMM throughput by pulling dequantization math out of the GPU hot-loop.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./flash-attention-block-identities.html">Flash-Attention Tiling</a></h4>
+                        <p>Symbolic tiling and recomputation strategies to bypass the GPU memory bandwidth wall.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./swiglu-activation-fusion.html">SwiGLU Fusion</a></h4>
+                        <p>Symbolically merging dual projections and gating for hardware-efficient LLM activations.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./grouped-gemm-moe-efficiency.html">Grouped-GEMM for MoE</a></h4>
+                        <p>Optimizing irregular expert routing with unified grouped matrix multiplication kernels.</p>
+                    </div>
+                    <div class="article-item">
+                        <h4><a href="./prefix-caching-symbolic-identities.html">Prefix Caching</a></h4>
+                        <p>Leveraging symbolic prefix identities to share KV cache states across multiple AI requests.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Stability</span>
+                <h2>Numerical Methods</h2>
+                <p>Symbolic approaches to improving the precision and stability of AI models.</p>
+                <div class="article-list">
+                    <div class="article-item">
+                        <h4><a href="./logarithmic-expansion-numerics.html">Log-Expansion for Stability</a></h4>
+                        <p>Preventing underflow and vanishing gradients through symbolic expansion.</p>
+                    </div>
+                </div>
+            </article>
         </section>
 
         <section class="section grid-three">
@@ -151,7 +251,7 @@
         <div class="product-shell">
             <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
         </div>
-        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
     </main>
 </body>
 </html>

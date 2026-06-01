@@ -8,12 +8,18 @@
 <div class="main-container">
     <div class="page-header">
         <div>
-            <p class="page-kicker"><a class="page-kicker-link" href="/">SymbolicComputation.com</a></p>
+            <p class="page-kicker"><a class="page-kicker-link" href="/">SymAI.NET</a></p>
             <h1>Sym Online</h1>
             <p class="page-summary">
                 The main Sym interface for running ProblemScript, algebraic simplification, calculus queries,
                 equation-solving workflows, and tensor-oriented rewrites in the browser.
             </p>
+            <div class="quick-links">
+                <a class="quick-link" href="/solver-demos">Exact Solver Demos</a>
+                <a class="quick-link" href="/rewrite-demo">Rewrite Demo</a>
+                <a class="quick-link" href="/tensor-demo">Tensor Demo</a>
+                <a class="quick-link" href="/derivative-demo">Derivative Demo</a>
+            </div>
         </div>
     </div>
 
@@ -238,6 +244,33 @@
         max-width: 52rem;
         margin: 0.5rem 0 0;
         color: #c2d3e7;
+    }
+
+    .quick-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        margin-top: 0.9rem;
+    }
+
+    .quick-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.2rem;
+        padding: 0.45rem 0.85rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.05);
+        color: #edf5ff;
+        text-decoration: none;
+        font-size: 0.92rem;
+    }
+
+    .quick-link:hover,
+    .quick-link:focus-visible {
+        background: rgba(137, 209, 182, 0.12);
+        border-color: rgba(137, 209, 182, 0.26);
     }
 
     .toolbar {

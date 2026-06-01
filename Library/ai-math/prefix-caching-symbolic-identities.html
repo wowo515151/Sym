@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prefix Caching: Symbolic Identities for Shared KV States</title>
+    <meta name="description" content="A symbolic study of KV cache prefix sharing and how it optimizes multi-turn conversations and RAG systems." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Prefix Caching Symbolic Identities</h1>
+            <p class="hero-copy">
+                Large language model interactions often share a common starting point, such as 
+                system prompts or long context documents. Prefix Caching allows the GPU to 
+                symbolically identify these shared segments, avoiding redundant computation 
+                and memory storage for the KV cache.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The Redundant Context Problem</h2>
+                <p>
+                    In a multi-turn chat or a RAG system with 50 different queries about the same 
+                    10,000-word document, a naive system computes the <strong>Key (K)</strong> and 
+                    <strong>Value (V)</strong> tensors for that document 50 separate times.
+                </p>
+                <p>
+                    This results in:
+                </p>
+                <ul class="article-list">
+                    <li><strong>Redundant Compute:</strong> 50x more FLOPs for the prompt phase.</li>
+                    <li><strong>Redundant Memory:</strong> 50x more HBM usage for identical KV caches.</li>
+                </ul>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Prefix Identity and KV Sharing</h2>
+                <p>
+                    A symbolic engine treats the attention context as a <strong>Concatenated Sequence</strong>. 
+                    It identifies that multiple requests share a common prefix <code>P</code>:
+                    <br><code>Seq1 = [P | Q1]</code>
+                    <br><code>Seq2 = [P | Q2]</code>
+                </p>
+                <p>
+                    The symbolic identity for attention with shared prefixes is:
+                    <br><code>Attn(Q, [K_p | K_q], [V_p | V_q]) = Merge(Attn(Q, K_p, V_p), Attn(Q, K_q, V_q))</code>
+                </p>
+                <p>
+                    This allows the system to:
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Compute Once:</strong> Generate the KV cache for prefix <code>P</code> exactly once.</li>
+                    <li><strong>Symbolic Pointer Sharing:</strong> Every new request simply "links" to the 
+                    existing KV cache block for <code>P</code>, only computing the new KV states 
+                    for the query <code>Q</code>.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Enabling Sub-Second RAG</h2>
+                <p>
+                    Prefix Caching is the foundational technology in high-performance serving 
+                    engines like <strong>vLLM (PagedAttention)</strong> and <strong>SGLang</strong>. 
+                    It reduces prompt latency from seconds to milliseconds for repeat context.
+                </p>
+                <p>
+                    Symbolically managing these prefixes ensures that the complex attention 
+                    normalization (Softmax scaling) remains correct even when the attention matrix 
+                    is split across shared and unique blocks.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Trace</span>
+                <h2>Shared Pointers</h2>
+                <div class="code-block">
+                    // Attention with Concatenation
+                    Attention(Q, Concat(Kp, Kq), Concat(Vp, Vq))
+                    <br><br>
+                    // Symbolic Re-formulation
+                    ConcatAttention(Q, Kp, Vp, Kq, Vq)
+                    <br><br>
+                    // Optimization
+                    Fetch_Cached(Kp, Vp)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

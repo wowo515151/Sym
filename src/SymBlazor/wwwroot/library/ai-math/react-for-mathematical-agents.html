@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ReAct For Mathematical Agents</title>
+    <meta name="description" content="How the ReAct pattern applies to AI mathematicians, where it helps, and where mathematical agents need stronger tools and verification than plain reasoning traces." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>ReAct For Mathematical Agents</h1>
+            <p class="hero-copy">
+                ReAct is a useful pattern for mathematical agents because it alternates reasoning with action. The agent
+                thinks about the next move, calls a tool, observes the result, and then continues with better grounding.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Pattern</span>
+                <h2>Reason, Act, Observe, Continue</h2>
+                <p>
+                    In a mathematical setting, ReAct usually means the agent forms a local hypothesis, decides what tool
+                    or check is needed, performs that action, inspects the result, and updates the next step. This is a
+                    natural fit for workflows where symbolic tools, theorem provers, graphing systems, or code analyzers
+                    can answer concrete subquestions.
+                </p>
+                <p>
+                    The appeal of the pattern is that it keeps the agent from drifting too far on unsupported prose
+                    alone. Each action can tighten the loop between interpretation and exact computation.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Math-Specific Caution</span>
+                <h2>ReAct Is Not Enough By Itself</h2>
+                <p>
+                    Mathematical work is unusually sensitive to silent error. A reasoning trace that sounds coherent is
+                    still not a proof, not an equivalence check, and not a successful symbolic derivation. That means
+                    ReAct works best when the action side includes exact tools rather than only retrieval or free-form
+                    notes.
+                </p>
+                <p>
+                    In practice, the strongest mathematical ReAct loops are tool-heavy and verification-aware.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Concrete Shape</span>
+                <h2>What ReAct Looks Like In Math</h2>
+                <p>
+                    A mathematical ReAct cycle might look like this: identify the current subgoal, call SymCLI to
+                    simplify or differentiate, inspect the symbolic output, compare it to the expected structure, write
+                    a brief summary to notes, and choose the next subgoal. The loop can stay narrow and disciplined
+                    rather than pretending to solve the whole problem in a single stretch.
+                </p>
+                <div class="code-block">question -> local reasoning -> exact tool call -> observation -> revised next step</div>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">When It Works Best</span>
+                <h2>Good For Local Exploration</h2>
+                <p>
+                    ReAct is especially strong for local exploration, interpretation-heavy tool use, debugging a
+                    derivation, comparing candidate transformations, or moving through a research thread in manageable
+                    increments. It gives the agent a rhythm: think just enough, check the world, then think again.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Weakness</span>
+                <h3>Long-Horizon Work Needs More Structure</h3>
+                <p>
+                    ReAct can become fragile if the task requires broad planning, branch management, or disciplined
+                    recovery across many files and many hours. For that, mathematical agents usually need stronger
+                    memory, explicit plans, and verifier checkpoints.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Upgrade Path</span>
+                <h3>ReAct Plus Verification Is Better</h3>
+                <p>
+                    The natural upgrade is to keep the ReAct loop but enrich the action phase with exact symbolic tools
+                    and enrich the observation phase with verification. That moves the agent closer to a serious AI
+                    mathematician instead of a clever conversational solver.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Related Patterns</span>
+                <h2>What ReAct Connects To</h2>
+                <p>
+                    ReAct naturally connects to plan-and-execute designs, verifier-guided pipelines, notebook-centered
+                    research agents, and symbolic-tool workflows. It is often a useful local control pattern inside a
+                    larger mathematical architecture rather than the entire architecture by itself.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./plan-and-execute-for-ai-mathematicians.html">Plan And Execute</a>
+                    <a class="button-link secondary" href="./verifier-guided-math-agents.html">Verifier-Guided Agents</a>
+                    <a class="button-link secondary" href="./symcli-for-ai-agents.html">SymCLI</a>
+                    <a class="button-link secondary" href="./planning-verification-and-recovery.html">Planning And Recovery</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

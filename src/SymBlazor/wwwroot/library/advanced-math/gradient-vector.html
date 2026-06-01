@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is A Gradient Vector?</title>
+    <meta name="description" content="What a gradient vector is, why it points in the direction of steepest increase, and how it connects to optimization, Jacobians, and symbolic computation." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Advanced Mathematics</p>
+            <h1>What Is A Gradient Vector?</h1>
+            <p class="hero-copy">
+                The gradient of a scalar-valued function is the vector of its first partial derivatives. It is the
+                object that packages local rate-of-change information into a direction-sensitive form.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>A Vector Of Partial Derivatives</h2>
+                <p>
+                    If <code>f(x_1, ..., x_n)</code> is a scalar-valued function, its gradient is the vector
+                    <code>grad f</code> whose components are the partial derivatives of <code>f</code> with respect to
+                    each input variable.
+                </p>
+                <div class="code-block">grad f = [ df/dx_1, ..., df/dx_n ]</div>
+                <p>
+                    This turns local derivative information into a geometric object that can be compared with directions,
+                    constraints, and local approximations.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Interpretation</span>
+                <h2>The Direction Of Steepest Increase</h2>
+                <p>
+                    The gradient points in the direction where the function increases fastest locally. Its magnitude
+                    reflects how steep that increase is. That is why gradients appear everywhere in optimization,
+                    machine learning, and constrained analysis.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Geometry</span>
+                <h3>Perpendicular To Level Sets</h3>
+                <p>
+                    Geometrically, the gradient is normal to level curves or level surfaces of the function. This makes
+                    it a natural object for reasoning about constrained optimization and local geometry.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Computation</span>
+                <h3>Why Symbolic Structure Helps</h3>
+                <p>
+                    Symbolic computation can derive gradient expressions exactly, simplify them, and expose repeated
+                    substructure before the result is evaluated numerically.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Connections</span>
+                <h2>Gradient, Jacobian, And Hessian</h2>
+                <p>
+                    The gradient is closely related to the Jacobian and Hessian. For a scalar-valued function, the
+                    Jacobian can be viewed as the row-vector version of first derivatives, while the Hessian organizes
+                    second derivatives and local curvature.
+                </p>
+                <p>
+                    This is one reason the gradient belongs naturally beside the existing Jacobian and Hessian pages. It
+                    completes the basic local-geometry chain for multivariable analysis.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./directional-derivative.html">Directional Derivative</a>
+                    <a class="button-link secondary" href="./jacobian-matrix.html">Jacobian Matrix</a>
+                    <a class="button-link secondary" href="./hessian-matrix.html">Hessian Matrix</a>
+                    <a class="button-link secondary" href="./lagrange-multipliers.html">Lagrange Multipliers</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Practical Use</span>
+                <h2>Why The Gradient Keeps Reappearing</h2>
+                <p>
+                    Gradient descent, local sensitivity, constrained optimization, and many symbolic derivation tasks
+                    all depend on having a clean first-order description of how a function changes. The gradient is the
+                    standard object for that job.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

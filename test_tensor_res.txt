@@ -1,0 +1,1 @@
+MatMul(MatMul(Stack(0, g1, g2), Stack(0, X, Y)), W)

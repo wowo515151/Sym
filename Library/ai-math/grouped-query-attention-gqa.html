@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Grouped-Query Attention (GQA): The Symbolic Middle Ground</title>
+    <meta name="description" content="A symbolic analysis of Grouped-Query Attention (GQA) as an optimal trade-off between MHA and MQA for GPU throughput." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Grouped-Query Attention (GQA)</h1>
+            <p class="hero-copy">
+                Grouped-Query Attention (GQA) is the architectural breakthrough that allows models like 
+                Llama-3 and Mistral to maintain high quality while significantly reducing memory 
+                bandwidth pressure. Symbolically, GQA is a generalized form of attention that groups 
+                multiple query heads to share a single key-value pair.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The Memory Wall: MHA vs. MQA</h2>
+                <p>
+                    In <strong>Multi-Head Attention (MHA)</strong>, every query head has its own KV head, 
+                    leading to massive KV caches that don't fit in GPU memory for long sequences. 
+                    In <strong>Multi-Query Attention (MQA)</strong>, all query heads share one KV head, 
+                    which saves memory but can degrade model quality.
+                </p>
+                <p>
+                    GQA solves this by partitioning query heads into <code>G</code> groups. Each group 
+                    shares one KV head. This is the "Goldilocks" solution for modern LLMs.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Representing Head Partitioning</h2>
+                <p>
+                    Symbolically, GQA is represented as a <strong>Blocked Reshape and Repeat</strong> operation 
+                    on the KV tensors before the attention MatMul. 
+                </p>
+                <p>
+                    Instead of a 1:1 or N:1 mapping, the engine sees a <code>GroupedRepeat</code> pattern:
+                    <br><code>K_grouped = Repeat(K, groups=H/G)</code>
+                </p>
+                <p>
+                    This allows the symbolic optimizer to identify <strong>Broadcast-MatMul</strong> 
+                    fusion opportunities. Instead of physically repeating the K/V tensors in memory 
+                    (which wastes space), the engine instructs the GPU to use a broadcast-aware 
+                    attention kernel that reads each KV head once and uses it for all queries in the group.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Maximizing Tokens-Per-Second</h2>
+                <p>
+                    The primary bottleneck for LLM inference is <strong>Memory Bandwidth</strong>, not 
+                    compute. GQA reduces the amount of KV data that must be loaded from HBM (High Bandwidth 
+                    Memory) for every token generated.
+                </p>
+                <p>
+                    By symbolically optimizing the GQA dispatch, we can ensure that the GPU's Tensor Cores 
+                    stay busy while the memory controllers handle a much smaller data stream, resulting 
+                    in 2x-3x higher inference throughput for large-batch serving.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Trace</span>
+                <h2>Logical Mapping</h2>
+                <div class="code-block">
+                    // GQA Structural Identity
+                    GQA(Q, K, V) = MultiHeadAttention(Q, Repeat(K, G), Repeat(V, G))
+                    <br><br>
+                    // Symbolic Optimization Target
+                    MatMul(Q, Transpose(Repeat(K, G))) -> BroadcastMatMul(Q, Transpose(K))
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

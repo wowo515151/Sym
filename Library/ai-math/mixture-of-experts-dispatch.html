@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mixture of Experts (MoE): Symbolic Dispatch and Stacking</title>
+    <meta name="description" content="A symbolic analysis of expert dispatch and kernel stacking in Mixture of Experts (MoE) architectures." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Mixture of Experts (MoE) Dispatch</h1>
+            <p class="hero-copy">
+                MoE models like Mixtral and DeepSeek achieve massive parameter counts with 
+                relatively low compute by only activating a subset of "experts" for each token. 
+                Optimizing the dispatch and execution of these experts is a symbolic challenge 
+                involving dynamic stacking and gated MatMuls.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>Sparse Computation, Dense Latency</h2>
+                <p>
+                    In an MoE layer, a <strong>Gating Network</strong> decides which expert <code>E<sub>i</sub></code> 
+                    processes which token. Mathematically:
+                    <br><code>Result = &Sigma; Gating(X)<sub>i</sub> &times; Expert<sub>i</sub>(X)</code>
+                </p>
+                <p>
+                    If implemented naively as individual matrix multiplications for each token-expert 
+                    pair, the GPU occupancy drops significantly. The overhead of many small kernels 
+                    stalls the pipeline.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Expert Stacking and Shared Sinks</h2>
+                <p>
+                    Symbolic engines identify that the experts share the same structural form, differing 
+                    only in their weight values. This allows for **Expert Stacking**:
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Identify Commonality:</strong> Recognize that all <code>Expert<sub>i</sub></code> paths are <code>MatMul(X, W<sub>i</sub>)</code>.</li>
+                    <li><strong>Symbolic Rewrite:</strong> Transform the sum of gated products into a single <strong>Grouped MatMul</strong> or <strong>Stacked Kernel</strong>.</li>
+                </ul>
+                <p>
+                    By rewriting the graph to use <code>GroupedMatMul(X, StackedWeights, GatingIndices)</code>, 
+                    we move from <code>N</code> small kernels to 1 unified kernel that handles the entire 
+                    MoE block in a single pass.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Throughput for Large Scale Models</h2>
+                <p>
+                    The efficiency of MoE depends entirely on the <strong>Dispatch/Combine</strong> overhead. 
+                    Symbolic optimization ensures that the router's decisions are translated into 
+                    hardware-friendly batch operations.
+                </p>
+                <p>
+                    This is critical for models like <strong>Llama-3-MoE</strong> or <strong>DeepSeek-V3</strong>, 
+                    where the routing logic must be fused with the expert computation to minimize 
+                    GPU stalls and synchronize expert outputs efficiently.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Proof</span>
+                <h2>E-Graph Trace</h2>
+                <div class="code-block">
+                    // Original MoE Gated Sum
+                    TensorAdd(TensorMul(MatMul(X1, W1), g1), TensorMul(MatMul(X2, W2), g2))
+                    <br><br>
+                    // Rule Applied: StackWeightedSum
+                    TensorAdd(TensorMul(?r1, ?w1), TensorMul(?r2, ?w2)) -> 
+                    MatMul(Stack(0, ?w1, ?w2), Stack(0, ?r1, ?r2))
+                    <br><br>
+                    // Result (Grouped Expert Kernel)
+                    MatMul(StackedExperts, DispatchedTokens)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

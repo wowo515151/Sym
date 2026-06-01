@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RMSNorm: Symbolic Simplification for Modern LLMs</title>
+    <meta name="description" content="A symbolic analysis of Root Mean Square Normalization (RMSNorm) and its optimization in Transformer models." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>RMSNorm Symbolic Optimization</h1>
+            <p class="hero-copy">
+                RMSNorm has replaced LayerNorm in most modern LLMs (Llama, Gemma, Mistral) due to its 
+                simplicity and computational efficiency. Symbolically, RMSNorm removes the mean-centering 
+                requirement, allowing for a faster, more stable normalization kernel.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The Overhead of Mean Centering</h2>
+                <p>
+                    Standard <strong>LayerNorm</strong> requires calculating the mean and variance of 
+                    the activations:
+                    <br><code>&mu; = E[X]</code>, <code>&sigma;<sup>2</sup> = E[(X - &mu;)<sup>2</sup>]</code>
+                </p>
+                <p>
+                    Subtracting the mean <code>&mu;</code> from every element in the tensor is a 
+                    re-centering step that adds significant memory traffic. Researchers found that 
+                    the primary benefit of normalization comes from the **scaling**, not the centering.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>The RMS Approximation</h2>
+                <p>
+                    RMSNorm simplifies the normalization factor by assuming the mean is zero:
+                    <br><code>RMS(X) = &radic;(E[X<sup>2</sup>] + &epsilon;)</code>
+                    <br><code>Output = (X / RMS(X)) &times; &gamma;</code>
+                </p>
+                <p>
+                    Symbolically, this reduces the operation to a single-pass calculation:
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Fused Power-Sum:</strong> Compute <code>&Sigma;X<sup>2</sup></code> in one pass.</li>
+                    <li><strong>No Re-centering:</strong> Skip the <code>X - &mu;</code> subtraction entirely.</li>
+                </ul>
+                <p>
+                    By identifying the <code>RMSNorm</code> pattern, a symbolic compiler can replace 
+                    the entire block with a <strong>Fused RMSNorm Kernel</strong> that is up to 40% 
+                    faster than a generic LayerNorm implementation.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Hardware-Efficient Normalization</h2>
+                <p>
+                    On GPUs, the <code>RMSNorm</code> kernel is heavily <strong>memory-bound</strong>. 
+                    Reducing the number of passes through the data from two (mean, then variance) to 
+                    one (RMS) directly translates to higher throughput.
+                </p>
+                <p>
+                    Furthermore, because <code>RMSNorm</code> is linear with respect to scaling, 
+                    any gain parameters <code>&gamma;</code> can often be <strong>symbolically folded</strong> 
+                    into the following Linear layer, further reducing kernel overhead.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Proof</span>
+                <h2>Trace</h2>
+                <div class="code-block">
+                    // Original Expression (LayerNorm variant)
+                    TensorMul(TensorDiv(TensorAdd(X, -Mean(X)), Std(X)), Gamma)
+                    <br><br>
+                    // Optimized Identity (RMSNorm)
+                    TensorMul(TensorDiv(X, Sqrt(Mean(Pow(X, 2)))), Gamma)
+                    <br><br>
+                    // Result (Single-Pass Kernel)
+                    FusedRMSNorm(X, Gamma)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

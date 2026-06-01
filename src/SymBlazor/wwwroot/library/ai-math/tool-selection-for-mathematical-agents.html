@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tool Selection For Mathematical Agents</title>
+    <meta name="description" content="How mathematical agents choose between symbolic tools, theorem provers, numerical methods, and free-form reasoning." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>Tool Selection For Mathematical Agents</h1>
+            <p class="hero-copy">
+                A mathematical agent becomes more useful when it chooses tools well. The central question is not whether
+                it can use many tools, but whether it can route the current subproblem to the right one.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Main Question</span>
+                <h2>What Kind Of Subproblem Is This?</h2>
+                <p>
+                    Some subproblems want exact symbolic work. Some want theorem-style justification. Some want numerical
+                    approximation. Some want ordinary high-level reasoning and planning. Tool selection starts by
+                    recognizing which kind of mathematical labor is actually needed right now.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Good Routing Is Part Of Good Reasoning</h2>
+                <p>
+                    A model that keeps the whole task inside free-form prose will often be too weak. A model that calls
+                    heavy tools constantly will be clumsy and expensive. Strong agents find the boundary where exact
+                    tooling adds real value and use it deliberately.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Common Options</span>
+                <h3>Symbolic, Theorem, Numerical, Or Prose</h3>
+                <p>
+                    A practical mathematical agent may switch between symbolic tools such as SymCLI, theorem-prover or
+                    verifier layers, numerical solvers, graphing tools, and ordinary notebook writing. The quality of
+                    the system depends heavily on how it chooses among them.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Rule Of Thumb</span>
+                <h3>Route By Risk And Structure</h3>
+                <p>
+                    The more exactness-sensitive and structure-dependent the step is, the stronger the case for a formal
+                    or symbolic tool. The more exploratory and strategic the step is, the stronger the case for ordinary
+                    reasoning and note-taking.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Architecture</span>
+                <h2>Tool Selection Is A Core Agent Skill</h2>
+                <p>
+                    Tool selection should not be treated as a tiny implementation detail. It is part of the agent's core
+                    mathematical competence. Good routing reduces hallucination, improves efficiency, and makes later
+                    verification much easier.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>Continue Here</h2>
+                <p>
+                    This topic belongs directly beside SymCLI call timing, exact tools, symbolic versus theorem
+                    workflows, and branch management.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./when-should-an-ai-agent-call-symcli.html">When To Call SymCLI</a>
+                    <a class="button-link secondary" href="./exact-tools-for-ai-mathematicians.html">Exact Tools</a>
+                    <a class="button-link secondary" href="./symbolic-computation-vs-theorem-proving.html">Symbolic Vs Theorem Proving</a>
+                    <a class="button-link secondary" href="./branch-and-compare-mathematical-reasoning.html">Branch And Compare</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

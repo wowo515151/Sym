@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flash-Attention: Symbolic Tiling and Recomputation</title>
+    <meta name="description" content="An analysis of the symbolic tiling and recomputation identities that make Flash-Attention 2-4x faster than standard attention." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Flash-Attention Block Identities</h1>
+            <p class="hero-copy">
+                Standard Attention is quadratic in sequence length, creating a memory bottleneck. 
+                Flash-Attention uses symbolic tiling and recomputation to break the large 
+                attention matrix into blocks that fit in GPU SRAM, eliminating the HBM bottleneck 
+                entirely.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The HBM Memory Wall</h2>
+                <p>
+                    In standard attention, we compute <code>S = Softmax(QK<sup>T</sup>)</code> and then 
+                    <code>O = SV</code>. For a sequence of 8k tokens, the matrix <code>S</code> is 
+                    <code>8000 &times; 8000</code>, which is 64 million elements. 
+                </p>
+                <p>
+                    Writing this massive matrix to the GPU's main memory (HBM) and reading it back 
+                    is the primary bottleneck. Most of the GPU's compute power sits idle while 
+                    waiting for these memory transfers.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Tiling and the Softmax Decomposition</h2>
+                <p>
+                    The breakthrough of Flash-Attention is the symbolic realization that 
+                    <code>Softmax(QK<sup>T</sup>)</code> can be calculated incrementally. 
+                    By tiling <code>Q</code>, <code>K</code>, and <code>V</code> into small blocks 
+                    (e.g., <code>128 &times; 128</code>), we can compute the partial attention 
+                    for that block and store it in high-speed **SRAM**.
+                </p>
+                <p>
+                    This depends on the **Online Softmax Identity**:
+                    <br><code>Softmax(X<sub>total</sub>) = Update(Softmax(X<sub>block1</sub>), Softmax(X<sub>block2</sub>))</code>
+                </p>
+                <p>
+                    By maintaining a running normalization factor, we can compute the entire 
+                    Attention mechanism without ever materializing the full <code>N &times; N</code> 
+                    matrix in HBM.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>The Road to 1M Token Context</h2>
+                <p>
+                    Flash-Attention (and its successor Flash-Attention-2) is why we now have 
+                    LLMs with 128k, 1M, or even larger context windows. It changes the 
+                    fundamental compute profile from **memory-bound** to **compute-bound**.
+                </p>
+                <p>
+                    Symbolic engines facilitate this by identifying the high-level 
+                    <code>Attention(Q, K, V)</code> operator and automatically mapping it to 
+                    the tiled implementation, ensuring that the complex re-scaling logic is 
+                    mathematically verified.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Trace</span>
+                <h2>Tiling Rule</h2>
+                <div class="code-block">
+                    // Global Attention
+                    Attention(Q, K, V) = Softmax(MatMul(Q, Transpose(K))) * V
+                    <br><br>
+                    // Symbolic Tiled Form
+                    Iterate(blocks):
+                      acc = Update(acc, Softmax_Tiled(Qi, Ki) * Vi)
+                    <br><br>
+                    // Optimization
+                    Write_HBM(acc)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

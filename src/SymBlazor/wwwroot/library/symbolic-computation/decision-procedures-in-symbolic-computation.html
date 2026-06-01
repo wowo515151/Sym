@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Decision Procedures In Symbolic Computation</title>
+    <meta name="description" content="What decision procedures are in symbolic computation and why some symbolic questions admit exact yes-or-no algorithms instead of open-ended search." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Decision Procedures In Symbolic Computation</h1>
+            <p class="hero-copy">
+                A decision procedure is an algorithm that determines, for a chosen class of symbolic questions, whether
+                the answer is yes or no in a definitive way. This is one of the places where symbolic computation moves
+                beyond heuristic rewriting into stronger algorithmic guarantees.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Main Idea</span>
+                <h2>Some Symbolic Questions Have Exact Algorithms</h2>
+                <p>
+                    Symbolic computation often involves open-ended search, rewrite heuristics, and cost-guided
+                    transformations. But not every task has that character. For some structured domains, there are
+                    procedures that can decide whether an identity holds, whether a constraint set is satisfiable, or
+                    whether a formula has a property of interest.
+                </p>
+                <p>
+                    That matters because it changes the status of the result. The system is no longer merely suggesting a
+                    likely transformation. It is resolving a question within a known formal scope.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Decision Beats Guessing</h2>
+                <p>
+                    When a symbolic engine can use a real decision procedure, the workflow becomes more reliable and more
+                    auditable. This is especially valuable in theorem-oriented work, constraint solving, and AI workflows
+                    that need a trustworthy answer before continuing.
+                </p>
+                <p>
+                    Of course, decision procedures are domain-bounded. Their strength comes from solving a well-defined
+                    class of questions rather than all of mathematics at once.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Typical Uses</span>
+                <h3>Equality, Satisfiability, And Restrictions</h3>
+                <p>
+                    Decision procedures often show up in equivalence checking, quantified fragments of logic, arithmetic
+                    theories, satisfiability-style tasks, and side-condition reasoning. They provide a more exact layer
+                    underneath higher-level symbolic systems.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Practical Boundary</span>
+                <h3>Scope Is The Price Of Certainty</h3>
+                <p>
+                    The reason these algorithms are valuable is also the reason they are limited. They work because the
+                    symbolic domain is controlled enough for exact resolution. Outside that scope, the system usually
+                    returns to search, rewriting, or human-guided structure.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">System Role</span>
+                <h2>How Decision Procedures Fit Into Larger Engines</h2>
+                <p>
+                    In practice, a symbolic engine may mix decision procedures with ordinary simplification, rewrite
+                    search, algebraic normalization, and domain-specific heuristics. The stronger algorithm gets used
+                    when the question fits its scope; the broader symbolic machinery handles the rest.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>Where To Continue</h2>
+                <p>
+                    This topic connects naturally to constraint solving, normal forms, theorem workflows, and exact tool
+                    use inside AI systems.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./constraint-solving-in-symbolic-computation.html">Constraint Solving</a>
+                    <a class="button-link secondary" href="./normal-forms-in-symbolic-computation.html">Normal Forms</a>
+                    <a class="button-link secondary" href="../ai-math/symbolic-computation-vs-theorem-proving.html">Symbolic Vs Theorem Proving</a>
+                    <a class="button-link secondary" href="../ai-math/exact-tools-for-ai-mathematicians.html">Exact Tools</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

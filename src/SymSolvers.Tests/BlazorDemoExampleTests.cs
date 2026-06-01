@@ -40,7 +40,14 @@ namespace SymSolvers.Tests
         {
             return EnumerateExamples("Derivative", BlazorDemoCatalog.DerivativeExamples)
                 .Concat(EnumerateExamples("Rewrite", BlazorDemoCatalog.RewriteExamples))
-                .Concat(EnumerateExamples("Tensor", BlazorDemoCatalog.TensorExamples));
+                .Concat(EnumerateExamples("Tensor", BlazorDemoCatalog.TensorExamples))
+                .Concat(EnumerateExamples("Integration", BlazorDemoCatalog.IntegrationExamples))
+                .Concat(EnumerateExamples("Limit", BlazorDemoCatalog.LimitExamples))
+                .Concat(EnumerateExamples("LinearAlgebra", BlazorDemoCatalog.LinearAlgebraExamples))
+                .Concat(EnumerateExamples("ODE", BlazorDemoCatalog.OdeExamples))
+                .Concat(EnumerateExamples("Recurrence", BlazorDemoCatalog.RecurrenceExamples))
+                .Concat(EnumerateExamples("Series", BlazorDemoCatalog.SeriesExamples))
+                .Concat(EnumerateExamples("Inequality", BlazorDemoCatalog.InequalityExamples));
         }
 
         private static IEnumerable<object?[]> EnumerateExamples(string category, IReadOnlyList<BlazorDemoExample> examples)

@@ -1,0 +1,1 @@
+Derivative(cos(x), x) * sin(x) + Derivative(sin(x), x) * cos(x)

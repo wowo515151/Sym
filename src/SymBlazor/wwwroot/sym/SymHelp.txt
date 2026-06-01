@@ -1,4 +1,4 @@
-This Sym help file has been written in .txt so that it can easily be used by AI agents. Feel free to copy it, SymbolicComputation.com.
+This Sym help file has been written in .txt so that it can easily be used by AI agents. Feel free to copy it, SymAI.NET.
 
 Sym Reference
 Sym, EGraphs, and Rule Sets

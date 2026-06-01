@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SwiGLU: Symbolic Fusion of Gated Linear Units</title>
+    <meta name="description" content="A symbolic analysis of the SwiGLU activation function and its fusion into a single GPU kernel for Llama and PaLM architectures." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>SwiGLU Activation Fusion</h1>
+            <p class="hero-copy">
+                SwiGLU has emerged as the superior activation function for Large Language Models, 
+                powering Llama-3, Mistral, and PaLM. Unlike simple activations like Relu, SwiGLU is 
+                a "Gated Linear Unit" that combines two linear projections with a non-linear gate. 
+                Symbolic fusion is what makes this complex operation hardware-efficient.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The Triple-Linear Bottleneck</h2>
+                <p>
+                    The SwiGLU operation is defined as:
+                    <br><code>SwiGLU(x) = (SiLU(xW) &otimes; xV)</code>
+                </p>
+                <p>
+                    In a naive implementation, this requires three distinct GPU operations:
+                </p>
+                <ol class="article-list">
+                    <li><strong>Projection 1:</strong> <code>xW</code> (MatMul)</li>
+                    <li><strong>Projection 2:</strong> <code>xV</code> (MatMul)</li>
+                    <li><strong>Gate & Multiply:</strong> <code>SiLU(gate) &times; value</code> (Element-wise)</li>
+                </ol>
+                <p>
+                    Executing these separately results in three memory round-trips, which creates a 
+                    significant bottleneck in the Feed-Forward Network (FFN) layers.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Gated Fusion Identity</h2>
+                <p>
+                    Symbolic engines identify the SwiGLU pattern as a <strong>Dual-Projection Gate</strong>. 
+                    Instead of seeing two separate <code>MatMuls</code>, the engine sees a single 
+                    operation on a concatenated weight matrix:
+                    <br><code>x &times; [W | V]</code>
+                </p>
+                <p>
+                    This allows for **Kernel Fusion**:
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Unified GEMM:</strong> Perform one large matrix multiplication to get both 
+                    <code>gate</code> and <code>value</code> in one pass.</li>
+                    <li><strong>Fused Activation:</strong> Apply the <code>SiLU</code> and the element-wise 
+                    product <code>&otimes;</code> inside the GEMM's epilogue (the final step of the kernel).</li>
+                </ul>
+                <p>
+                    This reduces the entire SwiGLU block to <strong>exactly one GPU kernel launch</strong>, 
+                    eliminating the memory overhead of the intermediate results.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Better Learning at Lower Cost</h2>
+                <p>
+                    SwiGLU provides better mathematical expressive power than Relu or Gelu, but it 
+                    would be too expensive to use without symbolic fusion. 
+                </p>
+                <p>
+                    By identifying the <code>GatedLinearUnit</code> pattern, symbolic compilers like 
+                    <strong>Triton</strong> or <strong>XLA</strong> can automatically generate 
+                    the fused kernel code, allowing AI researchers to use more sophisticated 
+                    architectures without a performance penalty.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Trace</span>
+                <h2>FFN Fusion</h2>
+                <div class="code-block">
+                    // Original FFN Layer
+                    Mul(SiLU(MatMul(X, W)), MatMul(X, V))
+                    <br><br>
+                    // Step 1: Weight Stacking
+                    MatMul(X, Stack(W, V)) -> [Gate, Value]
+                    <br><br>
+                    // Step 2: Fused Epilogue
+                    FusedSwiGLU(Gate, Value)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

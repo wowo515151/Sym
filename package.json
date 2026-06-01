@@ -1,0 +1,8 @@
+{
+  "name": "symwork-js-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:js-tools": "node --test tests/js-tools/**/*.test.js"
+  }
+}

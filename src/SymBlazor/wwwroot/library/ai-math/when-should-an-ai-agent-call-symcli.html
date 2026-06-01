@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>When Should An AI Agent Call SymCLI?</title>
+    <meta name="description" content="A practical guide to when AI agents should call SymCLI for exact symbolic work instead of relying on text-only reasoning." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>When Should An AI Agent Call SymCLI?</h1>
+            <p class="hero-copy">
+                An AI agent should call SymCLI when the next step depends on exact mathematical structure rather than on
+                plausible prose. The key question is not can the model probably answer, but whether the workflow needs a
+                dependable symbolic result.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Rule Of Thumb</span>
+                <h2>Call The Tool At Exactness Boundaries</h2>
+                <p>
+                    SymCLI is a good fit when the task involves simplification, symbolic differentiation, exact algebra,
+                    tensor expression optimization, or a mathematical code-analysis step where informal reasoning would
+                    be risky. If the outcome of the step will control later choices, the agent usually benefits from an
+                    exact tool call.
+                </p>
+                <p>
+                    By contrast, the agent can usually stay in free-form reasoning mode for framing the problem,
+                    proposing strategies, writing summaries, comparing high-level alternatives, or deciding what exact
+                    subproblem should be sent to SymCLI next.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Main Principle</span>
+                <h2>Use Language For Strategy, SymCLI For Structure</h2>
+                <p>
+                    A useful division of labor is simple: the model handles intent, explanation, search, and orchestration.
+                    SymCLI handles correctness-sensitive symbolic work. That split keeps the agent flexible without
+                    pretending that fluent text is a substitute for exact transformation.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Strong Call Cases</span>
+                <h2>Good Times To Invoke SymCLI</h2>
+                <ul class="lead-list">
+                    <li>The agent needs to simplify or normalize an expression before comparing alternatives.</li>
+                    <li>The next step depends on an exact derivative, integral, factorization, or rewrite.</li>
+                    <li>A tensor or expression-graph optimization should be validated symbolically instead of guessed.</li>
+                    <li>The agent needs a machine-readable code-analysis result from <code>analyze csharp-math</code>.</li>
+                    <li>The workflow would become expensive or misleading if a small algebraic error slipped through.</li>
+                </ul>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Maybe Not Yet</span>
+                <h2>Times To Wait Before Calling</h2>
+                <ul class="lead-list">
+                    <li>The user is still clarifying the goal and no exact subproblem has been identified.</li>
+                    <li>The agent is gathering context, reading definitions, or comparing broad approaches.</li>
+                    <li>The step is mostly editorial, explanatory, or organizational rather than symbolic.</li>
+                    <li>A quick human-readable note would be more useful than an exact symbolic artifact at that moment.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Practical Loop</span>
+                <h3>Use Small Exact Calls</h3>
+                <p>
+                    The strongest pattern is often to call SymCLI on a narrow subproblem, record the result, and then
+                    continue the broader reasoning from there. This keeps the workflow grounded without overloading the
+                    tool boundary.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Tool Discipline</span>
+                <h3>Better Calls Lead To Better Agents</h3>
+                <p>
+                    A strong mathematical agent is not one that calls tools constantly. It is one that calls the right
+                    tool at the right moment and then actually uses the returned artifact to guide the next step.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>How This Fits Into A Larger Workflow</h2>
+                <p>
+                    The decision to call SymCLI is really a decision about architecture. It belongs next to math tool
+                    use, ReAct loops, plan-and-execute design, and verifier-guided reasoning. The more serious the
+                    mathematical work becomes, the more important these exact-call decisions become.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./symcli-for-ai-agents.html">SymCLI For AI Agents</a>
+                    <a class="button-link secondary" href="./math-tool-use.html">Math Tool Use</a>
+                    <a class="button-link secondary" href="./react-for-mathematical-agents.html">ReAct</a>
+                    <a class="button-link secondary" href="./plan-and-execute-for-ai-mathematicians.html">Plan And Execute</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Fibonacci Sequence: Symbolic Closed-Form Derivation</title>
+    <meta name="description" content="A derivation of Binet's formula for the Fibonacci sequence using symbolic recurrence rules." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Advanced Mathematics / Discrete Math</p>
+            <h1>The Fibonacci Sequence: Binet's Formula</h1>
+            <p class="hero-copy">
+                The Fibonacci sequence is defined by a simple recurrence: <code>F<sub>n</sub> = F<sub>n-1</sub> + F<sub>n-2</sub></code>. 
+                However, to compute the n-th Fibonacci number efficiently, we use Binet's formula, which 
+                provides a direct closed-form expression in terms of the Golden Ratio (&phi;).
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The Cost of Recurrence</h2>
+                <p>
+                    A naive recursive implementation of Fibonacci has <strong>exponential time complexity</strong> 
+                    <code>O(2<sup>n</sup>)</code>. While memoization or dynamic programming reduces this to 
+                    <code>O(n)</code>, a closed-form symbolic expression allows us to compute 
+                    <code>F<sub>n</sub></code> in <strong>constant time</strong> <code>O(1)</code>.
+                </p>
+                <p>
+                    Deriving this formula involves solving the characteristic equation of the 
+                    linear recurrence relation.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Solving the Characteristic Equation</h2>
+                <p>
+                    The recurrence <code>F<sub>n</sub> - F<sub>n-1</sub> - F<sub>n-2</sub> = 0</code> has 
+                    a characteristic polynomial:
+                    <br><code>r<sup>2</sup> - r - 1 = 0</code>
+                </p>
+                <p>
+                    Using the quadratic formula, a symbolic engine finds the roots:
+                </p>
+                <ul class="lead-list">
+                    <li><code>r<sub>1</sub> = (1 + &radic;5) / 2</code> (&phi;)</li>
+                    <li><code>r<sub>2</sub> = (1 - &radic;5) / 2</code> (&psi;)</li>
+                </ul>
+                <p>
+                    Binet's formula is then: 
+                    <code>F<sub>n</sub> = (&phi;<sup>n</sup> - &psi;<sup>n</sup>) / &radic;5</code>.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>The Golden Ratio in Nature and Computing</h2>
+                <p>
+                    Binet's formula is the ultimate example of how <strong>irrational numbers</strong> 
+                    (&radic;5) can combine to form a sequence of pure <strong>integers</strong>.
+                </p>
+                <p>
+                    In computer science, this formula is used to analyze the complexity of the Euclidean 
+                    algorithm and is a prime case study for the <strong>Eigenvalue method</strong> 
+                    of solving systems of difference equations.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Proof</span>
+                <h2>Recurrence Rule Trace</h2>
+                <p>
+                    The Sym engine uses the <code>RecurrenceLinear</code> rule set to identify the linear 
+                    homogenous recurrence and apply the closed-form transformation.
+                </p>
+                <div class="code-block">
+                    // Rule Applied: RecurrenceLinear
+                    F(n) = a*F(n-1) + b*F(n-2) -> ClosedForm(F(n))
+                    <br><br>
+                    // Resulting Identity
+                    F(n) = ((1+sqrt(5))/2)^n / sqrt(5) - ((1-sqrt(5))/2)^n / sqrt(5)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

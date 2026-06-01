@@ -1,0 +1,58 @@
+@page "/recurrence-demo"
+
+<div class="demo-page">
+    <div class="demo-page-shell">
+        <section class="demo-hero">
+            <p class="demo-kicker">Sym Exact Workflow</p>
+            <h1>Recurrence Demo</h1>
+            <p class="demo-summary">
+                This page exposes Sym's discrete recurrence solver through a browser workflow built around exact
+                target-term queries and constant-coefficient recurrences.
+            </p>
+            <p class="demo-summary">
+                Instead of treating recurrences as a hidden edge case, the demo makes their expected script shape clear:
+                one recurrence relation, enough initial conditions, and an explicit target term such as <code>a(5)</code>.
+            </p>
+
+            <div class="demo-notes">
+                <div class="demo-note-card">
+                    <h2>What This Demo Exercises</h2>
+                    <p>
+                        Sym routes recurrence-shaped equation sets into the discrete recurrence strategy, which extracts a
+                        closed form and then evaluates the requested target term when enough initial data is present.
+                    </p>
+                </div>
+                <div class="demo-note-card">
+                    <h2>Technical Focus</h2>
+                    <ul>
+                        <li>Recurrence relations written as <code>a(n) = ...</code></li>
+                        <li>Initial conditions such as <code>a(0) = 3</code> and explicit target terms like <code>a(5)</code></li>
+                        <li>Discrete symbolic workflows that are now visible in the web UI</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <SymDemoWorkbench Examples="@Examples" InitialInput="@Examples[0].Script" />
+    </div>
+</div>
+
+@code {
+    private static readonly IReadOnlyList<BlazorDemoExample> Examples = BlazorDemoCatalog.RecurrenceExamples;
+}
+
+<style>
+    .demo-page { min-height: 100vh; padding: 1.5rem; color: #edf5ff; background: radial-gradient(circle at top left, rgba(74, 144, 226, 0.14), transparent 28rem), linear-gradient(180deg, #06111f 0%, #081a31 100%); }
+    .demo-page-shell { width: min(1180px, 100%); margin: 0 auto; }
+    .demo-hero { margin-bottom: 1.35rem; }
+    .demo-kicker { margin: 0 0 0.4rem; color: #89d1b6; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+    .demo-page h1 { margin: 0; color: #edf5ff; font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif; }
+    .demo-summary { max-width: 60rem; margin: 0.75rem 0 0; color: #edf5ff; line-height: 1.65; }
+    .demo-notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.15rem; }
+    .demo-note-card { padding: 1rem 1.1rem; border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 0.95rem; background: rgba(6, 17, 31, 0.68); color: #edf5ff; }
+    .demo-note-card h2 { margin: 0 0 0.55rem; font-size: 1rem; color: #edf5ff; }
+    .demo-note-card p, .demo-note-card li { color: #edf5ff; line-height: 1.6; }
+    .demo-note-card ul { margin: 0; padding-left: 1.2rem; }
+    .demo-note-card code { color: #edf5ff; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.3rem; border-radius: 0.35rem; }
+    @@media (max-width: 900px) { .demo-page { padding: 1rem; } .demo-notes { grid-template-columns: 1fr; } }
+</style>

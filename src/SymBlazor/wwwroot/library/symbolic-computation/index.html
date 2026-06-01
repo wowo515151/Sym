@@ -46,8 +46,26 @@
 
         <section class="section">
             <article class="panel prose quote-panel">
-                <span class="mini-label">Read First</span>
-                <h2>Core Concepts</h2>
+                <span class="mini-label">Navigation</span>
+                <h2>Read This Section By Layer</h2>
+                <p>
+                    The symbolic-computation library is easiest to navigate as four connected layers: representation,
+                    rewriting, stronger exact methods, and applications. That makes it easier to see where a page fits
+                    and reduces the sense that every article is repeating the same story.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./expression-trees.html">Representation</a>
+                    <a class="button-link secondary" href="./term-rewriting-systems.html">Rewriting</a>
+                    <a class="button-link secondary" href="./decision-procedures-in-symbolic-computation.html">Exact Methods</a>
+                    <a class="button-link secondary" href="./symbolic-differentiation.html">Applications</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Layer One</span>
+                <h2>Representation And Matching</h2>
                 <div class="article-list">
                     <div class="article-item">
                         <h3><a href="./what-is-symbolic-computation.html">What Is Symbolic Computation?</a></h3>
@@ -85,7 +103,154 @@
                         <h3><a href="./unification.html">What Is Unification?</a></h3>
                         <p>A practical introduction to structural variable binding in logic, theorem proving, and symbolic rule systems.</p>
                     </div>
+                    <div class="article-item">
+                        <h3><a href="./what-is-a-computer-algebra-system.html">What Is A Computer Algebra System?</a></h3>
+                        <p>How symbolic software turns exact mathematical structure into an operational tool rather than a notation-only object.</p>
+                    </div>
                 </div>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Layer Two</span>
+                <h2>Rewriting, Normalization, And Search</h2>
+                <div class="article-list">
+                    <div class="article-item">
+                        <h3><a href="./what-is-symbolic-simplification.html">What Is Symbolic Simplification?</a></h3>
+                        <p>Why simplification is context-dependent and how symbolic systems choose useful forms instead of merely shorter strings.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./what-is-symbolic-integration.html">What Is Symbolic Integration?</a></h3>
+                        <p>Why exact integration is harder than differentiation and how symbolic systems search for antiderivatives.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./confluence-in-term-rewriting.html">Confluence In Term Rewriting</a></h3>
+                        <p>How rewrite systems stay consistent when different valid rewrite paths are possible.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./termination-in-term-rewriting.html">Termination In Term Rewriting</a></h3>
+                        <p>Why symbolic rewrite systems can loop and how real engines control rule application.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./associative-commutative-matching.html">Associative-Commutative Matching Explained</a></h3>
+                        <p>Why matching under addition and multiplication is harder than ordinary tree matching.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./substitution-in-symbolic-computation.html">Substitution In Symbolic Computation</a></h3>
+                        <p>Why substitution is a structural operation rather than string replacement, and how it powers rewriting.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./normal-forms-in-symbolic-computation.html">Normal Forms In Symbolic Computation</a></h3>
+                        <p>What it means for rewriting to stop, and why that does not automatically guarantee a unique best form.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./completion-procedures-in-rewriting.html">Completion Procedures In Rewriting</a></h3>
+                        <p>Why some rule systems need derived rules and better orientation before normalization becomes reliable.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./rewrite-strategies-in-symbolic-computation.html">Rewrite Strategies In Symbolic Computation</a></h3>
+                        <p>Why rule control, traversal, and priority matter as much as the rewrite rules themselves.</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Layer Three</span>
+                <h2>Constraints, Decisions, And Verification</h2>
+                <div class="article-list">
+                    <div class="article-item">
+                        <h3><a href="./constraint-solving-in-symbolic-computation.html">Constraint Solving In Symbolic Computation</a></h3>
+                        <p>How symbolic systems reason about side conditions, domains, and shape-like restrictions.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./decision-procedures-in-symbolic-computation.html">Decision Procedures In Symbolic Computation</a></h3>
+                        <p>Why some symbolic questions admit exact yes-or-no procedures instead of open-ended search.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./symbolic-solving-vs-numerical-solving.html">Symbolic Solving Vs Numerical Solving</a></h3>
+                        <p>How exact structural solving differs from approximation-oriented numerical solving.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./symbolic-verification-of-transformations.html">Symbolic Verification Of Transformations</a></h3>
+                        <p>Why symbolic systems need to check that simplifications and rewrites really preserve meaning.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./symbolic-equivalence-checking.html">Symbolic Equivalence Checking</a></h3>
+                        <p>How symbolic engines decide whether different expressions or graphs preserve the same meaning.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./smt-solvers-in-symbolic-computation.html">SMT Solvers In Symbolic Computation</a></h3>
+                        <p>How satisfiability modulo theories strengthens symbolic workflows with exact logical decision support.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Layer Four</span>
+                <h2>Core Application Patterns</h2>
+                <div class="article-list">
+                    <div class="article-item">
+                        <h3><a href="./symbolic-differentiation.html">Symbolic Differentiation Explained</a></h3>
+                        <p>How derivative rules operate on expression structure and why exact derivatives remain useful objects.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./what-is-symbolic-integration.html">What Is Symbolic Integration?</a></h3>
+                        <p>Why exact integration is harder than differentiation and how symbolic systems search for antiderivatives.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./symbolic-solving-vs-numerical-solving.html">Symbolic Solving Vs Numerical Solving</a></h3>
+                        <p>How exact structural solving differs from approximation-oriented numerical solving.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="../ai-math/tensor-expression-graphs.html">Tensor Expression Graphs</a></h3>
+                        <p>How symbolic reasoning extends into tensor-style workloads, graph optimization, and AI-oriented expressions.</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Interactive Companion</span>
+                <h3>Try The Concepts In A Browser Tool</h3>
+                <p>
+                    This section now has companion tools for small-scale symbolic experimentation. The rewrite lab,
+                    unification lab, and tensor index lab are not replacements for the full Sym engine, but they make
+                    the mechanics of rule application, variable binding, and index notation much easier to inspect.
+                </p>
+                <div class="card-actions">
+                    <a class="button-link secondary" href="../../tools/symbolic-rewrite-lab.html">Rewrite Lab</a>
+                    <a class="button-link secondary" href="../../tools/unification-lab.html">Unification Lab</a>
+                    <a class="button-link secondary" href="../../tools/tensor-index-lab.html">Tensor Index Lab</a>
+                </div>
+            </article>
+
+            <article class="topic-card prose">
+                <span class="mini-label">Suggested Path</span>
+                <h3>A Better Reading Order</h3>
+                <p>
+                    The cleanest progression is to start with representation, then learn rewrite mechanics, then learn
+                    the global properties of rewrite systems, and only after that move into stronger exact methods such
+                    as constraint solving, decision procedures, and verification.
+                </p>
+                <ul class="topic-list">
+                    <li>What Is Symbolic Computation?</li>
+                    <li>Expression Trees, Pattern Matching, And Unification</li>
+                    <li>Term Rewriting, Simplification, Confluence, And Termination</li>
+                    <li>Normal Forms, Completion, And Equality Saturation</li>
+                    <li>Constraint Solving, Decision Procedures, And Verification</li>
+                </ul>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Section Shape</span>
+                <h3>From Local Rules To Exact Guarantees</h3>
+                <p>
+                    One organizing theme in this section is the movement from local rule application to stronger global
+                    behavior. Early pages explain how expressions are represented and rewritten. Later pages explain how
+                    real systems control those rules, compare equivalent forms, and sometimes answer questions with
+                    stronger guarantees than heuristic search alone can provide.
+                </p>
             </article>
         </section>
 
@@ -104,6 +269,7 @@
                 </p>
                 <div class="card-actions">
                     <a class="button-link secondary" href="./expression-trees.html">Read More</a>
+                    <a class="button-link ghost" href="./substitution-in-symbolic-computation.html">Substitution</a>
                 </div>
             </article>
             <article class="feature-card">
@@ -120,6 +286,7 @@
                 </p>
                 <div class="card-actions">
                     <a class="button-link secondary" href="./pattern-matching.html">Pattern Matching</a>
+                    <a class="button-link ghost" href="./associative-commutative-matching.html">AC Matching</a>
                 </div>
             </article>
             <article class="feature-card">
@@ -156,6 +323,13 @@
                     not enough on their own. A useful symbolic engine also needs trustworthy rewrites, a way to compare
                     equivalent expressions, and some notion of cost or preference.
                 </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./what-is-symbolic-simplification.html">Simplification</a>
+                    <a class="button-link secondary" href="./confluence-in-term-rewriting.html">Confluence</a>
+                    <a class="button-link secondary" href="./termination-in-term-rewriting.html">Termination</a>
+                    <a class="button-link secondary" href="./normal-forms-in-symbolic-computation.html">Normal Forms</a>
+                    <a class="button-link secondary" href="./symbolic-verification-of-transformations.html">Verification</a>
+                </div>
             </article>
 
             <article class="panel prose">
@@ -171,7 +345,10 @@
                     <a class="button-link secondary" href="./term-rewriting-systems.html">Rewriting Systems</a>
                     <a class="button-link secondary" href="./e-graphs.html">Equality Saturation</a>
                     <a class="button-link secondary" href="./symbolic-differentiation.html">Symbolic Differentiation</a>
+                    <a class="button-link secondary" href="./what-is-symbolic-integration.html">Symbolic Integration</a>
                     <a class="button-link secondary" href="./unification.html">Unification</a>
+                    <a class="button-link secondary" href="./constraint-solving-in-symbolic-computation.html">Constraint Solving</a>
+                    <a class="button-link secondary" href="./decision-procedures-in-symbolic-computation.html">Decision Procedures</a>
                     <a class="button-link secondary" href="../ai-math/tensor-expression-graphs.html">Tensor Optimization</a>
                     <a class="button-link ghost" href="../../open-sym.html?route=rewrite-demo&amp;label=Rewrite%20Demo">Rewrite Demo</a>
                 </div>
@@ -205,13 +382,27 @@
                     mean pushing toward a normal form. In another it may mean exploring many forms first and deciding
                     later which one is best for the task at hand.
                 </p>
+                <p>
+                    The same section now also covers rewrite-system properties such as confluence and termination, along
+                    with harder matching cases like associative-commutative operators, because those details often
+                    determine whether a symbolic engine feels robust or brittle.
+                </p>
+                <p>
+                    It also now extends into substitution, normal forms, completion procedures, and constraint solving,
+                    which are exactly the concepts that start to distinguish serious symbolic infrastructure from
+                    lightweight algebra demos.
+                </p>
+                <p>
+                    Decision procedures, symbolic solving, and verification push the section further toward the point
+                    where symbolic computation overlaps with formal reasoning and exact tool support for larger systems.
+                </p>
             </article>
         </section>
 
         <div class="product-shell">
             <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
         </div>
-        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
     </main>
 </body>
 </html>

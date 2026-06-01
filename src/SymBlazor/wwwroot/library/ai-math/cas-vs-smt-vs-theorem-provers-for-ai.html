@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CAS Vs SMT Vs Theorem Provers For AI</title>
+    <meta name="description" content="How AI mathematical agents should think about CAS tools, SMT solvers, and theorem provers, and when each tool family is the right fit." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>CAS Vs SMT Vs Theorem Provers For AI</h1>
+            <p class="hero-copy">
+                Computer algebra systems, SMT solvers, and theorem provers all help mathematical agents, but they solve
+                different kinds of exact subproblems and should not be treated as interchangeable.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Main Distinction</span>
+                <h2>Three Tool Families, Three Strength Profiles</h2>
+                <p>
+                    A CAS is strongest when the task is symbolic manipulation of mathematical expressions. An SMT solver
+                    is strongest when the task is satisfiability or exact checking inside supported logical theories. A
+                    theorem prover is strongest when the task is formal proof under an explicit logical framework.
+                </p>
+                <p>
+                    These categories do overlap, but the overlap is not complete. That is why tool selection matters so
+                    much for AI mathematicians.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Choosing The Wrong Exact Tool Wastes Time</h2>
+                <p>
+                    Many agent failures come from asking the wrong tool family to do the job. A proof assistant is not
+                    the easiest way to simplify a symbolic expression. A CAS is not the clearest way to discharge a hard
+                    satisfiability obligation. An SMT solver is not the right surface for all proof-structured work.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-three">
+            <article class="feature-card">
+                <span class="mini-label">CAS</span>
+                <h3>Expression Manipulation</h3>
+                <p>
+                    Best for simplification, symbolic solving, differentiation, integration, transformation, algebraic
+                    structure, and exact mathematical objects.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">SMT</span>
+                <h3>Constraint And Decision Work</h3>
+                <p>
+                    Best for satisfiability, consistency checks, theory-aware decisions, side conditions, and structured
+                    logical constraints.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Theorem Provers</span>
+                <h3>Formal Proof</h3>
+                <p>
+                    Best for explicit proof objects, theorem development, proof checking, and correctness-sensitive
+                    reasoning under a formal logic.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Practical Heuristic</span>
+                <h2>Ask What Kind Of Exactness You Need</h2>
+                <p>
+                    If the question is "how should this expression be transformed?" a CAS is often the best fit. If the
+                    question is "are these assumptions jointly feasible?" or "does this branch violate a condition?" an
+                    SMT solver may be more appropriate. If the question is "can this claim be justified inside a formal
+                    proof system?" theorem proving becomes the right destination.
+                </p>
+                <ul class="lead-list">
+                    <li>Use CAS for symbolic transformation</li>
+                    <li>Use SMT for structured exact decision questions</li>
+                    <li>Use theorem provers for proof-oriented correctness</li>
+                </ul>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">AI Workflow</span>
+                <h2>Agents Often Need More Than One</h2>
+                <p>
+                    In mature AI mathematics workflows, these tools are complementary rather than mutually exclusive. An
+                    agent may use a CAS to derive a form, an SMT solver to check a constraint-rich side condition, and a
+                    theorem prover for a proof-critical step that needs a formal certificate.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./tool-selection-for-mathematical-agents.html">Tool Selection</a>
+                    <a class="button-link secondary" href="./exact-tools-for-ai-mathematicians.html">Exact Tools</a>
+                    <a class="button-link secondary" href="./planner-executor-verifier-for-ai-mathematicians.html">Planner-Executor-Verifier</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Human Meaning</span>
+                <h3>These Tools Organize Mathematical Labor</h3>
+                <p>
+                    The real benefit of this distinction is that it clarifies which layer of labor is being automated:
+                    symbolic manipulation, exact decision support, or formal proof construction.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Boundary</span>
+                <h3>No Single Tool Family Owns All Of Math</h3>
+                <p>
+                    Strong systems are often hybrids. The trick is not to pick a winner once and for all. The trick is
+                    to route each subproblem to the tool family that fits it best.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Where To Continue</span>
+                <h2>Related Pages</h2>
+                <p>
+                    This comparison connects directly to symbolic-computation pages on CAS and SMT, as well as
+                    theorem-oriented AI pages.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="../symbolic-computation/what-is-a-computer-algebra-system.html">Computer Algebra Systems</a>
+                    <a class="button-link secondary" href="../symbolic-computation/smt-solvers-in-symbolic-computation.html">SMT Solvers</a>
+                    <a class="button-link secondary" href="./symbolic-computation-vs-theorem-proving.html">Symbolic Vs Theorem Proving</a>
+                    <a class="button-link secondary" href="./ai-for-theorem-proving.html">AI For Theorem Proving</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Bottom Line</span>
+                <h2>Tool Choice Should Follow The Shape Of The Question</h2>
+                <p>
+                    A strong AI mathematician is not defined by loyalty to one exact tool family. It is defined by
+                    knowing when symbolic manipulation, satisfiability reasoning, or formal proof is actually the right
+                    next step.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

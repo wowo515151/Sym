@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Recurrence Explorer</title>
+    <link rel="stylesheet" href="../library.css" />
+    <link rel="stylesheet" href="./tools.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <p class="eyebrow">Tools / Recurrences</p>
+            <h1>Recurrence Explorer</h1>
+            <p class="hero-copy">
+                This explorer generates sequences from linear recurrences and gives a lightweight closed-form description for simple first- and second-order cases. It is intended for learning, quick checking, and structured experimentation.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">All Tools</a>
+                <a class="button-link secondary" href="../library/advanced-math/generating-functions.html">Generating Functions</a>
+            </div>
+        </section>
+
+        <section class="tool-grid">
+            <article class="tool-panel">
+                <h2>Recurrence Input</h2>
+                <div class="tool-controls">
+                    <label class="tool-field">Recurrence coefficients
+                        <input id="recurrenceCoefficients" value="1, 1" />
+                    </label>
+                    <label class="tool-field">Initial values
+                        <input id="recurrenceInitial" value="0, 1" />
+                    </label>
+                    <label class="tool-field">Terms to show
+                        <input id="recurrenceCount" type="number" value="10" min="3" max="40" />
+                    </label>
+                    <div class="tool-actions">
+                        <button class="tool-button primary" id="runRecurrence">Generate Sequence</button>
+                    </div>
+                </div>
+            </article>
+            <article class="tool-panel">
+                <h2>Sequence Summary</h2>
+                <div id="recurrenceStats" class="tool-stat-grid"></div>
+                <div class="tool-surface">
+                    <h3>Terms</h3>
+                    <div id="recurrenceTerms"></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="section">
+            <article class="tool-panel">
+                <h2>Growth View</h2>
+                <div id="recurrenceChart" class="tool-surface"></div>
+                <p>
+                    Looking at the terms as a plotted sequence helps distinguish stable, oscillatory, and explosively growing recurrences much faster than scanning raw numbers alone.
+                </p>
+            </article>
+        </section>
+
+        <section class="tool-grid">
+            <article class="tool-panel">
+                <h2>How To Use This Lab</h2>
+                <p>
+                    Enter the recurrence coefficients and enough initial values to match the order. For example,
+                    coefficients <code>1, 1</code> with initial values <code>0, 1</code> produce the Fibonacci recurrence
+                    <code>a_n = a_{n-1} + a_{n-2}</code>.
+                </p>
+                <ul class="lead-list">
+                    <li>Increase the term count to inspect long-run growth or oscillation.</li>
+                    <li>Change signs to see how stable and alternating behavior emerges.</li>
+                    <li>Use the closed-form note as a quick guide for simple first- and second-order cases.</li>
+                </ul>
+            </article>
+            <article class="tool-panel">
+                <h2>Fundamental Mathematics</h2>
+                <p>
+                    A recurrence defines each term in a sequence from earlier terms. Linear recurrences are especially important
+                    because they can often be studied through a characteristic equation whose roots predict whether the sequence
+                    grows, decays, oscillates, or combines several behaviors at once.
+                </p>
+                <p>
+                    This connects sequences to algebraic structure. Instead of thinking only term by term, you can analyze the
+                    recurrence as a linear rule with its own internal modes of behavior.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+    <script type="module" src="./js/pages/recurrence-lab.js"></script>
+</body>
+</html>

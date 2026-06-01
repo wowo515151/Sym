@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Symbolic Rewrite Lab</title>
+    <link rel="stylesheet" href="../library.css" />
+    <link rel="stylesheet" href="./tools.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <p class="eyebrow">Tools / Rewriting</p>
+            <h1>Symbolic Rewrite Lab</h1>
+            <p class="hero-copy">
+                This lab lets you explore a miniature first-order rewrite system with actual rule application, reachable-term
+                graphs, normal forms, and toy e-class groupings. It is intentionally small, but it shows the mechanics behind
+                confluence, termination, traversal strategy, and rewrite-driven search.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">All Tools</a>
+                <a class="button-link secondary" href="../library/symbolic-computation/term-rewriting-systems.html">Rewrite Systems Article</a>
+                <a class="button-link ghost" href="../sym/rewrite-demo">Sym Rewrite Demo</a>
+            </div>
+        </section>
+
+        <section class="tool-grid">
+            <article class="tool-panel">
+                <h2>Rewrite System</h2>
+                <div class="tool-controls">
+                    <label class="tool-field">Start term
+                        <input id="rewriteStart" value="add(zero, add(x, zero))" />
+                    </label>
+                    <label class="tool-field">Rules, one per line
+                        <textarea id="rewriteRules">add(zero, ?x) -> ?x
+add(?x, zero) -> ?x
+mul(one, ?x) -> ?x
+mul(?x, one) -> ?x</textarea>
+                    </label>
+                    <div class="tool-actions">
+                        <button class="tool-button primary" id="runRewrite">Analyze Rewrite System</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="tool-panel tool-output">
+                <h2>System Summary</h2>
+                <div id="rewriteStats" class="tool-stat-grid"></div>
+                <div class="tool-surface">
+                    <h3>Sample Normal Forms</h3>
+                    <div id="normalForms"></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="tool-grid">
+            <article class="tool-panel">
+                <h2>Traversal Traces</h2>
+                <div class="tool-surface">
+                    <h3>Outermost Trace</h3>
+                    <div id="outerTrace"></div>
+                </div>
+                <div class="tool-surface">
+                    <h3>Innermost Trace</h3>
+                    <div id="innerTrace"></div>
+                </div>
+                <p>
+                    Different traversal strategies can reach the same normal form by different routes, or expose different
+                    failure modes when a system is not well behaved.
+                </p>
+            </article>
+
+            <article class="tool-panel">
+                <h2>Reachable Graph And Toy E-Classes</h2>
+                <div class="tool-surface">
+                    <h3>Reachable Rewrite Edges</h3>
+                    <div id="rewriteEdges"></div>
+                </div>
+                <div class="tool-surface">
+                    <h3>Connected Components</h3>
+                    <div id="egraphClusters"></div>
+                </div>
+                <p>
+                    The connected components are not a full equality-saturation implementation, but they give a compact way
+                    to see which terms end up living in the same local equivalence neighborhood.
+                </p>
+            </article>
+        </section>
+
+        <section class="tool-grid">
+            <article class="tool-panel">
+                <h2>How To Use This Lab</h2>
+                <p>
+                    Enter a start term and one rewrite rule per line in the form <code>left -&gt; right</code>. Variables begin
+                    with <code>?</code>, such as <code>?x</code>. Then run the analysis to inspect traces, reachable terms, and
+                    sample normal forms.
+                </p>
+                <ul class="lead-list">
+                    <li>Try identity-removal rules first, like <code>add(zero, ?x) -&gt; ?x</code>.</li>
+                    <li>Compare outermost and innermost traces to see how strategy changes the path.</li>
+                    <li>Introduce competing rules to see how non-confluent behavior appears.</li>
+                </ul>
+            </article>
+            <article class="tool-panel">
+                <h2>Fundamental Mathematics</h2>
+                <p>
+                    A term rewriting system transforms structured expressions by applying local rules. The key global questions
+                    are whether rewriting terminates, whether different rewrite paths eventually agree, and what final forms
+                    can be reached. Confluence and termination are two of the most important properties because they determine
+                    whether “simplification” behaves predictably.
+                </p>
+                <p>
+                    This lab is intentionally small, but it exposes the core mechanics behind normalization, symbolic search,
+                    and the rule-driven systems that appear in algebra engines, provers, and compiler-like optimizers.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+    <script type="module" src="./js/pages/symbolic-rewrite-lab.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rotary Positional Embeddings (RoPE): Symbolic Rotation in 2D</title>
+    <meta name="description" content="An analysis of the symbolic rotation identities in RoPE that enable relative positional encoding in Transformers." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Rotary Positional Embeddings (RoPE)</h1>
+            <p class="hero-copy">
+                RoPE is the mechanism that allows modern AI to understand the order of words. 
+                Unlike old-style additive embeddings, RoPE applies a symbolic rotation to the 
+                query and key vectors, encoding relative distance as an angle in the complex plane.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>Relative Distance as Scalar Products</h2>
+                <p>
+                    We want the attention between two tokens to depend only on their **relative distance** 
+                    <code>m - n</code>, not their absolute positions. Additive embeddings struggle with 
+                    long sequences because they don't have a clear geometric way to represent this.
+                </p>
+                <p>
+                    The challenge is to find a transformation <code>f(x, pos)</code> such that the 
+                    dot product <code>f(q, m) &middot; f(k, n)</code> is a function of <code>m - n</code>.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Complex Rotation Identity</h2>
+                <p>
+                    The core of RoPE is the 2D rotation matrix applied to pairs of dimensions:
+                </p>
+                <div class="code-block">
+                    [ cos(m&theta;)  -sin(m&theta;) ] [ x1 ]
+                    [ sin(m&theta;)   cos(m&theta;) ] [ x2 ]
+                </div>
+                <p>
+                    Symbolically, this is equivalent to multiplying a complex number <code>x<sub>1</sub> + ix<sub>2</sub></code> 
+                    by <code>e<sup>im&theta;</sup></code>. 
+                </p>
+                <p>
+                    When we take the dot product of two rotated vectors (at positions <code>m</code> and <code>n</code>), 
+                    the rotation angles subtract: <code>m&theta; - n&theta; = (m-n)&theta;</code>. 
+                    This creates a natural, periodic representation of relative position that generalizes 
+                    to any sequence length.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>The Backbone of Context Scaling</h2>
+                <p>
+                    RoPE is used by <strong>Llama</strong>, <strong>PaLM</strong>, and <strong>GPT-NeoX</strong>. 
+                    Because it is a purely symbolic rotation, we can "stretch" the rotation angles 
+                    (interpolation) to allow a model trained on 4k tokens to work on 1M tokens 
+                    (LongRoPE).
+                </p>
+                <p>
+                    Optimizing the RoPE kernel is critical because it happens for every single 
+                    Attention block. A fused <strong>RoPE + MatMul</strong> kernel avoids moving the 
+                    large rotated vectors back and forth between registers and global memory.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Trace</span>
+                <h2>The 2D Unit Rotation</h2>
+                <div class="code-block">
+                    // RoPE Pairing Rule
+                    Pair(x1, x2) &rarr; Rotate2D(Pair(x1, x2), pos * theta)
+                    <br><br>
+                    // Dot Product Identity
+                    Dot(RoPE(q, m), RoPE(k, n)) = Dot(q, k) * cos((m-n) * theta)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

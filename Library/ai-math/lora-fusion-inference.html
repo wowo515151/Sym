@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LoRA Fusion: Eliminating Adapter Latency in Inference</title>
+    <meta name="description" content="A symbolic study of LoRA adapter fusion (W + AB) to eliminate low-rank latency during model inference." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>LoRA Fusion for Inference</h1>
+            <p class="hero-copy">
+                Low-Rank Adaptation (LoRA) is the standard for efficient fine-tuning. While adapters 
+                are efficient to train, they add latency during inference if executed as separate layers. 
+                Symbolic fusion allows us to merge the adapter weights directly into the base model, 
+                achieving "zero-overhead" inference.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The Low-Rank Latency Penalty</h2>
+                <p>
+                    A LoRA layer modifies a base weight <code>W</code> using two low-rank matrices <code>A</code> 
+                    and <code>B</code>. During inference, the output is calculated as:
+                    <br><code>Y = X &times; W + (X &times; A) &times; B</code>
+                </p>
+                <p>
+                    Executing this as written requires two additional matrix multiplications (one for <code>A</code> 
+                    and one for <code>B</code>) for every layer. For high-throughput serving, this 
+                    additional compute can reduce total tokens-per-second.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Pre-computing the Delta</h2>
+                <p>
+                    Using the distributive property of matrix multiplication, a symbolic engine can 
+                    refactor the expression:
+                    <br><code>X &times; W + X &times; (A &times; B) = X &times; (W + A &times; B)</code>
+                </p>
+                <p>
+                    This transformation enables **Weight-Space Fusion**:
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Static Merge:</strong> Before the model starts serving, compute <code>W<sub>fused</sub> = W + A &times; B</code>.</li>
+                    <li><strong>Zero Overhead:</strong> During inference, simply compute <code>Y = X &times; W<sub>fused</sub></code>.</li>
+                </ul>
+                <p>
+                    The resulting <code>W<sub>fused</sub></code> has the same shape as <code>W</code>, meaning the 
+                    adapter now consumes <strong>zero extra FLOPs</strong> at runtime.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Multi-Tenant LLM Serving</h2>
+                <p>
+                    In "LoRA-Exchange" systems (like <strong>vLLM</strong> or <strong>LoRAX</strong>), 
+                    symbolic fusion is the key to serving hundreds of different fine-tuned models on 
+                    the same GPU base. 
+                </p>
+                <p>
+                    While dynamic switching between adapters requires special kernels (like SGMV), 
+                    static fusion remains the gold standard for dedicated model instances, ensuring 
+                    no performance regression compared to the base model.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Proof</span>
+                <h2>E-Graph Trace</h2>
+                <div class="code-block">
+                    // Original LoRA Expression
+                    TensorAdd(MatMul(X, W), MatMul(MatMul(X, A), B))
+                    <br><br>
+                    // Step 1: Re-associate Adapter
+                    MatMul(MatMul(X, A), B) -> MatMul(X, MatMul(A, B))
+                    <br><br>
+                    // Step 2: Factor Input X
+                    TensorAdd(MatMul(X, W), MatMul(X, delta)) -> MatMul(X, TensorAdd(W, delta))
+                    <br><br>
+                    // Result (Merged Weight)
+                    MatMul(X, W_fused)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is A Kronecker Product?</title>
+    <meta name="description" content="What the Kronecker product is, why it builds block-structured matrices, and how it connects linear algebra, tensors, and computation." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Advanced Mathematics</p>
+            <h1>What Is A Kronecker Product?</h1>
+            <p class="hero-copy">
+                The Kronecker product combines two matrices into a larger block-structured matrix. It is a standard way
+                to represent separable structure and tensor-like composition in linear algebra.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>A Block Matrix Built From Two Inputs</h2>
+                <p>
+                    If <code>A</code> and <code>B</code> are matrices, the Kronecker product <code>A ⊗ B</code> is the
+                    block matrix obtained by multiplying every entry of <code>A</code> by the entire matrix
+                    <code>B</code>.
+                </p>
+                <p>
+                    This creates a larger structured matrix that captures product-style behavior between the two inputs.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>It Makes Separable Structure Explicit</h2>
+                <p>
+                    Kronecker products appear in tensorized models, linear systems with repeated structure, operator
+                    representations, and matrix equations. They are useful because they encode compositional structure in
+                    a way that algorithms can exploit.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Tensor Link</span>
+                <h3>Why It Belongs Near Tensor Topics</h3>
+                <p>
+                    The Kronecker product is not the same as full tensor calculus, but it is closely related to tensor
+                    structure and often appears in tensor-oriented derivations and implementations.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Computation</span>
+                <h3>Structure Can Be Exploited</h3>
+                <p>
+                    Algorithms often avoid forming huge Kronecker matrices explicitly and instead exploit the underlying
+                    structure. That makes the concept useful both mathematically and computationally.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Related Topics</span>
+                <h2>Part Of A Structured Linear-Algebra Cluster</h2>
+                <p>
+                    The Kronecker product fits naturally beside tensor contraction, operator methods, and matrix
+                    decompositions because it is one of the cleanest ways to express compositional structure in matrices.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./tensor-contraction.html">Tensor Contraction</a>
+                    <a class="button-link secondary" href="./matrix-exponential.html">Matrix Exponential</a>
+                    <a class="button-link secondary" href="./singular-value-decomposition.html">Singular Value Decomposition</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Bottom Line</span>
+                <h2>The Kronecker Product Is A Structural Building Block</h2>
+                <p>
+                    It is valuable because it keeps composition visible. That makes it a natural tool in mathematical
+                    modeling, tensor-aware reasoning, and structured computation.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

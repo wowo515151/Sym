@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is A Computer Algebra System?</title>
+    <meta name="description" content="What a computer algebra system is, how it differs from numerical software, and why CAS tools matter in symbolic computation and AI-assisted math workflows." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>What Is A Computer Algebra System?</h1>
+            <p class="hero-copy">
+                A computer algebra system, often called a CAS, is software that manipulates mathematical expressions as
+                structured symbolic objects rather than treating them only as numbers to be approximated.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Core Idea</span>
+                <h2>Exact Structure Instead Of Immediate Approximation</h2>
+                <p>
+                    A computer algebra system keeps track of operators, variables, assumptions, and expression
+                    structure. That lets it simplify, factor, differentiate, integrate, solve, substitute, and compare
+                    formulas without collapsing them immediately into floating-point values.
+                </p>
+                <p>
+                    This is the main difference between a CAS and ordinary numerical software. Numerical tools are often
+                    excellent at approximation, optimization, and large-scale evaluation. A CAS is valuable when the
+                    form of the expression itself matters.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Symbolic Engines Make Mathematical Structure Usable</h2>
+                <p>
+                    Many mathematical tasks depend on representation, not just on final values. If a system needs to
+                    prove two expressions equivalent, produce an exact derivative, preserve an unevaluated integral, or
+                    rewrite a tensor expression before execution, symbolic structure becomes the real working object.
+                </p>
+                <p>
+                    A CAS exists to make that structure accessible to computation instead of leaving it trapped inside
+                    notation on a page.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Typical Jobs</span>
+                <h3>What A CAS Usually Does</h3>
+                <p>
+                    Computer algebra systems often support simplification, symbolic differentiation, symbolic
+                    integration, equation solving, polynomial manipulation, substitution, expansion, factoring, and
+                    identity checking.
+                </p>
+                <p>
+                    The important point is not the feature list by itself. The important point is that these operations
+                    are carried out on explicit mathematical structure.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Internal Machinery</span>
+                <h3>How It Usually Works</h3>
+                <p>
+                    Under the surface, a CAS depends on expression trees or related graph structures, rewrite rules,
+                    matching, unification-like binding, normalization, and domain-specific algorithms for tasks such as
+                    polynomial elimination or exact solving.
+                </p>
+                <p>
+                    That is why computer algebra belongs naturally inside the broader topic of symbolic computation.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Comparison</span>
+                <h2>CAS Versus Numerical Software</h2>
+                <p>
+                    Numerical software asks questions such as "what is the approximate value?" or "what solution can be
+                    reached efficiently with a stable algorithm?" A CAS asks questions such as "what is the expression,
+                    how can it be transformed, and what exact relationships hold?"
+                </p>
+                <p>
+                    The two approaches are not enemies. In real mathematical and engineering workflows they often work
+                    together. Symbolic software sets up exact structure, derives formulas, simplifies expressions, or
+                    reasons about constraints. Numerical software then evaluates, simulates, or optimizes at scale.
+                </p>
+                <ul class="lead-list">
+                    <li>CAS emphasizes exact symbolic structure</li>
+                    <li>Numerical systems emphasize values, approximation, and scale</li>
+                    <li>Strong workflows often use both</li>
+                </ul>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">AI Relevance</span>
+                <h2>Why CAS Tools Matter For AI Mathematicians</h2>
+                <p>
+                    In AI-assisted mathematical work, a computer algebra system provides the dependable execution layer
+                    for exact symbolic subproblems. A language model can interpret a request, choose a strategy, or
+                    explain results, but a CAS can perform the structural operations that should not be left to prose.
+                </p>
+                <p>
+                    This is one reason SymCLI and related tooling matter. They make symbolic execution available to
+                    coding agents through a stable interface rather than requiring the model to imitate algebra from
+                    memory.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="../ai-math/symcli-for-ai-agents.html">SymCLI For AI Agents</a>
+                    <a class="button-link secondary" href="../ai-math/exact-tools-for-ai-mathematicians.html">Exact Tools</a>
+                    <a class="button-link secondary" href="../ai-math/when-should-an-ai-agent-call-symcli.html">When To Call SymCLI</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Common Mistake</span>
+                <h3>A CAS Is Not Just A Fancy Calculator</h3>
+                <p>
+                    Calling a CAS a calculator undersells the important part. A calculator consumes numbers and returns
+                    numbers. A CAS often consumes structure and returns transformed structure. That difference is why it
+                    can support rewriting, symbolic solving, proof-adjacent reasoning, and expression-level analysis.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Boundary</span>
+                <h3>A CAS Is Powerful But Not Universal</h3>
+                <p>
+                    Computer algebra systems are not magical engines for all of mathematics. They still depend on
+                    representations, assumptions, algorithmic scope, and problem classes. Some tasks are naturally
+                    symbolic, some are better handled numerically, and some require theorem provers or specialized
+                    decision procedures.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Where To Continue</span>
+                <h2>From CAS Basics To Symbolic Infrastructure</h2>
+                <p>
+                    Once the idea of a computer algebra system is clear, the next useful questions are how expressions
+                    are represented, how rewrite systems operate, how exact decisions are made, and how symbolic engines
+                    fit into larger AI-assisted workflows.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./expression-trees.html">Expression Trees</a>
+                    <a class="button-link secondary" href="./term-rewriting-systems.html">Term Rewriting</a>
+                    <a class="button-link secondary" href="./what-is-symbolic-simplification.html">Simplification</a>
+                    <a class="button-link secondary" href="./decision-procedures-in-symbolic-computation.html">Decision Procedures</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Practical View</span>
+                <h2>CAS Software Is Where Symbolic Computation Becomes Operational</h2>
+                <p>
+                    Symbolic computation is the broader field. A computer algebra system is one of the main ways that
+                    field becomes usable software. If symbolic computation is the theory of structure-preserving
+                    mathematical manipulation, a CAS is one of its most practical runtime forms.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

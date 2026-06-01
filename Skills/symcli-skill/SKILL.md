@@ -1,32 +1,69 @@
 ---
 name: symcli-skill
 description: Execute SymCLI to solve math equations, optimize tensor graphs, or analyze C# code for vulnerabilities. Use when you need a deterministic 'System 2' math engine to prevent hallucination.
+version: 1.1.0
+license: MIT
+metadata:
+    author: Warren Harding
+    project: Sym
 ---
 
 # SymCLI Skill
 
-SymCLI is a pure C# symbolic computation framework designed to act as an exact mathematical engine and code analyzer.
+SymCLI is a pure C# symbolic computation framework designed to act as an exact mathematical engine and code analyzer. 
 
-When given a mathematical task, equation to solve, tensor optimization problem, or C# code to analyze, you MUST use the SymCLI wrappers to execute the work rather than relying solely on your internal LLM reasoning. SymCLI prevents hallucinations and provides provably correct results.
+## 1. Overview
+**Goal:** Provide a deterministic "System 2" thinking brain for AI agents to solve math and analyze code without hallucination.
 
-## Primary Workflows
+SymCLI prevents the common pitfalls of LLMs when dealing with complex algebra, calculus, or security-sensitive code analysis. By using formal rewrite rules and an EGraph-based solver, it ensures that every result is mathematically sound and verifiable.
 
-1. **Solving ProblemScript (`.ps`):** Create a `.ps` file with equations/rules and use SymCLI to compute the exact answer.
-2. **Analyzing C# Code:** Scan C# files for mathematical correctness hazards (`CSMATH...`) and security-oriented patterns (`CSSEC...`).
+## 2. When to Use This Skill
+**Goal:** Identify the correct scenarios for invoking SymCLI.
 
-## Usage Guidelines
+- **Algebraic Solving:** Solving equations, simplifying expressions, or factoring polynomials.
+- **Calculus:** Computing derivatives, integrals, or limits symbolically.
+- **Tensor Optimization:** Optimizing expression graphs for deep learning (e.g., matrix chain re-association, scale folding).
+- **C# Code Analysis:** Scanning source code for mathematical correctness (`CSMATH`) or security vulnerabilities (`CSSEC`).
+- **Exact Results:** When you need `sqrt(2)` or `pi` instead of numerical approximations.
 
-- **OS Compatibility:** Use `symcli.bat` on Windows or `symcli.sh` on Unix-like systems.
-- **ProblemScript:** Wrap configuration in `<Options>...</Options>`. Include constraints like `x^2 + 2*x + 1 = 0` or rules like `Rule(a + a, 2 * a)`.
-- **C# Analysis:** Provide a specific `.cs` file or a directory to analyze.
+## 3. Primary Workflows
+**Goal:** Execute the correct commands for the task at hand.
 
-### Agent Workflow
-1. Interpret the user's mathematical/coding task.
-2. Formulate the required input (e.g., write a `.ps` file).
-3. Execute the appropriate `symcli` wrapper.
-4. Read the output file and interpret the exact symbolic results back to the user.
+### Solving ProblemScript (`.ps`)
+1. Create a `.ps` file containing your options and equations.
+2. Execute: `symcli.bat <input.ps> <output.txt>` (Windows) or `./symcli.sh <input.ps> <output.txt>` (Unix).
+3. Read `<output.txt>` for the symbolic solution.
 
-## Exit Codes
+### Analyzing C# Code
+1. Execute: `symcli.bat analyze csharp-math <input_path> <output_report> [options]`
+2. Use `--json` for machine-readable output.
+
+## 4. Instructions & Examples
+**Goal:** Detailed patterns for agent usage.
+
+### Example: Solving a Quadratic Equation
+Write `problem.ps`:
+```xml
+<Options>
+  Target: x
+  RulePacks: Algebraic
+</Options>
+x^2 - 5*x + 6 = 0
+```
+Execute: `symcli.bat problem.ps result.txt` -> Returns `x = 2, x = 3`.
+
+### Example: Symbolic Derivative
+Write `calc.ps`:
+```xml
+<Options>
+  Target: diff(sin(x^2), x)
+  RulePacks: Calculus
+</Options>
+```
+Execute: `symcli.bat calc.ps result.txt` -> Returns `2*x*cos(x^2)`.
+
+## 5. Exit Codes
+**Goal:** Handle runtime results programmatically.
 
 - `0`: Success
 - `1`: Configuration/Argument Error
@@ -34,27 +71,9 @@ When given a mathematical task, equation to solve, tensor optimization problem, 
 - `3`: Unexpected runtime exception
 - `4`: Findings present (if `--fail-on-findings` used)
 
-## Available Scripts
+## 6. Best Practices
+**Goal:** Maximize accuracy and performance.
 
-- **Windows Wrapper:** `Skills/symcli-skill/symcli.bat`
-  Usage: `symcli.bat <input.ps> <output.txt>` or `symcli.bat analyze csharp-math <input> <output> [options]`
-- **Unix Wrapper:** `Skills/symcli-skill/symcli.sh`
-  Usage: `./symcli.sh <input.ps> <output.txt>` or `./symcli.sh analyze csharp-math <input> <output> [options]`
-
-## Examples
-
-### Solving an algebraic equation using ProblemScript
-1. Agent writes `problem.ps` with content:
-   ```xml
-   <Options>
-     Target: x
-     RulePacks: Algebraic
-   </Options>
-   x^2 - 4 = 0
-   ```
-2. Agent executes: `Skills/symcli-skill/symcli.bat problem.ps result.txt`
-3. Agent reads `result.txt` to find `x = 2, x = -2`.
-
-### Analyzing C# code for math vulnerabilities
-1. Agent executes: `Skills/symcli-skill/symcli.bat analyze csharp-math src/MathCore/Calculator.cs report.json --json`
-2. Agent reads `report.json` to review any `CSMATH` or `CSSEC` findings.
+- **Use RulePacks:** Explicitly specify `Algebraic`, `Calculus`, or `Tensor` in your options to guide the solver.
+- **Assumptions:** Specify variable domains (e.g., `real`, `integer`) in the options when possible.
+- **JSON Output:** Always use `--json` for automated analysis tasks to prevent parsing errors.

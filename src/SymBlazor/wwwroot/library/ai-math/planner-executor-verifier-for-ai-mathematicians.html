@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Planner-Executor-Verifier For AI Mathematicians</title>
+    <meta name="description" content="How planner-executor-verifier workflows help AI mathematicians combine strategy, exact tool use, and verification in longer mathematical tasks." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>Planner-Executor-Verifier For AI Mathematicians</h1>
+            <p class="hero-copy">
+                A planner-executor-verifier workflow separates high-level mathematical strategy from exact execution and
+                from explicit checking. This is one of the clearest ways to make AI mathematical work more reliable.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Main Idea</span>
+                <h2>Different Responsibilities Need Different Kinds Of Strength</h2>
+                <p>
+                    Mathematical work mixes at least three jobs. Someone or something has to choose a direction. Someone
+                    has to carry out exact local work. Someone has to check whether the result is acceptable. A
+                    planner-executor-verifier architecture makes those jobs explicit.
+                </p>
+                <p>
+                    In AI systems, that separation matters because a language model can be helpful at planning while
+                    exact tools are better at symbolic execution and dedicated checks are better at catching silent
+                    errors.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>One Smart-Sounding Loop Is Not Enough</h2>
+                <p>
+                    A single agent that narrates plans, performs transformations, and judges itself with the same mode
+                    of reasoning can still be useful, but it tends to blur together the parts of the workflow that most
+                    need structure. Separating roles makes failures easier to detect and recovery easier to organize.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-three">
+            <article class="feature-card">
+                <span class="mini-label">Planner</span>
+                <h3>Choose The Route</h3>
+                <p>
+                    The planner decides what kind of object the problem should become, what tools are needed, and how
+                    the task should be decomposed into manageable substeps.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Executor</span>
+                <h3>Do The Exact Work</h3>
+                <p>
+                    The executor calls symbolic tools, theorem systems, numerical routines, or CLI workflows that can
+                    produce concrete artifacts instead of just explanations.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Verifier</span>
+                <h3>Check Before Advancing</h3>
+                <p>
+                    The verifier compares claims against constraints, tests equivalence, checks consistency, or confirms
+                    that the chosen branch remains acceptable before the workflow moves on.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Workflow Benefit</span>
+                <h2>Longer Tasks Become Easier To Manage</h2>
+                <p>
+                    Once planning, execution, and verification are separated, longer mathematical tasks become less
+                    fragile. The planner can revise strategy without pretending it already completed the exact work. The
+                    executor can emit files, derivations, or solved artifacts. The verifier can reject weak branches
+                    before they contaminate the rest of the session.
+                </p>
+                <ul class="lead-list">
+                    <li>Planning becomes more deliberate</li>
+                    <li>Execution becomes more tool-centered</li>
+                    <li>Verification becomes a real gate instead of an afterthought</li>
+                </ul>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Relation To Existing Patterns</span>
+                <h2>Close To Plan-And-Execute, But More Explicit About Trust</h2>
+                <p>
+                    This pattern overlaps with plan-and-execute workflows, but it adds a clearer trust layer. The point
+                    is not just to split planning from doing. The point is to ensure that correctness-sensitive steps
+                    are checked by something stronger than the narrative that proposed them.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./plan-and-execute-for-ai-mathematicians.html">Plan And Execute</a>
+                    <a class="button-link secondary" href="./verifier-guided-math-agents.html">Verifier-Guided Agents</a>
+                    <a class="button-link secondary" href="./planning-verification-and-recovery.html">Planning And Recovery</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">SymCLI Fit</span>
+                <h3>Executors Need Concrete Tool Boundaries</h3>
+                <p>
+                    In a practical system, the executor often uses a CLI or other explicit tool boundary. That is why
+                    SymCLI-style workflows matter so much. They make the execution layer inspectable and repeatable.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Human Fit</span>
+                <h3>Humans Can Intervene At The Right Layer</h3>
+                <p>
+                    This architecture is also easier for humans to supervise. You can review the plan, inspect the
+                    generated artifacts, or tighten the verification criteria without redesigning the whole workflow.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Where To Continue</span>
+                <h2>Related Pages</h2>
+                <p>
+                    This page belongs with architecture, tool selection, artifact-driven workflows, and exact symbolic
+                    tooling.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./ai-math-agent-architecture.html">Architecture</a>
+                    <a class="button-link secondary" href="./tool-selection-for-mathematical-agents.html">Tool Selection</a>
+                    <a class="button-link secondary" href="./artifact-driven-mathematical-agents.html">Artifact-Driven Agents</a>
+                    <a class="button-link secondary" href="./symcli-for-ai-agents.html">SymCLI</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Bottom Line</span>
+                <h2>Mathematical Reliability Improves When Roles Are Separated</h2>
+                <p>
+                    A planner-executor-verifier workflow does not make AI mathematics magically correct. It does make
+                    the responsibilities clearer, the artifacts cleaner, and the failure modes easier to detect and
+                    repair.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

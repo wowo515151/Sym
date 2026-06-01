@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tensor Fusion: Bias and Activation Layers</title>
+    <meta name="description" content="An analysis of symbolic fusion opportunities for MatMul, Bias Add, and Relu layers in neural networks." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Tensor Fusion: Bias and Activation</h1>
+            <p class="hero-copy">
+                One of the most effective ways to optimize neural network performance is kernel fusion. 
+                Symbolic engines can detect patterns like <code>Relu(A &times; B + C)</code> and replace them with 
+                highly optimized, unified kernels.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The Cost of Kernel Overhead</h2>
+                <p>
+                    In a typical deep learning layer, we perform a <strong>Matrix Multiplication</strong>, followed 
+                    by a <strong>Bias Addition</strong>, followed by a <strong>Non-linear Activation</strong> (like Relu). 
+                    If executed separately, this requires three distinct GPU kernel launches and multiple round-trips 
+                    to global memory.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Pattern Matching for Fusion</h2>
+                <p>
+                    A symbolic system can represent the entire sequence as a single expression:
+                    <br><code>Relu(TensorAdd(MatMul(A, B), C))</code>
+                </p>
+                <p>
+                    Instead of optimizing each operation in isolation, the Sym engine looks for 
+                    <strong>Fusion Targets</strong>. By identifying the <code>FusedMatMulAddRelu</code> pattern, 
+                    the system instructs the compiler to use a single, hand-optimized CUDA or Triton kernel that 
+                    performs all three steps in one pass through the GPU's registers.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Proof</span>
+                <h2>Symbolic Trace</h2>
+                <div class="code-block">
+                    // Original Layer Expression
+                    Relu(TensorAdd(MatMul(A, B), C))
+                    <br><br>
+                    // Rule Applied: FuseMatMulAddRelu2
+                    Relu(TensorAdd(MatMul(?a, ?b), ?c)) -> FusedMatMulAddRelu(?a, ?b, ?c)
+                    <br><br>
+                    // Result (Optimized for Fusion)
+                    FusedMatMulAddRelu(A, B, C)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

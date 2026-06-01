@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Substitution In Symbolic Computation</title>
+    <meta name="description" content="What substitution means in symbolic computation, why it is more than string replacement, and how it supports rewriting, simplification, and theorem workflows." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Substitution In Symbolic Computation</h1>
+            <p class="hero-copy">
+                Substitution is the act of replacing one symbolic object with another inside an expression while
+                respecting mathematical structure. It sounds simple, but it sits at the heart of rewriting, solving,
+                simplification, and theorem-oriented workflows.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Main Idea</span>
+                <h2>More Than String Replacement</h2>
+                <p>
+                    In a symbolic system, substitution is not a blind text operation. The engine does not merely scan
+                    characters and paste new ones in their place. It works over expression structure: operators,
+                    arguments, variable bindings, and the boundaries of subexpressions.
+                </p>
+                <p>
+                    This matters because mathematical meaning depends on structure. Replacing <code>x</code> with
+                    <code>y + 1</code> inside an expression should create a new structured term, not a broken string.
+                    Once you treat expressions as data structures, substitution becomes a disciplined transformation.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Substitution Powers Many Other Operations</h2>
+                <p>
+                    Rewrite rules usually rely on a match followed by a substitution into a replacement pattern. Solvers
+                    use substitution to propagate derived relationships. Simplifiers use it to replace known
+                    subexpressions with normalized forms. Theorem workflows use it to instantiate general statements in
+                    specific contexts.
+                </p>
+                <p>
+                    Once substitution is reliable, much of symbolic computation becomes easier to express.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Example</span>
+                <h3>Replacing A Variable With A Structured Term</h3>
+                <p>
+                    If an expression contains <code>sin(x)</code> and the system substitutes <code>x := a + b</code>,
+                    the result should be the expression tree for <code>sin(a + b)</code>. The substitution acts on the
+                    variable node, not on loose text characters.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Matching Link</span>
+                <h3>Match First, Substitute Second</h3>
+                <p>
+                    In rule systems, a match usually binds symbolic placeholders to concrete subexpressions, and
+                    substitution then uses those bindings to build the replacement. This match-then-substitute pattern is
+                    one of the basic rhythms of symbolic rewriting.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">System Design</span>
+                <h2>Why Careful Substitution Matters</h2>
+                <p>
+                    If substitution is implemented carelessly, symbolic systems can produce malformed expressions, lose
+                    sharing, apply rules at the wrong scope, or break later matching behavior. That is why substitution
+                    belongs next to expression representation, pattern matching, and canonicalization in the conceptual
+                    core of symbolic computation.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>What It Connects To</h2>
+                <p>
+                    Substitution belongs directly beside expression trees, pattern matching, unification, and term
+                    rewriting. If those topics make sense, substitution becomes one of the clearest and most useful
+                    operations in the whole subject.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./expression-trees.html">Expression Trees</a>
+                    <a class="button-link secondary" href="./pattern-matching.html">Pattern Matching</a>
+                    <a class="button-link secondary" href="./unification.html">Unification</a>
+                    <a class="button-link secondary" href="./term-rewriting-systems.html">Term Rewriting</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

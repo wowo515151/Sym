@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Normal Forms In Symbolic Computation</title>
+    <meta name="description" content="What a normal form is in symbolic computation, how it differs from a canonical form, and why rewrite systems often aim toward stable endpoints." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Normal Forms In Symbolic Computation</h1>
+            <p class="hero-copy">
+                A normal form is an expression that cannot be rewritten any further by a chosen rule set. It is a local
+                notion of completion, and it plays a major role in simplification, normalization, and symbolic
+                reasoning.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>No More Applicable Rewrites</h2>
+                <p>
+                    If a rewrite system reaches an expression where none of its rules apply, that expression is in
+                    normal form with respect to that system. The important phrase is "with respect to that system." A
+                    normal form depends on the rule set and strategy you chose.
+                </p>
+                <p>
+                    This is why normal forms are useful but also limited. They tell you that a given rewrite process has
+                    stopped, not necessarily that the expression is globally best or uniquely preferred.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Key Distinction</span>
+                <h2>Normal Form Is Not Always Canonical Form</h2>
+                <p>
+                    A canonical form is usually meant to be a uniquely preferred representation among equivalent
+                    expressions. A normal form only says rewriting has stopped. If the system is not confluent, two
+                    different rewrite paths may lead to two different normal forms.
+                </p>
+                <p>
+                    That distinction explains why people discuss normal forms together with confluence and termination.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Why People Use Them</span>
+                <h3>Stable Endpoints Help Reasoning</h3>
+                <p>
+                    A normal form gives a rewrite system an endpoint. That can make equivalence testing, simplification,
+                    and downstream symbolic work easier because the system is no longer carrying around arbitrary
+                    partially rewritten expressions.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Limitation</span>
+                <h3>The Endpoint May Depend On The Path</h3>
+                <p>
+                    If different rewrite orders lead to different irreducible expressions, then normal form is not yet a
+                    strong global guarantee. This is exactly the situation where confluence becomes important.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Engineering View</span>
+                <h2>Why Normal Forms Matter In Practice</h2>
+                <p>
+                    Many symbolic systems aim first for a reliable normal form before attempting more ambitious search.
+                    This can make simplification easier to reason about, reduce duplicate work, and create cleaner inputs
+                    for matching, solving, and verification. Even systems that later use richer equivalence structures
+                    often still rely on normalization as a helpful front-end step.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>What To Read Next</h2>
+                <p>
+                    Normal forms connect directly to canonical forms, confluence, termination, and simplification
+                    strategy. Together these topics explain how symbolic systems decide when an expression is done.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./canonical-forms.html">Canonical Forms</a>
+                    <a class="button-link secondary" href="./confluence-in-term-rewriting.html">Confluence</a>
+                    <a class="button-link secondary" href="./termination-in-term-rewriting.html">Termination</a>
+                    <a class="button-link secondary" href="./what-is-symbolic-simplification.html">Simplification</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

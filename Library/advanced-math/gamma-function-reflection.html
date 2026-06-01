@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Gamma Function Reflection Formula</title>
+    <meta name="description" content="A symbolic exploration of the Gamma function reflection formula and its relationship to the sine function." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Advanced Mathematics / Special Functions</p>
+            <h1>Gamma Function Reflection Formula</h1>
+            <p class="hero-copy">
+                The Gamma function &Gamma;(z) is a fundamental extension of the factorial to complex numbers. 
+                One of its most elegant properties is the reflection formula, which links the Gamma function 
+                to trigonometry: &Gamma;(z)&Gamma;(1-z) = &pi; / sin(&pi;z).
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>Symmetry Across the Half-Integer</h2>
+                <p>
+                    For many calculations in physics and statistics, we encounter products of Gamma functions with 
+                    "reflected" arguments, such as &Gamma;(1/4) and &Gamma;(3/4). Calculating these directly 
+                    via integrals is often impossible.
+                </p>
+                <p>
+                    The reflection formula provides a bridge. It allows us to "reflect" a value across the 
+                    z = 1/2 line, converting a product of two complex Gamma functions into a single 
+                    trigonometric evaluation.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>The Factorial Connection</h2>
+                <p>
+                    Symbolically, the Gamma function satisfies the recurrence:
+                    <br><code>&Gamma;(z + 1) = z &times; &Gamma;(z)</code>
+                </p>
+                <p>
+                    When combined with Euler's limit definition, a symbolic engine can derive that the 
+                    poles of &Gamma;(z) at non-positive integers perfectly cancel the zeros of the 
+                    sine function when multiplied in this specific reflected form.
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Input:</strong> <code>&Gamma;(z) &times; &Gamma;(1 - z)</code></li>
+                    <li><strong>Identity:</strong> <code>&pi; / sin(&pi;z)</code></li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Quantum Mechanics and Residue Calculus</h2>
+                <p>
+                    This identity is a cornerstone of <strong>residue calculus</strong> and is used to solve 
+                    complex integrals in quantum mechanics (specifically in the derivation of the 
+                    Beta function and scattering amplitudes).
+                </p>
+                <p>
+                    In numerical libraries, the reflection formula is used to compute Gamma for negative 
+                    arguments, where the standard Stirling approximation fails due to the function's 
+                    highly oscillatory behavior and poles.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Proof</span>
+                <h2>E-Graph Verification</h2>
+                <p>
+                    The Sym engine uses the <code>GammaShift</code> and <code>TrigParity</code> rules to 
+                    verify consistency across the reflection boundary.
+                </p>
+                <div class="code-block">
+                    // Rule Applied: GammaShift
+                    gamma(z + 1) -> z * gamma(z)
+                    <br><br>
+                    // Derived Identity
+                    gamma(z) * gamma(1 - z) = pi / sin(pi * z)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

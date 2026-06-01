@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Weight Dequantization Hoisting: Maximizing INT4 GEMM Throughput</title>
+    <meta name="description" content="A study of symbolic scale hoisting to enable high-speed quantized matrix multiplication (W4A16) on GPU Tensor Cores." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Weight Dequantization Hoisting</h1>
+            <p class="hero-copy">
+                Serving massive LLMs requires quantizing weights to 4-bit (INT4). However, 
+                GPUs perform math in FP16 or BF16. Symbolic "Dequantization Hoisting" allows 
+                the engine to pull dequantization scales out of the inner GEMM loop, enabling 
+                high-speed integer math with floating-point precision.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>Loop-Level Dequantization Overhead</h2>
+                <p>
+                    In a quantized Linear layer (W4A16), the weights <code>W</code> are stored as 4-bit 
+                    integers plus a scale factor <code>S</code>. The math is:
+                    <br><code>Y = X &times; (W_int &times; S)</code>
+                </p>
+                <p>
+                    If the GPU dequantizes every weight <em>before</em> the multiplication inside the 
+                    dot-product loop, it must perform a floating-point multiplication for every 
+                    single element. This negates the speed benefit of using 4-bit weights and increases 
+                    register pressure.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Hoisting Scales out of GEMM</h2>
+                <p>
+                    A symbolic optimizer identifies that the scale <code>S</code> is constant across 
+                    a block of weights (e.g., a group of 128). Using the linearity of the matrix 
+                    product, it hoists the scaling operation:
+                    <br><code>X &times; (W_int &times; S)  &rarr;  (X &times; W_int) &times; S</code>
+                </p>
+                <p>
+                    This transformation allows the hardware to:
+                </p>
+                <ul class="lead-list">
+                    <li><strong>INT Math:</strong> Perform the bulk of the dot-product using fast 
+                    integer instructions (or INT8 Tensor Cores).</li>
+                    <li><strong>Post-Scaling:</strong> Apply the floating-point scale <code>S</code> 
+                    only once to the final accumulated result.</li>
+                </ul>
+                <p>
+                    This "hoisting" is what enables <strong>W4A16 kernels</strong> (like those in 
+                    AutoGPTQ or Marlin) to outperform standard FP16 kernels by up to 2x.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Large Language Model Quantization</h2>
+                <p>
+                    Techniques like <strong>AWQ</strong> and <strong>GPTQ</strong> rely on this 
+                    symbolic hoisting. By moving the dequantization math out of the hot-path, 
+                    we maximize the <strong>compute-to-bandwidth ratio</strong>.
+                </p>
+                <p>
+                    This is the difference between an 8-bit model that runs at the same speed 
+                    as a 16-bit model, and one that runs twice as fast.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Proof</span>
+                <h2>Linearity Trace</h2>
+                <div class="code-block">
+                    // Original Quantized MatMul
+                    MatMul(X, TensorMul(W_int, Scale))
+                    <br><br>
+                    // Rule Applied: MatMulWeightSlideRight_Mul
+                    MatMul(?a, Multiply(?b, ?g)) -> Multiply(MatMul(?a, ?b), ?g)
+                    <br><br>
+                    // Result (Optimized for INT Kernels)
+                    Multiply(MatMul_INT(X, W_int), Scale)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

@@ -20,7 +20,7 @@
     "type": "freemium",
     "free_tier": "Local CLI (Open Source)",
     "hosted_tier": "Azure Managed MCP (Paid via FET)",
-    "hosted_url": "https://symboliccomputation.com/mcp",
+    "hosted_url": "https://symai.net/mcp",
     "agentverse_address": "agent1qdd7zue9uh2pj5djudx4udc8m9e55ajtxxlczpps2azvjmj3xmtewgwhfmc"
   },
   "keywords": ["math", "symbolic", "tensor", "optimization", "mcp", "agentverse", "fetch.ai"]

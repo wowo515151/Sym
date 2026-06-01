@@ -178,22 +178,30 @@ namespace WordsToSym
             }
 
             // Apply symbol shapes
-            var constraints = rawConstraints.Select(c => ExpressionHelpers.Transform(c, e =>
+            var constraints = rawConstraints.Select(c =>
             {
-                if (e is Symbol s && symbolShapes.TryGetValue(s.Name, out var shape))
+                var shaped = ExpressionHelpers.Transform(c, e =>
                 {
-                    return new Symbol(s.Name, shape);
-                }
-                return e;
-            })).ToList();
+                    if (e is Symbol s && symbolShapes.TryGetValue(s.Name, out var shape))
+                    {
+                        return new Symbol(s.Name, shape);
+                    }
+                    return e;
+                });
+
+                return NormalizeSpecializedOperations(shaped);
+            }).ToList();
 
             if (diagnostics.Any())
             {
                 return FormatError("Parsing diagnostics failed.", diagnostics, optionsMap, warnings);
             }
 
+            var hasStandaloneNonEqualities = constraints.Any(c => c is not Equality);
+            var hasStrategySpecificForms = constraints.Any(ContainsStrategySpecificForm);
+
             // Target Inference
-            if (targetVar == null && constraints.Any())
+            if (targetVar == null && constraints.Any() && !hasStandaloneNonEqualities && !hasStrategySpecificForms)
             {
                 var allSymbols = constraints.SelectMany(c => SymbolCollector.CollectSymbolsList(c)).Select(s => s.Name).Distinct().ToList();
                 if (allSymbols.Count == 1)
@@ -266,7 +274,6 @@ namespace WordsToSym
             }
 
             // 8. Invoke solver
-            var solver = EGraphBackendSelector.CreateSolveStrategy(context);
             IExpression? problemExpr;
 
             // Pre-seed attributes into context shared graph if available
@@ -312,7 +319,17 @@ namespace WordsToSym
             if (Environment.GetEnvironmentVariable("SYM_DEBUG_SOLVE") == "1")
                 Console.WriteLine($"DEBUG: Final problemExpr: {problemExpr.ToDisplayString()}");
 
+            var solver = ProblemScriptSolverSelector.CreateSolveStrategy(problemExpr, context);
             var result = solver.Solve(problemExpr, context);
+            if (!result.IsSuccess && solver is not EGraphSolverStrategy)
+            {
+                var fallback = EGraphBackendSelector.CreateSolveStrategy(context);
+                var fallbackResult = fallback.Solve(problemExpr, context);
+                if (fallbackResult.IsSuccess)
+                {
+                    result = fallbackResult;
+                }
+            }
 
             // 9. Format and return result
             if (result.IsSuccess)
@@ -363,6 +380,91 @@ namespace WordsToSym
             }
 
             return options;
+        }
+
+        private static bool ContainsStrategySpecificForm(IExpression expr)
+        {
+            var found = false;
+            ExpressionHelpers.Transform(expr, e =>
+            {
+                if (found)
+                {
+                    return e;
+                }
+
+                if (e is Integral or DefiniteIntegral or Limit or SeriesExpansion or Derivative or MatrixMultiply)
+                {
+                    found = true;
+                    return e;
+                }
+
+                if (e is Function fn)
+                {
+                    if (string.Equals(fn.Name, "Integral", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(fn.Name, "DefiniteIntegral", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(fn.Name, "Limit", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(fn.Name, "SeriesExpansion", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(fn.Name, "Derivative", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(fn.Name, "MatrixMultiply", StringComparison.OrdinalIgnoreCase))
+                    {
+                        found = true;
+                    }
+                }
+
+                return e;
+            });
+
+            return found;
+        }
+
+        private static IExpression NormalizeSpecializedOperations(IExpression expr)
+        {
+            return ExpressionHelpers.Transform(expr, e =>
+            {
+                if (e is not Function fn)
+                {
+                    return e;
+                }
+
+                if (string.Equals(fn.Name, "Derivative", StringComparison.OrdinalIgnoreCase) && fn.Arguments.Count == 2)
+                {
+                    return new Derivative(fn.Arguments[0], fn.Arguments[1]);
+                }
+
+                if (string.Equals(fn.Name, "Integral", StringComparison.OrdinalIgnoreCase) && fn.Arguments.Count == 2)
+                {
+                    return new Integral(fn.Arguments[0], fn.Arguments[1]);
+                }
+
+                if (string.Equals(fn.Name, "DefiniteIntegral", StringComparison.OrdinalIgnoreCase) &&
+                    fn.Arguments.Count == 4 &&
+                    fn.Arguments[1] is Symbol definiteVariable)
+                {
+                    return new DefiniteIntegral(fn.Arguments[0], definiteVariable, fn.Arguments[2], fn.Arguments[3]);
+                }
+
+                if (string.Equals(fn.Name, "Limit", StringComparison.OrdinalIgnoreCase) &&
+                    fn.Arguments.Count == 3 &&
+                    fn.Arguments[1] is Symbol limitVariable)
+                {
+                    return new Limit(fn.Arguments[0], limitVariable, fn.Arguments[2]);
+                }
+
+                if (string.Equals(fn.Name, "SeriesExpansion", StringComparison.OrdinalIgnoreCase) &&
+                    fn.Arguments.Count == 4 &&
+                    fn.Arguments[1] is Symbol seriesVariable &&
+                    fn.Arguments[3] is Number seriesOrder)
+                {
+                    return new SeriesExpansion(fn.Arguments[0], seriesVariable, fn.Arguments[2], (int)seriesOrder.Value);
+                }
+
+                if (string.Equals(fn.Name, "MatrixMultiply", StringComparison.OrdinalIgnoreCase) && fn.Arguments.Count == 2)
+                {
+                    return new MatrixMultiply(fn.Arguments[0], fn.Arguments[1]);
+                }
+
+                return e;
+            });
         }
 
         private List<Rule> ParseRulesBlock(string normalizedScript, List<string> diagnostics)

@@ -32,18 +32,8 @@ public sealed class DifferentialEquationStrategy : ISolverStrategy, INamedSolver
     {
         if (context is null) return SolveResult.Failure(problem, "SolveContext cannot be null.");
         if (problem is null) return SolveResult.Failure(null, "Problem expression cannot be null.");
-        if (problem is not Equality eq) return SolveResult.Failure(problem, "DifferentialEquationStrategy requires an Equality expression.");
-
-        // 1. Try rules first (can handle classification and simple cases)
-        if (_rulePackStrategy != null)
-        {
-            var res = _rulePackStrategy.Solve(eq, context);
-            if (res.IsSuccess && res.ResultExpression != null && !res.ResultExpression.InternalEquals(eq))
-            {
-                 // If the result is a solution equality, we are done.
-                 if (res.ResultExpression is Equality) return res;
-            }
-        }
+        var currentProblem = problem;
+        if (currentProblem is not Equality eq) return SolveResult.Failure(problem, "DifferentialEquationStrategy requires an Equality expression.");
 
         var analysis = AnalyzeEquation(eq);
         if (!analysis.Success)

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Grouped-GEMM: The Secret to High-Throughput MoE</title>
+    <meta name="description" content="A symbolic analysis of Grouped Matrix Multiplication (Grouped-GEMM) and its role in optimizing Mixture of Experts (MoE) serving." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Grouped-GEMM for MoE Efficiency</h1>
+            <p class="hero-copy">
+                Mixture of Experts (MoE) architectures present a unique challenge: executing multiple 
+                different matrix multiplications on different subsets of data simultaneously. 
+                Grouped-GEMM is the symbolic solution that allows these irregular operations to 
+                be packed into a single, high-efficiency GPU call.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>Irregular Expert Assignment</h2>
+                <p>
+                    In an MoE model, token 1 might go to Expert A, while token 2 goes to Expert B. 
+                    This creates many small, uneven work packets:
+                    <br><code>Expert_A = MatMul(X_subset1, W_A)</code>
+                    <br><code>Expert_B = MatMul(X_subset2, W_B)</code>
+                </p>
+                <p>
+                    If <code>X_subset1</code> has 10 tokens and <code>X_subset2</code> has 50 tokens, 
+                    Standard Batching fails because the dimensions don't match. Launching 
+                    individual kernels for every expert results in <strong>GPU Under-utilization</strong> 
+                    (low occupancy).
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>From Stacking to Grouping</h2>
+                <p>
+                    While <strong>Stacking</strong> works for uniform inputs, **Grouped-GEMM** 
+                    is required for the ragged, dynamic nature of MoE routing.
+                </p>
+                <p>
+                    A symbolic engine identifies the "Collection of MatMuls" pattern:
+                    <br><code>List[MatMul(Xi, Wi)]</code>
+                </p>
+                <p>
+                    Instead of forcing a single uniform shape, the engine transforms the list 
+                    into a <strong>Grouped-GEMM Descriptor</strong>. This descriptor tells the GPU 
+                    to treat the expert weights as a single logical block, but with multiple 
+                    offsets and sequence lengths.
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Static Weights:</strong> <code>W_A, W_B, ...</code> are pre-arranged in memory.</li>
+                    <li><strong>Dynamic Indexing:</strong> The engine generates a map of which tokens 
+                    belong to which expert block.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Scaling to Thousands of Experts</h2>
+                <p>
+                    Without Grouped-GEMM, MoE models are forced to use "Padding" to make all expert 
+                    calls the same size, which wastes up to 50% of the compute power. 
+                </p>
+                <p>
+                    Symbolic optimization of Grouped-GEMMs is the core technology in high-performance 
+                    MoE libraries like <strong>DeepSpeed-MoE</strong> and <strong>MegaBlocks</strong>. 
+                    It allows models to scale the number of experts without increasing the 
+                    latency of the dispatch loop.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Trace</span>
+                <h2>Irregular Dispatch</h2>
+                <div class="code-block">
+                    // Individual Expert Calls
+                    Map(Expert_i, Select(X, Gating_i))
+                    <br><br>
+                    // Symbolic Transformation
+                    GroupedGEMM(
+                      Inputs = Concat(Xi),
+                      Weights = Concat(Wi),
+                      Metadata = GatingIndices
+                    )
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

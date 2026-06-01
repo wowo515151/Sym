@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Confluence In Term Rewriting</title>
+    <meta name="description" content="What confluence means in term rewriting, why it matters for symbolic systems, and how it affects consistency when multiple rewrite paths are possible." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Confluence In Term Rewriting</h1>
+            <p class="hero-copy">
+                Confluence is the property that says different valid rewrite paths still lead to a common result. It is
+                one of the key reasons a rewrite system can be trusted as more than a bag of local algebra tricks.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>Different Paths, Same Destination</h2>
+                <p>
+                    A rewrite system is confluent when, whenever an expression can be rewritten in two different ways,
+                    those branches can still be continued until they meet again. Informally, it means the system does
+                    not depend dangerously on which valid rewrite you happened to apply first.
+                </p>
+                <p>
+                    Confluence matters because symbolic systems often have many overlapping rewrite rules. If those rules
+                    send equivalent expressions into incompatible normal forms, then simplification becomes unstable and
+                    users lose confidence that the system has a coherent notion of result.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Consistency Is A Global Property</h2>
+                <p>
+                    Individual rewrite rules can each be mathematically sound and still interact badly as a group.
+                    Confluence is about the behavior of the whole system, not just the correctness of isolated rules. It
+                    asks whether local choices can be reconciled later.
+                </p>
+                <p>
+                    That is why confluence sits near the heart of symbolic simplification, theorem-prover normalization,
+                    and algebraic canonicalization.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Intuition</span>
+                <h3>Why Branches Appear</h3>
+                <p>
+                    If a term contains several subexpressions that match different rules, the engine may have multiple
+                    legitimate next moves. Confluence tells you whether those choices are harmless in the long run or
+                    whether the system may drift into competing end states.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Practical Benefit</span>
+                <h3>Canonical Results Become Plausible</h3>
+                <p>
+                    When a terminating rewrite system is also confluent, a normal form is much more meaningful. It
+                    suggests that the result does not merely reflect incidental rule order, but a stable target for the
+                    entire system.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">System Design</span>
+                <h2>How People Reason About Confluence</h2>
+                <p>
+                    In practice, developers study where rules overlap, whether competing rewrites can be joined, and
+                    whether critical pairs reveal hidden inconsistencies. Some systems aim for genuinely confluent
+                    normalization. Others accept local non-confluence and manage it through search structures such as
+                    e-graphs, where many equivalent forms are preserved instead of prematurely collapsed.
+                </p>
+                <p>
+                    That distinction matters. A normalization-oriented simplifier wants reliable convergence. A search
+                    system may tolerate branching more naturally because it treats equivalence itself as an object to
+                    manage.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Concepts</span>
+                <h2>Confluence Works With Other Properties</h2>
+                <p>
+                    Confluence alone does not guarantee that rewriting finishes. A system can be confluent and still
+                    loop. That is why confluence is often discussed together with termination. Together they help explain
+                    when a rewrite system has a unique stable outcome and when it needs more sophisticated control.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./term-rewriting-systems.html">Term Rewriting</a>
+                    <a class="button-link secondary" href="./termination-in-term-rewriting.html">Termination</a>
+                    <a class="button-link secondary" href="./canonical-forms.html">Canonical Forms</a>
+                    <a class="button-link secondary" href="./e-graphs.html">E-Graphs</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

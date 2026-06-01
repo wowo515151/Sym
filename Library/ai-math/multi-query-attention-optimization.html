@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Multi-Query Attention (MQA) Optimization</title>
+    <meta name="description" content="A symbolic analysis of memory-efficient re-association for Multi-Query Attention architectures." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Multi-Query Attention (MQA) Optimization</h1>
+            <p class="hero-copy">
+                Multi-Query Attention (MQA) reduces the memory footprint of transformer models by sharing 
+                Key and Value heads across multiple Query heads. Symbolic re-association can further 
+                optimize the computational cost of these shared projections.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>Asymmetric Shapes in Attention Projections</h2>
+                <p>
+                    In Multi-Query Attention, the <code>Key (K)</code> and <code>Value (V)</code> tensors have 
+                    significantly fewer dimensions than the <code>Query (Q)</code> tensor along the head axis. 
+                    This creates an asymmetry in the matrix multiplication chain: <code>(Q &times; K<sup>T</sup>) &times; V</code>.
+                </p>
+                <p>
+                    When the context length (the number of rows in K and V) is large, but the number of heads is 
+                    small, the intermediate product <code>Q &times; K<sup>T</sup></code> can be much larger than 
+                    the input or output tensors.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Preferring Context-Value Pre-computation</h2>
+                <p>
+                    Consider MQA shapes:
+                    <br><code>Q = [128, 64]</code>
+                    <br><code>K = [1024, 64]</code>
+                    <br><code>V = [1024, 128]</code>
+                </p>
+                <ul class="article-list">
+                    <li><strong>Standard Order:</strong> <code>(Q &times; K<sup>T</sup>) &times; V</code> computes a <code>[128, 1024]</code> attention matrix.</li>
+                    <li><strong>Optimized Order:</strong> <code>Q &times; (K<sup>T</sup> &times; V)</code> computes a <code>[64, 128]</code> summary matrix.</li>
+                </ul>
+                <p>
+                    By re-associating to <code>Q &times; (K<sup>T</sup> &times; V)</code>, the system avoids materializing the 
+                    large sequence-by-sequence attention matrix, leading to dramatic memory savings and faster 
+                    execution for long context windows.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Proof</span>
+                <h2>Symbolic Trace</h2>
+                <div class="code-block">
+                    // Original MQA Chain
+                    MatMul(MatMul(Q, Transpose(K)), V)
+                    <br><br>
+                    // Result (Optimized for context length)
+                    MatMul(Q, MatMul(Transpose(K), V))
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

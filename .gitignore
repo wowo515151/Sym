@@ -385,3 +385,12 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+.env
+agentverse_new_api_key.txt
+.azure-sp/
+Secure/
+.tmp_dotnet_home/
+.tmp_probe_manual/
+.tmp_probe_manual2/
+.tmp_probe_manual3/

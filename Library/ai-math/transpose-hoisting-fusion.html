@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Transpose Hoisting for Kernel Fusion</title>
+    <meta name="description" content="A symbolic analysis of how hoisting transpose operations can enable more efficient GPU kernel fusion." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Transpose Hoisting for Fusion</h1>
+            <p class="hero-copy">
+                The layout of tensors in memory—Row-Major vs Column-Major—determines the efficiency of 
+                GPU kernels. Symbolic "Transpose Hoisting" allows the engine to rearrange operations so 
+                that transposes are moved to the boundaries of the graph, enabling more fused operations 
+                in the "hot path."
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The Transpose Penalty</h2>
+                <p>
+                    Transposing a large matrix in GPU memory is not a "free" operation; it involves a 
+                    non-contiguous memory access pattern that can be quite slow. In many neural network 
+                    implementations, transposes are sprinkled throughout the graph (e.g., after a 
+                    Linear layer or before an Attention block).
+                </p>
+                <p>
+                    Consider <code>A<sup>T</sup> &times; B<sup>T</sup></code>. Executing this requires two 
+                    explicit transposes before the multiplication can even begin.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Hoisting the Transpose</h2>
+                <p>
+                    A symbolic engine uses the identity:
+                    <br><code>A<sup>T</sup> &times; B<sup>T</sup> = (B &times; A)<sup>T</sup></code>
+                </p>
+                <p>
+                    By "hoisting" the transpose outside the matrix multiplication:
+                </p>
+                <ul class="lead-list">
+                    <li>The GPU can perform a high-speed <code>MatMul</code> on the original layouts of <code>B</code> and <code>A</code>.</li>
+                    <li>A single transpose is performed on the <em>result</em>, or even better, deferred to the next layer's input.</li>
+                </ul>
+                <p>
+                    This is especially powerful when combined with <strong>Relu Commutation</strong>, where 
+                    <code>Relu(A<sup>T</sup>) = (Relu(A))<sup>T</sup></code>, allowing the activation to fuse 
+                    with the generating kernel before the transpose happens.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>CUDA Layout Optimization</h2>
+                <p>
+                    In libraries like <strong>cuBLAS</strong> and <strong>CUTLASS</strong>, specific 
+                    kernel variants (like <code>GEMM_NT</code> or <code>GEMM_TN</code>) are optimized for 
+                    specific input layouts. Symbolic hoisting ensures that the graph is presented to the 
+                    backend in a way that minimizes the need for explicit, slow memory shuffles.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Proof</span>
+                <h2>Symbolic Trace</h2>
+                <div class="code-block">
+                    // Original Expression
+                    MatMul(Transpose(A), Transpose(B))
+                    <br><br>
+                    // Rule Applied: TransposeMatMul (Inverse)
+                    MatMul(Transpose(?a), Transpose(?b)) -> Transpose(MatMul(?b, ?a))
+                    <br><br>
+                    // Commutation with Relu
+                    Relu(Transpose(X)) -> Transpose(Relu(X))
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

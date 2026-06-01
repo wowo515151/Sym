@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plan-And-Execute For AI Mathematicians</title>
+    <meta name="description" content="How plan-and-execute architectures help AI mathematicians handle longer tasks, structured tool use, and verification without collapsing into one giant prompt." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics</p>
+            <h1>Plan-And-Execute For AI Mathematicians</h1>
+            <p class="hero-copy">
+                Plan-and-execute is one of the most natural architectures for AI mathematicians because mathematical work
+                often depends on decomposition. The system benefits from separating strategy from exact local execution.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Core Idea</span>
+                <h2>Separate Global Strategy From Local Work</h2>
+                <p>
+                    In a plan-and-execute workflow, one layer decides what subproblems matter and in what order they
+                    should be approached. Another layer carries out the immediate step: calling SymCLI, checking an
+                    identity, testing a conjecture, or producing a small derivation artifact.
+                </p>
+                <p>
+                    This separation is helpful in mathematics because local exactness and global research direction are
+                    different kinds of work. A system that treats them as the same thing often becomes either vague at
+                    the top or rigid at the bottom.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Helps</span>
+                <h2>Long Tasks Need More Than A Single Loop</h2>
+                <p>
+                    Mathematical tasks often branch. A proof attempt fails. A simplification exposes a better target. A
+                    numerical experiment contradicts an assumption. Plan-and-execute architectures make it easier to
+                    re-evaluate direction without losing the discipline of exact tool use at the step level.
+                </p>
+                <p>
+                    This is one reason the pattern often outperforms a single uninterrupted reasoning trace on longer
+                    mathematical problems.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Typical Shape</span>
+                <h2>A Practical Mathematical Loop</h2>
+                <p>
+                    A planner identifies the current objective, the needed artifacts, and the next high-value check. An
+                    executor performs that concrete action and writes the result back to the working memory. A reviewer
+                    or verifier may then decide whether the branch should continue, be revised, or be abandoned.
+                </p>
+                <div class="code-block">goal -> plan -> exact execution -> artifact -> review -> updated plan</div>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Where SymCLI Fits</span>
+                <h2>Execution Should Be Tool-Centered</h2>
+                <p>
+                    The execution side of a mathematical agent is strongest when it uses exact tools. SymCLI is a good
+                    example because it provides a clear interface for symbolic tasks, which means the planner can assign
+                    concrete work instead of merely asking the model to think harder in prose.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Strength</span>
+                <h3>Better For Long-Horizon Research</h3>
+                <p>
+                    Plan-and-execute architectures are especially useful for theorem-oriented work, multi-stage
+                    derivations, conjecture exploration, and notebook-based research sessions where progress must be
+                    preserved over time.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Risk</span>
+                <h3>Plans Can Drift From Reality</h3>
+                <p>
+                    A weak planner may produce elegant-looking steps that ignore what the tools actually returned. That
+                    is why good plan-and-execute systems keep looping through artifacts, not just through intentions.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Best Practice</span>
+                <h2>Keep The Plan Lightweight And Revisable</h2>
+                <p>
+                    The planner does not need to foresee all of mathematics. It needs to maintain the current frontier:
+                    active assumptions, current branch goal, known obstacles, and the next few exact checks that matter.
+                    In practice, this makes planning more like research management than like exhaustive theorem search.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./planning-verification-and-recovery.html">Planning And Recovery</a>
+                    <a class="button-link secondary" href="./memory-and-notebooks-for-ai-mathematicians.html">Memory</a>
+                    <a class="button-link secondary" href="./when-should-an-ai-agent-call-symcli.html">When To Call SymCLI</a>
+                    <a class="button-link secondary" href="./multi-agent-mathematical-research.html">Multi-Agent Research</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

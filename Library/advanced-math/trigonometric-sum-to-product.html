@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trigonometric Sum-to-Product Identities</title>
+    <meta name="description" content="An exploration of how symbolic engines convert trigonometric sums into products for signal processing and physics." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Advanced Mathematics / Trigonometry</p>
+            <h1>Trigonometric Sum-to-Product Transformations</h1>
+            <p class="hero-copy">
+                Sum-to-product identities are the secret weapon of signal processing. By converting 
+                the addition of two waves into a product, we can identify beat frequencies, 
+                modulations, and interference patterns that are hidden in the sum.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The Interference of Waves</h2>
+                <p>
+                    When two sound waves or electromagnetic signals overlap, they combine via 
+                    <strong>linear superposition</strong>: <code>sin(A) + sin(B)</code>. While this 
+                    is mathematically simple, it is physically opaque.
+                </p>
+                <p>
+                    A product form, like <code>2 sin((A+B)/2) cos((A-B)/2)</code>, reveals the 
+                    "average" frequency and the "envelope" or "beat" frequency, which describes 
+                    the physical behavior of the interference.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Symmetry in the Complex Plane</h2>
+                <p>
+                    Symbolic engines derive these identities by representing trigonometric functions as 
+                    exponentials in the complex plane (Euler's formula).
+                </p>
+                <p>
+                    The addition <code>e<sup>iA</sup> + e<sup>iB</sup></code> can be factored by pulling 
+                    out the average phase, leading directly to the product form.
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Input:</strong> <code>sin(A) + sin(B)</code></li>
+                    <li><strong>Identity:</strong> <code>2 sin((A+B)/2) &times; cos((A-B)/2)</code></li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Beat Frequencies and FM Radio</h2>
+                <p>
+                    In <strong>Signal Analysis</strong>, the sum-to-product identity is used to calculate 
+                    the bandwidth of a modulated signal. In <strong>Acoustics</strong>, it explains 
+                    why two slightly out-of-tune instruments create a "wobbling" sound.
+                </p>
+                <p>
+                    For a symbolic computation engine, these identities are crucial for 
+                    <strong>Integrand Normalization</strong>. Many integrals that look impossible 
+                    in sum-form become trivial when converted to a product of trig terms.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Proof</span>
+                <h2>Rule Pack Verification</h2>
+                <p>
+                    The Sym engine uses the <code>Trigonometry</code> rule pack to expand and then 
+                    re-factor products of angles.
+                </p>
+                <div class="code-block">
+                    // Rule Applied: SinACosB (Reverse Direction)
+                    0.5 * (sin(a + b) + sin(a - b)) -> sin(a) * cos(b)
+                    <br><br>
+                    // Derived Identity
+                    sin(x) + sin(y) = 2 * sin((x+y)/2) * cos((x-y)/2)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

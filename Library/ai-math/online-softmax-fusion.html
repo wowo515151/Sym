@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Online Softmax: Symbolic Fusion for Single-Pass Execution</title>
+    <meta name="description" content="A symbolic study of the Online Softmax algorithm and how it enables single-pass GPU kernel fusion by eliminating the Max-Sum bottleneck." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Online Softmax Fusion</h1>
+            <p class="hero-copy">
+                Standard Softmax is a "three-pass" algorithm: find max, compute sum of exps, then normalize. 
+                Symbolic re-formulation into the "Online Softmax" allows these three steps to be fused 
+                into a single GPU kernel pass, dramatically reducing memory bandwidth and latency.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The Three-Pass Memory Wall</h2>
+                <p>
+                    A naive Softmax implementation on a GPU requires reading the input tensor from global 
+                    memory three separate times:
+                </p>
+                <ol class="article-list">
+                    <li><strong>Pass 1 (Max):</strong> Find <code>m = max(x<sub>i</sub>)</code> for numerical stability.</li>
+                    <li><strong>Pass 2 (Sum):</strong> Compute <code>S = &Sigma; exp(x<sub>i</sub> - m)</code>.</li>
+                    <li><strong>Pass 3 (Norm):</strong> Compute <code>y<sub>i</sub> = exp(x<sub>i</sub> - m) / S</code>.</li>
+                </ol>
+                <p>
+                    For a large attention matrix, the time spent moving data between HBM and the GPU 
+                    registers dominates the actual exponential math.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Recurrent Normalization</h2>
+                <p>
+                    Symbolically, we can represent the max and sum as recurrent updates. 
+                    If we have a partial max <code>m<sub>old</sub></code> and a partial sum 
+                    <code>S<sub>old</sub></code>, and we encounter a new element <code>x<sub>new</sub></code>:
+                </p>
+                <ul class="lead-list">
+                    <li><strong>New Max:</strong> <code>m<sub>new</sub> = max(m<sub>old</sub>, x<sub>new</sub>)</code></li>
+                    <li><strong>Rescaled Sum:</strong> <code>S<sub>new</sub> = S<sub>old</sub> &times; exp(m<sub>old</sub> - m<sub>new</sub>) + exp(x<sub>new</sub> - m<sub>new</sub>)</code></li>
+                </ul>
+                <p>
+                    This recurrence allows the GPU to compute the final stable softmax result while 
+                    streaming through the data **exactly once**. The symbolic engine identifies 
+                    the <code>Softmax(X)</code> operator and replaces the three-pass DAG with a 
+                    single <strong>OnlineSoftmax kernel</strong>.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Throughput in Long-Context Attention</h2>
+                <p>
+                    Online Softmax is the secret sauce behind <strong>Flash-Attention</strong>. 
+                    By enabling single-pass execution, it allows the attention mechanism to stay 
+                    entirely within the GPU's fast SRAM (L1 cache) without ever writing intermediate 
+                    results back to slower main memory.
+                </p>
+                <p>
+                    This reduces the memory bandwidth requirement of the softmax layer by **66%**, 
+                    which is directly proportional to the speedup seen in modern LLM training 
+                    and inference.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Trace</span>
+                <h2>Fusion Identity</h2>
+                <div class="code-block">
+                    // Three-Pass Softmax
+                    Div(Exp(Sub(X, Max(X))), Sum(Exp(Sub(X, Max(X)))))
+                    <br><br>
+                    // Symbolic Optimization Target
+                    Softmax(X) -> FusedOnlineSoftmax(X)
+                    <br><br>
+                    // Result (Verified for Single-Pass Kernel)
+                    Reduce(X, init={-inf, 0}, op=OnlineUpdate)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

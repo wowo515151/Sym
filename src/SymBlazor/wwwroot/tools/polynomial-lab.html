@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Polynomial Root And Shape Lab</title>
+    <link rel="stylesheet" href="../library.css" />
+    <link rel="stylesheet" href="./tools.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <p class="eyebrow">Tools / Polynomial Analysis</p>
+            <h1>Polynomial Root And Shape Lab</h1>
+            <p class="hero-copy">
+                This tool analyzes a polynomial from its coefficients, showing the curve, real and complex roots, and critical points. It is useful for students checking algebra and for engineers inspecting model polynomials or characteristic equations.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">All Tools</a>
+                <a class="button-link secondary" href="../library/advanced-math/eigenvalues-and-eigenvectors.html">Eigenvalue Context</a>
+            </div>
+        </section>
+
+        <section class="tool-grid">
+            <article class="tool-panel">
+                <h2>Polynomial Input</h2>
+                <div class="tool-controls">
+                    <label class="tool-field">Coefficients from highest degree to constant term
+                        <input id="coefficients" value="1, -6, 11, -6" />
+                    </label>
+                    <div class="tool-actions">
+                        <button class="tool-button primary" id="runPolynomial">Analyze Polynomial</button>
+                    </div>
+                </div>
+            </article>
+            <article class="tool-panel">
+                <h2>Summary</h2>
+                <div id="polynomialStats" class="tool-stat-grid"></div>
+                <div class="tool-surface">
+                    <h3>Roots</h3>
+                    <div id="polynomialRoots"></div>
+                </div>
+                <div class="tool-surface">
+                    <h3>Critical Points</h3>
+                    <div id="criticalPoints"></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="section">
+            <article class="tool-panel">
+                <h2>Curve View</h2>
+                <div id="polynomialChart" class="tool-surface"></div>
+                <p>
+                    The plot helps distinguish algebraically equivalent-looking coefficient lists that actually produce very different turning behavior or root multiplicity.
+                </p>
+            </article>
+        </section>
+
+        <section class="tool-grid">
+            <article class="tool-panel">
+                <h2>How To Use This Lab</h2>
+                <p>
+                    Enter coefficients in descending degree order, then run the analysis. For example,
+                    <code>1, -6, 11, -6</code> means <code>x^3 - 6x^2 + 11x - 6</code>.
+                </p>
+                <ul class="lead-list">
+                    <li>Use the roots panel to see real and complex roots together.</li>
+                    <li>Use the critical-point panel to see where the derivative vanishes.</li>
+                    <li>Use the chart to compare algebraic expectations against the actual curve shape.</li>
+                </ul>
+            </article>
+            <article class="tool-panel">
+                <h2>Fundamental Mathematics</h2>
+                <p>
+                    A polynomial is a finite sum of powers of a variable with fixed coefficients. Its roots are the values where
+                    the polynomial equals zero. Its critical points are the roots of its derivative, which mark locations where
+                    the curve has a horizontal tangent and may change from increasing to decreasing or vice versa.
+                </p>
+                <p>
+                    This is why polynomial analysis matters in algebra, control, approximation, and eigenvalue problems:
+                    the coefficients encode structure, but the roots and turning behavior reveal what that structure actually does.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+    <script type="module" src="./js/pages/polynomial-lab.js"></script>
+</body>
+</html>

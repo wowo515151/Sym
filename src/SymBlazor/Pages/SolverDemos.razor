@@ -1,0 +1,186 @@
+@page "/solver-demos"
+
+<div class="solver-page">
+    <div class="solver-shell">
+        <section class="solver-hero">
+            <p class="solver-kicker">Sym Exact Workflows</p>
+            <h1>Engine-Backed Solver Demos</h1>
+            <p class="solver-summary">
+                These demos expose solver capabilities that already exist in Sym's engine, but were not previously
+                surfaced as first-class browser workflows. The aim is to make exact symbolic work easier to discover
+                without forcing users to guess which ProblemScript shape unlocks a given solver.
+            </p>
+            <p class="solver-summary">
+                Each page runs against the real Sym backend. Integration, limits, matrix workflows, ODEs,
+                recurrences, series, and inequalities are now organized as explicit tracks instead of hiding behind a
+                single general-purpose input box.
+            </p>
+            <div class="solver-actions">
+                <a class="solver-link primary" href="/">Open Sym Online</a>
+                <a class="solver-link secondary" href="/rewrite-demo">Rewrite Demo</a>
+                <a class="solver-link secondary" href="/tensor-demo">Tensor Demo</a>
+            </div>
+        </section>
+
+        <section class="solver-grid">
+            @foreach (var demo in Demos)
+            {
+                <article class="solver-card">
+                    <span class="solver-label">@demo.Label</span>
+                    <h2>@demo.Title</h2>
+                    <p>@demo.Description</p>
+                    <ul>
+                        @foreach (var focus in demo.Focus)
+                        {
+                            <li>@focus</li>
+                        }
+                    </ul>
+                    <div class="solver-actions">
+                        <a class="solver-link secondary" href="@demo.Route">Open Demo</a>
+                    </div>
+                </article>
+            }
+        </section>
+    </div>
+</div>
+
+@code {
+    private static readonly IReadOnlyList<SolverDemoCard> Demos =
+    [
+        new("Calculus", "Integration Demo", "/integration-demo", "Exact antiderivatives and definite integrals through the dedicated integration strategy.", ["Polynomial antiderivatives", "By-parts style workflows", "Inverse-trig forms"]),
+        new("Calculus", "Limit Demo", "/limit-demo", "Limit evaluation paths that already exist in the engine, including classic cancellation and series-style cases.", ["Sinc limits", "Exponential cancellation", "Cosine-based series limits"]),
+        new("Matrix", "Linear Algebra Demo", "/linear-algebra-demo", "Small exact matrix workflows that use Sym's matrix strategy and linear-algebra solver.", ["Determinants", "Inverses", "Matrix-form linear systems"]),
+        new("Differential Equations", "ODE Demo", "/ode-demo", "First-class browser access to Sym's current ordinary differential equation support.", ["Separable ODEs", "Linear first-order forms", "Constant-coefficient equations"]),
+        new("Discrete Math", "Recurrence Demo", "/recurrence-demo", "Linear constant-coefficient recurrences and target-term queries through the discrete recurrence strategy.", ["Target-term queries", "Closed-form recurrence solving", "Initial-condition driven results"]),
+        new("Approximation", "Series Demo", "/series-demo", "Series expansion workflows for symbolic local analysis and approximation-aware reasoning.", ["Maclaurin series", "Log expansions", "Series-limit connections"]),
+        new("Logic And Domains", "Inequality Demo", "/inequality-demo", "Inequality isolation and interval-style outputs through the existing inequality solver path.", ["Linear isolation", "Intervals", "Guarded piecewise outputs"])
+    ];
+
+    private sealed record SolverDemoCard(string Label, string Title, string Route, string Description, IReadOnlyList<string> Focus);
+}
+
+<style>
+    .solver-page {
+        min-height: 100vh;
+        padding: 1.5rem;
+        color: #edf5ff;
+        background:
+            radial-gradient(circle at top left, rgba(74, 144, 226, 0.16), transparent 28rem),
+            linear-gradient(180deg, #06111f 0%, #081a31 100%);
+    }
+
+    .solver-shell {
+        width: min(1180px, 100%);
+        margin: 0 auto;
+    }
+
+    .solver-hero {
+        margin-bottom: 1.5rem;
+    }
+
+    .solver-kicker {
+        margin: 0 0 0.4rem;
+        color: #89d1b6;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    .solver-page h1,
+    .solver-page h2 {
+        font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+        color: #edf5ff;
+    }
+
+    .solver-page h1 {
+        margin: 0;
+    }
+
+    .solver-summary {
+        max-width: 66rem;
+        margin: 0.75rem 0 0;
+        line-height: 1.65;
+        color: #d6e2f0;
+    }
+
+    .solver-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1rem;
+    }
+
+    .solver-card {
+        padding: 1rem 1.1rem;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 0.95rem;
+        background: rgba(6, 17, 31, 0.68);
+    }
+
+    .solver-label {
+        display: inline-block;
+        margin-bottom: 0.55rem;
+        color: #89d1b6;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .solver-card h2 {
+        margin: 0 0 0.65rem;
+        font-size: 1.15rem;
+    }
+
+    .solver-card p,
+    .solver-card li {
+        line-height: 1.6;
+        color: #d6e2f0;
+    }
+
+    .solver-card ul {
+        margin: 0.75rem 0 0;
+        padding-left: 1.15rem;
+    }
+
+    .solver-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+
+    .solver-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.6rem;
+        padding: 0.65rem 1rem;
+        border-radius: 999px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .solver-link:hover,
+    .solver-link:focus-visible {
+        transform: translateY(-1px);
+    }
+
+    .solver-link.primary {
+        color: #06111f;
+        background: #89d1b6;
+    }
+
+    .solver-link.secondary {
+        color: #edf5ff;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    @@media (max-width: 900px) {
+        .solver-page {
+            padding: 1rem;
+        }
+    }
+</style>

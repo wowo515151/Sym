@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Series And Fourier Lab</title>
+    <link rel="stylesheet" href="../library.css" />
+    <link rel="stylesheet" href="./tools.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <p class="eyebrow">Tools / Series</p>
+            <h1>Series And Fourier Lab</h1>
+            <p class="hero-copy">
+                Compare a user-entered function against its local Taylor approximation and a Fourier partial sum. This lab
+                is built to help students and engineers see where local power-series reasoning and global periodic
+                approximation agree, and where they do not.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">All Tools</a>
+                <a class="button-link secondary" href="../library/symbolic-computation/what-is-symbolic-integration.html">Symbolic Integration Article</a>
+                <a class="button-link ghost" href="../sym/series-demo">Sym Series Demo</a>
+            </div>
+        </section>
+
+        <section class="tool-grid">
+            <article class="tool-panel">
+                <h2>Series Setup</h2>
+                <div class="tool-controls">
+                    <label class="tool-field">Function f(x)
+                        <input id="seriesExpression" value="sin(x) + 0.3*cos(2*x)" />
+                    </label>
+                    <div class="tool-row three">
+                        <label class="tool-field">Fourier harmonics
+                            <input id="fourierHarmonics" type="number" min="1" max="12" value="4" />
+                        </label>
+                        <label class="tool-field">Taylor center
+                            <input id="taylorCenter" type="number" step="0.1" value="0" />
+                        </label>
+                        <label class="tool-field">Taylor order
+                            <input id="taylorOrder" type="number" min="1" max="8" value="5" />
+                        </label>
+                    </div>
+                    <div class="tool-actions">
+                        <button class="tool-button primary" id="runSeries">Update Comparison</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="tool-panel tool-output">
+                <h2>Approximation Summary</h2>
+                <div id="seriesStats" class="tool-stat-grid"></div>
+                <div class="tool-surface">
+                    <h3>Fourier Coefficients</h3>
+                    <div id="fourierCoeffs"></div>
+                </div>
+                <div class="tool-surface">
+                    <h3>Taylor Coefficients</h3>
+                    <div id="taylorCoeffs"></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="tool-grid">
+            <article class="tool-panel">
+                <h2>Function Versus Approximations</h2>
+                <div id="seriesChart" class="tool-surface"></div>
+                <p>
+                    The full chart is shown on <code>[-pi, pi]</code>. The Fourier partial sum is meant to approximate the
+                    function over the whole interval, while the Taylor polynomial is only expected to behave well near the chosen center.
+                </p>
+            </article>
+            <article class="tool-panel">
+                <h2>How To Read The Output</h2>
+                <p>
+                    Taylor coefficients tell you about local behavior at one point. Fourier coefficients tell you how much of each
+                    sine and cosine mode is needed to reconstruct a periodic signal over a wider interval.
+                </p>
+                <ul class="lead-list">
+                    <li>Increase Taylor order to improve the local approximation near the center.</li>
+                    <li>Increase Fourier harmonics to capture more oscillatory structure across the whole window.</li>
+                    <li>Try <code>abs(x)</code> or a sharper waveform to see the difference between smooth and non-smooth behavior.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="tool-grid">
+            <article class="tool-panel">
+                <h2>How To Use This Lab</h2>
+                <p>
+                    Enter a function of <code>x</code>, then choose how many Fourier modes and how many Taylor terms to keep.
+                    The chart compares the original function with both approximations at once.
+                </p>
+                <ul class="lead-list">
+                    <li>Use the Taylor controls to study local approximation near one point.</li>
+                    <li>Use the Fourier controls to study periodic approximation across a whole interval.</li>
+                    <li>Compare the coefficient panels to see what each approximation is actually encoding.</li>
+                </ul>
+            </article>
+            <article class="tool-panel">
+                <h2>Fundamental Mathematics</h2>
+                <p>
+                    A Taylor series approximates a function near a chosen center using derivatives at that point. A Fourier
+                    series approximates a periodic function using weighted sine and cosine modes over an interval. These are
+                    different ideas: one is local and derivative-based, the other is global and frequency-based.
+                </p>
+                <p>
+                    Putting them side by side helps show why smooth local behavior does not automatically imply a good global
+                    approximation, and why oscillatory structure often becomes clearer in a Fourier basis.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+    <script type="module" src="./js/pages/series-fourier-lab.js"></script>
+</body>
+</html>

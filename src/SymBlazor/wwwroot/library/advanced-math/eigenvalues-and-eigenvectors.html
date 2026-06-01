@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Are Eigenvalues And Eigenvectors?</title>
+    <meta name="description" content="What eigenvalues and eigenvectors are, why they matter in linear algebra, and how they connect to operators, dynamics, and computation." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Advanced Mathematics</p>
+            <h1>What Are Eigenvalues And Eigenvectors?</h1>
+            <p class="hero-copy">
+                Eigenvalues and eigenvectors describe directions that a linear transformation leaves in place up to
+                scaling. They are one of the most important ways to understand what a matrix really does.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>Invariant Directions Under A Linear Map</h2>
+                <p>
+                    For a matrix or linear operator <code>A</code>, an eigenvector is a nonzero vector <code>v</code>
+                    such that <code>Av = lambda v</code> for some scalar <code>lambda</code>. That scalar is the
+                    corresponding eigenvalue.
+                </p>
+                <p>
+                    The point is that the direction of <code>v</code> survives the transformation. It may be stretched,
+                    compressed, or reversed, but it is not rotated away into a different direction.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Eigen-Structure Reveals Operator Behavior</h2>
+                <p>
+                    Eigenvalues and eigenvectors appear in stability analysis, differential equations, quantum
+                    mechanics, PCA-like methods, graph analysis, and iterative algorithms. They are useful because they
+                    reveal structure that is often invisible if a matrix is viewed only entry by entry.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Dynamics</span>
+                <h3>Why Repeated Application Becomes Easier</h3>
+                <p>
+                    If a matrix acts diagonally in the right basis, repeated powers and long-term behavior are easier to
+                    understand. That is one reason eigen-analysis is so important in dynamical systems and operator
+                    methods.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Computation</span>
+                <h3>Why Symbolic And Numerical Views Both Matter</h3>
+                <p>
+                    Some eigen-problems can be treated exactly in symbolic settings, while large practical systems often
+                    require numerical methods. The topic is a natural meeting point of exact structure and computation.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Related Topics</span>
+                <h2>From Spectral Structure To Decomposition</h2>
+                <p>
+                    Eigen-analysis sits naturally near singular value decomposition, matrix exponentials, and structured
+                    products such as the Kronecker product. Together they form an operator-focused linear-algebra
+                    cluster.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./singular-value-decomposition.html">Singular Value Decomposition</a>
+                    <a class="button-link secondary" href="./matrix-exponential.html">Matrix Exponential</a>
+                    <a class="button-link secondary" href="./kronecker-product.html">Kronecker Product</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Bottom Line</span>
+                <h2>Eigenvalues And Eigenvectors Turn Matrices Into Interpretable Objects</h2>
+                <p>
+                    Rather than thinking of a matrix only as a table of numbers, eigen-analysis lets us think of it as
+                    an operator with preferred directions and scaling behavior. That is why the topic is so central.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

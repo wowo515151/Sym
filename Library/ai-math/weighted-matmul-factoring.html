@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shared Weight Factoring and Stacking for Parallel MatMuls</title>
+    <meta name="description" content="An optimization analysis of parallel matrix multiplications with shared weights using stacking for kernel efficiency." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Shared Weight Factoring and Stacking</h1>
+            <p class="hero-copy">
+                In many AI architectures, multiple distinct input tensors are multiplied by the same weight matrix. 
+                Symbolic optimization can identify opportunities to "stack" these operations into a single large 
+                matrix multiplication, improving GPU utilization and memory bandwidth efficiency.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>Redundant Weight Loads in Parallel Paths</h2>
+                <p>
+                    Consider a scenario where two inputs <code>X</code> and <code>Y</code> are processed by the same 
+                    weights <code>W</code>, each with a different scaling factor <code>g1</code> and <code>g2</code>:
+                    <br><code>Result = (X &times; W) &times; g1 + (Y &times; W) &times; g2</code>
+                </p>
+                <p>
+                    A naive implementation executes two separate <code>MatMul</code> kernels. Because <code>W</code> 
+                    is shared, this results in loading the large weight matrix from memory twice, which is a 
+                    significant bottleneck on hardware that is memory-bandwidth limited.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Factoring and Stacking</h2>
+                <p>
+                    While basic factoring would transform the expression to <code>(X &times; g1 + Y &times; g2) &times; W</code>, 
+                    the Sym engine identifies an even more efficient form for modern hardware: <strong>Stacking</strong>.
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Original:</strong> Two separate kernels, two loads of <code>W</code>.</li>
+                    <li><strong>Factored:</strong> One larger addition, one load of <code>W</code>.</li>
+                    <li><strong>Stacked:</strong> One unified kernel where <code>X</code> and <code>Y</code> are concatenated along a new batch dimension.</li>
+                </ul>
+                <p>
+                    For shapes <code>X, Y = [32, 128]</code> and <code>W = [128, 256]</code>, stacking allows the 
+                    GPU to process both inputs in a single kernel launch, maximizing occupancy.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Memory Bandwidth and Kernel Fusion</h2>
+                <p>
+                    Modern GPUs have massive compute power but limited memory bandwidth. Loading a large weight matrix 
+                    is expensive. By stacking the inputs, we ensure that the weight matrix <code>W</code> is 
+                    read into the GPU's registers once and reused across all inputs in the stack.
+                </p>
+                <p>
+                    This is a foundational optimization for <strong>Mixture of Experts (MoE)</strong> and 
+                    <strong>Multi-Query Attention (MQA)</strong>, where shared weights are a primary architectural 
+                    feature.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Proof</span>
+                <h2>E-Graph Trace</h2>
+                <p>
+                    The Sym engine uses the <code>StackWeightedSum</code> rule to transform the addition of weighted 
+                    products into a stacked multiplication.
+                </p>
+                <div class="code-block">
+                    // Original Expression
+                    TensorAdd(TensorMul(MatMul(X, W), g1), TensorMul(MatMul(Y, W), g2))
+                    <br><br>
+                    // Optimization Rule Applied: StackWeightedSum
+                    TensorAdd(TensorMul(?r1, ?w1), TensorMul(?r2, ?w2)) -> MatMul(Stack(0, ?w1, ?w2), Stack(0, ?r1, ?r2))
+                    <br><br>
+                    // Result (Verified for Shapes)
+                    MatMul(MatMul(Stack(0, g1, g2), Stack(0, X, Y)), W)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

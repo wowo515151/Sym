@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KV Cache Quantization: Symbolic Scale Folding</title>
+    <meta name="description" content="A study of symbolic scale propagation to enable high-precision 4-bit and 8-bit KV caches in LLMs." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>KV Cache Quantization Folding</h1>
+            <p class="hero-copy">
+                The KV cache is the largest memory consumer in LLM serving. Quantizing these caches 
+                to 4-bit (INT4) or 8-bit (FP8) is essential for large context windows. Symbolic scale 
+                folding allows the quantization "scales" to be pushed through the attention math, 
+                minimizing precision loss.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The Storage vs. Precision Conflict</h2>
+                <p>
+                    A 128k context window in a large model can consume 50GB+ of HBM. 
+                    If we quantize the Key (K) and Value (V) tensors to 4-bit, we save 75% of that memory. 
+                    However, every time we perform an Attention MatMul, we must "dequantize" the values 
+                    back to FP16 to perform the math.
+                </p>
+                <p>
+                    Naively dequantizing inside the hot-loop adds a massive number of instructions 
+                    and can lead to rounding errors that accumulate across heads.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Scale Propagation</h2>
+                <p>
+                    A quantized tensor is represented as <code>Q(X) = X_int / Scale</code>. 
+                    When calculating attention <code>(Q &times; K<sup>T</sup>)</code>, we can pull 
+                    the scales out:
+                    <br><code>(Q &times; K_int<sup>T</sup> / S_k) = (Q &times; K_int<sup>T</sup>) / S_k</code>
+                </p>
+                <p>
+                    Symbolic engines perform **Scale Propagation**:
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Fold to Scalar:</strong> Instead of dequantizing every element of K, 
+                    the engine performs the MatMul in INT-space and applies the scalar scale 
+                    <code>1/S_k</code> to the *result*.</li>
+                    <li><strong>Hoisting:</strong> The scales for K and V are hoisted out of the 
+                    reduction loop and combined with the Softmax scaling factor.</li>
+                </ul>
+                <p>
+                    This allows the GPU to stay in high-speed integer mode for the bulk of the 
+                    work, only returning to floating-point at the very end of the attention block.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Beyond the 80GB Limit</h2>
+                <p>
+                    Scale-aware quantization is what makes it possible to serve an <strong>800B parameter 
+                    MoE model</strong> on a single node. By symbolically managing the scales, 
+                    systems like <strong>KIVI</strong> or <strong>AutoFP8</strong> can maintain near-FP16 
+                    accuracy while using 4-bit storage.
+                </p>
+                <p>
+                    This optimization is the frontier of "Infinite Context" AI, where the goal is 
+                    to fit as much history as possible into the GPU's fixed memory budget.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Trace</span>
+                <h2>Dequantization Hoisting</h2>
+                <div class="code-block">
+                    // Original Dequant MatMul
+                    MatMul(Q, Transpose(TensorDiv(K_int, S_k)))
+                    <br><br>
+                    // Rule Applied: MatMulWeightSlide (Scalar)
+                    MatMul(Q, Transpose(K_int) / S_k) -> MatMul(Q, Transpose(K_int)) / S_k
+                    <br><br>
+                    // Result (INT8/4 Kernel Friendly)
+                    TensorDiv(MatMul_INT(Q, Transpose(K_int)), S_k)
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

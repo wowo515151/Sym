@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is Symbolic Integration?</title>
+    <meta name="description" content="What symbolic integration is, why exact antiderivatives are difficult, and how symbolic systems balance rules, substitutions, and special functions." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>What Is Symbolic Integration?</h1>
+            <p class="hero-copy">
+                Symbolic integration is the task of finding an exact antiderivative or exact transformed integral
+                expression rather than approximating an area numerically at chosen sample points.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>Exact Integrals Instead Of Approximations</h2>
+                <p>
+                    In numerical integration, the question is usually what value a definite integral has to a chosen
+                    precision. In symbolic integration, the question is often what exact function differentiates back to
+                    the integrand. Those are related but importantly different problems.
+                </p>
+                <p>
+                    A symbolic answer might be an elementary antiderivative, a piecewise form, a substitution-ready
+                    transformed integral, or an expression involving special functions. The output is itself a
+                    mathematical object that can be simplified, differentiated, compared, or reused.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Reality Check</span>
+                <h2>Integration Is Harder Than Differentiation</h2>
+                <p>
+                    Differentiation is largely rule-driven and local. Integration is not so cooperative. The system
+                    often has to recognize patterns, discover substitutions, reverse product or chain-rule effects, or
+                    conclude that no elementary antiderivative exists.
+                </p>
+                <p>
+                    That is why symbolic integration has historically been one of the signature challenges of computer
+                    algebra systems.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Example</span>
+                <h3>Why Pattern Recognition Matters</h3>
+                <p>
+                    The integral of <code>2*x*cos(x^2)</code> becomes much easier once the system notices that it is the
+                    derivative of the inner term <code>x^2</code> times an outer function of that inner term. That
+                    recognition is structural, not merely numeric.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Output Quality</span>
+                <h3>The Best Result Is Not Always Shortest</h3>
+                <p>
+                    A good symbolic integrator should produce an answer that is mathematically correct and reasonably
+                    useful. Sometimes that means a compact elementary form. Sometimes it means returning a transformed
+                    expression that reveals why the integral is difficult.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Techniques</span>
+                <h2>How Symbolic Systems Approach Integration</h2>
+                <p>
+                    Symbolic integrators typically combine pattern libraries, algebraic normalization, substitution
+                    heuristics, partial-fraction decomposition, integration-by-parts templates, and domain-specific
+                    algorithms for classes such as rational functions, trig forms, or exponentials.
+                </p>
+                <p>
+                    Even when the exact algorithm is sophisticated, the visible workflow often still looks like symbolic
+                    pattern search guided by algebraic structure.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Exact Integrals Are Useful Objects</h2>
+                <p>
+                    An exact antiderivative can be differentiated to verify correctness, substituted into larger
+                    derivations, used to study asymptotic structure, or transformed further by a symbolic engine. That
+                    makes symbolic integration valuable not only for education but for mathematical software, theorem
+                    work, and AI systems that need exact intermediate results.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./symbolic-differentiation.html">Symbolic Differentiation</a>
+                    <a class="button-link secondary" href="./what-is-symbolic-simplification.html">Simplification</a>
+                    <a class="button-link secondary" href="../ai-math/exact-tools-for-ai-mathematicians.html">Exact Tools</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

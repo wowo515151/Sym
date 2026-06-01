@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is Singular Value Decomposition?</title>
+    <meta name="description" content="What singular value decomposition is, why it factors a matrix into structured pieces, and why it matters in computation, optimization, and data analysis." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Advanced Mathematics</p>
+            <h1>What Is Singular Value Decomposition?</h1>
+            <p class="hero-copy">
+                Singular value decomposition, or SVD, factors a matrix into orthogonal directions and nonnegative scale
+                factors. It is one of the most useful structured factorizations in linear algebra.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>A Structured Factorization</h2>
+                <p>
+                    The SVD of a matrix writes it as <code>U Sigma V^T</code>, where <code>U</code> and <code>V</code>
+                    are orthogonal matrices and <code>Sigma</code> is diagonal with nonnegative entries called singular
+                    values.
+                </p>
+                <p>
+                    This factorization separates direction from scale in a way that is stable and computationally useful
+                    even for non-square matrices.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>SVD Makes Matrix Structure Visible</h2>
+                <p>
+                    SVD reveals dominant directions, rank structure, low-rank approximations, and geometric stretching
+                    behavior. That is why it appears in numerical linear algebra, optimization, data analysis, and
+                    machine learning.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Geometry</span>
+                <h3>Stretching Along Orthogonal Axes</h3>
+                <p>
+                    Geometrically, SVD says that a matrix can be viewed as a rotation, followed by axis-aligned
+                    stretching, followed by another rotation. That picture is often easier to understand than a raw
+                    matrix of entries.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Computation</span>
+                <h3>Why It Is So Widely Used</h3>
+                <p>
+                    SVD is useful for pseudoinverses, compression, noise filtering, principal subspace analysis, and
+                    stable numerical algorithms. It is one of the workhorse decompositions of applied mathematics.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Connections</span>
+                <h2>Related To Spectral And Tensor Ideas</h2>
+                <p>
+                    SVD belongs in the same cluster as eigenvalues, matrix exponentials, and tensor structure. It is not
+                    the same as eigen-decomposition, but it plays a similar role in making operator behavior more
+                    interpretable.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./eigenvalues-and-eigenvectors.html">Eigenvalues And Eigenvectors</a>
+                    <a class="button-link secondary" href="./matrix-exponential.html">Matrix Exponential</a>
+                    <a class="button-link secondary" href="./tensor-contraction.html">Tensor Contraction</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Bottom Line</span>
+                <h2>SVD Is A Way To Read A Matrix Structurally</h2>
+                <p>
+                    Rather than treating a matrix as an opaque block of coefficients, SVD exposes the important
+                    directions and scales that govern its behavior. That is why it remains one of the most valuable
+                    decompositions in practical mathematics.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

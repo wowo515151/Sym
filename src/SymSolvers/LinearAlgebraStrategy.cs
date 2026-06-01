@@ -31,8 +31,8 @@ public class LinearAlgebraStrategy : ISolverStrategy, INamedSolverStrategy
 
         IExpression current = problem;
 
-        // 1. Apply rules from the pack
-        if (_rulePackStrategy != null)
+        // 1. Apply rules from the pack for direct matrix operators such as determinant or inverse.
+        if (current is not Equality && _rulePackStrategy != null)
         {
             var res = _rulePackStrategy.Solve(current, context);
             if (res.IsSuccess && res.ResultExpression != null && !res.ResultExpression.InternalEquals(current))

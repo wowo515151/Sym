@@ -45,9 +45,36 @@
 
         <section class="section">
             <article class="panel prose quote-panel">
-                <span class="mini-label">Main Articles</span>
-                <h2>Starting Points</h2>
+                <span class="mini-label">Navigation</span>
+                <h2>Read This Shelf By Theme</h2>
+                <p>
+                    The advanced-math shelf is smaller than the other two sections, so it works best as a focused set
+                    of themes: multivariable calculus, tensor structure, algebraic methods, and constrained
+                    optimization. Reading by theme makes the section feel more like a coherent reference shelf and less
+                    like a miscellaneous overflow area.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./gradient-vector.html">Local Geometry</a>
+                    <a class="button-link secondary" href="./eigenvalues-and-eigenvectors.html">Linear Algebra</a>
+                    <a class="button-link secondary" href="./tensor-contraction.html">Tensors</a>
+                    <a class="button-link secondary" href="./differential-forms.html">Geometric Methods</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Theme One</span>
+                <h2>Local Geometry And Optimization</h2>
                 <div class="article-list">
+                    <div class="article-item">
+                        <h3><a href="./gradient-vector.html">What Is A Gradient Vector?</a></h3>
+                        <p>How first derivatives become a geometric vector that points in the direction of steepest local increase.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./directional-derivative.html">What Is A Directional Derivative?</a></h3>
+                        <p>How local change is measured along a chosen direction rather than only along coordinate axes.</p>
+                    </div>
                     <div class="article-item">
                         <h3><a href="./jacobian-matrix.html">What Is A Jacobian Matrix?</a></h3>
                         <p>A clear explanation of derivatives of vector-valued functions and why the Jacobian captures local linear behavior.</p>
@@ -74,6 +101,65 @@
                     </div>
                 </div>
             </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Theme Two</span>
+                <h2>Structured Linear Algebra And Operators</h2>
+                <div class="article-list">
+                    <div class="article-item">
+                        <h3><a href="./eigenvalues-and-eigenvectors.html">What Are Eigenvalues And Eigenvectors?</a></h3>
+                        <p>How invariant directions and scaling factors reveal what a linear operator is really doing.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./singular-value-decomposition.html">What Is Singular Value Decomposition?</a></h3>
+                        <p>How SVD factors a matrix into orthogonal directions and singular values with strong computational meaning.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./matrix-exponential.html">What Is A Matrix Exponential?</a></h3>
+                        <p>How linear operators generate continuous-time evolution in differential systems.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./kronecker-product.html">What Is A Kronecker Product?</a></h3>
+                        <p>How block-structured matrix products capture separable and tensor-like structure.</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Theme Three</span>
+                <h2>Tensor And Algebraic Structure</h2>
+                <div class="article-list">
+                    <div class="article-item">
+                        <h3><a href="./tensor-contraction.html">What Is Tensor Contraction?</a></h3>
+                        <p>An introduction to index summation, dimensional reduction, and why tensor contraction appears everywhere from physics to AI.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./grobner-bases.html">What Is A Grobner Basis?</a></h3>
+                        <p>A practical introduction to polynomial ideals, elimination, and why Grobner bases matter in computer algebra.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./generating-functions.html">What Is A Generating Function?</a></h3>
+                        <p>How sequences become formal series and why that change of representation is so powerful.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Theme Four</span>
+                <h2>Geometric Differential Methods</h2>
+                <div class="article-list">
+                    <div class="article-item">
+                        <h3><a href="./differential-forms.html">What Is A Differential Form?</a></h3>
+                        <p>How calculus and geometry are expressed through oriented integrands and structured differential objects.</p>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="./lie-derivative.html">What Is A Lie Derivative?</a></h3>
+                        <p>How structured geometric objects change along the flow of a vector field.</p>
+                    </div>
+                </div>
+            </article>
         </section>
 
         <section class="section grid-two">
@@ -86,38 +172,64 @@
                     learning, and nonlinear modeling.
                 </p>
                 <p>
-                    Lagrange multipliers belong naturally beside them because constrained optimization depends on the same
-                    differential language. Once gradients and local structure are explicit, symbolic tools can often help
-                    derive the systems that numerical methods later solve.
+                    Gradients and directional derivatives fit into this same family because they make local change and
+                    local direction explicit before we move on to Jacobians, Hessians, and constrained optimization.
+                    Once those differential objects are explicit, symbolic tools can often help derive the systems that
+                    numerical methods later solve.
                 </p>
             </article>
 
             <article class="panel prose">
-                <span class="mini-label">Tensor Structure</span>
-                <h2>Higher-Rank Objects In Computation</h2>
+                <span class="mini-label">Operator Structure</span>
+                <h2>Linear Algebra That Carries Computation</h2>
                 <p>
-                    Tensor contraction belongs here because higher-rank arrays are one of the main ways modern technical
-                    software expresses structured computation. Once those expressions are explicit, they can be analyzed
-                    mathematically and optimized symbolically.
+                    Eigen-analysis, SVD, matrix exponentials, and Kronecker products belong here because modern
+                    computation depends heavily on structured linear operators. These are not just theoretical ideas.
+                    They are some of the main ways we understand transformation, stability, decomposition, and repeated
+                    structure in real systems.
                 </p>
                 <p>
-                    More algebraic topics such as Grobner bases and generating functions expand that same theme into other
-                    domains. The details differ, but the shared idea is that representation and computation remain tightly
-                    linked.
+                    The same shelf still connects naturally to tensor contraction, Grobner bases, and generating
+                    functions. The details differ, but the shared theme is that mathematical structure becomes more
+                    useful when it is represented explicitly enough to support computation and analysis.
                 </p>
                 <div class="inline-links">
+                    <a class="button-link secondary" href="./gradient-vector.html">Gradient Vector</a>
+                    <a class="button-link secondary" href="./directional-derivative.html">Directional Derivative</a>
                     <a class="button-link secondary" href="./jacobian-matrix.html">Jacobian Matrix</a>
                     <a class="button-link secondary" href="./hessian-matrix.html">Hessian Matrix</a>
+                    <a class="button-link secondary" href="./eigenvalues-and-eigenvectors.html">Eigenvalues</a>
+                    <a class="button-link secondary" href="./singular-value-decomposition.html">SVD</a>
+                    <a class="button-link secondary" href="./matrix-exponential.html">Matrix Exponential</a>
+                    <a class="button-link secondary" href="./kronecker-product.html">Kronecker Product</a>
                     <a class="button-link secondary" href="./tensor-contraction.html">Tensor Contraction</a>
                     <a class="button-link secondary" href="./grobner-bases.html">Grobner Bases</a>
                     <a class="button-link secondary" href="./generating-functions.html">Generating Functions</a>
                     <a class="button-link secondary" href="./lagrange-multipliers.html">Lagrange Multipliers</a>
+                    <a class="button-link secondary" href="./differential-forms.html">Differential Forms</a>
+                    <a class="button-link secondary" href="./lie-derivative.html">Lie Derivative</a>
                     <a class="button-link secondary" href="../ai-math/tensor-expression-graphs.html">Tensor Graphs In AI</a>
                 </div>
             </article>
         </section>
 
         <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Interactive Companion</span>
+                <h3>Use The Browser Tools Alongside The Articles</h3>
+                <p>
+                    Several topics in this shelf now have interactive companions. The multivariable calculus lab supports
+                    gradients, directional derivatives, Jacobians, and Hessians. The polynomial and series tools help with
+                    quick experiments that are easier to understand when a graph or local approximation is right beside the formula.
+                </p>
+                <div class="card-actions">
+                    <a class="button-link secondary" href="../../tools/multivariable-calculus-lab.html">Calculus Lab</a>
+                    <a class="button-link secondary" href="../../tools/polynomial-lab.html">Polynomial Lab</a>
+                    <a class="button-link secondary" href="../../tools/series-fourier-lab.html">Series And Fourier Lab</a>
+                    <a class="button-link secondary" href="../../tools/tensor-index-lab.html">Tensor Index Lab</a>
+                </div>
+            </article>
+
             <article class="topic-card prose">
                 <span class="mini-label">Algebraic Structure</span>
                 <h3>Exact Objects Still Matter</h3>
@@ -140,7 +252,30 @@
                 </p>
                 <p>
                     Once those geometric objects are written explicitly, symbolic and numerical tools can divide the work
-                    between exact setup and efficient evaluation.
+                    between exact setup and efficient evaluation. Gradients and directional derivatives are the natural
+                    first step into that story.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Suggested Path</span>
+                <h3>A Simple Reading Order</h3>
+                <p>
+                    A strong way to use this shelf is to begin with gradients and directional derivatives, continue into
+                    Jacobians and Hessians, then move into Lagrange multipliers, structured linear algebra topics such
+                    as eigenvalues and SVD, and finally branch into tensors, algebraic methods, or geometric tools such
+                    as differential forms and Lie derivatives depending on your use case.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Connection Back</span>
+                <h3>How This Shelf Supports The Rest Of The Library</h3>
+                <p>
+                    These pages are not isolated math notes. They feed back into symbolic computation and AI-oriented
+                    workflows by supplying the mathematical objects that symbolic engines manipulate and that
+                    mathematical agents increasingly need to reason about precisely.
                 </p>
             </article>
         </section>
@@ -148,7 +283,7 @@
         <div class="product-shell">
             <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
         </div>
-        <footer class="site-footer">Copyright SymbolicComputation.com 2026. AI assisted.</footer>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
     </main>
 </body>
 </html>

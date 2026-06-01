@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scale Folding for Fast Neural Inference</title>
+    <meta name="description" content="A symbolic analysis of scale folding and weight sliding to optimize inference latency in neural networks." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Scale Folding and Weight Sliding</h1>
+            <p class="hero-copy">
+                Inference latency is often dominated by small, element-wise operations that follow 
+                large matrix multiplications. Symbolic "Scale Folding" moves these constants into the 
+                weights themselves at compile-time, eliminating the need for extra kernels at runtime.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The "Death by a Thousand Kernels"</h2>
+                <p>
+                    In models like Batch-Normalized CNNs or Scaled Dot-Product Attention, we often see 
+                    a pattern where a matrix multiplication is followed by a scalar multiplication:
+                    <br><code>Result = (X &times; W) &times; g</code> (where <code>g</code> is a scale factor).
+                </p>
+                <p>
+                    On a GPU, this usually launches two kernels: one for the <code>MatMul</code> and one 
+                    for the element-wise multiplication by <code>g</code>. Even if the second kernel is 
+                    fast, the launch overhead and memory round-trip time add up across dozens of layers.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Moving the Constant (Scale Folding)</h2>
+                <p>
+                    Because matrix multiplication is linear, we can "slide" the scalar <code>g</code> 
+                    past the input <code>X</code> and into the weight matrix <code>W</code>:
+                    <br><code>(X &times; W) &times; g  =  X &times; (W &times; g)</code>
+                </p>
+                <p>
+                    In a symbolic engine, this is handled by **Weight Sliding** rules. 
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Compile-Time:</strong> We compute <code>W' = W &times; g</code> once.</li>
+                    <li><strong>Inference-Time:</strong> We only execute <code>X &times; W'</code>.</li>
+                </ul>
+                <p>
+                    This "folds" the scaling operation into the existing matrix multiplication, 
+                    reducing the total kernel count and improving latency without changing the 
+                    mathematical result.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Edge AI and Real-Time Systems</h2>
+                <p>
+                    Scale folding is a mandatory optimization for <strong>Quantization</strong> and 
+                    <strong>Batch Normalization Folding</strong>. It is one of the primary ways that 
+                    compilers like TensorRT and OpenVINO achieve high performance on edge hardware, 
+                    where every microsecond counts.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Proof</span>
+                <h2>Symbolic Trace</h2>
+                <div class="code-block">
+                    // Original Expression
+                    TensorMul(MatMul(X, W), g)
+                    <br><br>
+                    // Rule Applied: MatMulWeightSlideRight
+                    TensorMul(MatMul(?a, ?b), ?g) -> MatMul(?a, TensorMul(?b, ?g))
+                    <br><br>
+                    // Result (Foldable Form)
+                    MatMul(X, TensorMul(W, g))
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Completion Procedures In Rewriting</title>
+    <meta name="description" content="What completion procedures do in rewriting systems and why symbolic computation sometimes needs extra rules to turn equations into a usable rewrite system." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Completion Procedures In Rewriting</h1>
+            <p class="hero-copy">
+                Completion procedures try to turn a set of equations into a more usable rewrite system, often by adding
+                or orienting rules so that symbolic reasoning becomes more stable and more decisive.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Motivation</span>
+                <h2>Equations Alone Are Not Always Enough</h2>
+                <p>
+                    A set of equations tells you which expressions are supposed to be equivalent, but it may not tell
+                    you how to normalize them reliably. If you want a symbolic engine to compute with those equations,
+                    you often need an oriented rule system that behaves better under rewriting.
+                </p>
+                <p>
+                    Completion procedures address that gap. They try to refine the available rules so that the resulting
+                    rewrite system is more useful for actual computation and equivalence testing.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">High-Level Goal</span>
+                <h2>Move Toward A Better Rewrite System</h2>
+                <p>
+                    Informally, completion is about taking symbolic equalities and pushing them toward a form where
+                    rewriting becomes more predictable. That often means examining overlaps, resolving conflicts, and
+                    introducing new derived rules when the existing ones are not enough.
+                </p>
+                <p>
+                    This is one of the places where symbolic computation becomes visibly algorithmic rather than merely
+                    algebraic.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Why It Matters</span>
+                <h3>Better Rules Mean Better Normalization</h3>
+                <p>
+                    If a rewrite system cannot settle competing overlaps cleanly, simplification and equivalence testing
+                    become brittle. Completion is one route toward making those workflows more robust.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Practical Cost</span>
+                <h3>Not Every System Can Be Completed Nicely</h3>
+                <p>
+                    Completion can be difficult, expensive, or unsuccessful depending on the equations and rule
+                    orientation choices involved. That is one reason symbolic systems often balance elegant theory
+                    against pragmatic engineering constraints.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Conceptual Place</span>
+                <h2>Where Completion Fits In The Bigger Picture</h2>
+                <p>
+                    Completion sits between raw equations and reliable normalization. It belongs naturally beside
+                    confluence, termination, critical-pair reasoning, and canonical-form design. Even when a production
+                    symbolic engine does not run a textbook completion procedure directly, the same concerns still shape
+                    the rule engineering.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>Useful Companion Topics</h2>
+                <p>
+                    This topic makes the most sense once term rewriting, confluence, and normal forms are already in
+                    view. Those ideas supply the background that explains why completion is worth doing at all.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./term-rewriting-systems.html">Term Rewriting</a>
+                    <a class="button-link secondary" href="./confluence-in-term-rewriting.html">Confluence</a>
+                    <a class="button-link secondary" href="./normal-forms-in-symbolic-computation.html">Normal Forms</a>
+                    <a class="button-link secondary" href="./canonical-forms.html">Canonical Forms</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

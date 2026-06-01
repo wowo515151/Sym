@@ -30,21 +30,13 @@ public class DiscreteRecurrenceStrategy : ISolverStrategy, INamedSolverStrategy
     {
         if (context is null) return SolveResult.Failure(problem, "SolveContext cannot be null.");
         if (problem is null) return SolveResult.Failure(null, "Problem expression cannot be null.");
+        var currentProblem = problem;
 
-        // 1. Try rules first
-        if (_rulePackStrategy != null)
-        {
-            var res = _rulePackStrategy.Solve(problem, context);
-            if (res.IsSuccess && res.ResultExpression != null && !res.ResultExpression.InternalEquals(problem))
-            {
-                return res;
-            }
-        }
         var relations = new List<Equality>();
         var conditions = new List<Equality>();
         var targets = new List<Function>();
 
-        foreach (var eq in EnumerateEqualities(problem))
+        foreach (var eq in EnumerateEqualities(currentProblem))
         {
             if (IsRecurrenceRelation(eq, out var fnName, out var paramName))
             {
@@ -62,7 +54,7 @@ public class DiscreteRecurrenceStrategy : ISolverStrategy, INamedSolverStrategy
         var targetExpr = context.TargetVariable;
         if (targets.Count == 0 && targetExpr == null)
         {
-            if (problem is Vector v)
+            if (currentProblem is Vector v)
             {
                 foreach (var arg in v.Arguments)
                 {
@@ -86,12 +78,12 @@ public class DiscreteRecurrenceStrategy : ISolverStrategy, INamedSolverStrategy
             }
         }
 
-        if (targets.Count == 0 && targetExpr == null) return SolveResult.Failure(problem, "No target term found.");
+        if (targets.Count == 0 && targetExpr == null) return SolveResult.Failure(currentProblem, "No target term found.");
 
         var relation = relations[0];
         if (!ExtractCoefficients(relation, out var name, out var coeffs, out var order, out var failureDetail))
         {
-            return SolveResult.Failure(problem, $"Could not extract constant coefficients. {failureDetail}");
+            return SolveResult.Failure(currentProblem, $"Could not extract constant coefficients. {failureDetail}");
         }
 
         var charPolyCoeffs = new Rational[order + 1];
@@ -125,7 +117,7 @@ public class DiscreteRecurrenceStrategy : ISolverStrategy, INamedSolverStrategy
 
         if (!Polynomial.TryCreate(polyExpr, rSym, out var charPoly))
         {
-             return SolveResult.Failure(problem, "Failed to create characteristic polynomial.");
+             return SolveResult.Failure(currentProblem, "Failed to create characteristic polynomial.");
         }
 
         var roots = new List<IExpression>();
@@ -158,7 +150,7 @@ public class DiscreteRecurrenceStrategy : ISolverStrategy, INamedSolverStrategy
         }
         else if (factorization.Residual.Degree > 0)
         {
-             return SolveResult.Failure(problem, "Cannot solve higher order characteristic polynomial.");
+             return SolveResult.Failure(currentProblem, "Cannot solve higher order characteristic polynomial.");
         }
 
         var distinctRoots = roots.Select(r => r.ToDisplayString()).Distinct(StringComparer.Ordinal).ToList();
@@ -166,7 +158,7 @@ public class DiscreteRecurrenceStrategy : ISolverStrategy, INamedSolverStrategy
 
         if (conditions.Count < order)
         {
-             return SolveResult.Failure(problem, $"Not enough initial conditions. Need {order}, found {conditions.Count}.");
+             return SolveResult.Failure(currentProblem, $"Not enough initial conditions. Need {order}, found {conditions.Count}.");
         }
 
         var nSym = new Symbol("n");
@@ -217,7 +209,7 @@ public class DiscreteRecurrenceStrategy : ISolverStrategy, INamedSolverStrategy
         var matrixRows = equations.Count;
         var matrixCols = unknowns.Count;
         
-        if (matrixRows != matrixCols) return SolveResult.Failure(problem, "System for coefficients is not square.");
+        if (matrixRows != matrixCols) return SolveResult.Failure(currentProblem, "System for coefficients is not square.");
         
         var matrixElems = new List<IExpression>();
         

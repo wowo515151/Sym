@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Matrix-Vector Chain Association</title>
+    <meta name="description" content="A symbolic study of optimal matrix-vector product re-association to reduce computational complexity from O(N^3) to O(N^2)." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Matrix-Vector Chain Association</h1>
+            <p class="hero-copy">
+                The order in which we multiply a chain of matrices can change the algorithmic complexity of the 
+                operation. In the case of matrix-vector products, the difference is often between a cubic 
+                <code>O(N^3)</code> operation and a quadratic <code>O(N^2)</code> one.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The O(N^3) Trap</h2>
+                <p>
+                    Consider the expression <code>(A &times; B) &times; x</code>, where <code>A</code> and <code>B</code> 
+                    are large matrices and <code>x</code> is a vector.
+                </p>
+                <ul class="lead-list">
+                    <li>If we compute <code>(A &times; B)</code> first, we perform a matrix-matrix product. This is an 
+                    <code>O(N^3)</code> operation.</li>
+                    <li>The resulting matrix is then multiplied by the vector <code>x</code>, which is <code>O(N^2)</code>.</li>
+                </ul>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Re-associating for O(N^2) Complexity</h2>
+                <p>
+                    If we re-associate the expression to <code>A &times; (B &times; x)</code>, the complexity 
+                    profile changes completely:
+                </p>
+                <ul class="lead-list">
+                    <li>First, compute the matrix-vector product <code>B &times; x</code> (an <code>O(N^2)</code> operation).</li>
+                    <li>Then, multiply the matrix <code>A</code> by the resulting vector (another <code>O(N^2)</code> operation).</li>
+                </ul>
+                <p>
+                    The total complexity drops from <strong>O(N^3)</strong> to <strong>O(N^2)</strong>. For a matrix of 
+                    size 1000x1000, this is a <strong>1000-fold reduction</strong> in compute effort.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Proof</span>
+                <h2>Symbolic Trace</h2>
+                <div class="code-block">
+                    // Original Expression
+                    MatMul(MatMul(A, B), x)
+                    <br><br>
+                    // Optimization Rule Applied: AssocMatMul1
+                    MatMul(MatMul(?a, ?b), ?c) -> MatMul(?a, MatMul(?b, ?c))
+                    <br><br>
+                    // Result (Verified for Vector Shape)
+                    MatMul(A, MatMul(B, x))
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

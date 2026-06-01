@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Is A Matrix Exponential?</title>
+    <meta name="description" content="What a matrix exponential is, why it solves linear differential systems, and how it connects operators, eigenstructure, and computation." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Advanced Mathematics</p>
+            <h1>What Is A Matrix Exponential?</h1>
+            <p class="hero-copy">
+                The matrix exponential extends the ordinary exponential function to square matrices. It is one of the
+                central operator tools for linear differential equations and continuous-time dynamics.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Definition</span>
+                <h2>A Power-Series Extension</h2>
+                <p>
+                    The matrix exponential of <code>A</code> is defined by the same power series as the scalar
+                    exponential:
+                </p>
+                <div class="code-block">exp(A) = I + A + A^2/2! + A^3/3! + ...</div>
+                <p>
+                    This definition is natural because matrix multiplication lets the powers of <code>A</code> play the
+                    same role as powers of a scalar.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>It Solves Linear Time Evolution</h2>
+                <p>
+                    If a system satisfies <code>x'(t) = Ax(t)</code>, then the matrix exponential describes the solution
+                    flow. That is why it is central in control, dynamical systems, PDE and ODE contexts, and operator
+                    reasoning.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Operator View</span>
+                <h3>Functions Of Matrices Matter</h3>
+                <p>
+                    The matrix exponential is one of the clearest examples of applying a scalar function to an operator.
+                    This opens the door to a larger way of thinking about matrices structurally rather than entrywise.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Spectral Link</span>
+                <h3>Eigenstructure Often Simplifies The Story</h3>
+                <p>
+                    When a matrix is diagonalizable, its eigen-structure can make the matrix exponential much easier to
+                    understand. This creates a strong connection to spectral methods and decomposition ideas.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Connections</span>
+                <h2>Where It Fits In The Shelf</h2>
+                <p>
+                    The matrix exponential belongs beside eigen-analysis, SVD, and structured operator topics because it
+                    helps explain how matrices act over time rather than only in a single static multiplication.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./eigenvalues-and-eigenvectors.html">Eigenvalues And Eigenvectors</a>
+                    <a class="button-link secondary" href="./singular-value-decomposition.html">Singular Value Decomposition</a>
+                    <a class="button-link secondary" href="./kronecker-product.html">Kronecker Product</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Bottom Line</span>
+                <h2>The Matrix Exponential Connects Linear Algebra To Dynamics</h2>
+                <p>
+                    It turns a static matrix into a time-evolution operator. That is why it matters in so many settings
+                    where linear structure and continuous change meet.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SMT Solvers In Symbolic Computation</title>
+    <meta name="description" content="How SMT solvers fit into symbolic computation, what problems they solve, and how they differ from rewriting, CAS tools, and theorem provers." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>SMT Solvers In Symbolic Computation</h1>
+            <p class="hero-copy">
+                SMT solvers, or satisfiability modulo theories solvers, provide an exact decision-oriented layer for
+                symbolic questions that can be expressed inside supported logical theories.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Main Idea</span>
+                <h2>SMT Adds Logic And Theories To Symbolic Work</h2>
+                <p>
+                    An SMT solver checks satisfiability and related logical properties while understanding structured
+                    theories such as arithmetic, arrays, bit-vectors, or equality with uninterpreted functions. In
+                    symbolic computation, this gives us a powerful way to answer some questions more exactly than
+                    heuristic rewriting alone can.
+                </p>
+                <p>
+                    The important word is "theories." SMT is not just raw Boolean search. It is search plus
+                    mathematically meaningful background structure.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Some Symbolic Questions Are Really Satisfiability Questions</h2>
+                <p>
+                    Symbolic systems often need to know whether constraints can be satisfied, whether two forms are
+                    equivalent under certain assumptions, whether a path condition is consistent, or whether a candidate
+                    transformation violates a side condition.
+                </p>
+                <p>
+                    Those are exactly the kinds of questions where SMT can become a strong back-end component.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="feature-card">
+                <span class="mini-label">Best Fit</span>
+                <h3>Constraint-Rich Symbolic Problems</h3>
+                <p>
+                    SMT solvers are especially useful when symbolic work is carrying explicit conditions. Domains,
+                    inequalities, shape constraints, bit-level behavior, or combinations of logical and algebraic facts
+                    can often be expressed more naturally as satisfiability questions than as plain rewrite rules.
+                </p>
+            </article>
+            <article class="feature-card">
+                <span class="mini-label">Not The Same As CAS</span>
+                <h3>SMT And Computer Algebra Solve Different Kinds Of Problems</h3>
+                <p>
+                    A computer algebra system is often strongest at expression manipulation, exact transformation,
+                    algebraic normalization, and closed-form objects. An SMT solver is strongest when the problem is best
+                    phrased as a logical decision or satisfiability question inside supported theories.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Practical Role</span>
+                <h2>Where SMT Fits Inside Symbolic Engines</h2>
+                <p>
+                    In larger symbolic systems, SMT usually does not replace rewriting or algebraic manipulation. It
+                    complements them. Rewriting and normalization can simplify the symbolic object; SMT can then answer
+                    a harder logical question about the resulting structure or its side conditions.
+                </p>
+                <ul class="lead-list">
+                    <li>Use rewriting to shape the expression</li>
+                    <li>Use symbolic normalization to expose structure</li>
+                    <li>Use SMT when the remaining question is fundamentally logical or constraint-based</li>
+                </ul>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">AI Relevance</span>
+                <h2>Why Mathematical Agents May Need SMT</h2>
+                <p>
+                    AI mathematicians and coding agents often move between symbolic manipulation and exact checking. If
+                    an agent is deciding whether assumptions are consistent, whether a branch is still feasible, or
+                    whether a transformation preserves required conditions, SMT can become the right tool instead of
+                    leaving the question to prose.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="../ai-math/tool-selection-for-mathematical-agents.html">Tool Selection</a>
+                    <a class="button-link secondary" href="../ai-math/exact-tools-for-ai-mathematicians.html">Exact Tools</a>
+                    <a class="button-link secondary" href="../ai-math/symbolic-computation-vs-theorem-proving.html">Symbolic Vs Theorem Proving</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Neighboring Topics</span>
+                <h3>SMT Sits Between Rewriting And Full Formal Proof</h3>
+                <p>
+                    SMT is often more structured and exact than ordinary rewrite heuristics, but usually lighter-weight
+                    than full theorem proving. That makes it a useful middle layer in many practical symbolic workflows.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Important Caveat</span>
+                <h3>Theories And Encodings Set The Real Boundary</h3>
+                <p>
+                    SMT solvers are powerful because they solve a scoped formal problem. Their usefulness depends on
+                    whether the symbolic question has been encoded into the right theory with the right level of
+                    fidelity.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Where To Continue</span>
+                <h2>Related Reading</h2>
+                <p>
+                    This page connects naturally to constraint solving, decision procedures, symbolic equivalence
+                    checking, and AI-oriented tool selection.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./constraint-solving-in-symbolic-computation.html">Constraint Solving</a>
+                    <a class="button-link secondary" href="./decision-procedures-in-symbolic-computation.html">Decision Procedures</a>
+                    <a class="button-link secondary" href="./symbolic-equivalence-checking.html">Equivalence Checking</a>
+                    <a class="button-link secondary" href="../ai-math/cas-vs-smt-vs-theorem-provers-for-ai.html">CAS Vs SMT Vs Theorem Provers</a>
+                </div>
+            </article>
+            <article class="panel prose">
+                <span class="mini-label">Bottom Line</span>
+                <h2>SMT Gives Symbolic Computation A Stronger Decision Layer</h2>
+                <p>
+                    Symbolic computation is not only about transforming expressions. It is also about deciding when
+                    structured claims are true, false, or feasible under explicit assumptions. SMT solvers are one of
+                    the main tools for doing that well.
+                </p>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

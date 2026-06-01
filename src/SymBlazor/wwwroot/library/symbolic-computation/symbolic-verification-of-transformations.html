@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Symbolic Verification Of Transformations</title>
+    <meta name="description" content="How symbolic systems verify that a transformation is valid and why verification matters for trustworthy simplification, optimization, and AI tool use." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Symbolic Verification Of Transformations</h1>
+            <p class="hero-copy">
+                A symbolic system is only as trustworthy as its transformations. Verification is the discipline of
+                checking that a proposed rewrite, simplification, or optimization really preserves the intended meaning.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Main Idea</span>
+                <h2>Transformation Needs Checking</h2>
+                <p>
+                    Symbolic transformations are often treated as obviously valid, but real systems need to be careful.
+                    Domain conditions, operator semantics, shape restrictions, and rule interactions can all make a
+                    seemingly natural rewrite incorrect in context.
+                </p>
+                <p>
+                    Verification is the process of confirming that the transformation preserves the right notion of
+                    meaning: algebraic equivalence, logical consequence, type correctness, or some other explicit target.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Trust Is Built One Step At A Time</h2>
+                <p>
+                    Without verification, symbolic systems risk accumulating silent errors in their rule packs or
+                    optimization strategies. With verification, the engine becomes far more useful for exact tool use,
+                    theorem-oriented work, and AI workflows that depend on trustworthy mathematical substeps.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Common Targets</span>
+                <h3>Equivalence, Conditions, And Semantics</h3>
+                <p>
+                    A system may verify algebraic equivalence, preservation of assumptions, compatibility with domains,
+                    or shape-level correctness in tensor expressions. The exact verification target depends on the type of
+                    symbolic work being performed.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Practical Use</span>
+                <h3>Verification Supports Better Search</h3>
+                <p>
+                    Search-heavy symbolic systems become more useful when candidate rewrites can be checked before they
+                    become part of a final answer. Verification therefore helps not just correctness, but also search
+                    discipline and tool reliability.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">AI Connection</span>
+                <h2>Why This Matters For Agents</h2>
+                <p>
+                    An AI agent may propose a plausible transformation, but a symbolic verifier can determine whether the
+                    step should actually be trusted. This is one of the cleanest ways to combine flexible reasoning with
+                    exact computation.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Related Reading</span>
+                <h2>What To Read Next</h2>
+                <p>
+                    Verification connects directly to simplification, theorem workflows, and verifier-guided AI systems.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./what-is-symbolic-simplification.html">Simplification</a>
+                    <a class="button-link secondary" href="../ai-math/verifier-guided-math-agents.html">Verifier-Guided Agents</a>
+                    <a class="button-link secondary" href="../ai-math/theorem-proving-workflows-for-ai-agents.html">Theorem Workflows</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

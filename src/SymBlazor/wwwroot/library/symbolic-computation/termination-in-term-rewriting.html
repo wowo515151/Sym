@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Termination In Term Rewriting</title>
+    <meta name="description" content="What termination means in term rewriting, why rewrite systems can loop, and how symbolic engines control rule application to reach useful results." />
+    <link rel="stylesheet" href="../../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / Symbolic Computation</p>
+            <h1>Termination In Term Rewriting</h1>
+            <p class="hero-copy">
+                Termination is the property that says rewrite sequences eventually stop. Without it, even mathematically
+                valid symbolic rules can keep transforming an expression forever.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link ghost" href="../../index.html">Domain Home</a>
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../index.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Main Problem</span>
+                <h2>Valid Rules Can Still Loop</h2>
+                <p>
+                    A rewrite system may contain rules that are each mathematically correct but collectively unsafe as a
+                    simplifier. If one rule expands and another contracts, or if two rules reverse each other under
+                    different pattern shapes, an expression can bounce forever instead of settling into a usable form.
+                </p>
+                <p>
+                    This is why symbolic computation needs more than correctness. It also needs control. Termination is
+                    about whether local transformations eventually stop producing new work.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Why It Matters</span>
+                <h2>A Simplifier Must Know When To Stop</h2>
+                <p>
+                    In practical symbolic software, termination is tied directly to user trust. If simplification,
+                    normalization, or rule-based optimization can loop unpredictably, the system becomes difficult to
+                    use, difficult to debug, and difficult to compose with other tools.
+                </p>
+                <p>
+                    Termination also matters for AI tool use. An agent that calls an exact symbolic tool needs the tool
+                    to behave like an instrument, not a source of open-ended rewrite drift.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="topic-card prose">
+                <span class="mini-label">Typical Cause</span>
+                <h3>Expansion Versus Contraction</h3>
+                <p>
+                    Rules such as distribution and factoring are individually useful, but together they can create
+                    cycles. Expanding <code>(x + 1)(x + 2)</code> and then refactoring the result may return to where you
+                    started. Without orientation or strategy, the engine has no reason to stop.
+                </p>
+            </article>
+            <article class="topic-card prose">
+                <span class="mini-label">Control Strategy</span>
+                <h3>Rules Need Direction</h3>
+                <p>
+                    Many rewrite systems enforce termination by orienting rules toward a preferred form, using
+                    well-founded orderings, limiting rule families, or separating exploratory search from final
+                    extraction.
+                </p>
+            </article>
+        </section>
+
+        <section class="section grid-two">
+            <article class="panel prose">
+                <span class="mini-label">Practical Engineering</span>
+                <h2>How Real Systems Manage It</h2>
+                <p>
+                    Symbolic engines often mix several safeguards: canonical ordering, rewrite priorities, fixed-point
+                    passes, rule-pack selection, expression-size limits, and cost-based extraction after controlled
+                    search. Equality-saturation systems take a particularly interesting path. Instead of pretending
+                    there is one safe rewrite order, they allow expansion of the equivalence space for a bounded period
+                    and then extract a preferred form later.
+                </p>
+                <p>
+                    That does not make termination irrelevant. It simply moves the control problem from which single
+                    rewrite fires next to how large a search is allowed and how the final form is selected.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Companion Property</span>
+                <h2>Termination And Confluence Together</h2>
+                <p>
+                    Termination tells you rewriting stops. Confluence tells you different rewrite paths are consistent.
+                    When both properties hold strongly enough, a normal form becomes much more meaningful. When one is
+                    missing, the engine usually needs more explicit strategy or a richer search representation.
+                </p>
+                <div class="inline-links">
+                    <a class="button-link secondary" href="./term-rewriting-systems.html">Term Rewriting</a>
+                    <a class="button-link secondary" href="./confluence-in-term-rewriting.html">Confluence</a>
+                    <a class="button-link secondary" href="./equality-saturation.html">Equality Saturation</a>
+                    <a class="button-link secondary" href="./what-is-symbolic-simplification.html">Simplification</a>
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

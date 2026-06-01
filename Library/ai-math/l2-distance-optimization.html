@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Optimizing L2 Distance for Vector Databases (RAG)</title>
+    <meta name="description" content="A symbolic analysis of L2 distance expansion to optimize similarity search in vector databases and RAG systems." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>L2 Distance Optimization for RAG</h1>
+            <p class="hero-copy">
+                Vector databases and Retrieval-Augmented Generation (RAG) systems rely on fast similarity 
+                searches. By symbolically expanding the L2 distance squared, we can transform a slow 
+                point-to-point calculation into a high-performance matrix multiplication.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>The Quadratic Bottleneck of Similarity Search</h2>
+                <p>
+                    Calculating the Euclidean distance (L2) between a query vector <code>q</code> and millions of 
+                    stored vectors <code>v</code> is computationally expensive if done naively:
+                    <br><code>Dist = &Sigma;(q - v)<sup>2</sup></code>
+                </p>
+                <p>
+                    In this form, the GPU must perform a subtraction, a square, and a summation for every 
+                    single vector in the database. This pattern is memory-bound and does not leverage the 
+                    Tensor Cores effectively.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Expansion into Dot Products</h2>
+                <p>
+                    The symbolic identity for the squared difference expansion is:
+                    <br><code>&Sigma;(a - b)<sup>2</sup> = &Sigma;a<sup>2</sup> - 2&Sigma;(a &times; b) + &Sigma;b<sup>2</sup></code>
+                </p>
+                <p>
+                    This transformation is revolutionary for GPU performance:
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Pre-computation:</strong> <code>&Sigma;v<sup>2</sup></code> (the norms of stored vectors) can be computed once and stored.</li>
+                    <li><strong>Matrix Multiplication:</strong> The term <code>&Sigma;(q &times; v)</code> is simply a dot product, which can be batched as a single large <code>MatMul</code>.</li>
+                </ul>
+                <p>
+                    For a database of 1M vectors, this turns a millions of small kernels into one 
+                    optimized matrix-vector multiplication, improving throughput by orders of magnitude.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Enabling Real-Time Retrieval</h2>
+                <p>
+                    This optimization is the reason why libraries like <strong>FAISS</strong> and 
+                    <strong>Pinecone</strong> can perform sub-millisecond searches across massive datasets. 
+                    By moving the heavy lifting into a <code>GEMM</code> (General Matrix Multiply) kernel, 
+                    we maximize GPU utilization.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Proof</span>
+                <h2>E-Graph Trace</h2>
+                <div class="code-block">
+                    // Original L2 Squared
+                    Sum(Pow(TensorAdd(Q, TensorMul(V, -1)), 2))
+                    <br><br>
+                    // Rule Applied: ExpandL2Distance
+                    Sum(Pow(TensorAdd(?a, TensorMul(?b, -1)), 2)) -> 
+                    TensorAdd(TensorAdd(Sum(Pow(?a, 2)), TensorMul(Sum(TensorMul(?a, ?b)), -2)), Sum(Pow(?b, 2)))
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

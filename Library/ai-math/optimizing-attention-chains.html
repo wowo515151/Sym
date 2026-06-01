@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Optimizing Multi-Head Attention Chains</title>
+    <meta name="description" content="A symbolic analysis of MatMul re-association for Attention (QK^T V) to minimize FLOPs based on tensor shapes." />
+    <link rel="stylesheet" href="../library.css" />
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero content-hero">
+            <p class="eyebrow">Library / AI And Mathematics / Tensor Optimization</p>
+            <h1>Optimizing Multi-Head Attention Chains</h1>
+            <p class="hero-copy">
+                The core operation of transformer-based AI is the attention mechanism, specifically the chain of 
+                matrix multiplications: (Q &times; K<sup>T</sup>) &times; V. For specific sequence lengths and head 
+                dimensions, the order of these multiplications can change the compute cost by over 60%.
+            </p>
+            <div class="hero-actions">
+                <a class="button-link primary" href="./index.html">Back To Section</a>
+                <a class="button-link secondary" href="../LibraryHome.html">Library Home</a>
+            </div>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">The Problem</span>
+                <h2>Matrix Multiplication Is Associative, But Not Equally Costly</h2>
+                <p>
+                    In linear algebra, matrix multiplication is associative: <code>(A &times; B) &times; C = A &times; (B &times; C)</code>. 
+                    However, in computational mathematics, the choice between these two forms dictates the size of the 
+                    intermediate matrix and the total number of Floating Point Operations (FLOPs).
+                </p>
+                <p>
+                    For Multi-Head Attention (MHA), we deal with shapes defined by <code>SeqLen</code> (sequence length) 
+                    and <code>HeadDim</code> (dimension per head). When sequence lengths grow large, the 
+                    intermediate "Attention Matrix" (Q &times; K<sup>T</sup>) becomes a memory and compute bottleneck.
+                </p>
+            </article>
+
+            <article class="panel prose quote-panel">
+                <span class="mini-label">Symbolic Insight</span>
+                <h2>Shape-Aware Re-association</h2>
+                <p>
+                    Consider a standard attention block where:
+                    <br><code>Q = [128, 64]</code> (SeqLen, HeadDim)
+                    <br><code>K = [256, 64]</code> (ContextLen, HeadDim)
+                    <br><code>V = [256, 64]</code> (ContextLen, HeadDim)
+                </p>
+                <ul class="lead-list">
+                    <li><strong>Naive Form:</strong> <code>(Q &times; K<sup>T</sup>) &times; V</code> results in an intermediate matrix of <code>[128, 256]</code>.</li>
+                    <li><strong>Optimized Form:</strong> <code>Q &times; (K<sup>T</sup> &times; V)</code> results in an intermediate matrix of only <code>[64, 64]</code>.</li>
+                </ul>
+                <p>
+                    For these specific dimensions, the optimized form reduces total operations from <strong>4.2M FLOPs</strong> 
+                    to <strong>1.5M FLOPs</strong>—a saving of ~64%.
+                </p>
+            </article>
+        </section>
+
+        <section class="section content-grid">
+            <article class="panel prose">
+                <span class="mini-label">Why It Matters</span>
+                <h2>Beyond FLOPs: Memory Bandwidth and Throughput</h2>
+                <p>
+                    While FLOP reduction is the most visible benefit, the optimized form also significantly reduces the 
+                    <strong>memory bandwidth</strong> requirements. By avoiding the materialization of the large 
+                    intermediate attention matrix, the system keeps more of the computation within the GPU's fast 
+                    L2 cache.
+                </p>
+                <p>
+                    This optimization is particularly relevant for <strong>Cross-Attention</strong> (where context length 
+                    often exceeds head dimension) and <strong>Flash-Attention</strong> style implementations where 
+                    efficient memory access is the primary goal.
+                </p>
+            </article>
+
+            <article class="panel prose">
+                <span class="mini-label">Symbolic Proof</span>
+                <h2>E-Graph Trace</h2>
+                <p>
+                    The Sym engine uses an e-graph to explore equivalent associations and selects the form that 
+                    minimizes the cost model for the provided shapes.
+                </p>
+                <div class="code-block">
+                    // Original Expression
+                    MatMul(MatMul(Q, Transpose(K)), V)
+                    <br><br>
+                    // Optimization Rule Applied: AssocMatMul1
+                    MatMul(MatMul(?a, ?b), ?c) -> MatMul(?a, MatMul(?b, ?c))
+                    <br><br>
+                    // Result (Verified for Shapes)
+                    MatMul(Q, MatMul(Transpose(K), V))
+                </div>
+            </article>
+        </section>
+
+        <div class="product-shell">
+            <iframe class="product-frame" src="../ProductSection.html" title="ProductSection" loading="lazy"></iframe>
+        </div>
+        <footer class="site-footer">Copyright SymAI.NET 2026. AI assisted.</footer>
+    </main>
+</body>
+</html>

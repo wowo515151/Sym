@@ -1,0 +1,7 @@
+Error: Contradiction found in EGraph.
+Diagnostics:
+  Contradiction found in EGraph.
+  Non-equality constraints omitted from EGraph saturation:
+    Derivative((1 / (1 + exp((-1 * x)))), x)
+Options:
+  RulePacks: DifferentiationStrategy, AlgebraicStrategy
