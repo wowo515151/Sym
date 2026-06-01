@@ -5,7 +5,7 @@ public static class Logging
 {
     public static bool LoggingErrorsIsOn { get; set; } = false;
 
-    private const string ErrorsDirectory = @"C:\Users\wowod\Desktop\Code2025\SymbolicComputation.com\Errors";
+    private const string ErrorsDirectory = @"C:\Users\wowod\Desktop\Code2025\SymAI.net\Errors";
 
     public static void LogError(string detectorName, string message, string? details = null)
     {

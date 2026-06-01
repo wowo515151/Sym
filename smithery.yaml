@@ -3,7 +3,7 @@
 name: sym-mcp
 version: 1.0.0
 description: "High-performance symbolic math and tensor optimization engine. Bridges the gap between LLMs and precise mathematical reasoning."
-author: "SymbolicComputation.com"
+author: "SymAI.net"
 repository: "https://github.com/wowod/SymWork"
 license: "MIT"
 categories:

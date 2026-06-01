@@ -2,9 +2,9 @@
 
 This library provides a symbolic computation framework for representing and manipulating mathematical expressions, performing calculus, solving equations, and optimizing tensor-style expression graphs through rewrite rules and an EGraph-based solver.
 
-Pure C#, no native binaries. The repo includes the core engine, rule packs, CLI tools, and the Blazor UI that powers [SymbolicComputation.com](https://symboliccomputation.com).
+Pure C#, no native binaries. The repo includes the core engine, rule packs, CLI tools, and the Blazor UI that powers [SymAI.net](https://SymAI.net).
 
-Sym is online at [SymbolicComputation.com](https://symboliccomputation.com)
+Sym is online at [SymAI.net](https://SymAI.net)
 
 License: [MIT](LICENSE)
 
@@ -67,7 +67,7 @@ dotnet run --project src/SymBlazor/SymBlazor.csproj
 ## Repository layout
 
 - `src/Sym`, `src/SymCore`, `src/SymSolvers`, `src/SymRules`: core symbolic engine, solver, and rule libraries
-- `src/SymBlazor`: the Blazor WebAssembly UI published to SymbolicComputation.com
+- `src/SymBlazor`: the Blazor WebAssembly UI published to SymAI.net
 - `src/SymCLI`: command-line entry point
 - `Skills/symcli-skill`: repo-relative wrapper scripts and `SKILL.md` instructions for using `SymCLI` as an AI tool / skill
 - `src/WordsToSym`, `src/SymTools`, `src/HAMM`, `src/AGIMynd`: related tools and companion apps built around the wider Sym ecosystem
@@ -93,10 +93,10 @@ For production AI agents and high-availability workloads, we offer a managed **M
 You can access the hosted solver through the following Agentverse address:
 `agent1qdd7zue9uh2pj5djudx4udc8m9e55ajtxxlczpps2azvjmj3xmtewgwhfmc`
 
-Please see the [Hosted MCP Service Guide](HOSTED_MCP_GUIDE.md) for full details on message formats, pricing tiers (Lightning, Standard, Deep), and how to submit FET payment hashes. Or visit [SymbolicComputation.com/mcp](https://symboliccomputation.com/mcp).
+Please see the [Hosted MCP Service Guide](HOSTED_MCP_GUIDE.md) for full details on message formats, pricing tiers (Lightning, Standard, Deep), and how to submit FET payment hashes. Or visit [SymAI.net/mcp](https://SymAI.net/mcp).
 
 ---
 
 ![Sym image](SymPic.jpg)
 
-Copyright [SymbolicComputation.com](https://symboliccomputation.com) 2026. Authored by Warren Harding. AI assisted.
+Copyright [SymAI.net](https://SymAI.net) 2026. Authored by Warren Harding. AI assisted.
