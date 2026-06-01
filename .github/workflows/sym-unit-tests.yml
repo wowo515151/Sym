@@ -1,0 +1,85 @@
+name: Sym Unit Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Run Sym.Tests
+        run: dotnet test src/Sym.Tests/Sym.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=Sym.Tests.trx"
+        continue-on-error: true
+
+      - name: Run SymCore.Tests
+        run: dotnet test src/SymCore.Tests/SymCore.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=SymCore.Tests.trx"
+        continue-on-error: true
+
+      - name: Run SymRules.Tests
+        run: dotnet test src/SymRules.Tests/SymRules.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=SymRules.Tests.trx"
+        continue-on-error: true
+
+      - name: Run SymSolvers.Tests
+        run: dotnet test src/SymSolvers.Tests/SymSolvers.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=SymSolvers.Tests.trx"
+        continue-on-error: true
+
+      - name: Run SymEGraph.Tests
+        run: dotnet test src/SymEGraph.Tests/SymEGraph.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=SymEGraph.Tests.trx"
+        continue-on-error: true
+
+      - name: Run SymCLI.Tests
+        run: dotnet test src/SymCLI.Tests/SymCLI.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=SymCLI.Tests.trx"
+        continue-on-error: true
+
+      - name: Run SymTools.Tests
+        run: dotnet test src/SymTools.Tests/SymTools.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=SymTools.Tests.trx"
+        continue-on-error: true
+
+      - name: Run SymMCP.Tests
+        run: dotnet test src/SymMCP.Tests/SymMCP.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=SymMCP.Tests.trx"
+        continue-on-error: true
+
+      - name: Run CSharpIO.Tests
+        run: dotnet test src/CSharpIO.Tests/CSharpIO.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=CSharpIO.Tests.trx"
+        continue-on-error: true
+
+      - name: Run DriveCLI.Tests
+        run: dotnet test src/DriveCLI.Tests/DriveCLI.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=DriveCLI.Tests.trx"
+        continue-on-error: true
+
+      - name: Run HAMM.Tests
+        run: dotnet test src/HAMM.Tests/HAMM.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=HAMM.Tests.trx"
+        continue-on-error: true
+
+      - name: Run WordsToSym.Tests
+        run: dotnet test src/WordsToSym.Tests/WordsToSym.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=WordsToSym.Tests.trx"
+        continue-on-error: true
+
+      - name: Run AGIHelmsman.Tests
+        run: dotnet test src/AGIMynd/AGIHelmsman.Tests/AGIHelmsman.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=AGIHelmsman.Tests.trx"
+        continue-on-error: true
+
+      - name: Run ConsoleHelmsman.Tests
+        run: dotnet test src/AGIMynd/ConsoleHelmsman.Tests/ConsoleHelmsman.Tests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=ConsoleHelmsman.Tests.trx"
+        continue-on-error: true
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: "**/*.trx"
+          retention-days: 7
