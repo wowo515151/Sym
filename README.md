@@ -97,6 +97,4 @@ Please see the [Hosted MCP Service Guide](HOSTED_MCP_GUIDE.md) for full details 
 
 ---
 
-![Sym image](SymPic.jpg)
-
 Copyright [SymAI.net](https://SymAI.net) 2026. Authored by Warren Harding. AI assisted.
