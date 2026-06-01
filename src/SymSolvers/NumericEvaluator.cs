@@ -307,7 +307,7 @@ public static class NumericEvaluator
                     double resPow = Math.Pow((double)@base, dExp);
                     if (double.IsInfinity(resPow) || double.IsNaN(resPow))
                     {
-                        return SafeToDecimal(resPow);
+                        throw new OverflowException("Power result is infinity or NaN and cannot be represented as decimal.");
                     }
                     if (Math.Abs(resPow - Math.Round(resPow)) < 1e-10)
                     {
