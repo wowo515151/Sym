@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+using Sym.Atoms;
 using Sym.Core;
+using Sym.Core.Strategies;
 using Sym.Operations;
 
 namespace SymSolvers;
@@ -43,6 +45,11 @@ internal static class ProblemScriptSolverSelector
         if (LooksLikeLinearAlgebra(problem))
         {
             return new LinearAlgebraStrategy();
+        }
+
+        if (LooksLikePolynomialEquation(problem, context))
+        {
+            return new EquationSolverStrategy();
         }
 
         return EGraphBackendSelector.CreateSolveStrategy(context);
@@ -146,4 +153,37 @@ internal static class ProblemScriptSolverSelector
 
     private static bool HasFunctionName(IExpression expr, string expectedName)
         => expr is Function fn && string.Equals(fn.Name, expectedName, StringComparison.OrdinalIgnoreCase);
+
+    private static bool LooksLikePolynomialEquation(IExpression problem, SolveContext context)
+    {
+        // Check if any equality in the problem is a polynomial equation in the target variable
+        foreach (var eq in EnumerateEqualities(problem))
+        {
+            var target = context.TargetVariable;
+            if (target != null)
+            {
+                // Try to parse LHS - RHS as a polynomial in the target variable
+                var diff = new Subtract(eq.LeftOperand, eq.RightOperand).Canonicalize();
+                if (Sym.Core.Polynomial.TryCreate(diff, target, out var poly) && poly.Degree >= 1 && poly.Degree <= 6)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                // No target specified - try to find the primary symbol
+                var diff = new Subtract(eq.LeftOperand, eq.RightOperand).Canonicalize();
+                var symbols = SymbolCollector.CollectSymbolsList(diff).Select(s => s.Name).Distinct().ToList();
+                if (symbols.Count == 1)
+                {
+                    var singleSymbol = new Symbol(symbols[0]);
+                    if (Sym.Core.Polynomial.TryCreate(diff, singleSymbol, out var poly2) && poly2.Degree >= 1 && poly2.Degree <= 6)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

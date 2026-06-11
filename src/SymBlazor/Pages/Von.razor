@@ -3,67 +3,71 @@
 <div class="demo-page">
     <div class="demo-page-shell">
         <section class="demo-hero">
-            <p class="demo-kicker">SymAI Agent</p>
-            <h1>Von</h1>
+            <p class="demo-kicker">Von AI Agent</p>
+            <h1>Von — Autonomous Agentic AI</h1>
             <p class="demo-summary">
-                Von is an autonomous general purpose agentic AI that runs reliably on a 24GB GPU.
-                High end gaming machines have a 24GB GPU so Von is very cost effective to operate.
-                Von is currently focused on GitHub bug fixing.
-                Von can read your issues and deliver complete bug fixes for them with pull requests for $10/issue.
+                Von is an autonomous, general-purpose agentic AI that runs on a 24GB GPU. It is designed to find,
+                analyze, and fix bugs in GitHub repositories — delivering high-quality patches at $10 per issue.
+            </p>
+            <p class="demo-summary">
+                Von operates using a Von Neumann-inspired program execution architecture. It writes its own programs
+                in plain English, executes them in iterative agent passes, and self-improves over time by analyzing
+                its outcomes and refining its strategies.
+            </p>
+            <p class="demo-summary agent-runtime">
+                <strong>Current AgentTargetRunTime:</strong> 10 minutes
             </p>
 
             <div class="demo-notes">
                 <div class="demo-note-card">
-                    <h2>Quality over Quantity</h2>
+                    <h2>Quality Over Quantity</h2>
                     <p>
-                        Von prioritizes correctness and thoroughness over speed of delivery.
-                        Every fix goes through a rigorous quality process before being submitted.
+                        Von prioritizes thorough analysis and correct fixes over speed or volume. Each bug is
+                        investigated deeply, patches are reviewed for side effects, and tests are run to verify
+                        correctness before any pull request is submitted.
                     </p>
+                </div>
+                <div class="demo-note-card">
+                    <h2>Bug-Fixing Process</h2>
                     <ul>
-                        <li><strong>Verification:</strong> Confirm the repository builds and tests pass before any changes</li>
-                        <li><strong>Evidence Gathering:</strong> Collect logs, error traces, and reproducible test cases</li>
-                        <li><strong>Root Cause Analysis:</strong> Identify the true source of the bug, not just symptoms</li>
-                        <li><strong>Testing Conventions:</strong> Follow the project's existing test style and frameworks</li>
-                        <li><strong>Patch Review:</strong> Check for correctness, behavior preservation, regression risk, code hygiene, security, and maintainer readability</li>
-                        <li><strong>New Tests:</strong> Add tests for the fix and run the existing test suite</li>
-                        <li><strong>Self-Review:</strong> Reflect on the process and identify improvements for next time</li>
+                        <li>Search and triage bugs across verified repositories</li>
+                        <li>Analyze root causes with code-level investigation</li>
+                        <li>Plan targeted file-by-file edits minimizing risk</li>
+                        <li>Apply patches with automatic rollback on failure</li>
+                        <li>Run remote GitHub Actions tests to validate fixes</li>
+                        <li>Submit PR-ready reports with clear commit messages</li>
                     </ul>
                 </div>
                 <div class="demo-note-card">
-                    <h2>Runtime Configuration</h2>
+                    <h2>Self-Improvement</h2>
                     <p>
-                        <strong>Current AgentTargetRunTime:</strong> 10 minutes
+                        Von continuously refines its own programs by analyzing epoch outcomes, comparing variant
+                        strategies, and promoting improvements that boost robustness, coverage, and error handling.
+                        Each cycle makes Von better at finding and fixing bugs.
                     </p>
+                </div>
+                <div class="demo-note-card">
+                    <h2>Pricing &amp; Payment</h2>
                     <p>
-                        Each Von agent pass runs for up to 10 minutes, allowing deep analysis
-                        and thorough work on each subtask before handing off to the next pass.
+                        <strong>$10 per issue</strong> — transparent, flat-rate pricing for bug fixing.
                     </p>
-                    <p>
-                        Von uses a natural-language program execution system with focused child
-                        agent passes that plan, run, and hand off work across a structured call stack.
-                    </p>
+                    <ul>
+                        <li>Credit card payments accepted</li>
+                        <li>Cryptocurrency payments supported</li>
+                        <li>Pay only for issues Von successfully resolves</li>
+                    </ul>
                 </div>
             </div>
+        </section>
 
-            <div class="demo-notes" style="margin-top: 1rem;">
-                <div class="demo-note-card">
-                    <h2>Find the Owner</h2>
-                    <p>Connect with the creator of Von and Sym on social platforms:</p>
-                    <ul>
-                        <li><a href="https://www.linkedin.com/in/wowo51" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                        <li><a href="https://github.com/Wowo51" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-                    </ul>
-                </div>
-                <div class="demo-note-card">
-                    <h2>Payment Options</h2>
-                    <p>Von accepts the following payment methods:</p>
-                    <ul>
-                        <li><strong>Credit Card:</strong> Standard credit and debit card payments</li>
-                        <li><strong>Crypto:</strong> Cryptocurrency payments accepted</li>
-                    </ul>
-                    <p>
-                        Contact the owner through the links above to arrange payment for bug fixing services.
-                    </p>
+        <section class="demo-contact">
+            <div class="demo-note-card">
+                <h2>Connect With Von's Creator</h2>
+                <p>Find the team behind Von on professional and social platforms:</p>
+                <div class="contact-links">
+                    <a class="contact-link" href="https://ca.linkedin.com/in/warren-harding-29a0a673" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a class="contact-link" href="https://github.com/warrenharding" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a class="contact-link" href="https://transcendai.tech" target="_blank" rel="noopener noreferrer">TranscendAI.tech</a>
                 </div>
             </div>
         </section>
@@ -148,21 +152,43 @@
         padding-left: 1.2rem;
     }
 
-    .demo-note-card a {
-        color: #89d1b6;
-        text-decoration: none;
-    }
-
-    .demo-note-card a:hover,
-    .demo-note-card a:focus-visible {
-        text-decoration: underline;
-    }
-
     .demo-note-card code {
         color: #edf5ff;
         background: rgba(255, 255, 255, 0.08);
         padding: 0.1rem 0.3rem;
         border-radius: 0.35rem;
+    }
+
+    .demo-contact {
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        margin-top: 0.75rem;
+    }
+
+    .contact-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.2rem;
+        padding: 0.45rem 0.85rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.05);
+        color: #edf5ff;
+        text-decoration: none;
+        font-size: 0.92rem;
+    }
+
+    .contact-link:hover,
+    .contact-link:focus-visible {
+        background: rgba(137, 209, 182, 0.12);
+        border-color: rgba(137, 209, 182, 0.26);
     }
 
     @@media (max-width: 900px) {
