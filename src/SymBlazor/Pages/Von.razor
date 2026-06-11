@@ -1,0 +1,200 @@
+@page "/von"
+
+<div class="demo-page">
+    <div class="demo-page-shell">
+        <section class="demo-hero">
+            <p class="demo-kicker">Von AI Agent</p>
+            <h1>Von — Autonomous Agentic AI</h1>
+            <p class="demo-summary">
+                Von is an autonomous, general-purpose agentic AI that runs on a 24GB GPU. It is designed to find,
+                analyze, and fix bugs in GitHub repositories — delivering high-quality patches at $10 per issue.
+            </p>
+            <p class="demo-summary">
+                Von operates using a Von Neumann-inspired program execution architecture. It writes its own programs
+                in plain English, executes them in iterative agent passes, and self-improves over time by analyzing
+                its outcomes and refining its strategies.
+            </p>
+
+            <div class="demo-notes">
+                <div class="demo-note-card">
+                    <h2>Quality Over Quantity</h2>
+                    <p>
+                        Von prioritizes thorough analysis and correct fixes over speed or volume. Each bug is
+                        investigated deeply, patches are reviewed for side effects, and tests are run to verify
+                        correctness before any pull request is submitted.
+                    </p>
+                </div>
+                <div class="demo-note-card">
+                    <h2>Bug-Fixing Process</h2>
+                    <ul>
+                        <li>Search and triage bugs across verified repositories</li>
+                        <li>Analyze root causes with code-level investigation</li>
+                        <li>Plan targeted file-by-file edits minimizing risk</li>
+                        <li>Apply patches with automatic rollback on failure</li>
+                        <li>Run remote GitHub Actions tests to validate fixes</li>
+                        <li>Submit PR-ready reports with clear commit messages</li>
+                    </ul>
+                </div>
+                <div class="demo-note-card">
+                    <h2>Self-Improvement</h2>
+                    <p>
+                        Von continuously refines its own programs by analyzing epoch outcomes, comparing variant
+                        strategies, and promoting improvements that boost robustness, coverage, and error handling.
+                        Each cycle makes Von better at finding and fixing bugs.
+                    </p>
+                </div>
+                <div class="demo-note-card">
+                    <h2>Pricing &amp; Payment</h2>
+                    <p>
+                        <strong>$10 per issue</strong> — transparent, flat-rate pricing for bug fixing.
+                    </p>
+                    <ul>
+                        <li>Credit card payments accepted</li>
+                        <li>Cryptocurrency payments supported</li>
+                        <li>Pay only for issues Von successfully resolves</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="demo-contact">
+            <div class="demo-note-card">
+                <h2>Connect With Von's Creator</h2>
+                <p>Find the team behind Von on professional and social platforms:</p>
+                <div class="contact-links">
+                    <a class="contact-link" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a class="contact-link" href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a class="contact-link" href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<style>
+    .demo-page {
+        min-height: 100vh;
+        padding: 1.5rem;
+        color: #edf5ff;
+        background:
+            radial-gradient(circle at top left, rgba(74, 144, 226, 0.14), transparent 28rem),
+            linear-gradient(180deg, #06111f 0%, #081a31 100%);
+    }
+
+    .demo-page-shell {
+        width: min(1180px, 100%);
+        margin: 0 auto;
+    }
+
+    .demo-hero {
+        margin-bottom: 1.35rem;
+    }
+
+    .demo-kicker {
+        margin: 0 0 0.4rem;
+        color: #89d1b6;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    .demo-page h1 {
+        margin: 0;
+        color: #edf5ff;
+        font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    }
+
+    .demo-page h1:focus,
+    .demo-page h1:focus-visible {
+        outline: none;
+    }
+
+    .demo-summary {
+        max-width: 60rem;
+        margin: 0.75rem 0 0;
+        color: #edf5ff;
+        line-height: 1.65;
+    }
+
+    .demo-notes {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        margin-top: 1.15rem;
+    }
+
+    .demo-note-card {
+        padding: 1rem 1.1rem;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 0.95rem;
+        background: rgba(6, 17, 31, 0.68);
+        color: #edf5ff;
+    }
+
+    .demo-note-card h2 {
+        margin: 0 0 0.55rem;
+        font-size: 1rem;
+        color: #edf5ff;
+    }
+
+    .demo-note-card p,
+    .demo-note-card li {
+        color: #edf5ff;
+        line-height: 1.6;
+    }
+
+    .demo-note-card ul {
+        margin: 0;
+        padding-left: 1.2rem;
+    }
+
+    .demo-note-card code {
+        color: #edf5ff;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 0.1rem 0.3rem;
+        border-radius: 0.35rem;
+    }
+
+    .demo-contact {
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        margin-top: 0.75rem;
+    }
+
+    .contact-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.2rem;
+        padding: 0.45rem 0.85rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.05);
+        color: #edf5ff;
+        text-decoration: none;
+        font-size: 0.92rem;
+    }
+
+    .contact-link:hover,
+    .contact-link:focus-visible {
+        background: rgba(137, 209, 182, 0.12);
+        border-color: rgba(137, 209, 182, 0.26);
+    }
+
+    @@media (max-width: 900px) {
+        .demo-page {
+            padding: 1rem;
+        }
+
+        .demo-notes {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
