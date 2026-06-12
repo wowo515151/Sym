@@ -53,6 +53,10 @@
       "rewrite": "/sym/index.html"
     },
     {
+      "route": "/von",
+      "rewrite": "/sym/index.html"
+    },
+    {
       "route": "/library",
       "rewrite": "/library/index.html"
     }
