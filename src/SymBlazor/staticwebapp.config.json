@@ -54,7 +54,7 @@
     },
     {
       "route": "/von",
-      "rewrite": "/sym/index.html"
+      "redirect": "/sym/von"
     },
     {
       "route": "/library",
